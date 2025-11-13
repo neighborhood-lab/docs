@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rich Interactive Demo - Quick Start Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Rich Interactive Demo - Quick Start Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Rich Interactive Demo - Quick Start Guide</h1>
+<h2>Overview</h2>
+<p>The Care Commons Rich Interactive Demo transforms the platform into a <strong>living, breathing simulation</strong> of a home healthcare agency with realistic multi-persona workflows.</p>
+<h2>What&#39;s Included</h2>
+<h3>Demo Data (Phase 1 - ✅ COMPLETE)</h3>
+<ul>
+<li><p><strong>20+ Caregivers</strong> with varied:</p>
+<ul>
+<li>Roles: CNA, HHA, RN, Companion, Senior Caregiver</li>
+<li>Specialties: Dementia care, wound care, Parkinsons, hospice</li>
+<li>Languages: English, Spanish, Mandarin, Korean</li>
+<li>Certifications: Active, expiring soon, pending verification</li>
+<li>Employment: Full-time, part-time, per diem</li>
+<li>Compliance: 90% compliant, 10% with expiring credentials</li>
+</ul>
+</li>
+<li><p><strong>30+ Clients</strong> with diverse:</p>
+<ul>
+<li>Conditions: Alzheimers, Parkinsons, CHF, COPD, diabetes, stroke, cancer</li>
+<li>Risk levels: Low (7), Medium (11), High (8), Critical (4)</li>
+<li>Mobility: Independent (5), Walker (15), Wheelchair (7), Bedridden (3)</li>
+<li>Authorized hours: 10-60 hours per week</li>
+<li>Locations: Dallas/Fort Worth area with GPS coordinates</li>
+</ul>
+</li>
+<li><p><strong>3 Coordinators</strong>:</p>
+<ul>
+<li>Sarah Kim (Field Coordinator)</li>
+<li>Michael Brown (Scheduling Coordinator)</li>
+<li>Jennifer Lopez (Care Coordinator)</li>
+</ul>
+</li>
+</ul>
+<h2>Setup Instructions</h2>
+<h3>1. Prerequisites</h3>
+<p>Ensure you have:</p>
+<ul>
+<li>PostgreSQL database running</li>
+<li>Environment variables configured (<code>.env</code> file)</li>
+<li>Database migrations applied</li>
+</ul>
+<pre><code class="language-bash"># Check database connection
+npm run db:migrate:status
+
+# If needed, run migrations
+npm run db:migrate
+</code></pre>
+<h3>2. Seed Base Operational Data</h3>
+<p>This creates the organization, branch, and admin user:</p>
+<pre><code class="language-bash">npm run db:seed
+</code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code>✅ Minimal seed completed successfully!
+
+📊 Operational data created:
+  Organization: Care Commons Home Health
+  Branch: Main Office
+  Admin User: admin@carecommons.example
+  Password: Admin123!
+</code></pre>
+<h3>3. Seed Rich Demo Data</h3>
+<p>This adds all caregivers, clients, and coordinators:</p>
+<pre><code class="language-bash">npm run db:seed:demo-v2
+</code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code>🎭 Seeding enhanced interactive demo data...
+
+📝 Using DATABASE_URL for seeding
+Using organization: Care Commons Home Health (uuid)
+Using branch: Main Office (uuid)
+Using system user: uuid
+
+Creating Personal Care Services program...
+✅ Created program: uuid
+
+📝 Seeding 20+ caregivers...
+✅ Created 20 caregivers
+
+📝 Seeding 30+ clients...
+✅ Created 30 clients
+
+📝 Seeding coordinators...
+✅ Created 3 coordinators
+
+✅ Enhanced demo data seeded successfully!
+
+📊 Demo data summary:
+  Organization: Care Commons Home Health
+  Branch: Main Office
+  Program: Personal Care Services
+
+👨‍⚕️ Caregivers: 20
+    - Full-time: 14
+    - Part-time: 4
+    - Per diem: 2
+    - Compliant: 18
+    - Expiring credentials: 2
+
+👥 Clients: 30
+    - Low risk: 7
+    - Medium risk: 11
+    - High risk: 8
+    - Critical risk: 4
+
+👔 Coordinators: 3
+    - Field: 1
+    - Scheduling: 1
+    - Care: 1
+</code></pre>
+<h3>4. Verify Demo Data</h3>
+<pre><code class="language-bash"># Login to database
+psql $DATABASE_URL
+
+# Check caregiver count
+SELECT COUNT(*) FROM caregivers WHERE deleted_at IS NULL;
+-- Expected: 20
+
+# Check client count
+SELECT COUNT(*) FROM clients WHERE deleted_at IS NULL;
+-- Expected: 30
+
+# Check coordinator count
+SELECT COUNT(*) FROM users WHERE &#39;FIELD_COORDINATOR&#39; = ANY(roles) OR &#39;SCHEDULING_COORDINATOR&#39; = ANY(roles) OR &#39;CARE_COORDINATOR&#39; = ANY(roles);
+-- Expected: 3
+</code></pre>
+<h2>Demo Personas</h2>
+<h3>Featured Caregivers</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Role</th>
+<th>Specialty</th>
+<th>Languages</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Maria Rodriguez</td>
+<td>CNA</td>
+<td>Dementia Care</td>
+<td>English, Spanish</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>James Wilson</td>
+<td>HHA</td>
+<td>Mobility Assistance</td>
+<td>English</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>Aisha Johnson</td>
+<td>RN</td>
+<td>Wound Care</td>
+<td>English</td>
+<td>Compliant</td>
+</tr>
+<tr>
+<td>David Chen</td>
+<td>CNA</td>
+<td>-</td>
+<td>English, Mandarin</td>
+<td>Pending Verification</td>
+</tr>
+<tr>
+<td>Lisa Washington</td>
+<td>HHA</td>
+<td>-</td>
+<td>English</td>
+<td>Expiring Soon</td>
+</tr>
+<tr>
+<td>Robert Davis</td>
+<td>Senior</td>
+<td>Hospice Care</td>
+<td>English</td>
+<td>Compliant</td>
+</tr>
+</tbody></table>
+<p><strong>Total</strong>: 20 caregivers with full profiles</p>
+<h3>Featured Clients</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th>Conditions</th>
+<th>Risk</th>
+<th>Mobility</th>
+<th>Hours/Week</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Dorothy Chen</td>
+<td>87</td>
+<td>Alzheimers, Diabetes</td>
+<td>High</td>
+<td>Walker</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Robert Martinez</td>
+<td>72</td>
+<td>Parkinsons</td>
+<td>Medium</td>
+<td>Wheelchair</td>
+<td>28</td>
+</tr>
+<tr>
+<td>Margaret Thompson</td>
+<td>82</td>
+<td>CHF, COPD</td>
+<td>High</td>
+<td>Walker</td>
+<td>42</td>
+</tr>
+<tr>
+<td>William Jackson</td>
+<td>79</td>
+<td>Post-Stroke</td>
+<td>High</td>
+<td>Wheelchair</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Thomas Brown</td>
+<td>86</td>
+<td>Dementia, Wandering</td>
+<td><strong>Critical</strong></td>
+<td>Independent</td>
+<td>50</td>
+</tr>
+<tr>
+<td>David Gonzalez</td>
+<td>84</td>
+<td>Lung Cancer, Chemo</td>
+<td><strong>Critical</strong></td>
+<td>Bedridden</td>
+<td>56</td>
+</tr>
+</tbody></table>
+<p><strong>Total</strong>: 30 clients with diverse care needs</p>
+<h3>Coordinators</h3>
+<ul>
+<li><p><strong>Sarah Kim</strong> - Field Coordinator (North Dallas)</p>
+<ul>
+<li>Username: <code>sarah.kim</code></li>
+<li>Email: <code>sarah.kim@demo.carecommons.example</code></li>
+</ul>
+</li>
+<li><p><strong>Michael Brown</strong> - Scheduling Coordinator (Main Office)</p>
+<ul>
+<li>Username: <code>michael.brown</code></li>
+<li>Email: <code>michael.brown@demo.carecommons.example</code></li>
+</ul>
+</li>
+<li><p><strong>Jennifer Lopez</strong> - Care Coordinator (North Dallas)</p>
+<ul>
+<li>Username: <code>jennifer.lopez</code></li>
+<li>Email: <code>jennifer.lopez@demo.carecommons.example</code></li>
+</ul>
+</li>
+</ul>
+<h2>Using the Demo Data</h2>
+<h3>API Testing</h3>
+<pre><code class="language-bash"># Get all caregivers
+curl http://localhost:3000/api/caregivers
+
+# Get caregiver by ID
+curl http://localhost:3000/api/caregivers/{caregiver_id}
+
+# Get all clients
+curl http://localhost:3000/api/clients
+
+# Get client by ID
+curl http://localhost:3000/api/clients/{client_id}
+
+# Get users (coordinators)
+curl http://localhost:3000/api/users
+</code></pre>
+<h3>Database Queries</h3>
+<pre><code class="language-sql">-- Caregivers by compliance status
+SELECT 
+  compliance_status, 
+  COUNT(*) as count,
+  ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM caregivers WHERE deleted_at IS NULL), 1) as percentage
+FROM caregivers 
+WHERE deleted_at IS NULL
+GROUP BY compliance_status;
+
+-- Clients by risk level
+SELECT 
+  risk_flags-&gt;0-&gt;&gt;&#39;severity&#39; as risk_level,
+  COUNT(*) as count
+FROM clients 
+WHERE deleted_at IS NULL
+GROUP BY risk_flags-&gt;0-&gt;&gt;&#39;severity&#39;;
+
+-- Caregivers with expiring credentials
+SELECT 
+  first_name, 
+  last_name, 
+  employee_number,
+  credentials
+FROM caregivers 
+WHERE compliance_status = &#39;EXPIRING_SOON&#39; 
+  AND deleted_at IS NULL;
+
+-- Clients by mobility
+SELECT 
+  mobility_info-&gt;&gt;&#39;requiresWheelchair&#39; as wheelchair,
+  mobility_info-&gt;&gt;&#39;requiresWalker&#39; as walker,
+  COUNT(*) as count
+FROM clients 
+WHERE deleted_at IS NULL
+GROUP BY mobility_info-&gt;&gt;&#39;requiresWheelchair&#39;, mobility_info-&gt;&gt;&#39;requiresWalker&#39;;
+</code></pre>
+<h2>Resetting Demo Data</h2>
+<h3>Full Reset (Wipe Everything)</h3>
+<pre><code class="language-bash"># WARNING: This deletes ALL data
+npm run db:reset:demo
+
+# This runs:
+# 1. db:nuke     - Drop all tables
+# 2. db:migrate  - Recreate schema
+# 3. db:seed     - Add base org/branch/admin
+# 4. db:seed:demo-v2 - Add all demo data
+</code></pre>
+<h3>Incremental Reset</h3>
+<pre><code class="language-bash"># Just re-seed demo data (keeps base org/branch/admin)
+npm run db:seed:demo-v2
+
+# Note: This will add DUPLICATE data if run twice
+# Run db:nuke first if you want a clean slate
+</code></pre>
+<h2>Demo API Endpoints (Phase 3 - ✅ COMPLETE)</h2>
+<p>The interactive demo system provides write-enabled APIs for testing multi-persona workflows. All modifications are <strong>session-scoped</strong> and isolated per user.</p>
+<h3>Session Management</h3>
+<h4>Create Demo Session</h4>
+<pre><code class="language-bash">POST /api/demo/sessions
+Content-Type: application/json
+
+{
+  &quot;userId&quot;: &quot;demo-user-123&quot;,           # Optional (auto-generated if omitted)
+  &quot;personaType&quot;: &quot;CAREGIVER&quot;           # Optional: CAREGIVER, COORDINATOR_FIELD, COORDINATOR_SCHEDULING, COORDINATOR_CARE, ADMIN
+}
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;sessionId&quot;: &quot;session-xyz&quot;,
+    &quot;currentPersona&quot;: {
+      &quot;id&quot;: &quot;caregiver-uuid&quot;,
+      &quot;type&quot;: &quot;CAREGIVER&quot;,
+      &quot;name&quot;: &quot;Maria Rodriguez&quot;,
+      &quot;role&quot;: &quot;CNA&quot;
+    },
+    &quot;availablePersonas&quot;: [...],
+    &quot;expiresAt&quot;: &quot;2025-01-06T04:00:00Z&quot;
+  }
+}
+</code></pre>
+<h4>Get Session State</h4>
+<pre><code class="language-bash">GET /api/demo/sessions/:sessionId
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;sessionId&quot;: &quot;session-xyz&quot;,
+    &quot;currentPersona&quot;: {...},
+    &quot;state&quot;: {
+      &quot;currentTime&quot;: &quot;2025-01-05T14:30:00Z&quot;,
+      &quot;eventCount&quot;: 5
+    }
+  }
+}
+</code></pre>
+<h4>Switch Persona</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/persona
+Content-Type: application/json
+
+{
+  &quot;personaType&quot;: &quot;COORDINATOR_FIELD&quot;
+}
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;currentPersona&quot;: {
+      &quot;id&quot;: &quot;coordinator-uuid&quot;,
+      &quot;type&quot;: &quot;COORDINATOR_FIELD&quot;,
+      &quot;name&quot;: &quot;Sarah Kim&quot;,
+      &quot;role&quot;: &quot;Field Coordinator&quot;
+    }
+  }
+}
+</code></pre>
+<h4>Reset Session</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/reset
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;message&quot;: &quot;Session reset to base state&quot;
+  }
+}
+</code></pre>
+<h4>Delete Session</h4>
+<pre><code class="language-bash">DELETE /api/demo/sessions/:sessionId
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;message&quot;: &quot;Session deleted&quot;
+  }
+}
+</code></pre>
+<h3>Caregiver Actions</h3>
+<h4>Clock In to Visit</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/visits/:visitId/clock-in
+Content-Type: application/json
+
+{
+  &quot;location&quot;: {
+    &quot;latitude&quot;: 32.7767,
+    &quot;longitude&quot;: -96.7970,
+    &quot;accuracy&quot;: 10
+  }
+}
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;visitId&quot;: &quot;visit-uuid&quot;,
+    &quot;status&quot;: &quot;IN_PROGRESS&quot;,
+    &quot;actualStartTime&quot;: &quot;2025-01-05T14:30:00Z&quot;
+  }
+}
+</code></pre>
+<h4>Clock Out from Visit</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/visits/:visitId/clock-out
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;visitId&quot;: &quot;visit-uuid&quot;,
+    &quot;status&quot;: &quot;COMPLETED&quot;,
+    &quot;actualEndTime&quot;: &quot;2025-01-05T16:30:00Z&quot;
+  }
+}
+</code></pre>
+<h4>Complete Task</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/tasks/:taskId/complete
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;taskId&quot;: &quot;task-uuid&quot;,
+    &quot;status&quot;: &quot;COMPLETED&quot;,
+    &quot;completedAt&quot;: &quot;2025-01-05T15:00:00Z&quot;
+  }
+}
+</code></pre>
+<h4>Add Visit Note</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/visits/:visitId/notes
+Content-Type: application/json
+
+{
+  &quot;content&quot;: &quot;Patient in good spirits. Vital signs stable. Completed all ADLs without difficulty.&quot;
+}
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;visitId&quot;: &quot;visit-uuid&quot;,
+    &quot;note&quot;: {
+      &quot;content&quot;: &quot;Patient in good spirits...&quot;,
+      &quot;createdAt&quot;: &quot;2025-01-05T15:30:00Z&quot;
+    }
+  }
+}
+</code></pre>
+<h3>Coordinator Actions</h3>
+<h4>Assign Visit</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/visits/:visitId/assign
+Content-Type: application/json
+
+{
+  &quot;caregiverId&quot;: &quot;caregiver-uuid&quot;
+}
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;visitId&quot;: &quot;visit-uuid&quot;,
+    &quot;caregiverId&quot;: &quot;caregiver-uuid&quot;,
+    &quot;status&quot;: &quot;ASSIGNED&quot;
+  }
+}
+</code></pre>
+<h4>Resolve Exception</h4>
+<pre><code class="language-bash">POST /api/demo/sessions/:sessionId/exceptions/:exceptionId/resolve
+Content-Type: application/json
+
+{
+  &quot;resolution&quot;: &quot;Reassigned to backup caregiver. Original caregiver called in sick.&quot;
+}
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;exceptionId&quot;: &quot;exception-uuid&quot;,
+    &quot;status&quot;: &quot;RESOLVED&quot;,
+    &quot;resolvedAt&quot;: &quot;2025-01-05T10:00:00Z&quot;
+  }
+}
+</code></pre>
+<h3>Utilities</h3>
+<h4>Get Session Statistics</h4>
+<pre><code class="language-bash">GET /api/demo/stats
+
+# Response
+{
+  &quot;success&quot;: true,
+  &quot;data&quot;: {
+    &quot;activeSessions&quot;: 5,
+    &quot;totalEvents&quot;: 127,
+    &quot;avgEventsPerSession&quot;: 25.4,
+    &quot;oldestSessionAge&quot;: &quot;2h 15m&quot;
+  }
+}
+</code></pre>
+<h3>Example: Multi-Persona Workflow</h3>
+<pre><code class="language-bash"># 1. Create session as caregiver
+SESSION_ID=$(curl -X POST http://localhost:3000/api/demo/sessions \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;personaType&quot;: &quot;CAREGIVER&quot;}&#39; | jq -r &#39;.data.sessionId&#39;)
+
+# 2. Clock in to visit
+curl -X POST &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID/visits/visit-123/clock-in&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;location&quot;: {&quot;latitude&quot;: 32.7767, &quot;longitude&quot;: -96.7970, &quot;accuracy&quot;: 10}}&#39;
+
+# 3. Complete tasks
+curl -X POST &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID/tasks/task-456/complete&quot;
+
+# 4. Add visit note
+curl -X POST &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID/visits/visit-123/notes&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;content&quot;: &quot;Patient doing well. All tasks completed.&quot;}&#39;
+
+# 5. Clock out
+curl -X POST &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID/visits/visit-123/clock-out&quot;
+
+# 6. Switch to coordinator persona
+curl -X POST &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID/persona&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;personaType&quot;: &quot;COORDINATOR_FIELD&quot;}&#39;
+
+# 7. View exceptions and resolve
+curl -X POST &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID/exceptions/exc-789/resolve&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;resolution&quot;: &quot;Reassigned to backup caregiver&quot;}&#39;
+
+# 8. Clean up session
+curl -X DELETE &quot;http://localhost:3000/api/demo/sessions/$SESSION_ID&quot;
+</code></pre>
+<h3>Architecture Details</h3>
+<ul>
+<li><strong>Event Sourcing</strong>: All modifications are tracked as events</li>
+<li><strong>Session Isolation</strong>: Each session has independent state</li>
+<li><strong>Time Travel</strong>: Sessions maintain simulated time for testing</li>
+<li><strong>Auto-Expiration</strong>: Sessions expire after 4 hours (configurable)</li>
+<li><strong>Background Cleanup</strong>: Expired sessions cleaned every 60 seconds</li>
+</ul>
+<h3>Implementation</h3>
+<p>Demo APIs are implemented in:</p>
+<ul>
+<li><code>packages/app/src/routes/demo.ts</code> - Express route handlers</li>
+<li><code>packages/core/src/demo/demo-session-manager.ts</code> - Session management</li>
+<li><code>packages/core/src/demo/demo-state-store.ts</code> - In-memory storage</li>
+</ul>
+<h2>Next Steps (Future Phases)</h2>
+<h3>Phase 2: Demo Session Management - ✅ COMPLETE</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> In-memory session store</li>
+<li><input checked="" disabled="" type="checkbox"> Session isolation per user</li>
+<li><input checked="" disabled="" type="checkbox"> Persona switching</li>
+<li><input checked="" disabled="" type="checkbox"> Time acceleration</li>
+</ul>
+<h3>Phase 3: Write-Enabled APIs - ✅ COMPLETE</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Caregiver actions (clock-in/out, task completion)</li>
+<li><input checked="" disabled="" type="checkbox"> Coordinator actions (schedule assignment, exception resolution)</li>
+<li><input checked="" disabled="" type="checkbox"> Session management APIs</li>
+<li><input checked="" disabled="" type="checkbox"> Event sourcing for state replay</li>
+</ul>
+<h3>Phase 4: Role-Based UI (Week 3-4)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Caregiver mobile view</li>
+<li><input disabled="" type="checkbox"> Coordinator dashboard</li>
+<li><input disabled="" type="checkbox"> Administrator analytics</li>
+<li><input disabled="" type="checkbox"> Demo mode toggle</li>
+</ul>
+<h3>Phase 5: Family Portal &amp; AI (Week 4)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> SMS notifications (Twilio)</li>
+<li><input disabled="" type="checkbox"> AI chatbot (Anthropic Claude)</li>
+<li><input disabled="" type="checkbox"> Family portal UI</li>
+<li><input disabled="" type="checkbox"> Secure family access</li>
+</ul>
+<h2>Troubleshooting</h2>
+<h3>&quot;No organization found&quot; Error</h3>
+<p><strong>Solution</strong>: Run <code>npm run db:seed</code> first to create base org/branch/admin</p>
+<h3>Duplicate Key Errors</h3>
+<p><strong>Solution</strong>: The demo seed script will fail if run twice without cleanup. Run:</p>
+<pre><code class="language-bash">npm run db:nuke
+npm run db:migrate
+npm run db:seed
+npm run db:seed:demo-v2
+</code></pre>
+<h3>TypeScript Errors</h3>
+<p><strong>Solution</strong>: Ensure all dependencies are installed:</p>
+<pre><code class="language-bash">npm install
+npm run build
+</code></pre>
+<h3>Database Connection Errors</h3>
+<p><strong>Solution</strong>: Check your <code>.env</code> file or <code>DATABASE_URL</code> environment variable:</p>
+<pre><code class="language-bash"># Local development
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=postgres
+DB_NAME=care_commons
+
+# OR use DATABASE_URL
+DATABASE_URL=postgresql://user:pass@host:port/database
+</code></pre>
+<h2>Architecture Notes</h2>
+<h3>Why Separate Scripts?</h3>
+<ul>
+<li><p><strong><code>seed.ts</code></strong>: Minimal operational data (org, branch, admin)</p>
+<ul>
+<li>Run once per environment</li>
+<li>Required before demo data</li>
+</ul>
+</li>
+<li><p><strong><code>seed-demo-v2.ts</code></strong>: Rich demo data (caregivers, clients, coordinators)</p>
+<ul>
+<li>Can be re-run for testing</li>
+<li>Idempotent within fresh database</li>
+</ul>
+</li>
+</ul>
+<h3>Data Relationships</h3>
+<pre><code>Organization (1)
+  └─ Branch (1)
+      ├─ Caregivers (20)
+      ├─ Clients (30)
+      └─ Visits (future: 100+)
+  
+  └─ Program (1)
+      └─ Client Enrollments (30)
+
+Users (4)
+  ├─ Admin (1)
+  └─ Coordinators (3)
+</code></pre>
+<h2>Performance Considerations</h2>
+<ul>
+<li><strong>Seeding time</strong>: ~2-3 seconds for all data</li>
+<li><strong>Database size</strong>: ~500KB for demo data</li>
+<li><strong>Query performance</strong>: Indexed on all common queries</li>
+</ul>
+<h2>Contributing</h2>
+<p>To add more demo personas:</p>
+<ol>
+<li>Edit <code>packages/core/scripts/seed-demo-v2.ts</code></li>
+<li>Add personas to <code>CAREGIVER_PERSONAS</code> or <code>CLIENT_PERSONAS</code> arrays</li>
+<li>Run <code>npm run db:seed:demo-v2</code> to test</li>
+</ol>
+<h2>Support</h2>
+<ul>
+<li><strong>Documentation</strong>: See <code>RICH_DEMO_IMPLEMENTATION_PLAN.md</code></li>
+<li><strong>Issues</strong>: Report to development team</li>
+<li><strong>Questions</strong>: Ask in #engineering channel</li>
+</ul>
+<hr>
+<p><strong>Last Updated</strong>: 2025-01-05<br><strong>Status</strong>: Phases 1-3 Complete<br><strong>Next Phase</strong>: Role-Based UI Components (Phase 4)</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile E2E Testing with Detox - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Mobile E2E Testing with Detox</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Mobile E2E Testing with Detox</h1>
+<h2>Overview</h2>
+<p>This directory contains end-to-end (E2E) tests for the Care Commons mobile application using <a href="https://wix.github.io/Detox/">Detox</a>.</p>
+<p><strong>Status</strong>: MVP Implementation Complete<br><strong>Coverage</strong>: Authentication, Visit Check-In/Out (EVV Compliance)<br><strong>Platforms</strong>: iOS (Android support pending)</p>
+<h2>Quick Start</h2>
+<h3>Prerequisites</h3>
+<ol>
+<li><strong>macOS</strong> with Xcode installed (for iOS testing)</li>
+<li><strong>Node.js 22.x</strong> (already configured in project)</li>
+<li><strong>iOS Simulator</strong> (via Xcode)</li>
+<li><strong>Detox CLI</strong> (installed as dev dependency)</li>
+</ol>
+<h3>Installation</h3>
+<p>Detox and dependencies are already installed. If you need to reinstall:</p>
+<pre><code class="language-bash">npm install --save-dev detox detox-expo-helpers jest ts-jest @types/jest @types/detox
+</code></pre>
+<h3>Running Tests</h3>
+<p><strong>Step 1: Build the app for testing</strong></p>
+<pre><code class="language-bash"># Build iOS app for simulator
+npx detox build --configuration ios.sim.debug
+</code></pre>
+<p><strong>Step 2: Run E2E tests</strong></p>
+<pre><code class="language-bash"># Run all E2E tests
+npx detox test --configuration ios.sim.debug
+
+# Run specific test file
+npx detox test --configuration ios.sim.debug e2e/tests/01-authentication.e2e.ts
+
+# Run with verbose output
+npx detox test --configuration ios.sim.debug --loglevel verbose
+</code></pre>
+<p><strong>Step 3: Debug failing tests</strong></p>
+<pre><code class="language-bash"># Run tests in debug mode (slower, more detailed logs)
+npx detox test --configuration ios.sim.debug --loglevel trace
+
+# Take screenshots on test failure
+npx detox test --configuration ios.sim.debug --take-screenshots failing
+</code></pre>
+<h2>Test Structure</h2>
+<pre><code>e2e/
+├── tests/
+│   ├── 01-authentication.e2e.ts         # Login, logout, session management
+│   ├── 03-visit-check-in-out.e2e.ts     # EVV compliance (CRITICAL)
+│   └── (additional tests to be added)
+├── fixtures/
+│   ├── caregivers.json                   # Test caregiver data
+│   ├── clients.json                      # Test client data
+│   ├── visits.json                       # Test visit schedules
+│   └── tasks.json                        # Test care tasks
+├── helpers/
+│   ├── location-mock.ts                  # GPS location mocking
+│   ├── network-mock.ts                   # Network condition simulation
+│   └── assertions.ts                     # Custom EVV/geofence assertions
+├── setup/
+│   ├── test-environment.ts               # Test data seeding and utilities
+│   ├── global-setup.ts                   # Global test setup
+│   └── global-teardown.ts                # Global test teardown
+└── jest.config.js                        # Jest configuration for Detox
+</code></pre>
+<h2>Current Implementation Status</h2>
+<h3>✅ Completed</h3>
+<ul>
+<li><strong>Detox Configuration</strong>: <code>.detoxrc.js</code> configured for iOS and Android</li>
+<li><strong>Jest Integration</strong>: <code>jest.config.js</code> with TypeScript support</li>
+<li><strong>Test Fixtures</strong>: Realistic caregiver, client, visit, and task data</li>
+<li><strong>Helper Utilities</strong>: Location mocking, network mocking, custom assertions</li>
+<li><strong>Test Environment</strong>: Setup and teardown utilities</li>
+<li><strong>Authentication Tests</strong>: Login, logout, error handling (01-authentication.e2e.ts)</li>
+<li><strong>EVV Compliance Tests</strong>: Check-in/out flow for Texas and Florida (03-visit-check-in-out.e2e.ts)</li>
+</ul>
+<h3>🚧 Pending (Requires App Changes)</h3>
+<p>Before tests can run successfully, the mobile app UI components need <code>testID</code> props added:</p>
+<h4>Login Screen (<code>packages/mobile/src/screens/auth/LoginScreen.tsx</code>)</h4>
+<pre><code class="language-tsx">&lt;View testID=&quot;login-screen&quot;&gt;
+  &lt;TextInput testID=&quot;email-input&quot; ... /&gt;
+  &lt;TextInput testID=&quot;password-input&quot; ... /&gt;
+  &lt;Button testID=&quot;login-button&quot; ... /&gt;
+  &lt;Text testID=&quot;error-message&quot;&gt;...&lt;/Text&gt;
+  &lt;Text testID=&quot;email-error&quot;&gt;...&lt;/Text&gt;
+  &lt;Text testID=&quot;password-error&quot;&gt;...&lt;/Text&gt;
+&lt;/View&gt;
+</code></pre>
+<h4>Schedule Screen (<code>packages/mobile/src/screens/schedule/ScheduleScreen.tsx</code>)</h4>
+<pre><code class="language-tsx">&lt;View testID=&quot;schedule-screen&quot;&gt;
+  &lt;FlatList testID=&quot;visit-list&quot;&gt;
+    &lt;TouchableOpacity testID={`visit-item-${index}`}&gt;...&lt;/TouchableOpacity&gt;
+  &lt;/FlatList&gt;
+&lt;/View&gt;
+</code></pre>
+<h4>Visit Detail Screen (<code>packages/mobile/src/screens/visits/VisitDetailScreen.tsx</code>)</h4>
+<pre><code class="language-tsx">&lt;View testID=&quot;visit-detail-screen&quot;&gt;
+  &lt;Button testID=&quot;check-in-button&quot; ... /&gt;
+  &lt;Button testID=&quot;check-out-button&quot; ... /&gt;
+  &lt;Text testID=&quot;check-in-time&quot;&gt;...&lt;/Text&gt;
+  &lt;Text testID=&quot;location-verified-badge&quot;&gt;...&lt;/Text&gt;
+  &lt;Text testID=&quot;geofence-error&quot;&gt;...&lt;/Text&gt;
+  &lt;Text testID=&quot;gps-accuracy-warning&quot;&gt;...&lt;/Text&gt;
+  &lt;Text testID=&quot;visit-completed-indicator&quot;&gt;...&lt;/Text&gt;
+&lt;/View&gt;
+</code></pre>
+<h4>Profile Screen (<code>packages/mobile/src/screens/profile/ProfileScreen.tsx</code>)</h4>
+<pre><code class="language-tsx">&lt;View testID=&quot;profile-screen&quot;&gt;
+  &lt;Button testID=&quot;logout-button&quot; ... /&gt;
+  &lt;Button testID=&quot;confirm-logout&quot; ... /&gt;
+&lt;/View&gt;
+</code></pre>
+<h4>Bottom Navigation</h4>
+<pre><code class="language-tsx">&lt;Tab testID=&quot;schedule-tab&quot; ... /&gt;
+&lt;Tab testID=&quot;profile-tab&quot; ... /&gt;
+</code></pre>
+<h3>📋 Test Coverage</h3>
+<table>
+<thead>
+<tr>
+<th>Test Suite</th>
+<th>Status</th>
+<th>Coverage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Authentication</td>
+<td>✅ Complete</td>
+<td>Login, logout, validation errors</td>
+</tr>
+<tr>
+<td>EVV Check-In/Out (TX)</td>
+<td>✅ Complete</td>
+<td>Happy path, geofence validation, GPS accuracy</td>
+</tr>
+<tr>
+<td>EVV Check-In/Out (FL)</td>
+<td>✅ Complete</td>
+<td>Happy path, geofence validation (150m)</td>
+</tr>
+<tr>
+<td>Offline Workflow</td>
+<td>❌ Pending</td>
+<td>Offline check-in, sync queue, conflict resolution</td>
+</tr>
+<tr>
+<td>Visit Documentation</td>
+<td>❌ Pending</td>
+<td>Notes, tasks, photo upload</td>
+</tr>
+<tr>
+<td>Schedule Management</td>
+<td>❌ Pending</td>
+<td>View schedule, refresh, filters</td>
+</tr>
+<tr>
+<td>Biometric Auth</td>
+<td>❌ Pending</td>
+<td>Face ID / Touch ID re-authentication</td>
+</tr>
+</tbody></table>
+<h2>State-Specific EVV Testing</h2>
+<h3>Texas (HHSC Regulations)</h3>
+<ul>
+<li><strong>Geofence</strong>: 100m + GPS accuracy</li>
+<li><strong>Aggregator</strong>: HHAeXchange</li>
+<li><strong>Test Location</strong>: Austin, TX (30.2672, -97.7431)</li>
+</ul>
+<p><strong>Test Scenarios</strong>:</p>
+<ul>
+<li>✅ Check-in at client address (0m distance)</li>
+<li>✅ Check-in within geofence (90m, within 100m limit)</li>
+<li>✅ Check-in rejected outside geofence (200m, exceeds 100m limit)</li>
+<li>✅ Check-in with poor GPS accuracy (100m accuracy, still within 100m + 100m = 200m total)</li>
+</ul>
+<h3>Florida (AHCA Regulations)</h3>
+<ul>
+<li><strong>Geofence</strong>: 150m + GPS accuracy</li>
+<li><strong>Aggregator</strong>: Multi-aggregator (HHAeXchange, Netsmart)</li>
+<li><strong>Test Location</strong>: Miami, FL (25.7617, -80.1918)</li>
+</ul>
+<p><strong>Test Scenarios</strong>:</p>
+<ul>
+<li>✅ Check-in at client address (0m distance)</li>
+<li>✅ Check-in within geofence (140m, within 150m limit)</li>
+<li>✅ Check-in rejected outside geofence (300m, exceeds 150m limit)</li>
+</ul>
+<h2>EVV Compliance Validation</h2>
+<p>All tests validate the <strong>six required EVV elements</strong> per 21st Century Cures Act Section 12006:</p>
+<ol>
+<li><strong>Service Type</strong>: Type of care provided (personal care, companion care, etc.)</li>
+<li><strong>Individual Receiving Service</strong>: Client identification</li>
+<li><strong>Individual Providing Service</strong>: Caregiver identification</li>
+<li><strong>Date of Service</strong>: Service date</li>
+<li><strong>Location of Service</strong>: GPS coordinates (latitude/longitude)</li>
+<li><strong>Time In/Out</strong>: Check-in and check-out timestamps</li>
+</ol>
+<h2>Troubleshooting</h2>
+<h3>Issue: Tests fail with &quot;Cannot find element by.id(&#39;...&#39;)&quot;</h3>
+<p><strong>Cause</strong>: UI components don&#39;t have <code>testID</code> props<br><strong>Solution</strong>: Add <code>testID</code> props to components as documented above</p>
+<h3>Issue: Detox build fails</h3>
+<p><strong>Cause</strong>: Expo app not prebuilt for native<br><strong>Solution</strong>: Run <code>npx expo prebuild --platform ios</code> first</p>
+<h3>Issue: Simulator doesn&#39;t launch</h3>
+<p><strong>Cause</strong>: Simulator not installed or incorrect device name<br><strong>Solution</strong>: </p>
+<ol>
+<li>Open Xcode → Preferences → Components → Install iOS simulators</li>
+<li>Update <code>.detoxrc.js</code> device name to match installed simulators</li>
+<li>List simulators: <code>xcrun simctl list devices available</code></li>
+</ol>
+<h3>Issue: GPS location mocking not working</h3>
+<p><strong>Cause</strong>: Simulator location services disabled<br><strong>Solution</strong>: Features → Location → Custom Location (set in simulator menu)</p>
+<h3>Issue: Network mocking doesn&#39;t work</h3>
+<p><strong>Cause</strong>: Detox doesn&#39;t have built-in network mocking<br><strong>Solution</strong>: Use app-level mocks or external proxy (Charles, mitmproxy)</p>
+<h2>CI/CD Integration</h2>
+<h3>GitHub Actions Workflow</h3>
+<p>Create <code>.github/workflows/mobile-e2e.yml</code>:</p>
+<pre><code class="language-yaml">name: Mobile E2E Tests
+
+on:
+  pull_request:
+    paths:
+      - &#39;packages/mobile/**&#39;
+  push:
+    branches:
+      - develop
+
+jobs:
+  e2e-ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: &#39;22.x&#39;
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build iOS app for testing
+        run: |
+          cd packages/mobile
+          npx detox build --configuration ios.sim.debug
+      
+      - name: Run Detox tests
+        run: |
+          cd packages/mobile
+          npx detox test --configuration ios.sim.debug --cleanup
+      
+      - name: Upload test artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: detox-artifacts
+          path: packages/mobile/artifacts/
+</code></pre>
+<h2>Future Enhancements</h2>
+<h3>Short-Term (Next Sprint)</h3>
+<ol>
+<li><strong>Add testID props to all screens</strong> (prerequisite for running tests)</li>
+<li><strong>Implement offline workflow tests</strong> (critical for field caregivers)</li>
+<li><strong>Add visit documentation tests</strong> (notes, tasks, signatures)</li>
+<li><strong>Set up CI/CD pipeline</strong> (run tests on every PR)</li>
+</ol>
+<h3>Medium-Term</h3>
+<ol>
+<li><strong>Android support</strong> (configure Detox for Android emulator)</li>
+<li><strong>Performance testing</strong> (measure app startup, navigation speed)</li>
+<li><strong>Accessibility testing</strong> (VoiceOver, TalkBack integration)</li>
+<li><strong>Visual regression testing</strong> (screenshot comparisons)</li>
+</ol>
+<h3>Long-Term</h3>
+<ol>
+<li><strong>Multi-language testing</strong> (Spanish, etc.)</li>
+<li><strong>Biometric authentication tests</strong> (Face ID, Touch ID)</li>
+<li><strong>Load testing</strong> (simulate hundreds of visits)</li>
+<li><strong>Advanced offline scenarios</strong> (sync conflicts, data corruption)</li>
+</ol>
+<h2>Resources</h2>
+<ul>
+<li><strong>Detox Documentation</strong>: <a href="https://wix.github.io/Detox/">https://wix.github.io/Detox/</a></li>
+<li><strong>Detox with Expo</strong>: <a href="https://docs.expo.dev/guides/detox/">https://docs.expo.dev/guides/detox/</a></li>
+<li><strong>21st Century Cures Act EVV</strong>: <a href="https://www.medicaid.gov/medicaid/home-community-based-services/guidance/electronic-visit-verification-evv/index.html">https://www.medicaid.gov/medicaid/home-community-based-services/guidance/electronic-visit-verification-evv/index.html</a></li>
+<li><strong>Texas EVV Rules</strong>: <a href="https://hhs.texas.gov/services/health/electronic-visit-verification-evv">https://hhs.texas.gov/services/health/electronic-visit-verification-evv</a></li>
+<li><strong>Florida EVV Rules</strong>: <a href="https://ahca.myflorida.com/content/download/9876/file/EVV_Provider_Guide.pdf">https://ahca.myflorida.com/content/download/9876/file/EVV_Provider_Guide.pdf</a></li>
+</ul>
+<h2>Support</h2>
+<p>For questions or issues with E2E testing:</p>
+<ol>
+<li>Check this README and troubleshooting section</li>
+<li>Review Detox documentation</li>
+<li>Check existing GitHub issues</li>
+<li>Create new issue with:<ul>
+<li>Test output (use <code>--loglevel verbose</code>)</li>
+<li>Screenshots of failure</li>
+<li>Steps to reproduce</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>Last Updated</strong>: 2025-11-12<br><strong>Maintainer</strong>: Care Commons Development Team</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client & Demographics - Usage Examples - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>📖 User Guides</span> / 
+      <span>Client & Demographics - Usage Examples</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Client &amp; Demographics - Usage Examples</h1>
+<p>This document provides practical examples for common operations in the Client &amp; Demographics Management vertical.</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#creating-clients">Creating Clients</a></li>
+<li><a href="#searching--filtering">Searching &amp; Filtering</a></li>
+<li><a href="#managing-contacts">Managing Contacts</a></li>
+<li><a href="#risk-management">Risk Management</a></li>
+<li><a href="#status-management">Status Management</a></li>
+<li><a href="#utility-functions">Utility Functions</a></li>
+<li><a href="#api-usage">API Usage</a></li>
+<li><a href="#real-world-scenarios">Real-World Scenarios</a></li>
+</ol>
+<h2>Setup</h2>
+<pre><code class="language-typescript">import {
+  ClientService,
+  ClientRepository,
+  ClientValidator,
+  createClientRouter,
+} from &#39;@care-commons/client-demographics&#39;;
+import { getDatabase, UserContext } from &#39;@care-commons/core&#39;;
+
+// Initialize database and services
+const db = getDatabase();
+const clientRepository = new ClientRepository(db);
+const clientService = new ClientService(clientRepository);
+
+// Create user context (typically from auth middleware)
+const userContext: UserContext = {
+  userId: &#39;user-123&#39;,
+  roles: [&#39;COORDINATOR&#39;],
+  permissions: [&#39;clients:read&#39;, &#39;clients:create&#39;, &#39;clients:update&#39;],
+  organizationId: &#39;org-456&#39;,
+  branchIds: [&#39;branch-789&#39;],
+};
+</code></pre>
+<h2>Creating Clients</h2>
+<h3>Example 1: Simple Client Creation</h3>
+<pre><code class="language-typescript">const simpleClient = await clientService.createClient(
+  {
+    organizationId: &#39;org-456&#39;,
+    branchId: &#39;branch-789&#39;,
+    firstName: &#39;Mary&#39;,
+    lastName: &#39;Johnson&#39;,
+    dateOfBirth: new Date(&#39;1955-08-20&#39;),
+    primaryAddress: {
+      type: &#39;HOME&#39;,
+      line1: &#39;123 Main Street&#39;,
+      city: &#39;Springfield&#39;,
+      state: &#39;IL&#39;,
+      postalCode: &#39;62701&#39;,
+      country: &#39;US&#39;,
+    },
+  },
+  userContext
+);
+
+console.log(`Created client: ${simpleClient.clientNumber}`);
+</code></pre>
+<h3>Example 2: Complete Client with All Details</h3>
+<pre><code class="language-typescript">const completeClient = await clientService.createClient(
+  {
+    organizationId: &#39;org-456&#39;,
+    branchId: &#39;branch-789&#39;,
+    
+    // Identity
+    firstName: &#39;Robert&#39;,
+    middleName: &#39;James&#39;,
+    lastName: &#39;Anderson&#39;,
+    preferredName: &#39;Bob&#39;,
+    dateOfBirth: new Date(&#39;1948-03-15&#39;),
+    gender: &#39;MALE&#39;,
+    
+    // Contact
+    primaryPhone: {
+      number: &#39;555-123-4567&#39;,
+      type: &#39;MOBILE&#39;,
+      canReceiveSMS: true,
+    },
+    email: &#39;bob.anderson@example.com&#39;,
+    
+    // Address
+    primaryAddress: {
+      type: &#39;HOME&#39;,
+      line1: &#39;456 Oak Avenue&#39;,
+      line2: &#39;Apartment 3B&#39;,
+      city: &#39;Springfield&#39;,
+      state: &#39;IL&#39;,
+      postalCode: &#39;62702&#39;,
+      county: &#39;Sangamon&#39;,
+      country: &#39;US&#39;,
+    },
+    
+    // Emergency contacts
+    emergencyContacts: [
+      {
+        name: &#39;Susan Anderson&#39;,
+        relationship: &#39;Spouse&#39;,
+        phone: {
+          number: &#39;555-234-5678&#39;,
+          type: &#39;MOBILE&#39;,
+          canReceiveSMS: true,
+        },
+        email: &#39;susan.anderson@example.com&#39;,
+        isPrimary: true,
+        canMakeHealthcareDecisions: true,
+        notes: &#39;Available 24/7&#39;,
+      },
+      {
+        name: &#39;Michael Anderson&#39;,
+        relationship: &#39;Son&#39;,
+        phone: {
+          number: &#39;555-345-6789&#39;,
+          type: &#39;WORK&#39;,
+          canReceiveSMS: false,
+        },
+        email: &#39;michael.anderson@example.com&#39;,
+        isPrimary: false,
+        canMakeHealthcareDecisions: false,
+        notes: &#39;Contact only if Susan unavailable&#39;,
+      },
+    ],
+    
+    // Intake details
+    intakeDate: new Date(),
+    status: &#39;PENDING_INTAKE&#39;,
+    referralSource: &#39;Hospital discharge planner&#39;,
+  },
+  userContext
+);
+
+console.log(`Created client with full details: ${completeClient.clientNumber}`);
+</code></pre>
+<h2>Searching &amp; Filtering</h2>
+<h3>Example 3: Search by Name</h3>
+<pre><code class="language-typescript">const searchResults = await clientService.searchClients(
+  {
+    query: &#39;Johnson&#39;,
+  },
+  { page: 1, limit: 20 },
+  userContext
+);
+
+console.log(`Found ${searchResults.total} clients matching &quot;Johnson&quot;`);
+searchResults.items.forEach((client) =&gt; {
+  console.log(`  - ${client.firstName} ${client.lastName} (${client.clientNumber})`);
+});
+</code></pre>
+<h3>Example 4: Filter Active Clients in a City</h3>
+<pre><code class="language-typescript">const activeInSpringfield = await clientService.searchClients(
+  {
+    status: [&#39;ACTIVE&#39;],
+    city: &#39;Springfield&#39;,
+    state: &#39;IL&#39;,
+  },
+  { page: 1, limit: 50 },
+  userContext
+);
+
+console.log(`Active clients in Springfield: ${activeInSpringfield.total}`);
+</code></pre>
+<h3>Example 5: Find High-Risk Clients</h3>
+<pre><code class="language-typescript">const highRiskClients = await clientService.searchClients(
+  {
+    riskType: [&#39;FALL_RISK&#39;, &#39;WANDERING&#39;],
+    status: [&#39;ACTIVE&#39;],
+  },
+  { page: 1, limit: 100 },
+  userContext
+);
+
+console.log(`Clients with fall or wandering risk: ${highRiskClients.total}`);
+</code></pre>
+<h3>Example 6: Find Elderly Clients (Age-Based Filter)</h3>
+<pre><code class="language-typescript">const elderlyClients = await clientService.searchClients(
+  {
+    minAge: 80,
+    status: [&#39;ACTIVE&#39;],
+  },
+  { page: 1, limit: 50 },
+  userContext
+);
+
+console.log(`Active clients aged 80+: ${elderlyClients.total}`);
+</code></pre>
+<h2>Managing Contacts</h2>
+<h3>Example 7: Add Emergency Contact</h3>
+<pre><code class="language-typescript">const updatedClient = await clientService.addEmergencyContact(
+  clientId,
+  {
+    name: &#39;Jennifer Smith&#39;,
+    relationship: &#39;Niece&#39;,
+    phone: {
+      number: &#39;555-456-7890&#39;,
+      type: &#39;MOBILE&#39;,
+      canReceiveSMS: true,
+    },
+    email: &#39;jennifer.smith@example.com&#39;,
+    isPrimary: false,
+    canMakeHealthcareDecisions: false,
+    notes: &#39;Lives nearby, available for emergencies&#39;,
+  },
+  userContext
+);
+
+console.log(&#39;Emergency contact added successfully&#39;);
+</code></pre>
+<h3>Example 8: Update Emergency Contact</h3>
+<pre><code class="language-typescript">await clientService.updateEmergencyContact(
+  clientId,
+  contactId,
+  {
+    phone: {
+      number: &#39;555-999-8888&#39;,
+      type: &#39;MOBILE&#39;,
+      canReceiveSMS: true,
+    },
+    notes: &#39;Updated phone number as of 2024-03-15&#39;,
+  },
+  userContext
+);
+
+console.log(&#39;Emergency contact updated&#39;);
+</code></pre>
+<h3>Example 9: Set Primary Emergency Contact</h3>
+<pre><code class="language-typescript">const client = await clientService.getClientById(clientId, userContext);
+
+// Find the contact to make primary
+const contactToMakePrimary = client.emergencyContacts.find(
+  (c) =&gt; c.name === &#39;Jennifer Smith&#39;
+);
+
+if (contactToMakePrimary) {
+  // First, unset all other primary contacts
+  const updatedContacts = client.emergencyContacts.map((contact) =&gt; ({
+    ...contact,
+    isPrimary: contact.id === contactToMakePrimary.id,
+  }));
+
+  await clientService.updateClient(
+    clientId,
+    { emergencyContacts: updatedContacts },
+    userContext
+  );
+
+  console.log(&#39;Primary contact updated&#39;);
+}
+</code></pre>
+<h2>Risk Management</h2>
+<h3>Example 10: Add Multiple Risk Flags</h3>
+<pre><code class="language-typescript">// Add fall risk
+await clientService.addRiskFlag(
+  clientId,
+  {
+    type: &#39;FALL_RISK&#39;,
+    severity: &#39;HIGH&#39;,
+    description: &#39;History of 3 falls in past 6 months, uses walker&#39;,
+    mitigationPlan: &#39;Fall prevention mat installed, walker required, PT exercises&#39;,
+    requiresAcknowledgment: true,
+  },
+  userContext
+);
+
+// Add medication compliance concern
+await clientService.addRiskFlag(
+  clientId,
+  {
+    type: &#39;MEDICATION_COMPLIANCE&#39;,
+    severity: &#39;MEDIUM&#39;,
+    description: &#39;Sometimes forgets afternoon medications&#39;,
+    mitigationPlan: &#39;Medication reminder system, daily check-in during visits&#39;,
+    requiresAcknowledgment: false,
+  },
+  userContext
+);
+
+console.log(&#39;Risk flags added&#39;);
+</code></pre>
+<h3>Example 11: Monitor and Resolve Risk Flags</h3>
+<pre><code class="language-typescript">import { getActiveRiskFlags, getCriticalRiskFlags } from &#39;@care-commons/client-demographics&#39;;
+
+const client = await clientService.getClientById(clientId, userContext);
+
+// Check active risks
+const activeRisks = getActiveRiskFlags(client);
+console.log(`Client has ${activeRisks.length} active risk flags`);
+
+activeRisks.forEach((risk) =&gt; {
+  console.log(`  ⚠️  ${risk.type} (${risk.severity}): ${risk.description}`);
+});
+
+// Check critical risks
+const criticalRisks = getCriticalRiskFlags(client);
+if (criticalRisks.length &gt; 0) {
+  console.log(&#39;🚨 CRITICAL RISKS PRESENT:&#39;);
+  criticalRisks.forEach((risk) =&gt; {
+    console.log(`  - ${risk.description}`);
+  });
+}
+
+// Resolve a risk flag
+if (activeRisks.length &gt; 0) {
+  await clientService.resolveRiskFlag(clientId, activeRisks[0].id, userContext);
+  console.log(&#39;Risk flag resolved&#39;);
+}
+</code></pre>
+<h2>Status Management</h2>
+<h3>Example 12: Client Status Lifecycle</h3>
+<pre><code class="language-typescript">// New inquiry
+const newClient = await clientService.createClient(
+  {
+    organizationId: &#39;org-456&#39;,
+    branchId: &#39;branch-789&#39;,
+    firstName: &#39;Alice&#39;,
+    lastName: &#39;Williams&#39;,
+    dateOfBirth: new Date(&#39;1960-10-05&#39;),
+    primaryAddress: { /* ... */ },
+    status: &#39;INQUIRY&#39;,
+  },
+  userContext
+);
+
+// Progress to pending intake
+await clientService.updateClientStatus(
+  newClient.id,
+  &#39;PENDING_INTAKE&#39;,
+  &#39;Initial assessment scheduled&#39;,
+  userContext
+);
+
+// Complete intake and activate
+await clientService.updateClientStatus(
+  newClient.id,
+  &#39;ACTIVE&#39;,
+  &#39;Assessment complete, care plan established&#39;,
+  userContext
+);
+
+// Temporarily put on hold
+await clientService.updateClientStatus(
+  newClient.id,
+  &#39;ON_HOLD&#39;,
+  &#39;Client hospitalized - services paused&#39;,
+  userContext
+);
+
+// Resume services
+await clientService.updateClientStatus(
+  newClient.id,
+  &#39;ACTIVE&#39;,
+  &#39;Returned home, services resumed&#39;,
+  userContext
+);
+
+// Discharge
+await clientService.updateClientStatus(
+  newClient.id,
+  &#39;DISCHARGED&#39;,
+  &#39;Moved to assisted living facility&#39;,
+  userContext
+);
+</code></pre>
+<h2>Utility Functions</h2>
+<h3>Example 13: Display Client Information</h3>
+<pre><code class="language-typescript">import {
+  getFullName,
+  getDisplayName,
+  calculateAge,
+  formatPhoneNumber,
+  formatAddressSingleLine,
+  getPrimaryEmergencyContact,
+} from &#39;@care-commons/client-demographics&#39;;
+
+const client = await clientService.getClientById(clientId, userContext);
+
+// Display name variations
+console.log(`Full name: ${getFullName(client)}`);
+console.log(`Full name with middle: ${getFullName(client, true)}`);
+console.log(`Display name: ${getDisplayName(client)}`);
+
+// Age
+console.log(`Age: ${calculateAge(client.dateOfBirth)}`);
+
+// Contact info
+if (client.primaryPhone) {
+  console.log(`Phone: ${formatPhoneNumber(client.primaryPhone.number)}`);
+}
+
+// Address
+console.log(`Address: ${formatAddressSingleLine(client.primaryAddress)}`);
+
+// Emergency contact
+const primaryContact = getPrimaryEmergencyContact(client);
+if (primaryContact) {
+  console.log(`Emergency: ${primaryContact.name} (${primaryContact.relationship})`);
+  console.log(`  Phone: ${formatPhoneNumber(primaryContact.phone.number)}`);
+}
+</code></pre>
+<h3>Example 14: Check Client Eligibility and Safety</h3>
+<pre><code class="language-typescript">import {
+  isEligibleForServices,
+  hasAllergies,
+  hasLifeThreateningAllergies,
+  hasCriticalRisks,
+  requiresWheelchairAccess,
+  getActivePrograms,
+  getTotalAuthorizedHours,
+} from &#39;@care-commons/client-demographics&#39;;
+
+const client = await clientService.getClientById(clientId, userContext);
+
+// Eligibility check
+if (!isEligibleForServices(client)) {
+  console.log(&#39;⚠️  Client needs funding source verification&#39;);
+}
+
+// Safety checks
+if (hasLifeThreateningAllergies(client)) {
+  console.log(&#39;🚨 LIFE-THREATENING ALLERGIES PRESENT&#39;);
+  client.allergies
+    ?.filter((a) =&gt; a.severity === &#39;LIFE_THREATENING&#39;)
+    .forEach((allergy) =&gt; {
+      console.log(`  - ${allergy.allergen}: ${allergy.reaction}`);
+    });
+}
+
+if (hasCriticalRisks(client)) {
+  console.log(&#39;🚨 CRITICAL RISK FLAGS ACTIVE&#39;);
+}
+
+// Accessibility
+if (requiresWheelchairAccess(client)) {
+  console.log(&#39;♿ Wheelchair access required&#39;);
+}
+
+// Service authorization
+const activePrograms = getActivePrograms(client);
+const totalHours = getTotalAuthorizedHours(client);
+console.log(`Active programs: ${activePrograms.length}`);
+console.log(`Total authorized hours/week: ${totalHours}`);
+</code></pre>
+<h3>Example 15: Export Client Data</h3>
+<pre><code class="language-typescript">import { exportClientToCSV, generateClientSummary } from &#39;@care-commons/client-demographics&#39;;
+
+const client = await clientService.getClientById(clientId, userContext);
+
+// Generate summary
+const summary = generateClientSummary(client);
+console.log(&#39;Client Summary:&#39;);
+console.log(summary.basicInfo);
+console.log(summary.contactInfo);
+console.log(summary.careInfo);
+console.log(summary.riskInfo);
+
+// Export to CSV format
+const csvRow = exportClientToCSV(client);
+console.log(&#39;CSV Export:&#39;, csvRow);
+
+// Bulk export example
+const allClients = await clientService.searchClients(
+  { status: [&#39;ACTIVE&#39;] },
+  { page: 1, limit: 1000 },
+  userContext
+);
+
+const csvData = allClients.items.map(exportClientToCSV);
+// csvData can now be written to a CSV file
+</code></pre>
+<h2>API Usage</h2>
+<h3>Example 16: Express.js Router Setup</h3>
+<pre><code class="language-typescript">import express from &#39;express&#39;;
+import { createClientRouter } from &#39;@care-commons/client-demographics&#39;;
+
+const app = express();
+app.use(express.json());
+
+// Auth middleware to populate userContext
+app.use((req, res, next) =&gt; {
+  // In production, extract from JWT or session
+  req.userContext = {
+    userId: &#39;user-123&#39;,
+    roles: [&#39;COORDINATOR&#39;],
+    permissions: [&#39;clients:read&#39;, &#39;clients:create&#39;, &#39;clients:update&#39;],
+    organizationId: &#39;org-456&#39;,
+    branchIds: [&#39;branch-789&#39;],
+  };
+  next();
+});
+
+// Mount client routes
+const clientRouter = createClientRouter(clientService);
+app.use(&#39;/api&#39;, clientRouter);
+
+app.listen(3000, () =&gt; {
+  console.log(&#39;Server running on port 3000&#39;);
+});
+</code></pre>
+<h3>Example 17: HTTP API Calls</h3>
+<pre><code class="language-bash"># Search clients
+curl -X GET &quot;http://localhost:3000/api/clients?q=Johnson&amp;status=ACTIVE&amp;page=1&amp;limit=20&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot;
+
+# Get client by ID
+curl -X GET &quot;http://localhost:3000/api/clients/client-uuid-here&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot;
+
+# Create client
+curl -X POST &quot;http://localhost:3000/api/clients&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot; \
+  -d &#39;{
+    &quot;organizationId&quot;: &quot;org-456&quot;,
+    &quot;branchId&quot;: &quot;branch-789&quot;,
+    &quot;firstName&quot;: &quot;John&quot;,
+    &quot;lastName&quot;: &quot;Doe&quot;,
+    &quot;dateOfBirth&quot;: &quot;1950-01-01&quot;,
+    &quot;primaryAddress&quot;: {
+      &quot;type&quot;: &quot;HOME&quot;,
+      &quot;line1&quot;: &quot;123 Main St&quot;,
+      &quot;city&quot;: &quot;Springfield&quot;,
+      &quot;state&quot;: &quot;IL&quot;,
+      &quot;postalCode&quot;: &quot;62701&quot;,
+      &quot;country&quot;: &quot;US&quot;
+    }
+  }&#39;
+
+# Update client status
+curl -X PATCH &quot;http://localhost:3000/api/clients/client-uuid-here/status&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot; \
+  -d &#39;{
+    &quot;status&quot;: &quot;ACTIVE&quot;,
+    &quot;reason&quot;: &quot;Assessment complete&quot;
+  }&#39;
+
+# Add risk flag
+curl -X POST &quot;http://localhost:3000/api/clients/client-uuid-here/risk-flags&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot; \
+  -d &#39;{
+    &quot;type&quot;: &quot;FALL_RISK&quot;,
+    &quot;severity&quot;: &quot;HIGH&quot;,
+    &quot;description&quot;: &quot;History of falls&quot;,
+    &quot;mitigationPlan&quot;: &quot;Walker use required&quot;,
+    &quot;requiresAcknowledgment&quot;: true
+  }&#39;
+
+# Get dashboard stats
+curl -X GET &quot;http://localhost:3000/api/clients/dashboard/stats?branchId=branch-789&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot;
+</code></pre>
+<h2>Real-World Scenarios</h2>
+<h3>Example 18: Intake Workflow</h3>
+<pre><code class="language-typescript">// Step 1: Create inquiry from phone call
+const inquiry = await clientService.createClient(
+  {
+    organizationId: &#39;org-456&#39;,
+    branchId: &#39;branch-789&#39;,
+    firstName: &#39;Patricia&#39;,
+    lastName: &#39;Martinez&#39;,
+    dateOfBirth: new Date(&#39;1952-07-12&#39;),
+    primaryPhone: {
+      number: &#39;555-777-8888&#39;,
+      type: &#39;HOME&#39;,
+      canReceiveSMS: false,
+    },
+    primaryAddress: {
+      type: &#39;HOME&#39;,
+      line1: &#39;789 Elm Street&#39;,
+      city: &#39;Springfield&#39;,
+      state: &#39;IL&#39;,
+      postalCode: &#39;62703&#39;,
+      country: &#39;US&#39;,
+    },
+    status: &#39;INQUIRY&#39;,
+    referralSource: &#39;Family member called&#39;,
+  },
+  userContext
+);
+
+console.log(`Inquiry created: ${inquiry.clientNumber}`);
+
+// Step 2: Schedule intake assessment
+await clientService.updateClientStatus(
+  inquiry.id,
+  &#39;PENDING_INTAKE&#39;,
+  &#39;Initial assessment scheduled for 3/15/2024&#39;,
+  userContext
+);
+
+// Step 3: Complete intake and add details
+await clientService.updateClient(
+  inquiry.id,
+  {
+    email: &#39;patricia.martinez@example.com&#39;,
+    emergencyContacts: [
+      {
+        name: &#39;Carlos Martinez&#39;,
+        relationship: &#39;Son&#39;,
+        phone: {
+          number: &#39;555-888-9999&#39;,
+          type: &#39;MOBILE&#39;,
+          canReceiveSMS: true,
+        },
+        email: &#39;carlos.martinez@example.com&#39;,
+        isPrimary: true,
+        canMakeHealthcareDecisions: true,
+      },
+    ],
+  },
+  userContext
+);
+
+// Step 4: Add identified risk flags
+await clientService.addRiskFlag(
+  inquiry.id,
+  {
+    type: &#39;MEDICATION_COMPLIANCE&#39;,
+    severity: &#39;MEDIUM&#39;,
+    description: &#39;Takes multiple medications, occasionally forgets doses&#39;,
+    mitigationPlan: &#39;Medication organizer provided, daily reminder calls&#39;,
+    requiresAcknowledgment: false,
+  },
+  userContext
+);
+
+// Step 5: Activate client
+await clientService.updateClientStatus(
+  inquiry.id,
+  &#39;ACTIVE&#39;,
+  &#39;Intake complete, care plan approved, services beginning 3/18/2024&#39;,
+  userContext
+);
+
+console.log(&#39;Client intake workflow completed&#39;);
+</code></pre>
+<h3>Example 19: Daily Dashboard Report</h3>
+<pre><code class="language-typescript">import {
+  getActiveRiskFlags,
+  getCriticalRiskFlags,
+  isNewClient,
+  compareClients,
+} from &#39;@care-commons/client-demographics&#39;;
+
+async function generateDailyReport(branchId: string) {
+  // Get all active clients
+  const activeClients = await clientService.searchClients(
+    {
+      branchId,
+      status: [&#39;ACTIVE&#39;],
+    },
+    { page: 1, limit: 1000 },
+    userContext
+  );
+
+  console.log(&#39;\n📊 Daily Client Report&#39;);
+  console.log(`Branch: ${branchId}`);
+  console.log(`Date: ${new Date().toLocaleDateString()}`);
+  console.log(`\nTotal Active Clients: ${activeClients.total}`);
+
+  // New clients this month
+  const newClients = activeClients.items.filter((c) =&gt; isNewClient(c, 30));
+  console.log(`New Clients (Last 30 Days): ${newClients.length}`);
+
+  // High-risk clients
+  const highRiskClients = activeClients.items.filter((c) =&gt; {
+    const active = getActiveRiskFlags(c);
+    return active.some((r) =&gt; r.severity === &#39;HIGH&#39; || r.severity === &#39;CRITICAL&#39;);
+  });
+  console.log(`High-Risk Clients: ${highRiskClients.length}`);
+
+  // Critical alerts
+  const criticalAlerts = activeClients.items.filter((c) =&gt; {
+    return getCriticalRiskFlags(c).length &gt; 0;
+  });
+
+  if (criticalAlerts.length &gt; 0) {
+    console.log(`\n🚨 CRITICAL ALERTS: ${criticalAlerts.length}`);
+    criticalAlerts.forEach((client) =&gt; {
+      console.log(`  - ${client.firstName} ${client.lastName} (${client.clientNumber})`);
+      getCriticalRiskFlags(client).forEach((risk) =&gt; {
+        console.log(`    ⚠️  ${risk.type}: ${risk.description}`);
+      });
+    });
+  }
+
+  // Clients by status
+  const allClients = await clientService.searchClients(
+    { branchId },
+    { page: 1, limit: 1000 },
+    userContext
+  );
+
+  const statusCounts = {
+    INQUIRY: 0,
+    PENDING_INTAKE: 0,
+    ACTIVE: 0,
+    ON_HOLD: 0,
+    INACTIVE: 0,
+    DISCHARGED: 0,
+  };
+
+  allClients.items.forEach((c) =&gt; {
+    if (c.status in statusCounts) {
+      statusCounts[c.status as keyof typeof statusCounts]++;
+    }
+  });
+
+  console.log(&#39;\nClients by Status:&#39;);
+  Object.entries(statusCounts).forEach(([status, count]) =&gt; {
+    if (count &gt; 0) {
+      console.log(`  ${status}: ${count}`);
+    }
+  });
+}
+
+// Run the report
+generateDailyReport(&#39;branch-789&#39;);
+</code></pre>
+<h3>Example 20: Bulk Import from Spreadsheet</h3>
+<pre><code class="language-typescript">interface SpreadsheetRow {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+  phone: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
+  emergencyName: string;
+  emergencyPhone: string;
+  emergencyRelation: string;
+}
+
+async function importClientsFromSpreadsheet(rows: SpreadsheetRow[]) {
+  const results = {
+    successful: [] as string[],
+    failed: [] as { row: SpreadsheetRow; error: string }[],
+  };
+
+  for (const row of rows) {
+    try {
+      const client = await clientService.createClient(
+        {
+          organizationId: &#39;org-456&#39;,
+          branchId: &#39;branch-789&#39;,
+          firstName: row.firstName.trim(),
+          lastName: row.lastName.trim(),
+          dateOfBirth: new Date(row.dateOfBirth),
+          primaryPhone: {
+            number: row.phone.replace(/\D/g, &#39;&#39;),
+            type: &#39;HOME&#39;,
+            canReceiveSMS: false,
+          },
+          primaryAddress: {
+            type: &#39;HOME&#39;,
+            line1: row.street.trim(),
+            city: row.city.trim(),
+            state: row.state.trim(),
+            postalCode: row.zip.replace(/\D/g, &#39;&#39;),
+            country: &#39;US&#39;,
+          },
+          emergencyContacts: [
+            {
+              name: row.emergencyName.trim(),
+              relationship: row.emergencyRelation.trim(),
+              phone: {
+                number: row.emergencyPhone.replace(/\D/g, &#39;&#39;),
+                type: &#39;MOBILE&#39;,
+                canReceiveSMS: true,
+              },
+              isPrimary: true,
+              canMakeHealthcareDecisions: true,
+            },
+          ],
+          status: &#39;PENDING_INTAKE&#39;,
+        },
+        userContext
+      );
+
+      results.successful.push(client.clientNumber);
+      console.log(`✅ Imported: ${client.firstName} ${client.lastName}`);
+    } catch (error: any) {
+      results.failed.push({
+        row,
+        error: error.message,
+      });
+      console.log(`❌ Failed: ${row.firstName} ${row.lastName} - ${error.message}`);
+    }
+  }
+
+  console.log(`\nImport complete:`);
+  console.log(`  Successful: ${results.successful.length}`);
+  console.log(`  Failed: ${results.failed.length}`);
+
+  return results;
+}
+</code></pre>
+<hr>
+<p>For more information, see the <a href="./README.md">main README</a> or visit the <a href="https://docs.carecommons.org">Care Commons documentation</a>.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

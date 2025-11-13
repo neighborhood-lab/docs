@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Backup and Recovery Procedures - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Database Backup and Recovery Procedures</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Database Backup and Recovery Procedures</h1>
+<h2>Overview</h2>
+<p>Care Commons implements a <strong>dual-strategy backup approach</strong> for HIPAA compliance and disaster recovery:</p>
+<ol>
+<li><strong>Neon Branch Backups</strong> - Instant, copy-on-write snapshots with point-in-time recovery</li>
+<li><strong>pg_dump Backups</strong> - Traditional PostgreSQL dumps for portability and long-term archival</li>
+</ol>
+<h2>Backup Strategy</h2>
+<h3>Automated Daily Backups</h3>
+<ul>
+<li><strong>Schedule</strong>: Daily at 2 AM UTC (9 PM EST / 6 PM PST)</li>
+<li><strong>Workflow</strong>: <code>.github/workflows/backup.yml</code></li>
+<li><strong>Retention</strong>: 30 days for daily backups, 12 months for monthly snapshots</li>
+<li><strong>Storage</strong>: Neon branches + S3 (encrypted, STANDARD_IA storage class)</li>
+<li><strong>Verification</strong>: Automated integrity checks after each backup</li>
+</ul>
+<h3>Backup Types</h3>
+<h4>1. Neon Branch Backups (Primary)</h4>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Instant creation (copy-on-write, no downtime)</li>
+<li>Point-in-time recovery (PITR) to any second</li>
+<li>Zero storage cost (Neon&#39;s architecture)</li>
+<li>Fast restoration (seconds to minutes)</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Neon-specific (not portable to other PostgreSQL hosts)</li>
+<li>Requires Neon API access</li>
+</ul>
+<h4>2. pg_dump Backups (Secondary)</h4>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>Portable to any PostgreSQL instance</li>
+<li>Offline archival capability</li>
+<li>Encrypted storage in S3</li>
+<li>Standard PostgreSQL tooling</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Slower creation (database size dependent)</li>
+<li>Point-in-time recovery limited to backup timestamp</li>
+<li>Storage costs (S3)</li>
+</ul>
+<h2>Manual Backup Operations</h2>
+<h3>Create a Backup</h3>
+<pre><code class="language-bash"># Both Neon branch + pg_dump
+tsx scripts/backup-neon.ts --type both
+
+# Neon branch only (instant)
+tsx scripts/backup-neon.ts --type branch
+
+# pg_dump only (portable)
+tsx scripts/backup-neon.ts --type dump
+
+# Verify latest backup
+tsx scripts/backup-neon.ts --verify
+</code></pre>
+<h3>Environment Variables</h3>
+<p>Required for backup operations:</p>
+<pre><code class="language-bash"># Neon Configuration (required for branch backups)
+NEON_API_KEY=your_api_key
+NEON_PROJECT_ID=your_project_id
+
+# Database Connection (required for pg_dump backups)
+DATABASE_URL=postgresql://user:pass@host/database
+
+# Local Storage
+BACKUP_DIR=/var/backups/care-commons  # Default
+
+# S3 Configuration (optional, recommended for production)
+S3_BACKUP_BUCKET=care-commons-backups
+AWS_ACCESS_KEY_ID=your_access_key
+AWS_SECRET_ACCESS_KEY=your_secret_key
+
+# Retention Policy
+BACKUP_RETENTION_DAYS=30              # Default
+MONTHLY_RETENTION_MONTHS=12           # Default
+</code></pre>
+<h2>Recovery Procedures</h2>
+<h3>Scenario 1: Recent Data Loss (&lt; 7 days)</h3>
+<p><strong>Use Neon Branch Restoration (Fastest)</strong></p>
+<pre><code class="language-bash"># List available backup branches
+neon branches list --project-id &quot;$NEON_PROJECT_ID&quot;
+
+# Identify the backup branch closest to desired time
+# Example: backup-2025-11-10T14-30-00-000Z
+
+# Restore from branch (creates new branch from backup)
+neon branches restore \
+  --id backup-2025-11-10T14-30-00-000Z \
+  --project-id &quot;$NEON_PROJECT_ID&quot; \
+  --target main
+
+# Or create new branch and test before promoting
+neon branches restore \
+  --id backup-2025-11-10T14-30-00-000Z \
+  --project-id &quot;$NEON_PROJECT_ID&quot; \
+  --name restored-test
+</code></pre>
+<p><strong>Estimated Recovery Time</strong>: 5-15 minutes</p>
+<h3>Scenario 2: Older Data Loss (7-30 days)</h3>
+<p><strong>Use pg_dump Restoration</strong></p>
+<pre><code class="language-bash"># Download backup from S3 (if stored remotely)
+aws s3 cp \
+  &quot;s3://care-commons-backups/backups/care_commons_2025-11-03T02-00-00-000Z.dump&quot; \
+  /tmp/restore.dump
+
+# Or use local backup
+BACKUP_FILE=&quot;/var/backups/care-commons/care_commons_2025-11-03T02-00-00-000Z.dump&quot;
+
+# Create temporary database for testing
+createdb care_commons_restore_test
+
+# Restore to temporary database
+pg_restore \
+  --dbname=care_commons_restore_test \
+  --verbose \
+  --clean \
+  --if-exists \
+  &quot;$BACKUP_FILE&quot;
+
+# Verify restoration
+psql care_commons_restore_test -c &quot;SELECT COUNT(*) FROM organizations;&quot;
+psql care_commons_restore_test -c &quot;SELECT COUNT(*) FROM users;&quot;
+psql care_commons_restore_test -c &quot;SELECT MAX(created_at) FROM audit_log;&quot;
+
+# If verified, restore to production (CAUTION!)
+pg_restore \
+  --dbname=&quot;$DATABASE_URL&quot; \
+  --verbose \
+  --clean \
+  --if-exists \
+  &quot;$BACKUP_FILE&quot;
+</code></pre>
+<p><strong>Estimated Recovery Time</strong>: 30 minutes - 2 hours (depends on database size)</p>
+<h3>Scenario 3: Point-in-Time Recovery (Neon PITR)</h3>
+<p><strong>Restore to specific timestamp (not just backup time)</strong></p>
+<pre><code class="language-bash"># Neon supports PITR to any point within retention window
+# Check your retention window
+neon projects get --project-id &quot;$NEON_PROJECT_ID&quot;
+
+# Create branch from specific timestamp
+neon branches create \
+  --name &quot;pitr-2025-11-10-14-25&quot; \
+  --parent main \
+  --timestamp &quot;2025-11-10T14:25:00Z&quot; \
+  --project-id &quot;$NEON_PROJECT_ID&quot;
+
+# Connect to branch and verify data
+neon connection-string pitr-2025-11-10-14-25
+
+# If correct, promote branch to main
+neon branches rename pitr-2025-11-10-14-25 main-old
+neon branches rename pitr-2025-11-10-14-25 main
+</code></pre>
+<p><strong>Estimated Recovery Time</strong>: 10-20 minutes</p>
+<h3>Scenario 4: Complete Infrastructure Failure</h3>
+<p><strong>Restore to New PostgreSQL Instance</strong></p>
+<pre><code class="language-bash"># Download latest backup from S3
+aws s3 cp \
+  &quot;s3://care-commons-backups/backups/$(aws s3 ls s3://care-commons-backups/backups/ | sort | tail -1 | awk &#39;{print $4}&#39;)&quot; \
+  /tmp/restore.dump
+
+# Create new database on new PostgreSQL instance
+createdb -h new-postgres-host care_commons
+
+# Restore database
+pg_restore \
+  --host=new-postgres-host \
+  --dbname=care_commons \
+  --username=postgres \
+  --verbose \
+  --clean \
+  --if-exists \
+  /tmp/restore.dump
+
+# Run migrations to ensure schema is current
+DATABASE_URL=&quot;postgresql://postgres@new-postgres-host/care_commons&quot; \
+  npm run db:migrate
+
+# Update DNS/load balancer to point to new instance
+</code></pre>
+<p><strong>Estimated Recovery Time</strong>: 1-3 hours</p>
+<h2>Testing and Verification</h2>
+<h3>Monthly Backup Testing</h3>
+<p><strong>Required for HIPAA Compliance</strong></p>
+<pre><code class="language-bash"># 1. Download random backup from last month
+BACKUP_FILE=$(aws s3 ls s3://care-commons-backups/backups/ | \
+  grep &quot;$(date -d &#39;1 month ago&#39; +%Y-%m)&quot; | \
+  shuf -n 1 | \
+  awk &#39;{print $4}&#39;)
+
+aws s3 cp &quot;s3://care-commons-backups/backups/$BACKUP_FILE&quot; /tmp/test-restore.dump
+
+# 2. Restore to test database
+createdb care_commons_restore_test
+pg_restore --dbname=care_commons_restore_test /tmp/test-restore.dump
+
+# 3. Verify critical tables
+psql care_commons_restore_test &lt;&lt;EOF
+SELECT &#39;organizations&#39; as table_name, COUNT(*) as count FROM organizations
+UNION ALL
+SELECT &#39;users&#39;, COUNT(*) FROM users
+UNION ALL
+SELECT &#39;clients&#39;, COUNT(*) FROM clients
+UNION ALL
+SELECT &#39;caregivers&#39;, COUNT(*) FROM caregivers
+UNION ALL
+SELECT &#39;visits&#39;, COUNT(*) FROM visits
+UNION ALL
+SELECT &#39;evv_records&#39;, COUNT(*) FROM evv_records;
+EOF
+
+# 4. Document results
+echo &quot;Backup Test Results - $(date)&quot; &gt;&gt; /tmp/backup-test-results.log
+echo &quot;Backup File: $BACKUP_FILE&quot; &gt;&gt; /tmp/backup-test-results.log
+echo &quot;Status: SUCCESS&quot; &gt;&gt; /tmp/backup-test-results.log
+
+# 5. Cleanup
+dropdb care_commons_restore_test
+rm /tmp/test-restore.dump
+</code></pre>
+<h3>Automated Verification</h3>
+<p>The backup workflow automatically verifies:</p>
+<ul>
+<li>✅ Backup file integrity (pg_restore --list)</li>
+<li>✅ Retention policy compliance (no backups older than 30 days)</li>
+<li>✅ Minimum backup count (at least 7 daily backups available)</li>
+</ul>
+<h2>Monitoring and Alerts</h2>
+<h3>GitHub Actions</h3>
+<ul>
+<li><strong>Backup failures</strong> create GitHub issues automatically</li>
+<li><strong>Retention violations</strong> trigger workflow failures</li>
+<li><strong>Slack notifications</strong> sent on backup failures (if configured)</li>
+</ul>
+<h3>Manual Monitoring</h3>
+<pre><code class="language-bash"># Check backup status
+tsx scripts/backup-neon.ts --verify
+
+# List recent backups
+neon branches list --project-id &quot;$NEON_PROJECT_ID&quot; | grep backup-
+
+# Check S3 backup inventory
+aws s3 ls s3://care-commons-backups/backups/ | tail -10
+</code></pre>
+<h2>HIPAA Compliance Checklist</h2>
+<ul>
+<li>✅ <strong>Automated daily backups</strong> (30-day retention)</li>
+<li>✅ <strong>Encrypted storage</strong> (AES-256 in S3, TLS in-transit)</li>
+<li>✅ <strong>Geographic redundancy</strong> (S3 cross-region replication recommended)</li>
+<li>✅ <strong>Access controls</strong> (IAM policies, Neon API key rotation)</li>
+<li>✅ <strong>Audit trail</strong> (GitHub Actions logs, S3 access logs)</li>
+<li>✅ <strong>Tested restoration</strong> (monthly verification required)</li>
+<li>✅ <strong>Documented procedures</strong> (this document)</li>
+<li>✅ <strong>Retention policy</strong> (30 days + 12 months for monthly snapshots)</li>
+</ul>
+<h2>Security Considerations</h2>
+<h3>Access Control</h3>
+<ul>
+<li><strong>Neon API Key</strong>: Store in GitHub Secrets, rotate quarterly</li>
+<li><strong>S3 Bucket</strong>: IAM policy with least privilege (write-only for backups)</li>
+<li><strong>Backup Files</strong>: Server-side encryption (SSE-AES256)</li>
+<li><strong>Database Credentials</strong>: Never commit to repository</li>
+</ul>
+<h3>Encryption</h3>
+<ul>
+<li><strong>In-Transit</strong>: TLS 1.3 for all connections (Neon, S3, PostgreSQL)</li>
+<li><strong>At-Rest</strong>: <ul>
+<li>Neon: Encrypted by default (AES-256)</li>
+<li>S3: Server-side encryption enabled</li>
+<li>pg_dump: Can be encrypted with GPG (optional)</li>
+</ul>
+</li>
+</ul>
+<h3>Audit Trail</h3>
+<p>All backup operations are logged:</p>
+<ul>
+<li>GitHub Actions workflow runs</li>
+<li>Neon API calls (branch create/delete)</li>
+<li>S3 API calls (CloudTrail)</li>
+<li>Application logs (pino with context)</li>
+</ul>
+<h2>Disaster Recovery Objectives</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Actual</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>RPO</strong> (Recovery Point Objective)</td>
+<td>&lt; 24 hours</td>
+<td>&lt; 5 minutes (Neon PITR)</td>
+</tr>
+<tr>
+<td><strong>RTO</strong> (Recovery Time Objective)</td>
+<td>&lt; 4 hours</td>
+<td>5-60 minutes (scenario-dependent)</td>
+</tr>
+<tr>
+<td><strong>Backup Frequency</strong></td>
+<td>Daily</td>
+<td>Daily (2 AM UTC)</td>
+</tr>
+<tr>
+<td><strong>Retention Period</strong></td>
+<td>30 days</td>
+<td>30 days (daily) + 12 months (monthly)</td>
+</tr>
+<tr>
+<td><strong>Testing Frequency</strong></td>
+<td>Monthly</td>
+<td>Automated daily verification</td>
+</tr>
+</tbody></table>
+<h2>Troubleshooting</h2>
+<h3>Backup Creation Fails</h3>
+<pre><code class="language-bash"># Check Neon API access
+neon auth whoami
+
+# Check database connectivity
+psql &quot;$DATABASE_URL&quot; -c &quot;SELECT version();&quot;
+
+# Check S3 access
+aws s3 ls &quot;s3://${S3_BACKUP_BUCKET}/&quot;
+
+# Check disk space
+df -h &quot;$BACKUP_DIR&quot;
+</code></pre>
+<h3>Backup Verification Fails</h3>
+<pre><code class="language-bash"># Verify file is not corrupted
+pg_restore --list /path/to/backup.dump
+
+# Check file permissions
+ls -lh /path/to/backup.dump
+
+# Re-download from S3
+aws s3 cp &quot;s3://care-commons-backups/backups/file.dump&quot; /tmp/verify.dump
+pg_restore --list /tmp/verify.dump
+</code></pre>
+<h3>Restoration Fails</h3>
+<pre><code class="language-bash"># Check PostgreSQL version compatibility
+psql --version
+pg_restore --version
+
+# Restore with verbose logging
+pg_restore --verbose --dbname=test_db backup.dump 2&gt;&amp;1 | tee restore.log
+
+# Restore without --clean (if objects don&#39;t exist yet)
+pg_restore --dbname=test_db backup.dump
+
+# Restore specific table only
+pg_restore --table=table_name --dbname=test_db backup.dump
+</code></pre>
+<h2>Support and Escalation</h2>
+<h3>Emergency Contacts</h3>
+<ul>
+<li><strong>On-Call Engineer</strong>: (GitHub Pages on-call rotation)</li>
+<li><strong>Database Administrator</strong>: (DBA on-call)</li>
+<li><strong>Security Team</strong>: (HIPAA compliance issues)</li>
+</ul>
+<h3>Escalation Path</h3>
+<ol>
+<li><strong>Backup failure detected</strong> → GitHub issue created automatically</li>
+<li><strong>Manual intervention needed</strong> → On-call engineer notified</li>
+<li><strong>Restoration required</strong> → Follow recovery procedures above</li>
+<li><strong>Data loss confirmed</strong> → Escalate to security team + legal</li>
+</ol>
+<h2>Additional Resources</h2>
+<ul>
+<li><a href="https://neon.tech/docs/guides/branching">Neon Branching Documentation</a></li>
+<li><a href="https://www.postgresql.org/docs/current/backup.html">PostgreSQL Backup Documentation</a></li>
+<li><a href="https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html">HIPAA Backup Requirements</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/backup-best-practices.html">AWS S3 Backup Best Practices</a></li>
+</ul>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

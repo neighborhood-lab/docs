@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refactoring Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Refactoring Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Refactoring Guide</h1>
+<p>This guide outlines best practices for refactoring code in the Care Commons platform, with a focus on applying SOLID principles and reducing code duplication.</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#when-to-refactor">When to Refactor</a></li>
+<li><a href="#solid-principles">SOLID Principles</a></li>
+<li><a href="#common-refactoring-patterns">Common Refactoring Patterns</a></li>
+<li><a href="#available-utilities">Available Utilities</a></li>
+<li><a href="#code-review-checklist">Code Review Checklist</a></li>
+<li><a href="#tools-and-automation">Tools and Automation</a></li>
+</ol>
+<h2>When to Refactor</h2>
+<p>Refactor when you encounter:</p>
+<ul>
+<li><strong>Duplicate code</strong> (DRY violation) - Same logic repeated in multiple places</li>
+<li><strong>Large files</strong> (&gt;300 lines) - Consider splitting into smaller modules</li>
+<li><strong>Complex functions</strong> (&gt;50 lines or complexity &gt;10) - Break into smaller functions</li>
+<li><strong>God objects</strong> - Classes/services doing too many things</li>
+<li><strong>Tight coupling</strong> - Hard-coded dependencies between modules</li>
+<li><strong>Unclear intent</strong> - Code that&#39;s hard to understand or test</li>
+</ul>
+<h3>The Boy Scout Rule</h3>
+<blockquote>
+<p>&quot;Leave the code cleaner than you found it.&quot;</p>
+</blockquote>
+<p>When touching existing code:</p>
+<ol>
+<li>Fix obvious issues while you&#39;re there</li>
+<li>Add missing type annotations</li>
+<li>Extract magic numbers to constants</li>
+<li>Improve variable names for clarity</li>
+</ol>
+<h2>SOLID Principles</h2>
+<h3>Single Responsibility Principle (SRP)</h3>
+<p><strong>Definition</strong>: A class/function should have one reason to change.</p>
+<p><strong>Bad Example</strong>:</p>
+<pre><code class="language-typescript">class ClientService {
+  async create(data: any) { /* ... */ }
+  async sendWelcomeEmail(client: Client) { /* ... */ }
+  async generatePDF(client: Client) { /* ... */ }
+  async checkEligibility(client: Client) { /* ... */ }
+}
+</code></pre>
+<p><strong>Good Example</strong>:</p>
+<pre><code class="language-typescript">class ClientService {
+  async create(data: any) { /* ... */ }
+  async findById(id: string) { /* ... */ }
+}
+
+class ClientNotificationService {
+  async sendWelcomeEmail(client: Client) { /* ... */ }
+}
+
+class ClientEligibilityService {
+  async checkMedicaidEligibility(client: Client) { /* ... */ }
+}
+</code></pre>
+<h3>Open/Closed Principle (OCP)</h3>
+<p><strong>Definition</strong>: Open for extension, closed for modification.</p>
+<p><strong>Implementation</strong>: Use inheritance, composition, or strategy patterns.</p>
+<pre><code class="language-typescript">// Base class that&#39;s closed for modification
+abstract class BaseValidator {
+  validate(data: unknown): ValidationResult {
+    const schema = this.getSchema();
+    return schema.parse(data);
+  }
+
+  abstract getSchema(): ZodSchema;
+}
+
+// Extend with new validators without modifying base
+class ClientValidator extends BaseValidator {
+  getSchema() {
+    return clientSchema;
+  }
+}
+</code></pre>
+<h3>Liskov Substitution Principle (LSP)</h3>
+<p><strong>Definition</strong>: Subtypes must be substitutable for their base types.</p>
+<p>Ensure derived classes don&#39;t break expectations:</p>
+<ul>
+<li>Don&#39;t throw unexpected errors</li>
+<li>Don&#39;t add stricter preconditions</li>
+<li>Don&#39;t weaken postconditions</li>
+</ul>
+<h3>Interface Segregation Principle (ISP)</h3>
+<p><strong>Definition</strong>: Don&#39;t force clients to depend on methods they don&#39;t use.</p>
+<p><strong>Bad</strong>:</p>
+<pre><code class="language-typescript">interface Worker {
+  work(): void;
+  eat(): void;
+  sleep(): void;
+}
+
+class Robot implements Worker {
+  work() { /* ... */ }
+  eat() { throw new Error(&#39;Robots don\&#39;t eat&#39;); } // ❌ Forced to implement
+  sleep() { throw new Error(&#39;Robots don\&#39;t sleep&#39;); } // ❌ Forced to implement
+}
+</code></pre>
+<p><strong>Good</strong>:</p>
+<pre><code class="language-typescript">interface Workable {
+  work(): void;
+}
+
+interface Biological {
+  eat(): void;
+  sleep(): void;
+}
+
+class Robot implements Workable {
+  work() { /* ... */ } // ✅ Only implements what makes sense
+}
+</code></pre>
+<h3>Dependency Inversion Principle (DIP)</h3>
+<p><strong>Definition</strong>: Depend on abstractions, not concretions.</p>
+<p><strong>Bad</strong>:</p>
+<pre><code class="language-typescript">class VisitService {
+  async create(data: any) {
+    const client = await new ClientService().findById(data.clientId); // ❌ Tight coupling
+  }
+}
+</code></pre>
+<p><strong>Good</strong>:</p>
+<pre><code class="language-typescript">class VisitService {
+  constructor(
+    private clientService: ClientService, // ✅ Inject dependencies
+    private caregiverService: CaregiverService
+  ) {}
+
+  async create(data: any) {
+    const client = await this.clientService.findById(data.clientId);
+  }
+}
+</code></pre>
+<h2>Common Refactoring Patterns</h2>
+<h3>Extract Common Utilities</h3>
+<h4>Date Operations</h4>
+<p>Use <code>DateUtils</code> from <code>@care-commons/core</code>:</p>
+<pre><code class="language-typescript">import { DateUtils } from &#39;@care-commons/core&#39;;
+
+// Format dates consistently
+const formatted = DateUtils.formatDate(new Date(), &#39;yyyy-MM-dd&#39;);
+const dateTime = DateUtils.formatDateTime(new Date());
+
+// Business days calculation
+const deadline = DateUtils.addBusinessDays(new Date(), 5);
+
+// Date range generation
+const dates = DateUtils.getDateRange(startDate, endDate);
+</code></pre>
+<h4>Validation Schemas</h4>
+<p>Use common schemas from <code>@care-commons/core</code>:</p>
+<pre><code class="language-typescript">import {
+  emailSchema,
+  phoneSchema,
+  addressSchema,
+  paginationSchema
+} from &#39;@care-commons/core&#39;;
+
+const userSchema = z.object({
+  email: emailSchema,
+  phone: phoneSchema,
+  address: addressSchema,
+  // ... other fields
+});
+</code></pre>
+<h4>Error Handling</h4>
+<p>Use standard error classes:</p>
+<pre><code class="language-typescript">import {
+  NotFoundError,
+  ValidationError,
+  UnauthorizedError
+} from &#39;@care-commons/core&#39;;
+
+// In services
+if (!client) {
+  throw new NotFoundError(&#39;Client&#39;, id);
+}
+
+if (!validation.success) {
+  throw new ValidationError(&#39;Invalid data&#39;, validation.errors);
+}
+
+// In Express routes
+import { errorHandler, asyncHandler } from &#39;@care-commons/core&#39;;
+
+app.use(errorHandler);
+
+router.get(&#39;/clients/:id&#39;, asyncHandler(async (req, res) =&gt; {
+  const client = await clientService.findById(req.params.id);
+  res.json(client);
+}));
+</code></pre>
+<h3>Extract Reusable Components</h3>
+<h4>Form Fields</h4>
+<p>Use <code>FormField</code> components from <code>packages/web</code>:</p>
+<pre><code class="language-typescript">import { FormField } from &#39;@/components/forms/FormField&#39;;
+import { useForm } from &#39;react-hook-form&#39;;
+
+function ClientForm() {
+  const { register, formState: { errors } } = useForm();
+
+  return (
+    &lt;form&gt;
+      &lt;FormField
+        name=&quot;firstName&quot;
+        label=&quot;First Name&quot;
+        register={register}
+        errors={errors}
+        required
+      /&gt;
+      &lt;FormField
+        name=&quot;email&quot;
+        label=&quot;Email&quot;
+        type=&quot;email&quot;
+        register={register}
+        errors={errors}
+      /&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
+<h3>Extract Service Logic</h3>
+<p>When a service gets too large, split by responsibility:</p>
+<pre><code class="language-typescript">// Before: ClientService (400 lines)
+class ClientService {
+  create() { }
+  update() { }
+  delete() { }
+  sendEmail() { }
+  generateReport() { }
+  checkEligibility() { }
+}
+
+// After: Split into focused services
+class ClientService {
+  create() { }
+  update() { }
+  delete() { }
+}
+
+class ClientNotificationService {
+  sendWelcomeEmail() { }
+  sendReminder() { }
+}
+
+class ClientReportService {
+  generateReport() { }
+  exportToCSV() { }
+}
+
+class ClientEligibilityService {
+  checkMedicaidEligibility() { }
+}
+</code></pre>
+<h3>Repository Pattern</h3>
+<p>Use the base <code>Repository</code> class from <code>@care-commons/core</code>:</p>
+<pre><code class="language-typescript">import { Repository } from &#39;@care-commons/core&#39;;
+
+class ClientRepository extends Repository&lt;Client&gt; {
+  constructor(database: Database) {
+    super({
+      tableName: &#39;clients&#39;,
+      database,
+      enableAudit: true,
+      enableSoftDelete: true,
+    });
+  }
+
+  protected mapRowToEntity(row: Record&lt;string, unknown&gt;): Client {
+    // Map database row to domain entity
+  }
+
+  protected mapEntityToRow(entity: Partial&lt;Client&gt;): Record&lt;string, unknown&gt; {
+    // Map domain entity to database row
+  }
+
+  // Add domain-specific queries
+  async findByMedicaidId(medicaidId: string): Promise&lt;Client | null&gt; {
+    // Custom query
+  }
+}
+</code></pre>
+<h2>Available Utilities</h2>
+<h3>Core Package (<code>@care-commons/core</code>)</h3>
+<h4>Date Utilities</h4>
+<ul>
+<li><code>DateUtils.formatDate(date, format?)</code> - Format date to string</li>
+<li><code>DateUtils.formatDateTime(date)</code> - Format as datetime</li>
+<li><code>DateUtils.formatTime(date)</code> - Format time only</li>
+<li><code>DateUtils.addBusinessDays(date, days)</code> - Add business days</li>
+<li><code>DateUtils.getDateRange(start, end)</code> - Get array of dates</li>
+<li><code>DateUtils.isWithinTolerance(actual, expected, minutes)</code> - Check time tolerance</li>
+<li><code>DateUtils.isPast(date)</code> - Check if date is in past</li>
+<li><code>DateUtils.isFuture(date)</code> - Check if date is in future</li>
+</ul>
+<h4>Validation Schemas</h4>
+<ul>
+<li><code>emailSchema</code> - Email validation</li>
+<li><code>phoneSchema</code> - 10-digit phone</li>
+<li><code>zipCodeSchema</code> - US ZIP code</li>
+<li><code>ssnSchema</code> - SSN format</li>
+<li><code>addressSchema</code> - Physical address</li>
+<li><code>nameSchema</code> - Person name</li>
+<li><code>paginationSchema</code> - Pagination params</li>
+<li><code>dateRangeSchema</code> - Date range with validation</li>
+</ul>
+<h4>Error Classes</h4>
+<ul>
+<li><code>AppError</code> - Base error class</li>
+<li><code>NotFoundError</code> - 404 errors</li>
+<li><code>ValidationError</code> - 400 validation errors</li>
+<li><code>UnauthorizedError</code> - 401 auth errors</li>
+<li><code>ForbiddenError</code> - 403 permission errors</li>
+<li><code>ConflictError</code> - 409 conflicts</li>
+<li><code>errorHandler</code> - Express error middleware</li>
+<li><code>asyncHandler</code> - Async route wrapper</li>
+</ul>
+<h3>Web Package</h3>
+<h4>Form Components</h4>
+<ul>
+<li><code>FormField</code> - Generic form field</li>
+<li><code>CheckboxField</code> - Checkbox input</li>
+<li><code>RadioField</code> - Radio button group</li>
+</ul>
+<h2>Code Review Checklist</h2>
+<p>When reviewing code, check for:</p>
+<h3>Code Quality</h3>
+<ul>
+<li><input disabled="" type="checkbox"> No duplicate code (DRY principle)</li>
+<li><input disabled="" type="checkbox"> Functions are small and focused (&lt;50 lines)</li>
+<li><input disabled="" type="checkbox"> Files are reasonably sized (&lt;300 lines)</li>
+<li><input disabled="" type="checkbox"> Complexity is manageable (cyclomatic complexity &lt;10)</li>
+<li><input disabled="" type="checkbox"> Functions have ≤3 parameters (use objects for more)</li>
+</ul>
+<h3>SOLID Principles</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Each class/function has a single responsibility</li>
+<li><input disabled="" type="checkbox"> Code is open for extension, closed for modification</li>
+<li><input disabled="" type="checkbox"> Dependencies are injected, not created inline</li>
+<li><input disabled="" type="checkbox"> Interfaces are small and focused</li>
+</ul>
+<h3>Type Safety</h3>
+<ul>
+<li><input disabled="" type="checkbox"> All functions have explicit return types</li>
+<li><input disabled="" type="checkbox"> No <code>any</code> types (except in tests)</li>
+<li><input disabled="" type="checkbox"> Proper null/undefined handling</li>
+<li><input disabled="" type="checkbox"> Zod schemas for external data</li>
+</ul>
+<h3>Error Handling</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Errors use standard error classes</li>
+<li><input disabled="" type="checkbox"> Async errors are properly caught</li>
+<li><input disabled="" type="checkbox"> Error messages are clear and actionable</li>
+</ul>
+<h3>Testing</h3>
+<ul>
+<li><input disabled="" type="checkbox"> New code has unit tests</li>
+<li><input disabled="" type="checkbox"> Edge cases are covered</li>
+<li><input disabled="" type="checkbox"> Tests are readable and maintainable</li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Complex logic has comments</li>
+<li><input disabled="" type="checkbox"> Public APIs have JSDoc comments</li>
+<li><input disabled="" type="checkbox"> README updated if needed</li>
+</ul>
+<h2>Tools and Automation</h2>
+<h3>Detect Duplicate Code</h3>
+<p>Run <code>jscpd</code> to find duplication:</p>
+<pre><code class="language-bash">npx jscpd --min-lines 10 --min-tokens 50 packages/ verticals/
+</code></pre>
+<h3>ESLint Rules</h3>
+<p>The project enforces SOLID principles via ESLint:</p>
+<ul>
+<li><code>max-lines</code>: Warns at 300 lines per file</li>
+<li><code>max-lines-per-function</code>: Warns at 50 lines per function</li>
+<li><code>complexity</code>: Warns at cyclomatic complexity &gt;10</li>
+<li><code>max-depth</code>: Warns at nesting depth &gt;3</li>
+<li><code>max-params</code>: Warns at &gt;3 function parameters</li>
+</ul>
+<h3>Run Quality Checks</h3>
+<pre><code class="language-bash"># Lint
+npm run lint
+
+# Type check
+npm run typecheck
+
+# Tests
+npm run test
+
+# Build
+npm run build
+</code></pre>
+<h2>Best Practices Summary</h2>
+<ol>
+<li><strong>Keep it Simple</strong> - Simple code is easier to understand and maintain</li>
+<li><strong>Avoid Premature Optimization</strong> - Make it work, then make it fast</li>
+<li><strong>Test First</strong> - Write tests before or while coding</li>
+<li><strong>Refactor Regularly</strong> - Small, frequent refactorings are safer</li>
+<li><strong>Use Type System</strong> - Let TypeScript catch errors early</li>
+<li><strong>Follow Conventions</strong> - Consistency makes code predictable</li>
+<li><strong>Review Code</strong> - Get feedback before merging</li>
+<li><strong>Document Intent</strong> - Explain <em>why</em>, not <em>what</em></li>
+</ol>
+<h2>Questions?</h2>
+<p>If you&#39;re unsure about a refactoring:</p>
+<ol>
+<li>Discuss with the team</li>
+<li>Start with a small, safe refactoring</li>
+<li>Get code review feedback</li>
+<li>Iterate and improve</li>
+</ol>
+<p>Remember: <strong>Perfect is the enemy of good.</strong> Aim for continuous improvement, not perfection.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

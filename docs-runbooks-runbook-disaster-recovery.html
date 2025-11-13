@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disaster Recovery Runbook - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Disaster Recovery Runbook</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Disaster Recovery Runbook</h1>
+<h2>Quick Reference</h2>
+<p><strong>Emergency Contacts</strong></p>
+<ul>
+<li>On-Call Engineer: [CONFIGURE]</li>
+<li>Database Administrator: [CONFIGURE]</li>
+<li>Security Team: [CONFIGURE]</li>
+<li>Legal/Compliance: [CONFIGURE]</li>
+</ul>
+<p><strong>Key Locations</strong></p>
+<ul>
+<li>Backup Scripts: <code>/home/user/care-commons/scripts/</code></li>
+<li>Backup Storage: <code>/var/backups/care-commons/</code> or S3</li>
+<li>Documentation: <code>/home/user/care-commons/docs/DISASTER_RECOVERY.md</code></li>
+</ul>
+<hr>
+<h2>Scenario 1: Database Corruption</h2>
+<h3>Detection</h3>
+<ul>
+<li>Application errors related to database queries</li>
+<li>Data inconsistencies reported by users</li>
+<li>Database integrity check failures</li>
+<li>Unusual database logs or errors</li>
+</ul>
+<h3>Symptoms</h3>
+<pre><code>ERROR: invalid page in block 12345 of relation &quot;clients&quot;
+ERROR: could not read block 678 in file &quot;base/12345/67890&quot;
+</code></pre>
+<h3>Response Procedure</h3>
+<h4>Step 1: Assess the Situation (2-5 minutes)</h4>
+<pre><code class="language-bash"># Check database connectivity
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;SELECT 1;&quot;
+
+# Check for corruption
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  SELECT datname, pg_database_size(datname)
+  FROM pg_database
+  WHERE datname = &#39;care_commons&#39;;&quot;
+
+# Check recent errors
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  SELECT * FROM pg_stat_database_conflicts
+  WHERE datname = &#39;care_commons&#39;;&quot;
+</code></pre>
+<h4>Step 2: Stop Application (1-2 minutes)</h4>
+<pre><code class="language-bash"># Prevent further corruption
+# For Vercel deployments
+vercel env rm DATABASE_URL production
+
+# For Kubernetes
+kubectl scale deployment care-commons-api --replicas=0
+
+# Notify users (post status page update)
+curl -X POST $STATUS_PAGE_API -d &#39;{&quot;status&quot;: &quot;maintenance&quot;}&#39;
+</code></pre>
+<h4>Step 3: Identify Last Known Good Backup (2-3 minutes)</h4>
+<pre><code class="language-bash"># List available backups
+ls -lht /var/backups/care-commons/backup_*.sql.gz | head -10
+
+# Or from S3
+aws s3 ls s3://$AWS_S3_BUCKET/backups/database/ | tail -20
+
+# Verify backup integrity
+./scripts/verify-backups.sh
+</code></pre>
+<h4>Step 4: Restore Database (15-30 minutes)</h4>
+<pre><code class="language-bash"># Download backup if needed
+aws s3 cp s3://$AWS_S3_BUCKET/backups/database/backup_20240101_020000.sql.gz .
+
+# Run restore script
+./scripts/restore-database.sh backup_20240101_020000.sql.gz
+# Type &#39;yes&#39; when prompted
+</code></pre>
+<h4>Step 5: Verify Data Integrity (5-10 minutes)</h4>
+<pre><code class="language-bash"># Check record counts
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  SELECT &#39;clients&#39; as table, COUNT(*) FROM clients
+  UNION ALL
+  SELECT &#39;visits&#39;, COUNT(*) FROM visits
+  UNION ALL
+  SELECT &#39;providers&#39;, COUNT(*) FROM providers;&quot;
+
+# Check data consistency
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  SELECT COUNT(*) as orphaned_visits
+  FROM visits v
+  LEFT JOIN clients c ON v.client_id = c.id
+  WHERE c.id IS NULL;&quot;
+
+# Run application health checks
+npm run test:integration
+</code></pre>
+<h4>Step 6: Restart Application (5-10 minutes)</h4>
+<pre><code class="language-bash"># For Vercel
+vercel env add DATABASE_URL production
+
+# For Kubernetes
+kubectl scale deployment care-commons-api --replicas=3
+
+# Wait for pods to be ready
+kubectl wait --for=condition=ready pod -l app=care-commons-api --timeout=300s
+</code></pre>
+<h4>Step 7: Monitor and Verify (10-15 minutes)</h4>
+<pre><code class="language-bash"># Check application health
+curl https://care-commons.com/health/detailed
+
+# Monitor logs
+kubectl logs -f deployment/care-commons-api
+
+# Test critical functionality
+npm run test:e2e:critical
+
+# Update status page
+curl -X POST $STATUS_PAGE_API -d &#39;{&quot;status&quot;: &quot;operational&quot;}&#39;
+</code></pre>
+<h3>Expected Timeline</h3>
+<p><strong>Total Time</strong>: 45-75 minutes</p>
+<ul>
+<li>Assessment: 2-5 min</li>
+<li>Stop app: 1-2 min</li>
+<li>Find backup: 2-3 min</li>
+<li>Restore: 15-30 min</li>
+<li>Verify: 5-10 min</li>
+<li>Restart: 5-10 min</li>
+<li>Monitor: 10-15 min</li>
+</ul>
+<hr>
+<h2>Scenario 2: Complete Data Center Failure</h2>
+<h3>Detection</h3>
+<ul>
+<li>All services down across multiple availability zones</li>
+<li>Unable to connect to any infrastructure</li>
+<li>Cloud provider status page shows major outage</li>
+<li>Multiple monitoring alerts</li>
+</ul>
+<h3>Response Procedure</h3>
+<h4>Step 1: Confirm Scope (2-5 minutes)</h4>
+<pre><code class="language-bash"># Check cloud provider status
+curl https://status.aws.amazon.com/
+# Or Vercel
+curl https://www.vercel-status.com/
+
+# Attempt to connect to various endpoints
+ping care-commons.com
+curl -I https://care-commons.com
+nslookup care-commons.com
+</code></pre>
+<h4>Step 2: Activate Disaster Recovery Team (5 minutes)</h4>
+<ul>
+<li>Notify on-call engineer</li>
+<li>Notify database administrator</li>
+<li>Notify management</li>
+<li>Update status page</li>
+</ul>
+<h4>Step 3: Provision New Infrastructure (20-40 minutes)</h4>
+<p><strong>Option A: New Vercel Deployment</strong></p>
+<pre><code class="language-bash"># Clone repository
+git clone https://github.com/neighborhood-lab/care-commons.git
+cd care-commons
+
+# Create new Vercel project
+vercel link --yes
+vercel env pull
+
+# Deploy
+vercel --prod
+</code></pre>
+<p><strong>Option B: New AWS Infrastructure</strong></p>
+<pre><code class="language-bash"># Use infrastructure as code
+cd terraform/
+terraform init
+terraform apply -var=&quot;environment=disaster-recovery&quot;
+
+# Or use AWS CloudFormation
+aws cloudformation create-stack \
+  --stack-name care-commons-dr \
+  --template-body file://infrastructure.yaml
+</code></pre>
+<h4>Step 4: Restore Database (15-30 minutes)</h4>
+<pre><code class="language-bash"># Provision new database
+# For Neon
+neonctl projects create --name care-commons-dr
+
+# Download latest backup from S3
+aws s3 cp s3://$AWS_S3_BUCKET/backups/database/latest.sql.gz .
+
+# Restore
+gunzip latest.sql.gz
+psql -h $NEW_DB_HOST -U $DB_USER -d care_commons -f latest.sql
+</code></pre>
+<h4>Step 5: Update DNS (5-10 minutes)</h4>
+<pre><code class="language-bash"># Update DNS to point to new infrastructure
+# Via Route53
+aws route53 change-resource-record-sets \
+  --hosted-zone-id $ZONE_ID \
+  --change-batch file://dns-update.json
+
+# Wait for propagation
+dig care-commons.com
+</code></pre>
+<h4>Step 6: Verify and Test (15-30 minutes)</h4>
+<pre><code class="language-bash"># Run full test suite
+npm run test:all
+
+# Manual testing checklist
+# - User login
+# - Create/view clients
+# - Schedule visits
+# - View reports
+# - Mobile app connectivity
+</code></pre>
+<h4>Step 7: Communicate (10 minutes)</h4>
+<ul>
+<li>Update status page</li>
+<li>Email user notification</li>
+<li>Social media update (if applicable)</li>
+<li>Post-mortem scheduling</li>
+</ul>
+<h3>Expected Timeline</h3>
+<p><strong>Total Time</strong>: 70-130 minutes (1.2-2.2 hours)</p>
+<ul>
+<li>Confirm scope: 2-5 min</li>
+<li>Activate team: 5 min</li>
+<li>Provision infrastructure: 20-40 min</li>
+<li>Restore database: 15-30 min</li>
+<li>Update DNS: 5-10 min</li>
+<li>Verify: 15-30 min</li>
+<li>Communicate: 10 min</li>
+</ul>
+<hr>
+<h2>Scenario 3: Accidental Data Deletion</h2>
+<h3>Detection</h3>
+<ul>
+<li>User reports missing data</li>
+<li>Audit log shows unexpected DELETE operations</li>
+<li>Data count anomalies</li>
+<li>Missing records in reports</li>
+</ul>
+<h3>Response Procedure</h3>
+<h4>Step 1: Identify Scope (5-10 minutes)</h4>
+<pre><code class="language-bash"># Query audit logs
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  SELECT * FROM audit_logs
+  WHERE action IN (&#39;DELETE&#39;, &#39;UPDATE&#39;)
+  AND timestamp &gt; NOW() - INTERVAL &#39;1 hour&#39;
+  ORDER BY timestamp DESC
+  LIMIT 100;&quot;
+
+# Identify affected records
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  SELECT table_name, record_id, deleted_at
+  FROM audit_logs
+  WHERE deleted_at IS NOT NULL
+  AND deleted_at &gt; NOW() - INTERVAL &#39;1 hour&#39;;&quot;
+</code></pre>
+<h4>Step 2: Stop Further Changes (2-5 minutes)</h4>
+<pre><code class="language-bash"># Revoke problematic user access
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  REVOKE ALL ON ALL TABLES IN SCHEMA public FROM problem_user;&quot;
+
+# Or temporarily set database to read-only
+psql -h $DB_HOST -U $DB_USER -d postgres -c &quot;
+  ALTER DATABASE care_commons SET default_transaction_read_only = on;&quot;
+</code></pre>
+<h4>Step 3: Create Temporary Recovery Database (10-15 minutes)</h4>
+<pre><code class="language-bash"># Create recovery database
+createdb -h $DB_HOST -U $DB_USER care_commons_recovery
+
+# Find backup closest to before deletion
+ls -lt /var/backups/care-commons/backup_*.sql.gz
+
+# Restore to recovery database
+gunzip -c backup_20240101_020000.sql.gz | \
+  psql -h $DB_HOST -U $DB_USER -d care_commons_recovery
+</code></pre>
+<h4>Step 4: Extract Deleted Records (10-20 minutes)</h4>
+<pre><code class="language-bash"># Export affected records from recovery database
+psql -h $DB_HOST -U $DB_USER -d care_commons_recovery -c &quot;
+  COPY (
+    SELECT * FROM clients WHERE id IN (123, 456, 789)
+  ) TO &#39;/tmp/recovered_clients.csv&#39; CSV HEADER;&quot;
+
+psql -h $DB_HOST -U $DB_USER -d care_commons_recovery -c &quot;
+  COPY (
+    SELECT * FROM visits WHERE client_id IN (123, 456, 789)
+  ) TO &#39;/tmp/recovered_visits.csv&#39; CSV HEADER;&quot;
+</code></pre>
+<h4>Step 5: Import into Production (10-15 minutes)</h4>
+<pre><code class="language-bash"># Re-enable writes
+psql -h $DB_HOST -U $DB_USER -d postgres -c &quot;
+  ALTER DATABASE care_commons SET default_transaction_read_only = off;&quot;
+
+# Import recovered data
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  COPY clients FROM &#39;/tmp/recovered_clients.csv&#39; CSV HEADER;&quot;
+
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  COPY visits FROM &#39;/tmp/recovered_visits.csv&#39; CSV HEADER;&quot;
+</code></pre>
+<h4>Step 6: Verify with User (5-10 minutes)</h4>
+<ul>
+<li>Contact reporting user</li>
+<li>Verify data is restored correctly</li>
+<li>Check for any remaining issues</li>
+<li>Document in audit log</li>
+</ul>
+<h4>Step 7: Cleanup (5 minutes)</h4>
+<pre><code class="language-bash"># Drop recovery database
+dropdb -h $DB_HOST -U $DB_USER care_commons_recovery
+
+# Remove temporary files
+rm /tmp/recovered_*.csv
+
+# Update audit log
+psql -h $DB_HOST -U $DB_USER -d care_commons -c &quot;
+  INSERT INTO audit_logs (action, table_name, description, user_id)
+  VALUES (&#39;RECOVERY&#39;, &#39;clients&#39;, &#39;Recovered accidentally deleted records&#39;, 1);&quot;
+</code></pre>
+<h3>Expected Timeline</h3>
+<p><strong>Total Time</strong>: 45-80 minutes</p>
+<ul>
+<li>Identify scope: 5-10 min</li>
+<li>Stop changes: 2-5 min</li>
+<li>Create recovery DB: 10-15 min</li>
+<li>Extract records: 10-20 min</li>
+<li>Import to prod: 10-15 min</li>
+<li>Verify: 5-10 min</li>
+<li>Cleanup: 5 min</li>
+</ul>
+<hr>
+<h2>Scenario 4: Ransomware Attack</h2>
+<h3>Detection</h3>
+<ul>
+<li>Encrypted files with unusual extensions</li>
+<li>Ransom note in directories</li>
+<li>System files inaccessible</li>
+<li>Mass file modifications in short time</li>
+<li>Antivirus/EDR alerts</li>
+</ul>
+<h3>⚠️ CRITICAL: DO NOT PAY RANSOM</h3>
+<h3>Response Procedure</h3>
+<h4>Step 1: IMMEDIATE ISOLATION (0-2 minutes)</h4>
+<pre><code class="language-bash"># Disconnect affected systems from network
+sudo ifconfig eth0 down
+
+# Disable all network interfaces
+sudo systemctl stop networking
+
+# For AWS instances
+aws ec2 modify-instance-attribute \
+  --instance-id $INSTANCE_ID \
+  --no-source-dest-check
+
+# For cloud servers - security group isolation
+aws ec2 revoke-security-group-ingress \
+  --group-id $SG_ID \
+  --ip-permissions &#39;[{&quot;IpProtocol&quot;: &quot;-1&quot;, &quot;IpRanges&quot;: [{&quot;CidrIp&quot;: &quot;0.0.0.0/0&quot;}]}]&#39;
+</code></pre>
+<h4>Step 2: Activate Incident Response (2-5 minutes)</h4>
+<p><strong>IMMEDIATELY CONTACT:</strong></p>
+<ul>
+<li>Security team (HIGHEST PRIORITY)</li>
+<li>On-call engineer</li>
+<li>Database administrator</li>
+<li>Legal counsel</li>
+<li>Cyber insurance provider</li>
+<li>FBI Cyber Division (if in US): (855) 292-3937</li>
+</ul>
+<h4>Step 3: Preserve Evidence (10-15 minutes)</h4>
+<pre><code class="language-bash"># DO NOT DELETE ANYTHING YET
+
+# Take memory dump
+sudo dd if=/dev/mem of=/mnt/external/memory-dump.raw bs=1M
+
+# Document ransom note
+cp /path/to/ransom-note.txt /mnt/external/evidence/
+
+# Capture system state
+ps aux &gt; /mnt/external/evidence/processes.txt
+netstat -tulpn &gt; /mnt/external/evidence/network.txt
+ls -laR / &gt; /mnt/external/evidence/filesystem.txt
+
+# Create disk image (if possible)
+sudo dd if=/dev/sda of=/mnt/external/disk-image.raw bs=64K conv=noerror,sync
+</code></pre>
+<h4>Step 4: Assess Damage (15-30 minutes)</h4>
+<pre><code class="language-bash"># Check backup integrity (from isolated system)
+ssh backup-server &quot;find /var/backups/care-commons -name &#39;backup_*.sql.gz&#39; -mtime -7&quot;
+
+# Verify backups are not encrypted
+ssh backup-server &quot;gunzip -t /var/backups/care-commons/backup_latest.sql.gz&quot;
+
+# Check S3 backups
+aws s3 ls s3://$AWS_S3_BUCKET/backups/database/ --region us-east-1
+
+# Identify extent of infection
+find / -name &quot;*.encrypted&quot; -o -name &quot;*.locked&quot; -o -name &quot;*DECRYPT*&quot;
+</code></pre>
+<h4>Step 5: Clean Environment Setup (30-60 minutes)</h4>
+<pre><code class="language-bash"># Provision completely new infrastructure
+# DO NOT use any existing infrastructure
+
+# New AWS account or completely isolated environment
+terraform workspace new disaster-recovery-clean
+terraform apply -var=&quot;isolated=true&quot;
+
+# Scan backups before restoration
+clamscan -r /var/backups/care-commons/
+
+# Or use cloud antivirus
+aws s3 sync s3://$BACKUP_BUCKET /tmp/scan-location
+clamscan -r /tmp/scan-location
+</code></pre>
+<h4>Step 6: Restore from Pre-Infection Backup (30-60 minutes)</h4>
+<pre><code class="language-bash"># Identify last clean backup (before infection)
+# Check backup dates against infection timeline
+
+# Restore to clean environment
+./scripts/restore-database.sh /clean-backups/backup_YYYYMMDD_HHMMSS.sql.gz
+
+# Verify no malware in backup
+grep -r &quot;eval(&quot; /restored-files/
+grep -r &quot;base64_decode&quot; /restored-files/
+</code></pre>
+<h4>Step 7: Change ALL Credentials (30-45 minutes)</h4>
+<pre><code class="language-bash"># Database passwords
+psql -c &quot;ALTER USER postgres PASSWORD &#39;NEW_SECURE_PASSWORD&#39;;&quot;
+
+# Application secrets
+vercel env rm DATABASE_URL
+vercel env add DATABASE_URL &quot;postgresql://new-credentials...&quot;
+
+# API keys
+aws secretsmanager create-secret \
+  --name care-commons/api-keys-new \
+  --secret-string file://new-secrets.json
+
+# SSH keys
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_new
+# Deploy new keys to authorized_keys
+
+# Admin passwords
+# Force password reset for all users
+psql -c &quot;UPDATE users SET password_reset_required = true;&quot;
+</code></pre>
+<h4>Step 8: Security Hardening (1-2 hours)</h4>
+<pre><code class="language-bash"># Update all software
+apt update &amp;&amp; apt upgrade -y
+
+# Enable additional security
+ufw enable
+ufw default deny incoming
+ufw allow 443/tcp
+ufw allow 22/tcp
+
+# Install security monitoring
+apt install fail2ban
+systemctl enable fail2ban
+systemctl start fail2ban
+
+# Configure intrusion detection
+apt install aide
+aideinit
+</code></pre>
+<h4>Step 9: Monitoring and Verification (ongoing)</h4>
+<pre><code class="language-bash"># Enhanced logging
+rsyslog.conf: *.* @@siem-server:514
+
+# File integrity monitoring
+aide --check
+
+# Network monitoring
+tcpdump -i eth0 -w /var/log/network-capture.pcap
+
+# Application monitoring
+npm run test:security
+npm run test:e2e
+</code></pre>
+<h4>Step 10: Reporting and Compliance (1-3 days)</h4>
+<ul>
+<li><p><strong>HIPAA Breach Notification</strong> (if PHI compromised)</p>
+<ul>
+<li>Notify HHS within 60 days</li>
+<li>Notify affected individuals</li>
+<li>Media notification (if &gt;500 individuals)</li>
+</ul>
+</li>
+<li><p><strong>Law Enforcement Report</strong></p>
+<ul>
+<li>File FBI IC3 complaint</li>
+<li>Contact local FBI field office</li>
+</ul>
+</li>
+<li><p><strong>Insurance Claim</strong></p>
+<ul>
+<li>Contact cyber insurance</li>
+<li>Document all losses</li>
+<li>Preserve evidence</li>
+</ul>
+</li>
+<li><p><strong>Post-Incident Review</strong></p>
+<ul>
+<li>Root cause analysis</li>
+<li>Update security procedures</li>
+<li>Staff training</li>
+</ul>
+</li>
+</ul>
+<h3>Expected Timeline</h3>
+<p><strong>Total Time</strong>: 4-8 hours for immediate recovery, days for full remediation</p>
+<ul>
+<li>Isolation: 0-2 min</li>
+<li>Activate IR: 2-5 min</li>
+<li>Preserve evidence: 10-15 min</li>
+<li>Assess damage: 15-30 min</li>
+<li>Clean environment: 30-60 min</li>
+<li>Restore: 30-60 min</li>
+<li>Credential rotation: 30-45 min</li>
+<li>Security hardening: 1-2 hours</li>
+<li>Ongoing monitoring: continuous</li>
+<li>Reporting: 1-3 days</li>
+</ul>
+<hr>
+<h2>General Best Practices</h2>
+<h3>Communication Templates</h3>
+<p><strong>Incident Start Notification</strong></p>
+<pre><code>INCIDENT ALERT: [Scenario Type]
+Severity: [Critical/High/Medium]
+Detection Time: [Timestamp]
+Current Status: [Investigating/Responding/Recovering]
+Expected Resolution: [Time estimate]
+Impact: [User-facing impact description]
+Next Update: [Time]
+</code></pre>
+<p><strong>Incident Resolution Notification</strong></p>
+<pre><code>INCIDENT RESOLVED: [Scenario Type]
+Resolution Time: [Timestamp]
+Duration: [Total time]
+Root Cause: [Brief description]
+Actions Taken: [Summary]
+Preventive Measures: [What&#39;s being done]
+Post-Mortem: [When/where]
+</code></pre>
+<h3>Post-Incident Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Complete incident timeline documentation</li>
+<li><input disabled="" type="checkbox"> Update runbook with lessons learned</li>
+<li><input disabled="" type="checkbox"> Schedule post-mortem meeting</li>
+<li><input disabled="" type="checkbox"> Test disaster recovery improvements</li>
+<li><input disabled="" type="checkbox"> Update contact information</li>
+<li><input disabled="" type="checkbox"> Review and update insurance coverage</li>
+<li><input disabled="" type="checkbox"> Conduct security audit</li>
+<li><input disabled="" type="checkbox"> Update disaster recovery plan</li>
+<li><input disabled="" type="checkbox"> Staff training on new procedures</li>
+<li><input disabled="" type="checkbox"> Verify backup integrity</li>
+<li><input disabled="" type="checkbox"> Test restored systems under load</li>
+<li><input disabled="" type="checkbox"> Customer communication follow-up</li>
+</ul>
+<h3>Testing Schedule</h3>
+<ul>
+<li><strong>Monthly</strong>: Backup restoration test</li>
+<li><strong>Quarterly</strong>: Disaster recovery drill (specific scenario)</li>
+<li><strong>Annually</strong>: Full disaster recovery exercise (all scenarios)</li>
+<li><strong>After any incident</strong>: Immediate test of updated procedures</li>
+</ul>
+<h3>Key Metrics to Track</h3>
+<ul>
+<li><strong>RTO (Recovery Time Objective)</strong>: &lt; 1 hour</li>
+<li><strong>RPO (Recovery Point Objective)</strong>: 0 (zero data loss)</li>
+<li><strong>Backup Success Rate</strong>: &gt; 99.9%</li>
+<li><strong>Restoration Test Success</strong>: 100%</li>
+<li><strong>Mean Time to Detect (MTTD)</strong>: &lt; 15 minutes</li>
+<li><strong>Mean Time to Respond (MTTR)</strong>: &lt; 30 minutes</li>
+<li><strong>Mean Time to Recover (MTTR)</strong>: &lt; 60 minutes</li>
+</ul>
+<hr>
+<h2>Additional Resources</h2>
+<ul>
+<li>Main Documentation: <code>/docs/DISASTER_RECOVERY.md</code></li>
+<li>Backup Scripts: <code>/scripts/</code></li>
+<li>Security Runbooks: <code>/docs/runbooks/</code></li>
+<li>Compliance Documentation: <code>/docs/compliance/</code></li>
+<li>Contact List: <code>/docs/ops/contacts.md</code> (create this)</li>
+</ul>
+<h2>Revision History</h2>
+<ul>
+<li>2024-01-01: Initial version created</li>
+<li>[Add updates as procedures are tested and refined]</li>
+</ul>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to View the Mobile App - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>How to View the Mobile App</span>
+    </div>
+      <article class="markdown-content">
+        <h1>How to View the Mobile App</h1>
+<p>The Care Commons mobile app is a React Native + Expo application. There are several issues preventing it from running in web mode that need to be resolved.</p>
+<h2>Current Status ⚠️</h2>
+<p>The mobile app has dependency and configuration issues:</p>
+<ul>
+<li>✅ Dependencies installed</li>
+<li>⚠️ Web support requires additional setup</li>
+<li>✅ Native builds should work (iOS/Android simulators)</li>
+</ul>
+<h2>Recommended Viewing Methods</h2>
+<h3>Option 1: View Screenshots/Documentation (Immediate)</h3>
+<p>The mobile app documentation includes detailed information about implemented features:</p>
+<pre><code class="language-bash">cat packages/mobile/README.md
+cat packages/mobile/MOBILE_FOUNDATION_SUMMARY.md
+cat packages/mobile/QUICKSTART_MOBILE.md
+</code></pre>
+<p><strong>Features Documented:</strong></p>
+<ul>
+<li>Login screen with biometric auth</li>
+<li>Today&#39;s Visits screen</li>
+<li>Offline-first architecture</li>
+<li>EVV compliance features</li>
+<li>GPS/location services</li>
+</ul>
+<h3>Option 2: Use Expo Go on Physical Device (Recommended - 5 min)</h3>
+<p>This is the <strong>easiest and fastest</strong> way to see the actual mobile app:</p>
+<pre><code class="language-bash">cd packages/mobile
+
+# Start Expo dev server
+npm run start
+</code></pre>
+<p>Then:</p>
+<ol>
+<li><p><strong>Install Expo Go</strong> on your phone:</p>
+<ul>
+<li>iOS: <a href="https://apps.apple.com/app/expo-go/id982107779">https://apps.apple.com/app/expo-go/id982107779</a></li>
+<li>Android: <a href="https://play.google.com/store/apps/details?id=host.exp.exponent">https://play.google.com/store/apps/details?id=host.exp.exponent</a></li>
+</ul>
+</li>
+<li><p><strong>Scan QR code</strong> shown in terminal with:</p>
+<ul>
+<li>iOS: Camera app</li>
+<li>Android: Expo Go app</li>
+</ul>
+</li>
+<li><p><strong>App loads on device</strong> - you can test:</p>
+<ul>
+<li>Login UI</li>
+<li>Navigation</li>
+<li>Biometric auth (if device supports)</li>
+<li>Offline features</li>
+<li>Real GPS (unlike simulators)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>✅ No Xcode/Android Studio required</li>
+<li>✅ Works on real device with real sensors</li>
+<li>✅ Fast reload on code changes</li>
+<li>✅ Test GPS and biometric features</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>⚠️ Requires physical device</li>
+<li>⚠️ Device and computer must be on same network</li>
+</ul>
+<h3>Option 3: iOS Simulator (macOS Only - 10 min)</h3>
+<pre><code class="language-bash">cd packages/mobile
+
+# Install iOS dependencies
+npm install
+
+# Run on iOS simulator (requires Xcode)
+npm run ios
+</code></pre>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>✅ Full native experience</li>
+<li>✅ Can test iOS-specific features</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>⚠️ Requires macOS and Xcode</li>
+<li>⚠️ First build takes 5-10 minutes</li>
+<li>⚠️ No real GPS or biometric hardware</li>
+</ul>
+<h3>Option 4: Android Emulator (15 min)</h3>
+<pre><code class="language-bash">cd packages/mobile
+
+# Install Android dependencies
+npm install
+
+# Run on Android emulator (requires Android Studio)
+npm run android
+</code></pre>
+<p><strong>Pros:</strong></p>
+<ul>
+<li>✅ Full native experience</li>
+<li>✅ Works on any OS</li>
+</ul>
+<p><strong>Cons:</strong></p>
+<ul>
+<li>⚠️ Requires Android Studio and SDK</li>
+<li>⚠️ Emulator setup is complex</li>
+<li>⚠️ First build takes 10-15 minutes</li>
+</ul>
+<h2>Issues Preventing Web View</h2>
+<h3>Problem 1: Missing Dependencies</h3>
+<p>The mobile package needs additional dependencies for web support:</p>
+<pre><code>✅ react-native-web (now installed)
+⚠️ react-native-worklets (needs proper setup)
+⚠️ expo-localization version mismatch
+</code></pre>
+<h3>Problem 2: Monorepo Hoisting</h3>
+<p>Expo plugins are looking for dependencies in wrong location:</p>
+<pre><code>expo-location plugin expects: node_modules/expo/config-plugins
+Actual location: packages/mobile/node_modules/expo/config-plugins
+</code></pre>
+<h3>Problem 3: Bundle Compilation Errors</h3>
+<p>Metro bundler failing with:</p>
+<pre><code>Cannot find module &#39;react-native-worklets/plugin&#39;
+MIME type &#39;application/json&#39; is not executable
+</code></pre>
+<h2>Fixing Web Support (TODO)</h2>
+<p>To enable web viewing, the following needs to be done:</p>
+<h3>1. Fix Dependency Resolution</h3>
+<pre><code class="language-bash">cd packages/mobile
+
+# Add missing worklets dependency
+npx expo install react-native-reanimated react-native-worklets
+
+# Fix version mismatches
+npx expo install --fix
+</code></pre>
+<h3>2. Configure for Web</h3>
+<p>Update <code>app.json</code> to conditionally load native plugins:</p>
+<pre><code class="language-json">{
+  &quot;expo&quot;: {
+    &quot;plugins&quot;: [
+      // Only load these for native builds, not web
+    ]
+  }
+}
+</code></pre>
+<h3>3. Update Metro Config</h3>
+<p>Create <code>metro.config.js</code> to handle monorepo structure:</p>
+<pre><code class="language-javascript">const { getDefaultConfig } = require(&#39;expo/metro-config&#39;);
+const path = require(&#39;path&#39;);
+
+const config = getDefaultConfig(__dirname);
+
+// Add workspace packages
+config.watchFolders = [
+  path.resolve(__dirname, &#39;../..&#39;),
+];
+
+config.resolver.nodeModulesPaths = [
+  path.resolve(__dirname, &#39;node_modules&#39;),
+  path.resolve(__dirname, &#39;../../node_modules&#39;),
+];
+
+module.exports = config;
+</code></pre>
+<h3>4. Alternative: Create Web-Only Entry Point</h3>
+<p>Create a separate <code>web-index.tsx</code> that doesn&#39;t import native-only modules:</p>
+<pre><code class="language-typescript">// packages/mobile/web-index.tsx
+import { registerRootComponent } from &#39;expo&#39;;
+import App from &#39;./App.web&#39;; // Web-specific app without native deps
+
+registerRootComponent(App);
+</code></pre>
+<h2>Alternative: View Web Application</h2>
+<p>If you want to see the UI/UX immediately, the <strong>web application</strong> already works and shares 70% of the code with mobile:</p>
+<pre><code class="language-bash"># From root directory
+npm run dev:web
+</code></pre>
+<p>Open <a href="http://localhost:3001">http://localhost:3001</a></p>
+<p>The web app includes:</p>
+<ul>
+<li>✅ All verticals (clients, caregivers, visits, etc.)</li>
+<li>✅ Dashboard views</li>
+<li>✅ Care plans</li>
+<li>✅ EVV tracking interface</li>
+<li>✅ Analytics</li>
+<li>✅ Family portal</li>
+</ul>
+<p><strong>Mobile-specific features not in web:</strong></p>
+<ul>
+<li>Offline-first (WatermelonDB)</li>
+<li>GPS/geofencing</li>
+<li>Biometric auth</li>
+<li>Background location tracking</li>
+<li>Camera integration</li>
+</ul>
+<h2>Recommended Next Steps</h2>
+<ol>
+<li><strong>Immediate viewing</strong>: Use <strong>Expo Go on phone</strong> (Option 2) - fastest way to see the app</li>
+<li><strong>For development</strong>: Use <strong>iOS Simulator</strong> (Option 3) or <strong>Android Emulator</strong> (Option 4)</li>
+<li><strong>For web preview</strong>: Fix the issues above to enable web support</li>
+<li><strong>Alternative</strong>: View the web app which shares most UI/UX</li>
+</ol>
+<h2>Getting Help</h2>
+<p>If you need to view the mobile app urgently:</p>
+<ol>
+<li>Try Expo Go on your phone (5 minutes)</li>
+<li>If that doesn&#39;t work, view the web app instead</li>
+<li>For production mobile viewing, native simulators are required</li>
+</ol>
+<p>The mobile app infrastructure is complete, but the web preview requires additional configuration due to the monorepo structure and native dependencies.</p>
+<hr>
+<p><strong>TL;DR</strong>: Use Expo Go on your phone for the fastest way to see the mobile app. Run <code>cd packages/mobile &amp;&amp; npm run start</code> and scan the QR code with Expo Go app.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

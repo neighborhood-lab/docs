@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication Login Failure Debugging Report - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Authentication Login Failure Debugging Report</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Authentication Login Failure Debugging Report</h1>
+<h2>Executive Summary</h2>
+<p>This report analyzes authentication login failures from Vercel logs and provides diagnostic tools and recommendations for resolution.</p>
+<h2>Analysis of Vercel Logs</h2>
+<h3>Observed Failure Pattern</h3>
+<p>From the logs dated 2025-11-08, we observed multiple 401 authentication failures on:</p>
+<ul>
+<li><code>/api/auth/login</code> - Password authentication endpoint</li>
+<li><code>/api/demo/sessions</code> - Demo session endpoint requiring authentication</li>
+</ul>
+<h3>Login Flow Analysis</h3>
+<p>When a login attempt fails, the following sequence occurs:</p>
+<ol>
+<li><p><strong>Rate Limit Check</strong> - Query checks failed attempts in last 15 minutes</p>
+<pre><code class="language-sql">SELECT COUNT(*) FROM auth_events
+WHERE email = $1
+AND timestamp &gt; NOW() - INTERVAL &#39;15 minutes&#39;
+AND result = &#39;FAILED&#39;
+</code></pre>
+</li>
+<li><p><strong>User Lookup</strong> - Query finds user by email</p>
+<pre><code class="language-sql">SELECT id, password_hash, status, locked_until, failed_login_attempts
+FROM users WHERE email = $1 AND deleted_at IS NULL
+</code></pre>
+</li>
+<li><p><strong>Password Verification</strong> - PBKDF2 hash verification in code</p>
+</li>
+<li><p><strong>Failed Attempt Recording</strong> - On failure:</p>
+<ul>
+<li>Increment <code>failed_login_attempts</code> counter</li>
+<li>Set <code>locked_until</code> if attempts &gt;= 5 (30 minute lockout)</li>
+<li>Insert record into <code>auth_events</code> table</li>
+</ul>
+</li>
+</ol>
+<h3>Key Findings</h3>
+<p>✅ <strong>Working Correctly:</strong></p>
+<ul>
+<li>Database queries executing successfully</li>
+<li>User records exist and are being found</li>
+<li>Failed attempt tracking working</li>
+<li>Account lockout mechanism functioning</li>
+</ul>
+<p>❌ <strong>The Issue:</strong></p>
+<ul>
+<li>Password verification is failing (line 223 in <code>packages/core/src/service/auth-service.ts</code>)</li>
+<li>This could be due to:<ol>
+<li>Wrong password being used</li>
+<li>Password hash format mismatch</li>
+<li>Stale/incorrect password hash in database</li>
+<li>Environment variable mismatch during seeding</li>
+</ol>
+</li>
+</ul>
+<h2>Root Cause Analysis</h2>
+<h3>Expected Password Format</h3>
+<p>According to <code>packages/core/scripts/seed-users.ts:9</code>:</p>
+<pre><code class="language-typescript">// Default password for all users: Admin123!
+const defaultPassword = process.env[&#39;ADMIN_PASSWORD&#39;] ?? &#39;Admin123!&#39;;
+</code></pre>
+<p><strong>Default credentials for seeded users:</strong></p>
+<ul>
+<li>Admin: <code>admin@carecommons.example</code> / <code>Admin123!</code></li>
+<li>Coordinator: <code>coordinator@carecommons.example</code> / <code>Admin123!</code></li>
+<li>Caregiver: <code>caregiver@carecommons.example</code> / <code>Admin123!</code></li>
+</ul>
+<h3>Password Hashing Mechanism</h3>
+<p>The system uses PBKDF2 with the following parameters:</p>
+<ul>
+<li><strong>Algorithm:</strong> PBKDF2-HMAC-SHA512</li>
+<li><strong>Iterations:</strong> 100,000</li>
+<li><strong>Key Length:</strong> 64 bytes (512 bits)</li>
+<li><strong>Salt Length:</strong> 16 bytes (128 bits)</li>
+<li><strong>Format:</strong> <code>salt:hash</code> (both hex-encoded)</li>
+</ul>
+<p>See <code>packages/core/src/utils/password-utils.ts</code> for implementation.</p>
+<h3>Possible Causes</h3>
+<ol>
+<li><p><strong>User Using Wrong Password</strong> (Most Likely)</p>
+<ul>
+<li>Expected: <code>Admin123!</code></li>
+<li>User might be trying different password</li>
+<li>Password might have been changed manually</li>
+</ul>
+</li>
+<li><p><strong>Password Hash Format Mismatch</strong></p>
+<ul>
+<li>Database might have hash from old system (bcrypt, plain text, etc.)</li>
+<li>Manual database edits with wrong format</li>
+<li>Migration issues</li>
+</ul>
+</li>
+<li><p><strong>Environment Variable Mismatch</strong></p>
+<ul>
+<li>Database seeded with <code>ADMIN_PASSWORD=SomethingElse</code></li>
+<li>User trying default <code>Admin123!</code> which doesn&#39;t match</li>
+</ul>
+</li>
+<li><p><strong>Account Locked</strong></p>
+<ul>
+<li>After 5 failed attempts, account locks for 30 minutes</li>
+<li>Logs show incremental failed attempts</li>
+</ul>
+</li>
+</ol>
+<h2>Diagnostic Tools</h2>
+<h3>1. Debug Authentication Script</h3>
+<p>Created: <code>packages/core/scripts/debug-auth-login.ts</code></p>
+<p>This script provides comprehensive diagnostics:</p>
+<ul>
+<li>✅ Checks if user exists</li>
+<li>✅ Verifies account status (ACTIVE/INACTIVE)</li>
+<li>✅ Checks account lock status</li>
+<li>✅ Validates password hash format</li>
+<li>✅ Tests password verification</li>
+<li>✅ Reviews recent failed login attempts</li>
+<li>✅ Checks rate limiting</li>
+</ul>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash"># Check user status
+tsx packages/core/scripts/debug-auth-login.ts admin@carecommons.example
+
+# Test password verification
+tsx packages/core/scripts/debug-auth-login.ts admin@carecommons.example &quot;Admin123!&quot;
+</code></pre>
+<h3>2. Password Reset Script</h3>
+<p>Existing: <code>packages/core/scripts/set-admin-password.ts</code></p>
+<p>Resets admin password to default or <code>ADMIN_PASSWORD</code> env var.</p>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash"># Reset to default (Admin123!)
+tsx packages/core/scripts/set-admin-password.ts
+
+# Reset to custom password
+ADMIN_PASSWORD=&quot;NewPassword123!&quot; tsx packages/core/scripts/set-admin-password.ts
+</code></pre>
+<h3>3. User Seeding Script</h3>
+<p>Existing: <code>packages/core/scripts/seed-users.ts</code></p>
+<p>Creates/updates all user accounts with fresh password hashes.</p>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash"># Seed all users with default password
+npm run seed:users
+
+# Seed with custom password
+ADMIN_PASSWORD=&quot;YourPassword123!&quot; npm run seed:users
+</code></pre>
+<h2>Recommendations</h2>
+<h3>Immediate Actions</h3>
+<ol>
+<li><p><strong>Run Diagnostic Script</strong></p>
+<pre><code class="language-bash">tsx packages/core/scripts/debug-auth-login.ts admin@carecommons.example &quot;Admin123!&quot;
+</code></pre>
+<p>This will identify the exact issue.</p>
+</li>
+<li><p><strong>If Account is Locked</strong>
+Wait 30 minutes or manually unlock:</p>
+<pre><code class="language-sql">UPDATE users
+SET locked_until = NULL, failed_login_attempts = 0
+WHERE email = &#39;admin@carecommons.example&#39;;
+</code></pre>
+</li>
+<li><p><strong>If Password Hash is Invalid</strong>
+Reset password:</p>
+<pre><code class="language-bash">tsx packages/core/scripts/set-admin-password.ts
+</code></pre>
+</li>
+<li><p><strong>If User Doesn&#39;t Exist</strong>
+Run user seeding:</p>
+<pre><code class="language-bash">npm run seed:users
+</code></pre>
+</li>
+</ol>
+<h3>Long-term Improvements</h3>
+<ol>
+<li><p><strong>Add Better Logging</strong></p>
+<ul>
+<li>Log failure reasons more explicitly</li>
+<li>Include sanitized email in logs (for debugging)</li>
+<li>Add correlation IDs for tracking login attempts</li>
+</ul>
+</li>
+<li><p><strong>Add Admin Dashboard</strong></p>
+<ul>
+<li>View failed login attempts</li>
+<li>Unlock accounts manually</li>
+<li>Reset passwords via UI</li>
+</ul>
+</li>
+<li><p><strong>Improve Error Messages</strong></p>
+<ul>
+<li>Return more specific errors (account locked vs wrong password)</li>
+<li>Include lock duration in error response</li>
+<li>Add &quot;Forgot Password&quot; flow</li>
+</ul>
+</li>
+<li><p><strong>Add Monitoring Alerts</strong></p>
+<ul>
+<li>Alert on high failure rates</li>
+<li>Notify on account lockouts</li>
+<li>Track password reset requests</li>
+</ul>
+</li>
+<li><p><strong>Password Hash Migration Tool</strong></p>
+<ul>
+<li>Detect old/invalid hash formats</li>
+<li>Auto-migrate to new format</li>
+<li>Validate all user passwords on startup</li>
+</ul>
+</li>
+</ol>
+<h2>Security Considerations</h2>
+<h3>Current Security Features ✅</h3>
+<ul>
+<li>PBKDF2 with 100,000 iterations (exceeds NIST recommendations)</li>
+<li>Salted hashes (prevents rainbow table attacks)</li>
+<li>Constant-time comparison (prevents timing attacks)</li>
+<li>Account lockout after 5 failed attempts</li>
+<li>30-minute lockout duration</li>
+<li>Rate limiting (10 attempts per 15 minutes)</li>
+<li>HIPAA-compliant audit logging</li>
+<li>OAuth 2.0 support (Google)</li>
+</ul>
+<h3>Password Complexity Requirements</h3>
+<ul>
+<li>Minimum 8 characters (12+ recommended)</li>
+<li>At least one uppercase letter</li>
+<li>At least one lowercase letter</li>
+<li>At least one number</li>
+<li>Special characters recommended</li>
+</ul>
+<h3>Audit Trail</h3>
+<p>All authentication events logged to <code>auth_events</code> table:</p>
+<ul>
+<li>Login attempts (success/failure)</li>
+<li>Account lockouts</li>
+<li>Password changes</li>
+<li>Token refreshes</li>
+<li>Logouts</li>
+</ul>
+<h2>Testing Steps</h2>
+<ol>
+<li><p><strong>Test with Default Password</strong></p>
+<pre><code class="language-bash">curl -X POST http://localhost:3000/api/auth/login \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;email&quot;:&quot;admin@carecommons.example&quot;,&quot;password&quot;:&quot;Admin123!&quot;}&#39;
+</code></pre>
+</li>
+<li><p><strong>Run Diagnostic Script</strong></p>
+<pre><code class="language-bash">tsx packages/core/scripts/debug-auth-login.ts admin@carecommons.example &quot;Admin123!&quot;
+</code></pre>
+</li>
+<li><p><strong>Check Database Directly</strong></p>
+<pre><code class="language-sql">SELECT email, status, failed_login_attempts, locked_until,
+       LENGTH(password_hash) as hash_length,
+       CASE WHEN password_hash LIKE &#39;%:%&#39; THEN &#39;Valid Format&#39; ELSE &#39;Invalid Format&#39; END as hash_format
+FROM users
+WHERE email = &#39;admin@carecommons.example&#39;;
+</code></pre>
+</li>
+<li><p><strong>Review Auth Events</strong></p>
+<pre><code class="language-sql">SELECT timestamp, event_type, result, failure_reason, ip_address
+FROM auth_events
+WHERE email = &#39;admin@carecommons.example&#39;
+ORDER BY timestamp DESC
+LIMIT 10;
+</code></pre>
+</li>
+</ol>
+<h2>Code References</h2>
+<ul>
+<li>Auth Route Handler: <code>packages/app/src/routes/auth.ts:205-260</code></li>
+<li>Auth Service: <code>packages/core/src/service/auth-service.ts:178-277</code></li>
+<li>Password Utils: <code>packages/core/src/utils/password-utils.ts</code></li>
+<li>User Seeding: <code>packages/core/scripts/seed-users.ts</code></li>
+<li>Password Reset: <code>packages/core/scripts/set-admin-password.ts</code></li>
+<li>Debug Script: <code>packages/core/scripts/debug-auth-login.ts</code> (NEW)</li>
+</ul>
+<h2>Next Steps</h2>
+<ol>
+<li>Run the diagnostic script to identify the exact issue</li>
+<li>Follow the recommended fix based on diagnostic output</li>
+<li>Test login with corrected credentials</li>
+<li>Review and implement long-term improvements</li>
+<li>Add monitoring for future login failures</li>
+</ol>
+<h2>Questions to Answer</h2>
+<p>To help diagnose the issue further, please answer:</p>
+<ol>
+<li><p><strong>What email are you trying to login with?</strong></p>
+<ul>
+<li>Expected: <code>admin@carecommons.example</code></li>
+</ul>
+</li>
+<li><p><strong>What password are you trying to use?</strong></p>
+<ul>
+<li>Expected: <code>Admin123!</code> (or value of <code>ADMIN_PASSWORD</code> env var during seeding)</li>
+</ul>
+</li>
+<li><p><strong>When was the database last seeded?</strong></p>
+<ul>
+<li>Check if seed-users script was run recently</li>
+</ul>
+</li>
+<li><p><strong>What is the value of <code>ADMIN_PASSWORD</code> environment variable?</strong></p>
+<ul>
+<li>During database seeding</li>
+<li>In the deployment environment</li>
+</ul>
+</li>
+<li><p><strong>Have there been any manual database changes?</strong></p>
+<ul>
+<li>Direct SQL updates to users table</li>
+<li>Password hash modifications</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>Created:</strong> 2025-11-08
+<strong>Author:</strong> Claude Code
+<strong>Status:</strong> Active Investigation</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Assurance & Audits Vertical - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Quality Assurance & Audits Vertical</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Quality Assurance &amp; Audits Vertical</h1>
+<p>Comprehensive audit management system for quality assurance, compliance tracking, and corrective action management in home care operations.</p>
+<h2>Overview</h2>
+<p>This vertical provides a complete solution for managing audits, tracking findings, and implementing corrective actions to ensure compliance with regulatory standards and maintain high-quality care.</p>
+<h2>Features</h2>
+<h3>Audit Management</h3>
+<ul>
+<li>Create and manage various types of audits (compliance, quality, safety, documentation, etc.)</li>
+<li>Schedule audits with defined scope (organization, branch, department, caregiver, client, process)</li>
+<li>Track audit lifecycle from draft through completion and approval</li>
+<li>Generate audit numbers and maintain audit history</li>
+<li>Calculate compliance scores and overall ratings</li>
+<li>Support for follow-up audits</li>
+</ul>
+<h3>Audit Types Supported</h3>
+<ul>
+<li><strong>Compliance Audits</strong> - Regulatory compliance verification</li>
+<li><strong>Quality Audits</strong> - Quality of care assessments</li>
+<li><strong>Safety Audits</strong> - Safety protocol reviews</li>
+<li><strong>Documentation Audits</strong> - Documentation quality checks</li>
+<li><strong>Financial Audits</strong> - Billing and financial reviews</li>
+<li><strong>Medication Audits</strong> - Medication management verification</li>
+<li><strong>Infection Control Audits</strong> - Infection control compliance</li>
+<li><strong>Training Audits</strong> - Staff training verification</li>
+<li><strong>Internal Reviews</strong> - Internal quality assessments</li>
+<li><strong>External Audits</strong> - Third-party agency audits</li>
+</ul>
+<h3>Findings Management</h3>
+<ul>
+<li>Document audit findings with severity levels (critical, major, minor, observation)</li>
+<li>Categorize findings by type (documentation, training, policy, safety, etc.)</li>
+<li>Reference regulatory standards and requirements</li>
+<li>Attach evidence (photos, documents)</li>
+<li>Track finding resolution status</li>
+<li>Verify corrective action effectiveness</li>
+</ul>
+<h3>Corrective Action Plans</h3>
+<ul>
+<li>Create detailed corrective action plans for findings</li>
+<li>Conduct root cause analysis</li>
+<li>Define specific actions and responsibilities</li>
+<li>Set target completion dates</li>
+<li>Track progress with percentage completion</li>
+<li>Monitor resource requirements and costs</li>
+<li>Verify action effectiveness</li>
+<li>Support for different action types (immediate, short-term, long-term, preventive)</li>
+</ul>
+<h3>Dashboard &amp; Reporting</h3>
+<ul>
+<li>Real-time audit dashboard</li>
+<li>Track upcoming, in-progress, and completed audits</li>
+<li>Monitor critical findings</li>
+<li>View overdue corrective actions</li>
+<li>Generate audit statistics and metrics</li>
+<li>Compliance score tracking</li>
+</ul>
+<h2>Architecture</h2>
+<h3>Data Models</h3>
+<h4>Core Entities</h4>
+<ul>
+<li><strong>Audit</strong> - Main audit record with metadata, scheduling, and results</li>
+<li><strong>AuditFinding</strong> - Individual findings or deficiencies identified during audit</li>
+<li><strong>CorrectiveAction</strong> - Action plans to address findings</li>
+<li><strong>AuditTemplate</strong> - Reusable audit templates with checklists</li>
+<li><strong>AuditChecklistResponse</strong> - Completed checklist items</li>
+</ul>
+<h4>Key Enumerations</h4>
+<ul>
+<li><code>AuditType</code> - Types of audits</li>
+<li><code>AuditStatus</code> - Audit lifecycle states</li>
+<li><code>AuditScope</code> - Scope of audit (organization, branch, etc.)</li>
+<li><code>FindingSeverity</code> - Severity levels for findings</li>
+<li><code>FindingStatus</code> - Finding resolution states</li>
+<li><code>CorrectiveActionStatus</code> - Action plan states</li>
+</ul>
+<h3>Service Layer</h3>
+<p>The <code>AuditService</code> provides comprehensive business logic:</p>
+<pre><code class="language-typescript">class AuditService {
+  // Audit management
+  createAudit(input, context)
+  getAudit(auditId, context)
+  getAuditDetail(auditId, context)
+  updateAudit(auditId, updates, context)
+  startAudit(auditId, context)
+  completeAudit(auditId, summary, recommendations, context)
+
+  // Findings management
+  createFinding(input, context)
+  getFindingsForAudit(auditId, context)
+  updateFindingStatus(findingId, status, context)
+  verifyFinding(findingId, notes, context)
+  getCriticalFindings(context, limit)
+
+  // Corrective actions
+  createCorrectiveAction(input, context)
+  getCorrectiveActionsForAudit(auditId, context)
+  updateCorrectiveActionProgress(actionId, progress, context)
+  completeCorrectiveAction(actionId, context)
+  verifyCorrectiveAction(actionId, rating, notes, context)
+  getOverdueCorrectiveActions(context, limit)
+
+  // Dashboard &amp; analytics
+  getAuditDashboard(context)
+}
+</code></pre>
+<h3>Repository Layer</h3>
+<p>Three main repositories handle data access:</p>
+<ul>
+<li><code>AuditRepository</code> - Audit CRUD operations and queries</li>
+<li><code>AuditFindingRepository</code> - Finding management</li>
+<li><code>CorrectiveActionRepository</code> - Corrective action management</li>
+</ul>
+<h3>API Routes</h3>
+<p>RESTful API endpoints for all operations:</p>
+<pre><code>GET    /api/audits                     - List audits with filters
+GET    /api/audits/:id                 - Get audit details
+POST   /api/audits                     - Create new audit
+PATCH  /api/audits/:id                 - Update audit
+POST   /api/audits/:id/start           - Start audit
+POST   /api/audits/:id/complete        - Complete audit
+
+GET    /api/audits/:auditId/findings   - Get findings
+POST   /api/audits/:auditId/findings   - Create finding
+PATCH  /api/findings/:id/status        - Update finding status
+POST   /api/findings/:id/verify        - Verify finding
+
+GET    /api/audits/:auditId/corrective-actions  - Get actions
+POST   /api/corrective-actions                  - Create action
+POST   /api/corrective-actions/:id/progress     - Update progress
+POST   /api/corrective-actions/:id/complete     - Complete action
+POST   /api/corrective-actions/:id/verify       - Verify effectiveness
+
+GET    /api/audits-dashboard            - Get dashboard data
+GET    /api/audits/critical-findings    - Get critical findings
+GET    /api/audits/overdue-actions      - Get overdue actions
+</code></pre>
+<h2>Usage</h2>
+<h3>Creating an Audit</h3>
+<pre><code class="language-typescript">import { AuditService } from &#39;@care-commons/quality-assurance-audits&#39;;
+
+const audit = await auditService.createAudit({
+  title: &#39;Q1 2024 Compliance Audit&#39;,
+  description: &#39;Quarterly compliance review for Branch A&#39;,
+  auditType: &#39;COMPLIANCE&#39;,
+  priority: &#39;HIGH&#39;,
+  scope: &#39;BRANCH&#39;,
+  scopeEntityId: branchId,
+  scheduledStartDate: new Date(&#39;2024-01-15&#39;),
+  scheduledEndDate: new Date(&#39;2024-01-20&#39;),
+  leadAuditorId: auditorId,
+  standardsReference: &#39;CMS 42 CFR 484&#39;
+}, userContext);
+</code></pre>
+<h3>Recording a Finding</h3>
+<pre><code class="language-typescript">const finding = await auditService.createFinding({
+  auditId: audit.id,
+  title: &#39;Missing Caregiver Certification&#39;,
+  description: &#39;Caregiver X certification expired 30 days ago&#39;,
+  category: &#39;TRAINING&#39;,
+  severity: &#39;MAJOR&#39;,
+  standardReference: &#39;CMS 484.80&#39;,
+  requiredCorrectiveAction: &#39;Renew certification within 7 days&#39;,
+  targetResolutionDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+}, userContext);
+</code></pre>
+<h3>Creating Corrective Action</h3>
+<pre><code class="language-typescript">const action = await auditService.createCorrectiveAction({
+  findingId: finding.id,
+  auditId: audit.id,
+  title: &#39;Renew Caregiver Certification&#39;,
+  description: &#39;Schedule and complete certification renewal&#39;,
+  actionType: &#39;IMMEDIATE&#39;,
+  specificActions: [
+    &#39;Contact training provider&#39;,
+    &#39;Schedule certification exam&#39;,
+    &#39;Complete certification within 7 days&#39;
+  ],
+  responsiblePersonId: managerId,
+  targetCompletionDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+  resourcesRequired: &#39;Certification exam fee: $150&#39;
+}, userContext);
+</code></pre>
+<h3>Tracking Progress</h3>
+<pre><code class="language-typescript">await auditService.updateCorrectiveActionProgress(
+  action.id,
+  {
+    progressNote: &#39;Exam scheduled for Jan 18, 2024&#39;,
+    completionPercentage: 50,
+    nextSteps: &#39;Complete exam and submit certificate&#39;
+  },
+  userContext
+);
+</code></pre>
+<h2>Compliance &amp; Standards</h2>
+<p>The system supports tracking compliance with various regulatory standards:</p>
+<ul>
+<li>CMS Home Health Conditions of Participation (42 CFR 484)</li>
+<li>State-specific home care regulations</li>
+<li>OSHA safety standards</li>
+<li>HIPAA privacy requirements</li>
+<li>Internal quality standards</li>
+</ul>
+<h2>Permissions</h2>
+<p>Required permissions for various operations:</p>
+<ul>
+<li><code>audits:create</code> - Create new audits</li>
+<li><code>audits:view</code> - View audits and findings</li>
+<li><code>audits:update</code> - Update audit information</li>
+<li><code>audits:create-findings</code> - Document findings</li>
+<li><code>audits:verify-findings</code> - Verify finding resolution</li>
+<li><code>audits:create-corrective-actions</code> - Create action plans</li>
+<li><code>audits:update-corrective-actions</code> - Update action progress</li>
+<li><code>audits:verify-corrective-actions</code> - Verify action effectiveness</li>
+</ul>
+<h2>Database Schema</h2>
+<p>The vertical requires the following database tables:</p>
+<ul>
+<li><code>audits</code> - Main audit records</li>
+<li><code>audit_findings</code> - Audit findings</li>
+<li><code>corrective_actions</code> - Corrective action plans</li>
+<li><code>audit_templates</code> - Reusable audit templates</li>
+<li><code>audit_checklist_responses</code> - Completed checklist items</li>
+</ul>
+<h2>Development</h2>
+<h3>Build</h3>
+<pre><code class="language-bash">npm run build
+</code></pre>
+<h3>Test</h3>
+<pre><code class="language-bash">npm test
+npm run test:coverage
+</code></pre>
+<h3>Lint</h3>
+<pre><code class="language-bash">npm run lint
+</code></pre>
+<h3>Type Check</h3>
+<pre><code class="language-bash">npm run typecheck
+</code></pre>
+<h2>Integration Points</h2>
+<p>This vertical integrates with:</p>
+<ul>
+<li><strong>Core Package</strong> - Base types, database, permissions</li>
+<li><strong>Caregiver Staff</strong> - Link findings to specific caregivers</li>
+<li><strong>Client Demographics</strong> - Link findings to specific clients</li>
+<li><strong>Training Management</strong> - Track training-related findings</li>
+<li><strong>Documentation</strong> - Reference documentation deficiencies</li>
+</ul>
+<h2>Future Enhancements</h2>
+<p>Planned features:</p>
+<ul>
+<li>AI-powered finding categorization</li>
+<li>Automated compliance score calculations</li>
+<li>Trend analysis and predictive analytics</li>
+<li>Mobile audit app for on-site inspections</li>
+<li>Photo/video evidence capture</li>
+<li>Digital signature support</li>
+<li>Automated notifications for overdue actions</li>
+<li>Integration with external audit agencies</li>
+<li>Customizable audit templates</li>
+<li>Report generation (PDF, Excel)</li>
+</ul>
+<h2>License</h2>
+<p>Copyright © 2024 Care Commons</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

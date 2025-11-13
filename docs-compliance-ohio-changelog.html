@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ohio Compliance Changelog - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Ohio Compliance Changelog</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Ohio Compliance Changelog</h1>
+<p><strong>State Code</strong>: OH<br><strong>Monitoring Authority</strong>: Ohio Department of Medicaid (ODM)<br><strong>Last Review</strong>: 2025-11-05</p>
+<hr>
+<h2>Purpose</h2>
+<p>This changelog tracks all changes to Ohio home healthcare compliance requirements. When Ohio regulations change, this file documents:</p>
+<ol>
+<li>What changed</li>
+<li>When it takes effect</li>
+<li>How it impacts Care Commons implementation</li>
+<li>Migration path for existing data/workflows</li>
+</ol>
+<hr>
+<h2>Monitoring Sources</h2>
+<h3>Primary Sources (Check Weekly)</h3>
+<ul>
+<li><strong>Ohio Department of Medicaid</strong>: <a href="https://medicaid.ohio.gov/">https://medicaid.ohio.gov/</a><ul>
+<li>Provider Updates: <a href="https://medicaid.ohio.gov/resources-for-providers/provider-updates">https://medicaid.ohio.gov/resources-for-providers/provider-updates</a></li>
+<li>Rule Making: <a href="https://medicaid.ohio.gov/about-us/medicaid-rules">https://medicaid.ohio.gov/about-us/medicaid-rules</a></li>
+</ul>
+</li>
+<li><strong>Ohio Register</strong>: <a href="https://www.registerofohio.state.oh.us/">https://www.registerofohio.state.oh.us/</a><ul>
+<li>Subscribe to &quot;Health and Human Services&quot; category</li>
+</ul>
+</li>
+<li><strong>Ohio Administrative Code (OAC)</strong>: <a href="https://codes.ohio.gov/ohio-administrative-code">https://codes.ohio.gov/ohio-administrative-code</a><ul>
+<li>Title 5160 (Medicaid)</li>
+<li>Title 3701 (Public Health)</li>
+</ul>
+</li>
+<li><strong>Ohio Revised Code (ORC)</strong>: <a href="https://codes.ohio.gov/ohio-revised-code">https://codes.ohio.gov/ohio-revised-code</a><ul>
+<li>Chapter 3721 (Nursing Homes)</li>
+<li>Chapter 5164 (Medical Assistance Programs)</li>
+</ul>
+</li>
+</ul>
+<h3>Secondary Sources (Check Monthly)</h3>
+<ul>
+<li><strong>Ohio Association for Home Care</strong>: <a href="https://www.ohiohomecare.org/">https://www.ohiohomecare.org/</a><ul>
+<li>Member alerts and regulatory updates</li>
+</ul>
+</li>
+<li><strong>Sandata Provider Portal</strong>: <a href="https://www.sandata.com/">https://www.sandata.com/</a><ul>
+<li>EVV system updates and bulletins</li>
+</ul>
+</li>
+<li><strong>Centers for Medicare &amp; Medicaid Services (CMS)</strong>: <a href="https://www.cms.gov/">https://www.cms.gov/</a><ul>
+<li>Federal EVV policy changes</li>
+</ul>
+</li>
+</ul>
+<h3>Alert Configuration</h3>
+<pre><code class="language-bash"># Google Alerts
+- &quot;Ohio Department of Medicaid&quot; + &quot;home health&quot; + &quot;rule change&quot;
+- &quot;Ohio Administrative Code 5160-12&quot; + &quot;amendment&quot;
+- &quot;Ohio EVV&quot; + &quot;Sandata&quot;
+- &quot;Ohio Nurse Aide Registry&quot; + &quot;requirement&quot;
+
+# RSS Feeds
+- https://medicaid.ohio.gov/resources-for-providers/provider-updates/rss
+- https://www.registerofohio.state.oh.us/rss
+</code></pre>
+<hr>
+<h2>Change History</h2>
+<h3>2025-11-05 - Initial Documentation ✅</h3>
+<p><strong>Type</strong>: Milestone<br><strong>Status</strong>: Complete  </p>
+<p><strong>Changes</strong>:</p>
+<ul>
+<li>Initial comprehensive documentation of Ohio compliance requirements</li>
+<li>Established baseline for all regulatory standards as of November 2025</li>
+<li>Documented current requirements for:<ul>
+<li>Background screening (FBI+BCI, 5-year cycle)</li>
+<li>STNA registry (2-year certification cycle, 12 hours CE)</li>
+<li>HHA training (75-hour program, annual competency)</li>
+<li>RN supervision (14-day new, 60-day established)</li>
+<li>Service authorization (MCO prior auth, units tracking)</li>
+<li>Plan of care (60-day review cycle)</li>
+<li>Visit documentation (24-hour timeliness)</li>
+<li>EVV requirements (Sandata aggregator, 125m+75m geofence, 10-min grace)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Implementation</strong>:</p>
+<ul>
+<li>Created <code>docs/compliance/ohio/REQUIREMENTS.md</code> (comprehensive regulation documentation)</li>
+<li>Created <code>docs/compliance/ohio/IMPLEMENTATION.md</code> (developer guide)</li>
+<li>Created <code>docs/compliance/ohio/TEST_SCENARIOS.md</code> (65 test scenarios)</li>
+<li>Created <code>docs/compliance/ohio/CHANGELOG.md</code> (this file)</li>
+</ul>
+<p><strong>Impact</strong>: None (baseline establishment)</p>
+<p><strong>Sources</strong>: </p>
+<ul>
+<li>Ohio Revised Code §173.27, §3721.30, §4723, §5164.34</li>
+<li>Ohio Administrative Code 3701-18-03, 5160-1-17, 5160-12-03, 5160-58-01</li>
+<li>21st Century Cures Act §12006(a)</li>
+<li>42 CFR §484</li>
+</ul>
+<p><strong>Care Commons Version</strong>: v0.9.0</p>
+<hr>
+<h3>[No prior changes - this is initial documentation]</h3>
+<hr>
+<h2>Historical Milestones (Ohio Medicaid Home Health)</h2>
+<h3>2024-01-01 - MyCare Ohio Expansion</h3>
+<p><strong>Type</strong>: Program Expansion<br><strong>Status</strong>: Implemented</p>
+<p><strong>Changes</strong>:</p>
+<ul>
+<li>MyCare Ohio (dual-eligible program) expanded to additional counties</li>
+<li>New MCO contracts: Aetna Better Health, Molina Healthcare</li>
+<li>Updated authorization routing for dual-eligible beneficiaries</li>
+</ul>
+<p><strong>Impact</strong>: Moderate</p>
+<ul>
+<li>Required MCO-specific authorization workflows</li>
+<li>Updated Sandata submission routing</li>
+</ul>
+<p><strong>Source</strong>: Ohio Department of Medicaid MyCare Ohio Expansion Notice</p>
+<hr>
+<h3>2021-01-01 - EVV Implementation</h3>
+<p><strong>Type</strong>: Federal Mandate Implementation<br><strong>Status</strong>: Implemented</p>
+<p><strong>Changes</strong>:</p>
+<ul>
+<li>Ohio implemented Electronic Visit Verification (EVV) for personal care services</li>
+<li>Selected Sandata Technologies as state EVV aggregator (FREE for providers)</li>
+<li>Established EVV standards:<ul>
+<li>GPS required for home-based visits</li>
+<li>Telephony acceptable for facility visits</li>
+<li>125m base geofence + 75m GPS tolerance</li>
+<li>10-minute grace periods</li>
+<li>7-day correction window</li>
+</ul>
+</li>
+</ul>
+<p><strong>Impact</strong>: High</p>
+<ul>
+<li>All personal care providers required to implement EVV</li>
+<li>FREE aggregator reduced provider costs (vs. other states charging fees)</li>
+<li>Real-time and batch submission options</li>
+</ul>
+<p><strong>Source</strong>: 21st Century Cures Act §12006(a), Ohio Administrative Code 5160-1-17.2</p>
+<hr>
+<h3>2019-07-01 - Background Screening Changes</h3>
+<p><strong>Type</strong>: Regulatory Update<br><strong>Status</strong>: Implemented</p>
+<p><strong>Changes</strong>:</p>
+<ul>
+<li>Ohio Medicaid implemented 5-year background screening cycle (previously 3 years)</li>
+<li>Required FBI + BCI fingerprint checks (not just name-based)</li>
+<li>Established break-in-service rules (&gt;90 days requires re-check)</li>
+</ul>
+<p><strong>Impact</strong>: Moderate</p>
+<ul>
+<li>Extended renewal cycle reduced administrative burden</li>
+<li>Fingerprinting increased initial cost but improved accuracy</li>
+<li>Clarified re-screening triggers</li>
+</ul>
+<p><strong>Source</strong>: Ohio Revised Code §5164.34 (amended 2019)</p>
+<hr>
+<h3>2017-01-01 - STNA Certification Cycle Extended</h3>
+<p><strong>Type</strong>: Regulatory Update<br><strong>Status</strong>: Implemented</p>
+<p><strong>Changes</strong>:</p>
+<ul>
+<li>STNA certification renewal extended from annual to biennial (every 2 years)</li>
+<li>Continuing education requirement established: 12 hours every 2 years</li>
+<li>24-month paid work requirement maintained (or must re-test)</li>
+</ul>
+<p><strong>Impact</strong>: Low</p>
+<ul>
+<li>Reduced administrative burden for CNAs</li>
+<li>Standardized CE tracking requirements</li>
+</ul>
+<p><strong>Source</strong>: Ohio Administrative Code 3701-18-03 (amended 2017)</p>
+<hr>
+<h2>Pending Changes (None Currently Known)</h2>
+<p><em>No pending regulatory changes are currently known as of 2025-11-05.</em></p>
+<p><strong>Check back</strong>: Next scheduled review date is <strong>2026-02-05</strong> (quarterly reviews).</p>
+<hr>
+<h2>Tracking Future Changes</h2>
+<h3>When Ohio Regulations Change</h3>
+<ol>
+<li><strong>Document the change here</strong> in reverse chronological order</li>
+<li><strong>Update REQUIREMENTS.md</strong> with new requirements</li>
+<li><strong>Update IMPLEMENTATION.md</strong> if code changes needed</li>
+<li><strong>Update TEST_SCENARIOS.md</strong> with new test cases</li>
+<li><strong>Update validator code</strong> in <code>packages/core/src/compliance/ohio/</code></li>
+<li><strong>Update tests</strong> in <code>packages/core/src/compliance/ohio/__tests__/</code></li>
+<li><strong>Run full test suite</strong> to ensure no regressions</li>
+<li><strong>Create migration guide</strong> if existing data affected</li>
+<li><strong>Notify Care Commons users</strong> via email/in-app notification</li>
+<li><strong>Submit PR</strong> with all updates and regulatory citations</li>
+</ol>
+<h3>Git Commit Message Template</h3>
+<pre><code>Ohio: [Brief description of change]
+
+Regulatory Change:
+- [Statute/Rule citation]
+- Effective date: [YYYY-MM-DD]
+- Transition period: [If applicable]
+
+Changes:
+- REQUIREMENTS.md: [What sections updated]
+- IMPLEMENTATION.md: [Code changes needed]
+- validator.ts: [Validation logic changes]
+- tests: [New test scenarios]
+
+Impact: [High/Moderate/Low]
+- [Describe impact on existing implementations]
+- [Migration path if needed]
+
+References:
+- [Link to Ohio Register notice]
+- [Link to OAC/ORC section]
+- [Industry association guidance]
+
+Reviewed-by: [Compliance Officer Name]
+</code></pre>
+<h3>Example Future Change</h3>
+<pre><code class="language-markdown">### 2026-03-01 - Background Screening Cycle Shortened (HYPOTHETICAL)
+
+**Type**: Regulatory Update  
+**Status**: Proposed (not yet effective)  
+**Effective Date**: 2026-03-01  
+**Transition Period**: 90 days
+
+**Changes**:
+- Background screening renewal cycle shortened from 5 years to 3 years
+- Ohio Revised Code §5164.34 amended per House Bill XXXX
+
+**Impact**: Moderate
+- Caregivers with checks &gt;3 years old will need re-screening by 2026-05-30
+- Estimated 1,200 caregivers in system affected
+- Increased administrative cost (~$50/caregiver every 3 years vs. 5 years)
+
+**Implementation Changes**:
+- Update `credentialConfig.backgroundScreening.expirationDays` from 1825 to 1095
+- Add migration script to calculate new expiration dates
+- Send proactive notifications to affected caregivers 60 days before new expiration
+- Update `OH_BACKGROUND_EXPIRED` validation to use new threshold
+
+**Files to Update**:
+- `packages/core/src/compliance/ohio/validator.ts`
+- `docs/compliance/ohio/REQUIREMENTS.md` (§1.1)
+- `docs/compliance/ohio/IMPLEMENTATION.md`
+
+**References**:
+- House Bill XXXX: [link]
+- Ohio Register Vol XX, No Y
+- Effective date: March 1, 2026
+</code></pre>
+<hr>
+<h2>Regulatory Review Checklist</h2>
+<p>When reviewing for potential changes (quarterly):</p>
+<ul>
+<li><input disabled="" type="checkbox"> Check Ohio Department of Medicaid provider updates</li>
+<li><input disabled="" type="checkbox"> Review Ohio Register for new/amended rules in OAC 5160</li>
+<li><input disabled="" type="checkbox"> Check Sandata provider portal for EVV updates</li>
+<li><input disabled="" type="checkbox"> Review Ohio Department of Health nurse aide registry announcements</li>
+<li><input disabled="" type="checkbox"> Check Ohio Association for Home Care member alerts</li>
+<li><input disabled="" type="checkbox"> Review CMS federal EVV policy updates</li>
+<li><input disabled="" type="checkbox"> Search Google Alerts for &quot;Ohio home health&quot; + &quot;regulation change&quot;</li>
+<li><input disabled="" type="checkbox"> Document any findings (even if no changes) with review date</li>
+</ul>
+<p><strong>Last Review</strong>: 2025-11-05<br><strong>Reviewed By</strong>: Care Commons Compliance Team<br><strong>Next Review Due</strong>: 2026-02-05<br><strong>Findings</strong>: No pending changes identified</p>
+<hr>
+<h2>Contact Information</h2>
+<h3>Ohio Regulatory Authorities</h3>
+<p><strong>Ohio Department of Medicaid (ODM)</strong></p>
+<ul>
+<li>Website: <a href="https://medicaid.ohio.gov/">https://medicaid.ohio.gov/</a></li>
+<li>Provider Hotline: 1-800-686-1518</li>
+<li>Email: <a href="mailto:ODM_ProviderSupport@medicaid.ohio.gov">ODM_ProviderSupport@medicaid.ohio.gov</a></li>
+<li>Address: 50 West Town Street, Suite 400, Columbus, OH 43215</li>
+</ul>
+<p><strong>Ohio Department of Health (ODH) - Nurse Aide Registry</strong></p>
+<ul>
+<li>Website: <a href="https://odh.ohio.gov/know-our-programs/nurse-aide-registry">https://odh.ohio.gov/know-our-programs/nurse-aide-registry</a></li>
+<li>Phone: 614-752-9500</li>
+<li>Email: <a href="mailto:nursing@odh.ohio.gov">nursing@odh.ohio.gov</a></li>
+</ul>
+<p><strong>Ohio Attorney General - BCI (Background Checks)</strong></p>
+<ul>
+<li>Website: <a href="https://www.ohioattorneygeneral.gov/Business/Services-for-Business/WebCheck">https://www.ohioattorneygeneral.gov/Business/Services-for-Business/WebCheck</a></li>
+<li>Phone: 614-466-8204</li>
+</ul>
+<p><strong>Sandata Technologies (EVV Aggregator)</strong></p>
+<ul>
+<li>Provider Support: 1-800-447-8342</li>
+<li>Website: <a href="https://www.sandata.com/">https://www.sandata.com/</a></li>
+<li>Portal: <a href="https://portal.sandata.com/">https://portal.sandata.com/</a></li>
+</ul>
+<h3>Care Commons Compliance</h3>
+<p><strong>Compliance Questions</strong>:</p>
+<ul>
+<li>Email: <a href="mailto:compliance@carecommons.org">compliance@carecommons.org</a></li>
+<li>GitHub Discussions: <a href="https://github.com/neighborhood-lab/care-commons/discussions">https://github.com/neighborhood-lab/care-commons/discussions</a> (tag: <code>compliance</code>, <code>ohio</code>)</li>
+</ul>
+<p><strong>Report Regulatory Changes</strong>:</p>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/neighborhood-lab/care-commons/issues/new?labels=compliance,ohio,regulatory-change">https://github.com/neighborhood-lab/care-commons/issues/new?labels=compliance,ohio,regulatory-change</a></li>
+<li>Provide: Citation, effective date, description, impact assessment</li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migration Guide - Client & Demographics Management - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>📖 User Guides</span> / 
+      <span>Migration Guide - Client & Demographics Management</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Migration Guide - Client &amp; Demographics Management</h1>
+<p>This guide helps organizations migrate existing client data to Care Commons.</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#pre-migration-checklist">Pre-Migration Checklist</a></li>
+<li><a href="#data-export-from-existing-systems">Data Export from Existing Systems</a></li>
+<li><a href="#data-mapping">Data Mapping</a></li>
+<li><a href="#data-transformation">Data Transformation</a></li>
+<li><a href="#import-process">Import Process</a></li>
+<li><a href="#validation">Validation</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ol>
+<h2>Pre-Migration Checklist</h2>
+<p>Before beginning migration, ensure:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Care Commons instance is set up and running</li>
+<li><input disabled="" type="checkbox"> Organization and branch records are created</li>
+<li><input disabled="" type="checkbox"> User accounts with appropriate permissions exist</li>
+<li><input disabled="" type="checkbox"> Database backup of existing system is complete</li>
+<li><input disabled="" type="checkbox"> Test environment is available for trial runs</li>
+<li><input disabled="" type="checkbox"> Data cleaning has been performed on source data</li>
+<li><input disabled="" type="checkbox"> Stakeholders are informed of migration schedule</li>
+</ul>
+<h2>Data Export from Existing Systems</h2>
+<h3>Common Home Care Systems</h3>
+<h4>From Spreadsheets (Excel/CSV)</h4>
+<p>Most organizations maintain client data in spreadsheets. Export to CSV format:</p>
+<pre><code>File → Save As → CSV (Comma delimited)
+</code></pre>
+<h4>From AxisCare</h4>
+<ol>
+<li>Navigate to Reports → Client List</li>
+<li>Select all required fields</li>
+<li>Export to Excel</li>
+<li>Save as CSV</li>
+</ol>
+<h4>From ClearCare/WellSky</h4>
+<ol>
+<li>Go to Reports → Custom Reports</li>
+<li>Create report with client demographics</li>
+<li>Export to CSV format</li>
+</ol>
+<h4>From MatrixCare</h4>
+<ol>
+<li>Access Matrix IQ Reports</li>
+<li>Run Client Master List report</li>
+<li>Export data to Excel/CSV</li>
+</ol>
+<h2>Data Mapping</h2>
+<h3>Required Fields</h3>
+<p>Map these fields from your source system to Care Commons:</p>
+<table>
+<thead>
+<tr>
+<th>Care Commons Field</th>
+<th>Description</th>
+<th>Required</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>firstName</code></td>
+<td>Client first name</td>
+<td>✅</td>
+<td>&quot;Margaret&quot;</td>
+</tr>
+<tr>
+<td><code>lastName</code></td>
+<td>Client last name</td>
+<td>✅</td>
+<td>&quot;Thompson&quot;</td>
+</tr>
+<tr>
+<td><code>dateOfBirth</code></td>
+<td>Date of birth</td>
+<td>✅</td>
+<td>&quot;1942-06-15&quot;</td>
+</tr>
+<tr>
+<td><code>primaryAddress.line1</code></td>
+<td>Street address</td>
+<td>✅</td>
+<td>&quot;456 Oak Avenue&quot;</td>
+</tr>
+<tr>
+<td><code>primaryAddress.city</code></td>
+<td>City</td>
+<td>✅</td>
+<td>&quot;Springfield&quot;</td>
+</tr>
+<tr>
+<td><code>primaryAddress.state</code></td>
+<td>State (2-letter code)</td>
+<td>✅</td>
+<td>&quot;IL&quot;</td>
+</tr>
+<tr>
+<td><code>primaryAddress.postalCode</code></td>
+<td>ZIP code</td>
+<td>✅</td>
+<td>&quot;62702&quot;</td>
+</tr>
+<tr>
+<td><code>primaryAddress.country</code></td>
+<td>Country code</td>
+<td>✅</td>
+<td>&quot;US&quot;</td>
+</tr>
+</tbody></table>
+<h3>Optional but Recommended Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Care Commons Field</th>
+<th>Source System Field</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>middleName</code></td>
+<td>Middle Name</td>
+<td>&quot;Rose&quot;</td>
+</tr>
+<tr>
+<td><code>preferredName</code></td>
+<td>Nickname / Preferred</td>
+<td>&quot;Maggie&quot;</td>
+</tr>
+<tr>
+<td><code>gender</code></td>
+<td>Gender</td>
+<td>&quot;FEMALE&quot;</td>
+</tr>
+<tr>
+<td><code>primaryPhone.number</code></td>
+<td>Phone / Primary Phone</td>
+<td>&quot;555-0201&quot;</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>Email Address</td>
+<td>&quot;<a href="mailto:maggie@example.com">maggie@example.com</a>&quot;</td>
+</tr>
+<tr>
+<td><code>ssn</code></td>
+<td>SSN / Social Security</td>
+<td>&quot;123-45-6789&quot;</td>
+</tr>
+<tr>
+<td><code>medicareNumber</code></td>
+<td>Medicare ID</td>
+<td>&quot;MCR123456789A&quot;</td>
+</tr>
+<tr>
+<td><code>medicaidNumber</code></td>
+<td>Medicaid ID</td>
+<td>&quot;MCD123456&quot;</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>Status / Active</td>
+<td>&quot;ACTIVE&quot;</td>
+</tr>
+</tbody></table>
+<h3>Emergency Contact Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>Care Commons Field</th>
+<th>Source Field</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>emergencyContacts[0].name</code></td>
+<td>Emergency Contact Name</td>
+<td>&quot;Sarah Thompson&quot;</td>
+</tr>
+<tr>
+<td><code>emergencyContacts[0].relationship</code></td>
+<td>Relationship</td>
+<td>&quot;Daughter&quot;</td>
+</tr>
+<tr>
+<td><code>emergencyContacts[0].phone.number</code></td>
+<td>Emergency Phone</td>
+<td>&quot;555-0210&quot;</td>
+</tr>
+<tr>
+<td><code>emergencyContacts[0].isPrimary</code></td>
+<td>Primary Contact</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h2>Data Transformation</h2>
+<h3>CSV Template</h3>
+<p>Create a CSV with these columns:</p>
+<pre><code class="language-csv">firstName,middleName,lastName,preferredName,dateOfBirth,gender,phone,email,street,apt,city,state,zip,emergencyName,emergencyRelation,emergencyPhone,status,intakeDate,medicareNumber,medicaidNumber
+Margaret,Rose,Thompson,Maggie,1942-06-15,FEMALE,555-0201,maggie@example.com,456 Oak Avenue,Apt 3B,Springfield,IL,62702,Sarah Thompson,Daughter,555-0210,ACTIVE,2024-01-15,MCR123456789A,
+</code></pre>
+<h3>Transformation Script</h3>
+<p>Use this TypeScript script to transform your CSV data:</p>
+<pre><code class="language-typescript">import * as fs from &#39;fs&#39;;
+import * as csv from &#39;csv-parser&#39;;
+import { CreateClientInput } from &#39;@care-commons/client-demographics&#39;;
+
+interface SourceRow {
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  preferredName?: string;
+  dateOfBirth: string;
+  gender?: string;
+  phone?: string;
+  email?: string;
+  street: string;
+  apt?: string;
+  city: string;
+  state: string;
+  zip: string;
+  emergencyName?: string;
+  emergencyRelation?: string;
+  emergencyPhone?: string;
+  status?: string;
+  intakeDate?: string;
+  medicareNumber?: string;
+  medicaidNumber?: string;
+}
+
+function transformRow(row: SourceRow, organizationId: string, branchId: string): CreateClientInput {
+  return {
+    organizationId,
+    branchId,
+    firstName: row.firstName.trim(),
+    middleName: row.middleName?.trim(),
+    lastName: row.lastName.trim(),
+    preferredName: row.preferredName?.trim(),
+    dateOfBirth: new Date(row.dateOfBirth),
+    gender: mapGender(row.gender),
+    primaryPhone: row.phone ? {
+      number: row.phone.replace(/\D/g, &#39;&#39;),
+      type: &#39;HOME&#39;,
+      canReceiveSMS: false,
+    } : undefined,
+    email: row.email?.trim(),
+    primaryAddress: {
+      type: &#39;HOME&#39;,
+      line1: row.street.trim(),
+      line2: row.apt?.trim(),
+      city: row.city.trim(),
+      state: row.state.trim().toUpperCase(),
+      postalCode: row.zip.replace(/\D/g, &#39;&#39;),
+      country: &#39;US&#39;,
+    },
+    emergencyContacts: row.emergencyName ? [{
+      name: row.emergencyName.trim(),
+      relationship: row.emergencyRelation?.trim() || &#39;Family&#39;,
+      phone: {
+        number: row.emergencyPhone?.replace(/\D/g, &#39;&#39;) || &#39;&#39;,
+        type: &#39;MOBILE&#39;,
+        canReceiveSMS: true,
+      },
+      isPrimary: true,
+      canMakeHealthcareDecisions: true,
+    }] : [],
+    status: mapStatus(row.status),
+    intakeDate: row.intakeDate ? new Date(row.intakeDate) : undefined,
+  };
+}
+
+function mapGender(gender?: string): any {
+  if (!gender) return undefined;
+  
+  const normalized = gender.toLowerCase().trim();
+  
+  if (normalized === &#39;m&#39; || normalized === &#39;male&#39;) return &#39;MALE&#39;;
+  if (normalized === &#39;f&#39; || normalized === &#39;female&#39;) return &#39;FEMALE&#39;;
+  if (normalized === &#39;nb&#39; || normalized === &#39;non-binary&#39;) return &#39;NON_BINARY&#39;;
+  
+  return &#39;OTHER&#39;;
+}
+
+function mapStatus(status?: string): any {
+  if (!status) return &#39;PENDING_INTAKE&#39;;
+  
+  const normalized = status.toLowerCase().trim();
+  
+  if (normalized === &#39;active&#39;) return &#39;ACTIVE&#39;;
+  if (normalized === &#39;inactive&#39;) return &#39;INACTIVE&#39;;
+  if (normalized === &#39;discharged&#39;) return &#39;DISCHARGED&#39;;
+  if (normalized === &#39;hold&#39; || normalized === &#39;on hold&#39;) return &#39;ON_HOLD&#39;;
+  if (normalized === &#39;pending&#39; || normalized === &#39;pending intake&#39;) return &#39;PENDING_INTAKE&#39;;
+  if (normalized === &#39;inquiry&#39;) return &#39;INQUIRY&#39;;
+  
+  return &#39;ACTIVE&#39;;
+}
+
+async function transformCSV(inputFile: string, outputFile: string, orgId: string, branchId: string) {
+  const transformed: CreateClientInput[] = [];
+  
+  return new Promise((resolve, reject) =&gt; {
+    fs.createReadStream(inputFile)
+      .pipe(csv())
+      .on(&#39;data&#39;, (row: SourceRow) =&gt; {
+        try {
+          const client = transformRow(row, orgId, branchId);
+          transformed.push(client);
+        } catch (error) {
+          console.error(`Error transforming row:`, row, error);
+        }
+      })
+      .on(&#39;end&#39;, () =&gt; {
+        fs.writeFileSync(outputFile, JSON.stringify(transformed, null, 2));
+        console.log(`Transformed ${transformed.length} clients to ${outputFile}`);
+        resolve(transformed);
+      })
+      .on(&#39;error&#39;, reject);
+  });
+}
+
+// Usage:
+// transformCSV(&#39;clients.csv&#39;, &#39;clients-transformed.json&#39;, &#39;org-456&#39;, &#39;branch-789&#39;);
+</code></pre>
+<h2>Import Process</h2>
+<h3>Option 1: Using the API</h3>
+<pre><code class="language-typescript">import { ClientService } from &#39;@care-commons/client-demographics&#39;;
+import * as fs from &#39;fs&#39;;
+
+async function importClients(jsonFile: string, clientService: ClientService, userContext: any) {
+  const clients = JSON.parse(fs.readFileSync(jsonFile, &#39;utf-8&#39;));
+  
+  const results = {
+    successful: [] as any[],
+    failed: [] as any[],
+  };
+  
+  for (const clientData of clients) {
+    try {
+      const client = await clientService.createClient(clientData, userContext);
+      results.successful.push({
+        clientNumber: client.clientNumber,
+        name: `${client.firstName} ${client.lastName}`,
+      });
+      console.log(`✅ Imported: ${client.firstName} ${client.lastName}`);
+    } catch (error: any) {
+      results.failed.push({
+        client: `${clientData.firstName} ${clientData.lastName}`,
+        error: error.message,
+      });
+      console.error(`❌ Failed: ${clientData.firstName} ${clientData.lastName}`);
+      console.error(`   Error: ${error.message}`);
+    }
+  }
+  
+  console.log(`\n📊 Import Summary:`);
+  console.log(`   Successful: ${results.successful.length}`);
+  console.log(`   Failed: ${results.failed.length}`);
+  
+  // Write results
+  fs.writeFileSync(
+    &#39;import-results.json&#39;,
+    JSON.stringify(results, null, 2)
+  );
+  
+  return results;
+}
+</code></pre>
+<h3>Option 2: Using Bulk Import Endpoint</h3>
+<pre><code class="language-bash">curl -X POST &quot;http://localhost:3000/api/clients/bulk-import&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;Authorization: Bearer YOUR_TOKEN&quot; \
+  -d @clients-transformed.json
+</code></pre>
+<h3>Option 3: Direct Database Import</h3>
+<p>For very large datasets (10,000+ clients), use direct database import:</p>
+<pre><code class="language-sql">-- Create temporary staging table
+CREATE TABLE clients_staging (
+    first_name TEXT,
+    last_name TEXT,
+    date_of_birth DATE,
+    -- ... other fields
+);
+
+-- Import from CSV
+COPY clients_staging FROM &#39;/path/to/clients.csv&#39; 
+WITH (FORMAT csv, HEADER true);
+
+-- Transform and insert
+INSERT INTO clients (
+    id, organization_id, branch_id, client_number,
+    first_name, last_name, date_of_birth, primary_address,
+    emergency_contacts, service_eligibility, status,
+    created_by, updated_by
+)
+SELECT 
+    uuid_generate_v4(),
+    &#39;org-456&#39;,
+    &#39;branch-789&#39;,
+    &#39;CL-&#39; || to_char(nextval(&#39;client_number_seq&#39;), &#39;FM0000&#39;),
+    first_name,
+    last_name,
+    date_of_birth,
+    jsonb_build_object(
+        &#39;type&#39;, &#39;HOME&#39;,
+        &#39;line1&#39;, street,
+        &#39;city&#39;, city,
+        &#39;state&#39;, state,
+        &#39;postalCode&#39;, zip,
+        &#39;country&#39;, &#39;US&#39;
+    ),
+    &#39;[]&#39;::jsonb,
+    &#39;{}&#39;::jsonb,
+    &#39;ACTIVE&#39;,
+    &#39;system-user-id&#39;,
+    &#39;system-user-id&#39;
+FROM clients_staging;
+
+-- Clean up
+DROP TABLE clients_staging;
+</code></pre>
+<h2>Validation</h2>
+<h3>Post-Import Checks</h3>
+<ol>
+<li><strong>Count Verification</strong></li>
+</ol>
+<pre><code class="language-sql">-- Total clients imported
+SELECT COUNT(*) FROM clients WHERE organization_id = &#39;org-456&#39;;
+
+-- By status
+SELECT status, COUNT(*) 
+FROM clients 
+WHERE organization_id = &#39;org-456&#39;
+GROUP BY status;
+</code></pre>
+<ol start="2">
+<li><strong>Data Quality Checks</strong></li>
+</ol>
+<pre><code class="language-sql">-- Clients missing emergency contacts
+SELECT id, first_name, last_name, client_number
+FROM clients
+WHERE jsonb_array_length(emergency_contacts) = 0;
+
+-- Invalid phone numbers
+SELECT id, first_name, last_name, primary_phone
+FROM clients
+WHERE primary_phone IS NOT NULL
+  AND length(primary_phone-&gt;&gt;&#39;number&#39;) &lt; 10;
+
+-- Invalid addresses
+SELECT id, first_name, last_name
+FROM clients
+WHERE primary_address-&gt;&gt;&#39;city&#39; IS NULL
+   OR primary_address-&gt;&gt;&#39;state&#39; IS NULL
+   OR primary_address-&gt;&gt;&#39;postalCode&#39; IS NULL;
+</code></pre>
+<ol start="3">
+<li><strong>Duplicate Detection</strong></li>
+</ol>
+<pre><code class="language-sql">-- Potential duplicates by name and DOB
+SELECT first_name, last_name, date_of_birth, COUNT(*)
+FROM clients
+WHERE organization_id = &#39;org-456&#39;
+GROUP BY first_name, last_name, date_of_birth
+HAVING COUNT(*) &gt; 1;
+</code></pre>
+<h3>Testing Checklist</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Search functionality works with imported data</li>
+<li><input disabled="" type="checkbox"> Client details display correctly</li>
+<li><input disabled="" type="checkbox"> Emergency contacts are accessible</li>
+<li><input disabled="" type="checkbox"> Status updates function properly</li>
+<li><input disabled="" type="checkbox"> Risk flags can be added and managed</li>
+<li><input disabled="" type="checkbox"> Reports generate correctly with new data</li>
+</ul>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<h4>Issue: Invalid Date Format</h4>
+<p><strong>Error:</strong> <code>Invalid date format</code></p>
+<p><strong>Solution:</strong> Ensure dates are in ISO format (YYYY-MM-DD):</p>
+<pre><code class="language-typescript">// Wrong
+dateOfBirth: &#39;03/15/1945&#39;
+
+// Correct
+dateOfBirth: &#39;1945-03-15&#39;
+</code></pre>
+<h4>Issue: Invalid Phone Numbers</h4>
+<p><strong>Error:</strong> <code>Invalid phone number format</code></p>
+<p><strong>Solution:</strong> Strip all non-digits from phone numbers:</p>
+<pre><code class="language-typescript">phone: phoneString.replace(/\D/g, &#39;&#39;)
+</code></pre>
+<h4>Issue: Missing Required Fields</h4>
+<p><strong>Error:</strong> <code>Validation failed: firstName is required</code></p>
+<p><strong>Solution:</strong> Ensure all required fields are present and not empty:</p>
+<pre><code class="language-typescript">if (!row.firstName || row.firstName.trim() === &#39;&#39;) {
+  console.error(&#39;Skipping row: missing first name&#39;);
+  continue;
+}
+</code></pre>
+<h4>Issue: Duplicate Client Numbers</h4>
+<p><strong>Error:</strong> <code>Client number already exists</code></p>
+<p><strong>Solution:</strong> System auto-generates client numbers. Don&#39;t provide them during import.</p>
+<h4>Issue: Permission Denied</h4>
+<p><strong>Error:</strong> <code>Permission denied: clients:create</code></p>
+<p><strong>Solution:</strong> Ensure user context has proper permissions:</p>
+<pre><code class="language-typescript">const userContext = {
+  userId: &#39;admin-user-id&#39;,
+  roles: [&#39;ORG_ADMIN&#39;],
+  permissions: [&#39;clients:create&#39;, &#39;clients:update&#39;],
+  organizationId: &#39;org-456&#39;,
+  branchIds: [&#39;branch-789&#39;],
+};
+</code></pre>
+<h3>Data Cleaning Best Practices</h3>
+<p>Before import:</p>
+<ol>
+<li><strong>Remove duplicates</strong> in source data</li>
+<li><strong>Standardize phone numbers</strong> (remove formatting)</li>
+<li><strong>Validate dates</strong> (ensure YYYY-MM-DD format)</li>
+<li><strong>Normalize state codes</strong> (use 2-letter codes)</li>
+<li><strong>Clean ZIP codes</strong> (remove dashes, ensure 5 digits)</li>
+<li><strong>Trim whitespace</strong> from all text fields</li>
+<li><strong>Validate email addresses</strong></li>
+<li><strong>Check for missing required fields</strong></li>
+</ol>
+<h3>Rollback Procedure</h3>
+<p>If import fails or data issues are discovered:</p>
+<pre><code class="language-sql">-- Rollback recent import (be careful with this!)
+DELETE FROM clients 
+WHERE organization_id = &#39;org-456&#39;
+  AND created_at &gt; &#39;2024-03-15 10:00:00&#39;;
+
+-- Or mark as deleted (soft delete - safer)
+UPDATE clients
+SET deleted_at = NOW(), deleted_by = &#39;system-admin&#39;
+WHERE organization_id = &#39;org-456&#39;
+  AND created_at &gt; &#39;2024-03-15 10:00:00&#39;;
+</code></pre>
+<h2>Post-Migration Tasks</h2>
+<p>After successful import:</p>
+<ol>
+<li><input disabled="" type="checkbox"> Verify all clients are searchable</li>
+<li><input disabled="" type="checkbox"> Test workflow from inquiry → active</li>
+<li><input disabled="" type="checkbox"> Add risk flags to high-risk clients</li>
+<li><input disabled="" type="checkbox"> Verify program enrollments</li>
+<li><input disabled="" type="checkbox"> Set up authorized contacts for family portal access</li>
+<li><input disabled="" type="checkbox"> Train staff on new system</li>
+<li><input disabled="" type="checkbox"> Archive old system data per retention policy</li>
+</ol>
+<h2>Support</h2>
+<p>For migration assistance:</p>
+<ul>
+<li><strong>Documentation:</strong> <a href="https://docs.carecommons.org">https://docs.carecommons.org</a></li>
+<li><strong>Community Forum:</strong> <a href="https://github.com/neighborhood-lab/care-commons/discussions">https://github.com/neighborhood-lab/care-commons/discussions</a></li>
+<li><strong>Issues:</strong> <a href="https://github.com/neighborhood-lab/care-commons/issues">https://github.com/neighborhood-lab/care-commons/issues</a></li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

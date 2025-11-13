@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[STATE NAME] Compliance Test Scenarios - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>[STATE NAME] Compliance Test Scenarios</span>
+    </div>
+      <article class="markdown-content">
+        <h1>[STATE NAME] Compliance Test Scenarios</h1>
+<p><strong>State Code</strong>: [XX]<br><strong>Last Updated</strong>: [YYYY-MM-DD]<br><strong>Test Coverage</strong>: [XX]%</p>
+<h2>Overview</h2>
+<p>This document contains comprehensive test scenarios for [STATE] regulatory compliance requirements. Every requirement documented in <a href="./REQUIREMENTS.md">REQUIREMENTS.md</a> must have corresponding test scenarios.</p>
+<hr>
+<h2>1. Caregiver Credentials</h2>
+<h3>1.1 Background Screening</h3>
+<h4>Test Case: BS-001 - No Background Check on File</h4>
+<p><strong>Requirement</strong>: [Reference to REQUIREMENTS.md section]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: A caregiver with no background check record<br><strong>When</strong>: System attempts to assign caregiver to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is blocked</li>
+<li>Error message displays: &quot;Cannot assign caregiver - no background screening on file&quot;</li>
+<li>Regulation cited: [State Code §X.XXX]</li>
+<li>Remediation: &quot;Complete background screening before assignment&quot;</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const caregiver = {
+  id: &#39;test-caregiver-1&#39;,
+  background_check_date: null,
+  background_check_status: null,
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.canAssign).toBe(false);
+expect(result.issues).toContainEqual({
+  type: &#39;[STATE]_BACKGROUND_MISSING&#39;,
+  severity: &#39;BLOCKING&#39;,
+  regulation: &#39;[State Code §X.XXX]&#39;,
+});
+</code></pre>
+<hr>
+<h4>Test Case: BS-002 - Expired Background Check</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: A caregiver with background check older than [X years]<br><strong>When</strong>: System attempts to assign caregiver to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is blocked</li>
+<li>Error message displays expiration details</li>
+<li>Shows days since expiration</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const caregiver = {
+  id: &#39;test-caregiver-2&#39;,
+  background_check_date: subDays(new Date(), 730), // 2 years old
+  background_check_status: &#39;CLEAR&#39;,
+  background_check_expiration: subDays(new Date(), 365), // Expired 1 year ago
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.canAssign).toBe(false);
+expect(result.issues).toContainEqual({
+  type: &#39;[STATE]_BACKGROUND_EXPIRED&#39;,
+  severity: &#39;BLOCKING&#39;,
+  message: expect.stringContaining(&#39;expired&#39;),
+});
+</code></pre>
+<hr>
+<h4>Test Case: BS-003 - Background Check Expiring Soon</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: Medium<br><strong>Type</strong>: Warning</p>
+<p><strong>Given</strong>: A caregiver with background check expiring in 20 days<br><strong>When</strong>: System attempts to assign caregiver to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is allowed</li>
+<li>Warning message displays</li>
+<li>Renewal reminder sent</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const caregiver = {
+  id: &#39;test-caregiver-3&#39;,
+  background_check_date: subDays(new Date(), 345), // 345 days old
+  background_check_status: &#39;CLEAR&#39;,
+  background_check_expiration: addDays(new Date(), 20), // Expires in 20 days
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.canAssign).toBe(true);
+expect(result.issues).toContainEqual({
+  type: &#39;[STATE]_BACKGROUND_EXPIRING_SOON&#39;,
+  severity: &#39;WARNING&#39;,
+  message: expect.stringContaining(&#39;expires in 20 days&#39;),
+});
+</code></pre>
+<hr>
+<h4>Test Case: BS-004 - Valid Background Check</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Acceptance</p>
+<p><strong>Given</strong>: A caregiver with current, clear background check<br><strong>When</strong>: System attempts to assign caregiver to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is allowed</li>
+<li>No blocking issues</li>
+<li>May have informational notices</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const caregiver = {
+  id: &#39;test-caregiver-4&#39;,
+  background_check_date: subDays(new Date(), 90), // 90 days old
+  background_check_status: &#39;CLEAR&#39;,
+  background_check_expiration: addDays(new Date(), 275), // 275 days remaining
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.canAssign).toBe(true);
+expect(result.issues.filter(i =&gt; i.severity === &#39;BLOCKING&#39;)).toHaveLength(0);
+</code></pre>
+<hr>
+<h4>Test Case: BS-005 - Background Check with Issues</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: A caregiver with issues on background check<br><strong>When</strong>: System attempts to assign caregiver to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is permanently blocked</li>
+<li>Cannot be overridden by supervisor</li>
+<li>Requires compliance review</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const caregiver = {
+  id: &#39;test-caregiver-5&#39;,
+  background_check_date: new Date(),
+  background_check_status: &#39;ISSUES&#39;,
+  background_check_notes: &#39;Disqualifying offense found&#39;,
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.canAssign).toBe(false);
+expect(result.issues[0].canBeOverridden).toBe(false);
+expect(result.issues[0].requiresComplianceReview).toBe(true);
+</code></pre>
+<hr>
+<h4>Test Case: BS-006 - Pending Background Check</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: A caregiver with pending background check<br><strong>When</strong>: System attempts to assign caregiver to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is blocked</li>
+<li>Can be assigned once results received</li>
+<li>Pending status displayed</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const caregiver = {
+  id: &#39;test-caregiver-6&#39;,
+  background_check_date: subDays(new Date(), 5),
+  background_check_status: &#39;PENDING&#39;,
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.canAssign).toBe(false);
+expect(result.issues).toContainEqual({
+  type: &#39;[STATE]_BACKGROUND_PENDING&#39;,
+  severity: &#39;BLOCKING&#39;,
+  message: &#39;Background check results pending&#39;,
+});
+</code></pre>
+<hr>
+<h3>1.2 Professional Licensure</h3>
+<h4>Test Case: LIC-001 - Active License</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Acceptance</p>
+<p><strong>Given</strong>: An RN with active, current license<br><strong>When</strong>: System assigns RN to skilled nursing visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is allowed</li>
+<li>License verified</li>
+<li>No blocking issues</li>
+</ul>
+<hr>
+<h4>Test Case: LIC-002 - Expired License</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: An RN with expired license<br><strong>When</strong>: System attempts to assign RN to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is blocked for all visits</li>
+<li>Error shows license expiration date</li>
+<li>Remediation: Renew license</li>
+</ul>
+<hr>
+<h4>Test Case: LIC-003 - Role Mismatch</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: An LPN assigned to RN-only task (IV therapy)<br><strong>When</strong>: System attempts to create visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is blocked</li>
+<li>Error: &quot;Task requires RN license, caregiver is LPN&quot;</li>
+<li>Suggests qualified alternatives</li>
+</ul>
+<hr>
+<h4>Test Case: LIC-004 - Out-of-State License Without Reciprocity</h4>
+<p><strong>Requirement</strong>: [Reference]<br><strong>Priority</strong>: High<br><strong>Type</strong>: Blocking Validation</p>
+<p><strong>Given</strong>: A caregiver with license from non-reciprocal state<br><strong>When</strong>: System attempts to assign to visit in [THIS STATE]<br><strong>Then</strong>: </p>
+<ul>
+<li>Assignment is blocked</li>
+<li>Error: &quot;License from [OTHER STATE] not valid in [THIS STATE]&quot;</li>
+<li>Remediation: Obtain [THIS STATE] license or reciprocity</li>
+</ul>
+<hr>
+<h3>1.3 Registry Checks</h3>
+<h4>Test Case: REG-001 - Clear on All Registries</h4>
+<p><strong>Given</strong>: Caregiver clear on all required registries<br><strong>Then</strong>: Assignment allowed</p>
+<h4>Test Case: REG-002 - Listed on Abuse Registry</h4>
+<p><strong>Given</strong>: Caregiver listed on abuse/neglect registry<br><strong>Then</strong>: Permanent block, cannot be overridden</p>
+<h4>Test Case: REG-003 - Expired Registry Check</h4>
+<p><strong>Given</strong>: Registry check older than required frequency<br><strong>Then</strong>: Block until re-verified</p>
+<h4>Test Case: REG-004 - Name Change Verification</h4>
+<p><strong>Given</strong>: Caregiver with recent name change<br><strong>Then</strong>: Require verification under both names</p>
+<hr>
+<h2>2. Client Authorization</h2>
+<h3>2.1 Service Authorization</h3>
+<h4>Test Case: AUTH-001 - Valid Authorization</h4>
+<p><strong>Given</strong>: Client with active authorization covering service<br><strong>When</strong>: Schedule visit within authorization dates and units<br><strong>Then</strong>: Visit creation allowed</p>
+<h4>Test Case: AUTH-002 - Expired Authorization</h4>
+<p><strong>Given</strong>: Client with expired authorization<br><strong>When</strong>: Attempt to schedule visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Visit creation blocked</li>
+<li>Error: &quot;Authorization expired on [DATE]&quot;</li>
+<li>Suggest contacting payor for renewal</li>
+</ul>
+<h4>Test Case: AUTH-003 - Exceeding Authorized Units</h4>
+<p><strong>Given</strong>: Client with 100 authorized hours, 95 already used<br><strong>When</strong>: Attempt to schedule 10-hour visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Visit creation blocked</li>
+<li>Error: &quot;Would exceed authorized units (5 hours remaining)&quot;</li>
+<li>Suggest requesting additional authorization</li>
+</ul>
+<h4>Test Case: AUTH-004 - Authorization Near Limit (Warning)</h4>
+<p><strong>Given</strong>: Client with authorization at 90% utilization<br><strong>When</strong>: View client dashboard<br><strong>Then</strong>: </p>
+<ul>
+<li>Warning displayed</li>
+<li>&quot;Authorization 90% consumed - request renewal&quot;</li>
+<li>Auto-notification to care coordinator</li>
+</ul>
+<h4>Test Case: AUTH-005 - Non-Authorized Service</h4>
+<p><strong>Given</strong>: Client authorized for personal care only<br><strong>When</strong>: Attempt to schedule skilled nursing visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Visit creation blocked</li>
+<li>Error: &quot;Skilled nursing not authorized&quot;</li>
+<li>List authorized services</li>
+</ul>
+<hr>
+<h3>2.2 Plan of Care</h3>
+<h4>Test Case: POC-001 - Current Plan of Care</h4>
+<p><strong>Given</strong>: Client with plan of care reviewed within required timeframe<br><strong>Then</strong>: Service delivery allowed</p>
+<h4>Test Case: POC-002 - Plan of Care Review Due</h4>
+<p><strong>Given</strong>: Client with plan of care due for review in 5 days<br><strong>Then</strong>: </p>
+<ul>
+<li>Warning displayed</li>
+<li>Service still allowed</li>
+<li>Alert sent to supervisor</li>
+</ul>
+<h4>Test Case: POC-003 - Plan of Care Overdue</h4>
+<p><strong>Given</strong>: Client with plan of care overdue for review<br><strong>Then</strong>: </p>
+<ul>
+<li>Service blocked</li>
+<li>Error: &quot;Plan of care review overdue by [X] days&quot;</li>
+<li>Must complete review before continuing service</li>
+</ul>
+<h4>Test Case: POC-004 - Expired Physician Orders</h4>
+<p><strong>Given</strong>: Client with physician orders expired<br><strong>Then</strong>: </p>
+<ul>
+<li>Service blocked</li>
+<li>Require new physician signature</li>
+<li>Cannot override</li>
+</ul>
+<hr>
+<h2>3. Visit Documentation</h2>
+<h3>3.1 Required Documentation</h3>
+<h4>Test Case: DOC-001 - Complete Documentation</h4>
+<p><strong>Given</strong>: Visit with all required fields completed<br><strong>Then</strong>: Visit can be marked complete</p>
+<h4>Test Case: DOC-002 - Missing Required Field</h4>
+<p><strong>Given</strong>: Visit missing required documentation field<br><strong>When</strong>: Attempt to mark visit complete<br><strong>Then</strong>: </p>
+<ul>
+<li>Completion blocked</li>
+<li>List missing required fields</li>
+<li>Highlight fields in UI</li>
+</ul>
+<h4>Test Case: DOC-003 - Late Documentation</h4>
+<p><strong>Given</strong>: Visit completed 48 hours ago without documentation<br><strong>When</strong>: Attempt to complete documentation now<br><strong>Then</strong>: </p>
+<ul>
+<li>Documentation allowed with supervisor approval</li>
+<li>Late documentation flag set</li>
+<li>Supervisor notification sent</li>
+<li>Reason required</li>
+</ul>
+<h4>Test Case: DOC-004 - Visit Notes Quality Check</h4>
+<p><strong>Given</strong>: Visit notes with blocked phrase &quot;Client fine&quot;<br><strong>When</strong>: Submit documentation<br><strong>Then</strong>: </p>
+<ul>
+<li>Warning displayed</li>
+<li>Suggest more specific description</li>
+<li>May require supervisor review</li>
+</ul>
+<hr>
+<h2>4. Electronic Visit Verification (EVV)</h2>
+<h3>4.1 Geofence Compliance</h3>
+<h4>Test Case: EVV-001 - Clock-In Inside Geofence</h4>
+<p><strong>Given</strong>: Caregiver at client&#39;s address (within geofence)<br><strong>When</strong>: Clock in to visit<br><strong>Then</strong>: </p>
+<ul>
+<li>Clock-in accepted</li>
+<li>Location verified</li>
+<li>GPS coordinates logged</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const clientLocation = { lat: 40.7128, lng: -74.0060 }; // NYC example
+const geofence = { radius: 100, tolerance: 50 }; // 150m total
+const clockInLocation = { lat: 40.7129, lng: -74.0061 }; // ~12m away
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.locationVerified).toBe(true);
+expect(result.distanceFromGeofence).toBeLessThan(150);
+</code></pre>
+<hr>
+<h4>Test Case: EVV-002 - Clock-In Outside Geofence</h4>
+<p><strong>Given</strong>: Caregiver 300m from client&#39;s address<br><strong>When</strong>: Attempt to clock in<br><strong>Then</strong>: </p>
+<ul>
+<li>Clock-in blocked</li>
+<li>Error: &quot;You are 300m from service location&quot;</li>
+<li>Show map with current position and geofence</li>
+<li>Allow supervisor override with reason</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const clientLocation = { lat: 40.7128, lng: -74.0060 };
+const geofence = { radius: 100, tolerance: 50 };
+const clockInLocation = { lat: 40.7155, lng: -74.0060 }; // ~300m north
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.locationVerified).toBe(false);
+expect(result.issues).toContainEqual({
+  type: &#39;GEOFENCE_VIOLATION&#39;,
+  severity: &#39;BLOCKING&#39;,
+  distance: expect.toBeGreaterThan(250),
+});
+</code></pre>
+<hr>
+<h4>Test Case: EVV-003 - Clock-In Within Tolerance</h4>
+<p><strong>Given</strong>: Caregiver 140m from client&#39;s address (within tolerance)<br><strong>When</strong>: Clock in<br><strong>Then</strong>: </p>
+<ul>
+<li>Clock-in accepted with warning</li>
+<li>&quot;You are near the edge of the geofence&quot;</li>
+<li>GPS accuracy checked</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const clockInLocation = { lat: 40.7141, lng: -74.0060 }; // ~145m north
+const gpsAccuracy = 20; // meters
+const effectiveTolerance = 150; // base 100 + tolerance 50
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.locationVerified).toBe(true);
+expect(result.issues).toContainEqual({
+  type: &#39;GEOFENCE_EDGE_WARNING&#39;,
+  severity: &#39;WARNING&#39;,
+});
+</code></pre>
+<hr>
+<h3>4.2 Grace Periods</h3>
+<h4>Test Case: EVV-004 - Clock-In Within Grace Period</h4>
+<p><strong>Given</strong>: Visit scheduled for 10:00 AM, grace period 10 minutes<br><strong>When</strong>: Clock in at 10:08 AM<br><strong>Then</strong>: </p>
+<ul>
+<li>Clock-in accepted</li>
+<li>No late flag</li>
+<li>Grace period noted in record</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const scheduledStart = new Date(&#39;2025-11-05T10:00:00&#39;);
+const clockInTime = new Date(&#39;2025-11-05T10:08:00&#39;);
+const gracePeriodMinutes = 10;
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.accepted).toBe(true);
+expect(result.withinGracePeriod).toBe(true);
+expect(result.lateFlag).toBe(false);
+</code></pre>
+<hr>
+<h4>Test Case: EVV-005 - Clock-In Outside Grace Period</h4>
+<p><strong>Given</strong>: Visit scheduled for 10:00 AM, grace period 10 minutes<br><strong>When</strong>: Clock in at 10:15 AM<br><strong>Then</strong>: </p>
+<ul>
+<li>Clock-in accepted with late flag</li>
+<li>Reason required</li>
+<li>Supervisor notification</li>
+<li>May affect billing</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const scheduledStart = new Date(&#39;2025-11-05T10:00:00&#39;);
+const clockInTime = new Date(&#39;2025-11-05T10:15:00&#39;);
+const gracePeriodMinutes = 10;
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.accepted).toBe(true);
+expect(result.withinGracePeriod).toBe(false);
+expect(result.lateFlag).toBe(true);
+expect(result.requiresExplanation).toBe(true);
+</code></pre>
+<hr>
+<h3>4.3 Manual Overrides</h3>
+<h4>Test Case: EVV-006 - Valid Override Scenario</h4>
+<p><strong>Given</strong>: GPS malfunction in rural area<br><strong>When</strong>: Supervisor approves manual override<br><strong>Then</strong>: </p>
+<ul>
+<li>Override accepted</li>
+<li>Reason logged</li>
+<li>Supervisor approval documented</li>
+<li>Audit trail complete</li>
+</ul>
+<p><strong>Test Data</strong>:</p>
+<pre><code class="language-typescript">const override = {
+  reason: &#39;GPS_MALFUNCTION&#39;,
+  explanation: &#39;Client in rural area, known GPS dead zone&#39;,
+  approvedBy: &#39;supervisor-123&#39;,
+  approvalDate: new Date(),
+  documentation: &#39;screenshot-of-gps-error.png&#39;,
+};
+</code></pre>
+<p><strong>Assertion</strong>:</p>
+<pre><code class="language-typescript">expect(result.overrideApproved).toBe(true);
+expect(result.auditTrail).toContain(&#39;supervisor-123&#39;);
+expect(result.submittedToAggregator).toBe(true);
+</code></pre>
+<hr>
+<h4>Test Case: EVV-007 - Invalid Override Attempt</h4>
+<p><strong>Given</strong>: Repeated override requests for same caregiver<br><strong>When</strong>: Supervisor attempts to approve 10th override this month<br><strong>Then</strong>: </p>
+<ul>
+<li>Warning displayed</li>
+<li>&quot;Excessive overrides - possible fraud pattern&quot;</li>
+<li>Compliance review required</li>
+<li>May still approve with justification</li>
+</ul>
+<hr>
+<h3>4.4 Aggregator Submission</h3>
+<h4>Test Case: EVV-008 - Successful Aggregator Submission</h4>
+<p><strong>Given</strong>: Complete EVV record with all six data elements<br><strong>When</strong>: Submit to state aggregator<br><strong>Then</strong>: </p>
+<ul>
+<li>Submission accepted</li>
+<li>Confirmation ID received</li>
+<li>Status updated to SUBMITTED</li>
+<li>Timestamp logged</li>
+</ul>
+<hr>
+<h4>Test Case: EVV-009 - Aggregator Submission Failure</h4>
+<p><strong>Given</strong>: Network error during submission<br><strong>When</strong>: Attempt to submit to aggregator<br><strong>Then</strong>: </p>
+<ul>
+<li>Retry with exponential backoff</li>
+<li>Queue for batch submission</li>
+<li>Alert if fails after retries</li>
+<li>Do not block caregiver from other visits</li>
+</ul>
+<hr>
+<h4>Test Case: EVV-010 - Aggregator Rejection</h4>
+<p><strong>Given</strong>: EVV record missing required field for aggregator<br><strong>When</strong>: Submit to aggregator<br><strong>Then</strong>: </p>
+<ul>
+<li>Submission rejected</li>
+<li>Error message from aggregator logged</li>
+<li>Flag visit for correction</li>
+<li>Notify supervisor</li>
+</ul>
+<hr>
+<h2>5. Data Retention</h2>
+<h4>Test Case: RET-001 - Data Within Retention Period</h4>
+<p><strong>Given</strong>: Visit record from 2 years ago (retention: 6 years)<br><strong>Then</strong>: Data accessible, cannot be permanently deleted</p>
+<h4>Test Case: RET-002 - Data Beyond Retention Period</h4>
+<p><strong>Given</strong>: Visit record from 8 years ago (retention: 6 years)<br><strong>Then</strong>: Eligible for permanent deletion, archive first</p>
+<h4>Test Case: RET-003 - Soft Delete</h4>
+<p><strong>Given</strong>: Request to delete recent visit record<br><strong>Then</strong>: Soft delete only, mark as deleted but retain data</p>
+<hr>
+<h2>6. Privacy &amp; Security</h2>
+<h4>Test Case: SEC-001 - Role-Based Access</h4>
+<p><strong>Given</strong>: Field staff trying to access billing data<br><strong>Then</strong>: Access denied, insufficient permissions</p>
+<h4>Test Case: SEC-002 - Audit Trail</h4>
+<p><strong>Given</strong>: Supervisor accessing client PHI<br><strong>Then</strong>: Access logged with timestamp, user, and reason</p>
+<h4>Test Case: SEC-003 - Field-Level Permissions</h4>
+<p><strong>Given</strong>: User viewing client record<br><strong>Then</strong>: SSN/Medicaid ID masked based on role permissions</p>
+<hr>
+<h2>Edge Cases</h2>
+<h3>Edge Case 1: Multiple State Operations</h3>
+<p><strong>Scenario</strong>: Agency operates in [STATE] and neighboring state<br><strong>Test</strong>: Ensure correct state rules applied based on service location<br><strong>Expected</strong>: [STATE] rules for [STATE] visits, other state rules for other visits</p>
+<h3>Edge Case 2: State Border Proximity</h3>
+<p><strong>Scenario</strong>: Client address near state border, GPS places visit in wrong state<br><strong>Test</strong>: Geofence validation against state boundaries<br><strong>Expected</strong>: Warning if coordinates outside state, require verification</p>
+<h3>Edge Case 3: Daylight Saving Time</h3>
+<p><strong>Scenario</strong>: Clock-in during DST transition<br><strong>Test</strong>: Ensure timestamps handled correctly<br><strong>Expected</strong>: UTC timestamps, local display adjusted, no duplicate/missing hours</p>
+<h3>Edge Case 4: Leap Year</h3>
+<p><strong>Scenario</strong>: Credential expiration calculation on Feb 29<br><strong>Test</strong>: Ensure expiration dates calculated correctly<br><strong>Expected</strong>: Correct expiration even in leap years</p>
+<h3>Edge Case 5: Name Changes</h3>
+<p><strong>Scenario</strong>: Caregiver name change due to marriage<br><strong>Test</strong>: Background check verification under both names<br><strong>Expected</strong>: Re-verification required, both names checked</p>
+<hr>
+<h2>Performance Tests</h2>
+<h3>Performance Test 1: Bulk Validation</h3>
+<p><strong>Scenario</strong>: Validate 100 caregivers for assignments simultaneously<br><strong>Expected</strong>: Complete in &lt;1 second<br><strong>Acceptance</strong>: Each validation &lt;10ms</p>
+<h3>Performance Test 2: Aggregator Batch Submission</h3>
+<p><strong>Scenario</strong>: Submit 1000 EVV records to aggregator<br><strong>Expected</strong>: Complete in &lt;30 seconds<br><strong>Acceptance</strong>: No timeouts, all records queued</p>
+<h3>Performance Test 3: Real-Time Clock-In</h3>
+<p><strong>Scenario</strong>: 50 caregivers clocking in simultaneously at 9:00 AM<br><strong>Expected</strong>: All clock-ins processed in &lt;5 seconds<br><strong>Acceptance</strong>: No failed clock-ins due to load</p>
+<hr>
+<h2>Integration Tests</h2>
+<h3>Integration Test 1: End-to-End Visit Workflow</h3>
+<p><strong>Scenario</strong>: Create visit → assign caregiver → clock in → provide service → clock out → document → submit EVV<br><strong>Expected</strong>: All compliance checks pass, EVV submitted successfully</p>
+<h3>Integration Test 2: Multi-State Agency</h3>
+<p><strong>Scenario</strong>: Agency with offices in 3 states, validate correct rules per state<br><strong>Expected</strong>: State-specific validators applied correctly</p>
+<hr>
+<h2>Regression Tests</h2>
+<p>These tests must pass after ANY code change:</p>
+<ul>
+<li><input disabled="" type="checkbox"> All background check scenarios</li>
+<li><input disabled="" type="checkbox"> All licensure scenarios</li>
+<li><input disabled="" type="checkbox"> All authorization scenarios</li>
+<li><input disabled="" type="checkbox"> All geofence scenarios</li>
+<li><input disabled="" type="checkbox"> All grace period scenarios</li>
+<li><input disabled="" type="checkbox"> All manual override scenarios</li>
+<li><input disabled="" type="checkbox"> All aggregator submission scenarios</li>
+</ul>
+<hr>
+<h2>Test Coverage Requirements</h2>
+<ul>
+<li><strong>Critical Paths</strong>: 100% coverage required</li>
+<li><strong>Blocking Validations</strong>: 100% coverage required</li>
+<li><strong>Edge Cases</strong>: 80% coverage minimum</li>
+<li><strong>Performance Tests</strong>: Must run in CI/CD</li>
+<li><strong>Integration Tests</strong>: Must run before deployment</li>
+</ul>
+<hr>
+<h2>Test Data Management</h2>
+<h3>Test Caregivers</h3>
+<ul>
+<li><code>test-caregiver-valid</code>: All credentials current</li>
+<li><code>test-caregiver-expired-bg</code>: Expired background check</li>
+<li><code>test-caregiver-no-license</code>: Missing licensure</li>
+<li><code>test-caregiver-abuse-registry</code>: Listed on abuse registry</li>
+</ul>
+<h3>Test Clients</h3>
+<ul>
+<li><code>test-client-valid-auth</code>: Current authorization</li>
+<li><code>test-client-expired-auth</code>: Expired authorization</li>
+<li><code>test-client-near-limit</code>: Authorization 95% consumed</li>
+<li><code>test-client-no-poc</code>: Missing plan of care</li>
+</ul>
+<h3>Test Visits</h3>
+<ul>
+<li><code>test-visit-standard</code>: Standard personal care visit</li>
+<li><code>test-visit-skilled</code>: Skilled nursing visit</li>
+<li><code>test-visit-rural</code>: Rural location (GPS challenges)</li>
+<li><code>test-visit-urban</code>: Urban location (multi-story building)</li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

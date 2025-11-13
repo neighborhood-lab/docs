@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Admin Dashboard</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Admin Dashboard</h1>
+<p>Comprehensive administrative interface for Care Commons, providing real-time operations monitoring, multi-state EVV configuration, database management, and compliance reporting.</p>
+<h2>Features</h2>
+<h3>1. Operations Center</h3>
+<p>Real-time monitoring and exception management for ongoing care operations.</p>
+<p><strong>Components:</strong></p>
+<ul>
+<li><strong>Active Visits with Live GPS</strong>: Monitor all ongoing visits with GPS status, geofence compliance, and duration tracking</li>
+<li><strong>EVV Exceptions Dashboard</strong>: Instant visibility into violations with severity levels (critical/error/warning/info)</li>
+<li><strong>Pending VMURs (Texas)</strong>: Texas Visit Maintenance Unlock Request approval queue with deadlines</li>
+</ul>
+<p><strong>Use Cases:</strong></p>
+<ul>
+<li>Monitor field staff in real-time</li>
+<li>Quickly identify and resolve GPS/geofence issues</li>
+<li>Approve/deny Texas VMUR requests before deadlines</li>
+<li>Track visit durations and compliance status</li>
+</ul>
+<h3>2. State Configuration Panel</h3>
+<p>Multi-state EVV compliance settings for all 50 states (currently supports TX, FL, OH, PA, GA, NC, AZ).</p>
+<p><strong>Configurable Settings:</strong></p>
+<ul>
+<li><strong>Geofence Tolerance</strong>: 50-300 meters (state-specific requirements)</li>
+<li><strong>Grace Periods</strong>: Clock-in/out grace periods (5-30 minutes)</li>
+<li><strong>GPS Accuracy Thresholds</strong>: Minimum GPS accuracy requirements</li>
+<li><strong>Aggregator Selection</strong>: HHAeXchange, Sandata, Netsmart Tellus, iConnect</li>
+<li><strong>Required Documentation</strong>: EVV 6 elements, GPS coordinates, task verification, signatures, photos</li>
+<li><strong>Enable/Disable States</strong>: Toggle state operations on/off</li>
+</ul>
+<p><strong>State-Specific Examples:</strong></p>
+<ul>
+<li><strong>Texas</strong>: 100m geofence, 10min grace period, mandatory HHAeXchange</li>
+<li><strong>Florida</strong>: 150m geofence, 15min grace period, multi-aggregator support</li>
+</ul>
+<h3>3. Database Management</h3>
+<p>Direct access to all system tables for data export and viewing.</p>
+<p><strong>Available Tables:</strong></p>
+<ul>
+<li><strong>Core</strong>: clients, caregivers, organizations, users</li>
+<li><strong>EVV</strong>: visits, evv_records, evv_revisions, aggregator_submissions, vmur_requests</li>
+<li><strong>Billing</strong>: invoices, payments</li>
+<li><strong>Scheduling</strong>: schedules, open_shifts</li>
+</ul>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Category filtering (Core, EVV, Billing, Scheduling)</li>
+<li>Search functionality</li>
+<li>Row count display</li>
+<li>Export to CSV</li>
+<li>View table data</li>
+</ul>
+<h3>4. Compliance Center</h3>
+<p>Audit trails, HIPAA access logs, and regulatory reporting.</p>
+<p><strong>Audit Trail:</strong></p>
+<ul>
+<li>User actions (CREATE, UPDATE, DELETE, APPROVE)</li>
+<li>Timestamps and IP addresses</li>
+<li>Success/failure status</li>
+<li>Resource tracking</li>
+</ul>
+<p><strong>HIPAA PHI Access Logs:</strong></p>
+<ul>
+<li>Who accessed what PHI</li>
+<li>When and for what purpose</li>
+<li>Client information</li>
+<li>Audit-ready export</li>
+</ul>
+<p><strong>Compliance Reports:</strong></p>
+<ul>
+<li>Texas EVV Aggregator Submissions (daily)</li>
+<li>Florida MCO Compliance Report (weekly)</li>
+<li>HIPAA Access Audit Report (monthly)</li>
+<li>State Regulatory Filings (quarterly)</li>
+</ul>
+<h2>Access Control</h2>
+<p><strong>Required Permission:</strong> <code>admin:access</code></p>
+<p><strong>Granted to Roles:</strong></p>
+<ul>
+<li><code>SUPER_ADMIN</code> - Full access to all admin features</li>
+<li><code>ORG_ADMIN</code> - Full access within their organization</li>
+</ul>
+<p><strong>Fine-Grained Permissions:</strong></p>
+<ul>
+<li><code>admin:state-config</code> - Edit state configurations</li>
+<li><code>admin:data-access</code> - Access database tables</li>
+<li><code>admin:compliance</code> - View compliance reports and audit logs</li>
+</ul>
+<h2>Usage</h2>
+<h3>Accessing the Dashboard</h3>
+<p>Navigate to <code>/admin</code> in the web application. The admin link appears in the sidebar for users with appropriate permissions.</p>
+<h3>Monitoring Operations</h3>
+<pre><code class="language-typescript">// View active visits
+// Navigate to Operations tab
+// Click &quot;Track&quot; to see GPS location
+// Click &quot;Resolve&quot; on exceptions to take action
+</code></pre>
+<h3>Configuring States</h3>
+<pre><code class="language-typescript">// Navigate to State Configuration tab
+// Select a state from the sidebar
+// Modify settings (geofence, grace period, aggregator, etc.)
+// Click &quot;Save Changes&quot; to persist
+</code></pre>
+<h3>Exporting Data</h3>
+<pre><code class="language-typescript">// Navigate to Data Management tab
+// Filter by category or search
+// Click &quot;View&quot; to see table data
+// Click export icon to download CSV
+</code></pre>
+<h3>Reviewing Compliance</h3>
+<pre><code class="language-typescript">// Navigate to Compliance Center tab
+// Switch between Audit Trail, HIPAA Logs, and Reports
+// Click &quot;Export&quot; to download logs for external auditing
+// Click &quot;View&quot; or &quot;Download&quot; on reports
+</code></pre>
+<h2>API Integration (Ready for Implementation)</h2>
+<p>The dashboard is built with mock data and fully typed interfaces. To connect to real APIs:</p>
+<h3>1. Active Visits API</h3>
+<pre><code class="language-typescript">// GET /api/admin/active-visits
+interface ActiveVisit {
+  id: string;
+  caregiverName: string;
+  clientName: string;
+  clockInTime: Date;
+  gpsStatus: &#39;good&#39; | &#39;weak&#39; | &#39;none&#39;;
+  geofenceStatus: &#39;within&#39; | &#39;outside&#39;;
+  state: StateCode;
+}
+</code></pre>
+<h3>2. State Configuration API</h3>
+<pre><code class="language-typescript">// GET /api/admin/state-config/:state
+// PUT /api/admin/state-config/:state
+interface StateConfig {
+  state: StateCode;
+  enabled: boolean;
+  geofenceTolerance: number;
+  gracePeriodMinutes: number;
+  aggregator: string;
+  requiredDocuments: string[];
+  gpsAccuracyThreshold: number;
+}
+</code></pre>
+<h3>3. Database Tables API</h3>
+<pre><code class="language-typescript">// GET /api/admin/tables/:tableName?page=1&amp;limit=50
+interface TableData {
+  rows: Record&lt;string, unknown&gt;[];
+  total: number;
+  page: number;
+  limit: number;
+}
+</code></pre>
+<h3>4. Audit Logs API</h3>
+<pre><code class="language-typescript">// GET /api/admin/audit-logs?startDate=...&amp;endDate=...
+// GET /api/admin/hipaa-logs?startDate=...&amp;endDate=...
+interface AuditLogEntry {
+  id: string;
+  timestamp: Date;
+  userId: string;
+  action: string;
+  resource: string;
+  ipAddress: string;
+  status: &#39;success&#39; | &#39;failure&#39;;
+}
+</code></pre>
+<h3>5. Compliance Reports API</h3>
+<pre><code class="language-typescript">// GET /api/admin/reports
+// GET /api/admin/reports/:id/download
+interface ComplianceReport {
+  id: string;
+  name: string;
+  category: &#39;evv&#39; | &#39;hipaa&#39; | &#39;state&#39; | &#39;billing&#39;;
+  lastGenerated: Date;
+  frequency: &#39;daily&#39; | &#39;weekly&#39; | &#39;monthly&#39;;
+}
+</code></pre>
+<h2>Components</h2>
+<h3>AdminDashboard.tsx</h3>
+<p>Main dashboard with tab navigation and real-time stats.</p>
+<h3>OperationsCenter.tsx</h3>
+<p>Real-time monitoring of active visits, exceptions, and VMURs.</p>
+<h3>StateConfigPanel.tsx</h3>
+<p>Multi-state configuration editor with save/reset functionality.</p>
+<h3>DataGridPanel.tsx</h3>
+<p>Database table browser with search, filter, and export.</p>
+<h3>ComplianceCenter.tsx</h3>
+<p>Audit trails, HIPAA logs, and compliance reports.</p>
+<h2>Types</h2>
+<p>All types are defined in <code>types/admin.types.ts</code>:</p>
+<ul>
+<li><code>StateCode</code> - Supported state codes</li>
+<li><code>StateConfig</code> - State configuration interface</li>
+<li><code>ActiveVisit</code> - Real-time visit data</li>
+<li><code>EVVException</code> - Exception tracking</li>
+<li><code>VMURRequest</code> - Texas VMUR workflow</li>
+<li><code>AuditLogEntry</code> - System audit trail</li>
+<li><code>HIPAAAccessLog</code> - PHI access tracking</li>
+<li><code>ComplianceReport</code> - Regulatory reports</li>
+<li><code>DatabaseTable</code> - Table metadata</li>
+</ul>
+<h2>State-Specific Compliance</h2>
+<h3>Texas (TX)</h3>
+<ul>
+<li><strong>Aggregator</strong>: HHAeXchange (mandatory)</li>
+<li><strong>Geofence</strong>: 100m base + GPS accuracy tolerance</li>
+<li><strong>Grace Period</strong>: 10 minutes clock-in/out</li>
+<li><strong>GPS Accuracy</strong>: 100m minimum</li>
+<li><strong>Special Requirements</strong>: VMUR for corrections, Employee Misconduct Registry checks</li>
+</ul>
+<h3>Florida (FL)</h3>
+<ul>
+<li><strong>Aggregator</strong>: Multi-aggregator (HHAeXchange, Netsmart Tellus, others)</li>
+<li><strong>Geofence</strong>: 150m base + GPS accuracy tolerance</li>
+<li><strong>Grace Period</strong>: 15 minutes clock-in/out</li>
+<li><strong>GPS Accuracy</strong>: 150m minimum</li>
+<li><strong>Special Requirements</strong>: Level 2 background screening, RN supervision visits (60 days)</li>
+</ul>
+<h3>Other States</h3>
+<p>Ohio, Pennsylvania, Georgia, North Carolina, Arizona configurations can be enabled and customized as needed.</p>
+<h2>Security Considerations</h2>
+<ol>
+<li><strong>Permission Checks</strong>: All admin routes require <code>admin:access</code> permission</li>
+<li><strong>Audit Logging</strong>: All admin actions are logged with user, timestamp, and IP</li>
+<li><strong>Data Export</strong>: Exports should be logged and monitored for compliance</li>
+<li><strong>State Config Changes</strong>: Changes to state configurations should trigger notifications</li>
+<li><strong>PHI Access</strong>: HIPAA logs track all access to protected health information</li>
+</ol>
+<h2>Future Enhancements</h2>
+<ol>
+<li><strong>WebSocket Integration</strong>: Real-time updates for active visits without polling</li>
+<li><strong>Advanced Filtering</strong>: Date ranges, multiple filters, saved filter presets</li>
+<li><strong>Report Scheduling</strong>: Automated report generation and email delivery</li>
+<li><strong>Bulk Operations</strong>: Bulk approve/deny VMURs, bulk export tables</li>
+<li><strong>Dashboard Customization</strong>: User-configurable widgets and layouts</li>
+<li><strong>Mobile Support</strong>: Responsive design for tablet/mobile admin access</li>
+<li><strong>Additional States</strong>: Expand to all 50 states with specific compliance rules</li>
+<li><strong>Integration Testing</strong>: Comprehensive test coverage for all components</li>
+</ol>
+<h2>Troubleshooting</h2>
+<h3>Admin Link Not Visible</h3>
+<ul>
+<li>Verify user has <code>admin:access</code> permission</li>
+<li>Check user role is <code>SUPER_ADMIN</code> or <code>ORG_ADMIN</code></li>
+<li>Refresh browser to reload permissions</li>
+</ul>
+<h3>State Configuration Not Saving</h3>
+<ul>
+<li>Check for unsaved changes warning</li>
+<li>Verify user has <code>admin:state-config</code> permission</li>
+<li>Check browser console for API errors</li>
+</ul>
+<h3>Data Export Not Working</h3>
+<ul>
+<li>Verify user has <code>admin:data-access</code> permission</li>
+<li>Check browser allows file downloads</li>
+<li>Verify table has data to export</li>
+</ul>
+<h3>Compliance Reports Empty</h3>
+<ul>
+<li>Check date range filters</li>
+<li>Verify audit logging is enabled</li>
+<li>Check API endpoints are connected</li>
+</ul>
+<h2>Contributing</h2>
+<p>When adding new features to the admin dashboard:</p>
+<ol>
+<li><strong>Maintain Permission Checks</strong>: All new features should have appropriate permission requirements</li>
+<li><strong>Add Type Definitions</strong>: Update <code>types/admin.types.ts</code> for new data structures</li>
+<li><strong>Follow Naming Conventions</strong>: Use consistent naming (e.g., <code>StateConfig</code>, <code>VMURRequest</code>)</li>
+<li><strong>Document API Contracts</strong>: Add API documentation for new endpoints</li>
+<li><strong>Test State-Specific Logic</strong>: Verify compliance rules for TX, FL, and other states</li>
+<li><strong>Update README</strong>: Document new features and usage instructions</li>
+</ol>
+<h2>License</h2>
+<p>Copyright © 2025 Neighborhood Lab<br>Licensed under the terms of the Care Commons project.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

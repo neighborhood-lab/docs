@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Load Testing Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Load Testing Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Load Testing Guide</h1>
+<p><strong>Version</strong>: 1.0
+<strong>Last Updated</strong>: 2025-11-08
+<strong>Owner</strong>: Engineering Team</p>
+<hr>
+<h2>Overview</h2>
+<p>This guide provides procedures for load testing the Care Commons platform to ensure it can handle expected production traffic and identify performance bottlenecks.</p>
+<hr>
+<h2>Load Testing Strategy</h2>
+<h3>Performance Goals</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Acceptable</th>
+<th>Critical</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Response Time (p50)</td>
+<td>&lt; 100ms</td>
+<td>&lt; 200ms</td>
+<td>&gt; 500ms</td>
+</tr>
+<tr>
+<td>Response Time (p95)</td>
+<td>&lt; 300ms</td>
+<td>&lt; 500ms</td>
+<td>&gt; 1000ms</td>
+</tr>
+<tr>
+<td>Response Time (p99)</td>
+<td>&lt; 500ms</td>
+<td>&lt; 1000ms</td>
+<td>&gt; 2000ms</td>
+</tr>
+<tr>
+<td>Throughput</td>
+<td>&gt; 100 req/s</td>
+<td>&gt; 50 req/s</td>
+<td>&lt; 20 req/s</td>
+</tr>
+<tr>
+<td>Error Rate</td>
+<td>&lt; 0.1%</td>
+<td>&lt; 1%</td>
+<td>&gt; 5%</td>
+</tr>
+<tr>
+<td>Database Query Time</td>
+<td>&lt; 50ms</td>
+<td>&lt; 100ms</td>
+<td>&gt; 200ms</td>
+</tr>
+</tbody></table>
+<h3>Traffic Estimates</h3>
+<p><strong>Expected Production Load</strong> (per organization):</p>
+<ul>
+<li>Daily active users: 50-200</li>
+<li>Concurrent users (peak): 20-50</li>
+<li>API requests/minute: 100-500</li>
+<li>Visit clock-ins/day: 100-500</li>
+<li>Mobile sync operations/hour: 50-200</li>
+</ul>
+<p><strong>Load Test Scenarios</strong>:</p>
+<ol>
+<li><strong>Normal Load</strong>: Average traffic (100 req/min)</li>
+<li><strong>Peak Load</strong>: 2x average traffic (200 req/min)</li>
+<li><strong>Stress Test</strong>: 5x average traffic (500 req/min)</li>
+<li><strong>Spike Test</strong>: Sudden 10x traffic surge</li>
+</ol>
+<hr>
+<h2>Load Testing Tools</h2>
+<h3>Recommended: Artillery</h3>
+<p><strong>Installation</strong>:</p>
+<pre><code class="language-bash">npm install -g artillery@latest
+</code></pre>
+<p><strong>Configuration</strong> (<code>artillery.yml</code>):</p>
+<pre><code class="language-yaml">config:
+  target: &#39;https://your-domain.com&#39;
+  phases:
+    # Warm-up phase
+    - duration: 60
+      arrivalRate: 5
+      name: &quot;Warm up&quot;
+    # Ramp up to normal load
+    - duration: 300
+      arrivalRate: 5
+      rampTo: 20
+      name: &quot;Ramp up to normal load&quot;
+    # Sustained normal load
+    - duration: 600
+      arrivalRate: 20
+      name: &quot;Sustained load&quot;
+    # Spike test
+    - duration: 60
+      arrivalRate: 100
+      name: &quot;Spike test&quot;
+  processor: &quot;./load-test-processor.js&quot;
+  plugins:
+    metrics-by-endpoint:
+      # Group metrics by endpoint
+      stripQueryString: true
+
+scenarios:
+  # Scenario 1: User Authentication
+  - name: &quot;User Login Flow&quot;
+    weight: 20
+    flow:
+      - post:
+          url: &quot;/api/auth/login&quot;
+          json:
+            email: &quot;{{ $randomEmail }}&quot;
+            password: &quot;test-password&quot;
+          capture:
+            - json: &quot;$.token&quot;
+              as: &quot;authToken&quot;
+
+  # Scenario 2: API Health Check
+  - name: &quot;Health Check&quot;
+    weight: 10
+    flow:
+      - get:
+          url: &quot;/health&quot;
+          expect:
+            - statusCode: 200
+
+  # Scenario 3: List Organizations
+  - name: &quot;List Organizations&quot;
+    weight: 15
+    beforeRequest: &quot;setAuthToken&quot;
+    flow:
+      - get:
+          url: &quot;/api/organizations&quot;
+          headers:
+            Authorization: &quot;Bearer {{ authToken }}&quot;
+
+  # Scenario 4: List Clients
+  - name: &quot;List Clients&quot;
+    weight: 20
+    beforeRequest: &quot;setAuthToken&quot;
+    flow:
+      - get:
+          url: &quot;/api/clients&quot;
+          headers:
+            Authorization: &quot;Bearer {{ authToken }}&quot;
+
+  # Scenario 5: Create Visit
+  - name: &quot;Create Visit&quot;
+    weight: 15
+    beforeRequest: &quot;setAuthToken&quot;
+    flow:
+      - post:
+          url: &quot;/api/visits&quot;
+          headers:
+            Authorization: &quot;Bearer {{ authToken }}&quot;
+          json:
+            clientId: &quot;{{ $randomClientId }}&quot;
+            caregiverId: &quot;{{ $randomCaregiverId }}&quot;
+            scheduledStart: &quot;{{ $timestamp }}&quot;
+            scheduledEnd: &quot;{{ $timestampPlusHour }}&quot;
+            serviceType: &quot;personal_care&quot;
+
+  # Scenario 6: Mobile Sync
+  - name: &quot;Mobile Sync&quot;
+    weight: 20
+    beforeRequest: &quot;setAuthToken&quot;
+    flow:
+      - post:
+          url: &quot;/api/sync/pull&quot;
+          headers:
+            Authorization: &quot;Bearer {{ authToken }}&quot;
+          json:
+            lastPulledAt: null
+</code></pre>
+<p><strong>Processor File</strong> (<code>load-test-processor.js</code>):</p>
+<pre><code class="language-javascript">module.exports = {
+  setAuthToken: setAuthToken,
+  randomEmail: randomEmail,
+  randomClientId: randomClientId,
+  randomCaregiverId: randomCaregiverId,
+};
+
+// Store auth tokens for reuse
+const authTokens = [];
+
+function setAuthToken(requestParams, context, ee, next) {
+  // Reuse existing token if available
+  if (authTokens.length &gt; 0) {
+    const token = authTokens[Math.floor(Math.random() * authTokens.length)];
+    context.vars.authToken = token;
+  }
+  return next();
+}
+
+function randomEmail(context, events, done) {
+  context.vars.randomEmail = `test-${Date.now()}-${Math.random()}@example.com`;
+  return done();
+}
+
+function randomClientId(context, events, done) {
+  // Use pre-seeded client IDs for testing
+  const clientIds = [
+    &#39;client-id-1&#39;,
+    &#39;client-id-2&#39;,
+    &#39;client-id-3&#39;,
+  ];
+  context.vars.randomClientId = clientIds[Math.floor(Math.random() * clientIds.length)];
+  return done();
+}
+
+function randomCaregiverId(context, events, done) {
+  const caregiverIds = [
+    &#39;caregiver-id-1&#39;,
+    &#39;caregiver-id-2&#39;,
+    &#39;caregiver-id-3&#39;,
+  ];
+  context.vars.randomCaregiverId = caregiverIds[Math.floor(Math.random() * caregiverIds.length)];
+  return done();
+}
+</code></pre>
+<p><strong>Run Load Test</strong>:</p>
+<pre><code class="language-bash"># Run basic load test
+artillery run artillery.yml
+
+# Run with custom target
+artillery run --target https://staging.your-domain.com artillery.yml
+
+# Run and save report
+artillery run artillery.yml --output report.json
+
+# Generate HTML report
+artillery report report.json --output report.html
+</code></pre>
+<h3>Alternative: k6</h3>
+<p><strong>Installation</strong>:</p>
+<pre><code class="language-bash"># macOS
+brew install k6
+
+# Linux
+sudo gpg -k
+sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+echo &quot;deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main&quot; | sudo tee /etc/apt/sources.list.d/k6.list
+sudo apt-get update
+sudo apt-get install k6
+</code></pre>
+<p><strong>Test Script</strong> (<code>load-test.js</code>):</p>
+<pre><code class="language-javascript">import http from &#39;k6/http&#39;;
+import { check, sleep } from &#39;k6&#39;;
+import { Rate } from &#39;k6/metrics&#39;;
+
+// Custom metrics
+const errorRate = new Rate(&#39;errors&#39;);
+
+export const options = {
+  stages: [
+    { duration: &#39;1m&#39;, target: 10 },   // Ramp up to 10 users
+    { duration: &#39;5m&#39;, target: 50 },   // Ramp up to 50 users
+    { duration: &#39;10m&#39;, target: 50 },  // Stay at 50 users
+    { duration: &#39;1m&#39;, target: 100 },  // Spike to 100 users
+    { duration: &#39;5m&#39;, target: 0 },    // Ramp down
+  ],
+  thresholds: {
+    http_req_duration: [&#39;p(95)&lt;500&#39;, &#39;p(99)&lt;1000&#39;],
+    http_req_failed: [&#39;rate&lt;0.01&#39;],
+    errors: [&#39;rate&lt;0.01&#39;],
+  },
+};
+
+const BASE_URL = __ENV.BASE_URL || &#39;https://your-domain.com&#39;;
+
+export default function () {
+  // Test 1: Health check
+  let res = http.get(`${BASE_URL}/health`);
+  check(res, {
+    &#39;health check status is 200&#39;: (r) =&gt; r.status === 200,
+    &#39;health check has status field&#39;: (r) =&gt; r.json(&#39;status&#39;) === &#39;healthy&#39;,
+  }) || errorRate.add(1);
+
+  sleep(1);
+
+  // Test 2: Login
+  const loginPayload = JSON.stringify({
+    email: `test-${__VU}@example.com`,
+    password: &#39;test-password&#39;,
+  });
+
+  res = http.post(`${BASE_URL}/api/auth/login`, loginPayload, {
+    headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+  });
+
+  const authToken = res.json(&#39;token&#39;);
+  check(res, {
+    &#39;login successful&#39;: (r) =&gt; r.status === 200,
+    &#39;token received&#39;: (r) =&gt; authToken !== undefined,
+  }) || errorRate.add(1);
+
+  if (!authToken) return;
+
+  sleep(1);
+
+  // Test 3: Fetch data
+  const authHeaders = {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  };
+
+  res = http.get(`${BASE_URL}/api/clients`, authHeaders);
+  check(res, {
+    &#39;fetch clients successful&#39;: (r) =&gt; r.status === 200,
+  }) || errorRate.add(1);
+
+  sleep(2);
+}
+</code></pre>
+<p><strong>Run k6 Test</strong>:</p>
+<pre><code class="language-bash"># Run load test
+k6 run load-test.js
+
+# Run with custom base URL
+k6 run -e BASE_URL=https://staging.your-domain.com load-test.js
+
+# Run with output to InfluxDB (if configured)
+k6 run --out influxdb=http://localhost:8086/k6 load-test.js
+</code></pre>
+<hr>
+<h2>Pre-Production Load Testing Procedure</h2>
+<h3>Step 1: Prepare Test Environment</h3>
+<p><strong>Use Staging/Preview Environment</strong>:</p>
+<pre><code>❌ DO NOT run load tests against production
+✅ Use Vercel preview deployment or staging environment
+</code></pre>
+<ol>
+<li><p><strong>Deploy to Preview</strong>:</p>
+<pre><code class="language-bash"># Create preview deployment
+vercel deploy --preview
+
+# Note the preview URL
+# Example: https://care-commons-preview-abc123.vercel.app
+</code></pre>
+</li>
+<li><p><strong>Seed Test Data</strong>:</p>
+<pre><code class="language-bash"># Connect to preview database
+export DATABASE_URL=&quot;postgresql://preview-db-url&quot;
+
+# Run migrations
+npm run db:migrate
+
+# Seed with demo data
+npm run db:seed:demo
+
+# Create additional test users/data for load testing
+node scripts/create-load-test-data.js
+</code></pre>
+</li>
+<li><p><strong>Configure Monitoring</strong>:</p>
+<ul>
+<li>Enable Sentry for preview environment</li>
+<li>Access Vercel analytics for preview deployment</li>
+<li>Monitor Neon database metrics</li>
+</ul>
+</li>
+</ol>
+<h3>Step 2: Run Baseline Test</h3>
+<p><strong>Purpose</strong>: Establish performance baseline</p>
+<pre><code class="language-bash"># Run light load to establish baseline
+artillery quick --count 10 --num 100 https://preview-url.vercel.app/health
+
+# Expected output:
+# Scenarios launched: 10
+# Scenarios completed: 10
+# Requests completed: 100
+# Mean response time: ~150ms
+# p95 response time: ~300ms
+# p99 response time: ~500ms
+</code></pre>
+<h3>Step 3: Run Progressive Load Tests</h3>
+<p><strong>Test 1: Normal Load</strong> (100 requests/minute):</p>
+<pre><code class="language-bash">artillery run \
+  --target https://preview-url.vercel.app \
+  --config &#39;{&quot;phases&quot;:[{&quot;duration&quot;:300,&quot;arrivalRate&quot;:1.67}]}&#39; \
+  artillery.yml
+</code></pre>
+<p><strong>Test 2: Peak Load</strong> (200 requests/minute):</p>
+<pre><code class="language-bash">artillery run \
+  --target https://preview-url.vercel.app \
+  --config &#39;{&quot;phases&quot;:[{&quot;duration&quot;:300,&quot;arrivalRate&quot;:3.33}]}&#39; \
+  artillery.yml
+</code></pre>
+<p><strong>Test 3: Stress Test</strong> (500 requests/minute):</p>
+<pre><code class="language-bash">artillery run \
+  --target https://preview-url.vercel.app \
+  --config &#39;{&quot;phases&quot;:[{&quot;duration&quot;:300,&quot;arrivalRate&quot;:8.33}]}&#39; \
+  artillery.yml
+</code></pre>
+<h3>Step 4: Analyze Results</h3>
+<p><strong>Key Metrics to Review</strong>:</p>
+<ol>
+<li><p><strong>Response Times</strong>:</p>
+<pre><code>✅ p50 &lt; 200ms
+✅ p95 &lt; 500ms
+✅ p99 &lt; 1000ms
+⚠️ If p95 &gt; 500ms → investigate slow endpoints
+❌ If p99 &gt; 2000ms → performance issues, do not launch
+</code></pre>
+</li>
+<li><p><strong>Error Rate</strong>:</p>
+<pre><code>✅ &lt; 1% errors
+⚠️ 1-5% errors → investigate and fix
+❌ &gt; 5% errors → critical issues, do not launch
+</code></pre>
+</li>
+<li><p><strong>Database Performance</strong>:</p>
+<ul>
+<li>Check Neon metrics dashboard</li>
+<li>Review slow query logs</li>
+<li>Monitor connection pool utilization</li>
+</ul>
+</li>
+<li><p><strong>Vercel Metrics</strong>:</p>
+<ul>
+<li>Function execution time</li>
+<li>Cold start frequency</li>
+<li>Edge cache hit rate</li>
+</ul>
+</li>
+</ol>
+<h3>Step 5: Identify Bottlenecks</h3>
+<p><strong>Common Issues</strong>:</p>
+<ol>
+<li><p><strong>Slow Database Queries</strong>:</p>
+<pre><code class="language-sql">-- Find slow queries
+SELECT query, mean_exec_time, calls
+FROM pg_stat_statements
+ORDER BY mean_exec_time DESC
+LIMIT 10;
+
+-- Add missing indexes
+CREATE INDEX idx_visits_client_date
+ON visits(client_id, scheduled_start);
+</code></pre>
+</li>
+<li><p><strong>High Connection Pool Usage</strong>:</p>
+<pre><code class="language-javascript">// Increase pool size if needed (packages/core/src/db/connection.ts)
+pool: {
+  min: 2,
+  max: 30, // Increase from 20 if needed
+}
+</code></pre>
+</li>
+<li><p><strong>Slow API Endpoints</strong>:</p>
+<ul>
+<li>Check Prometheus metrics: <code>/metrics</code></li>
+<li>Review Sentry performance traces</li>
+<li>Add caching where appropriate</li>
+</ul>
+</li>
+</ol>
+<h3>Step 6: Re-test After Optimizations</h3>
+<pre><code class="language-bash"># Run same load test again
+artillery run artillery.yml --output report-optimized.json
+
+# Compare with baseline
+artillery report report-baseline.json --output baseline.html
+artillery report report-optimized.json --output optimized.html
+
+# Compare metrics side-by-side
+</code></pre>
+<hr>
+<h2>Production Monitoring During Launch</h2>
+<h3>Real-Time Metrics to Watch</h3>
+<ol>
+<li><p><strong>Vercel Dashboard</strong>:</p>
+<ul>
+<li>Request rate</li>
+<li>Response times (p50, p95, p99)</li>
+<li>Error rate</li>
+<li>Function execution duration</li>
+</ul>
+</li>
+<li><p><strong>Prometheus Metrics</strong> (<code>/metrics</code>):</p>
+<pre><code class="language-bash"># Watch metrics in real-time
+watch -n 5 &#39;curl -s https://domain.com/metrics | grep http_requests_total&#39;
+
+# Key metrics:
+# - http_requests_total{status=&quot;200&quot;}
+# - http_request_duration_seconds
+# - db_query_duration_seconds
+</code></pre>
+</li>
+<li><p><strong>Neon Database</strong>:</p>
+<ul>
+<li>Connection count</li>
+<li>Query duration</li>
+<li>Active queries</li>
+<li>Lock wait time</li>
+</ul>
+</li>
+<li><p><strong>Sentry</strong>:</p>
+<ul>
+<li>Error rate</li>
+<li>Performance issues</li>
+<li>Transaction throughput</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Performance Optimization Checklist</h2>
+<h3>Application Level</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Database query optimization (indexes, N+1 queries)</li>
+<li><input disabled="" type="checkbox"> Enable response compression (gzip/brotli)</li>
+<li><input disabled="" type="checkbox"> Implement caching (Redis for rate limiting)</li>
+<li><input disabled="" type="checkbox"> Optimize serialization (reduce payload size)</li>
+<li><input disabled="" type="checkbox"> Connection pooling tuning</li>
+<li><input disabled="" type="checkbox"> Lazy loading for large datasets</li>
+</ul>
+<h3>Database Level</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Add indexes for common queries</li>
+<li><input disabled="" type="checkbox"> Analyze and vacuum tables regularly</li>
+<li><input disabled="" type="checkbox"> Optimize slow queries</li>
+<li><input disabled="" type="checkbox"> Consider read replicas (if needed)</li>
+<li><input disabled="" type="checkbox"> Enable query caching</li>
+</ul>
+<h3>Infrastructure Level</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Vercel Edge caching for static assets</li>
+<li><input disabled="" type="checkbox"> CDN for media files</li>
+<li><input disabled="" type="checkbox"> Database in same region as serverless functions</li>
+<li><input disabled="" type="checkbox"> Connection pooling (Neon serverless driver)</li>
+</ul>
+<hr>
+<h2>Load Testing Checklist</h2>
+<p><strong>Before Launch</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Load test plan created</li>
+<li><input disabled="" type="checkbox"> Test environment prepared</li>
+<li><input disabled="" type="checkbox"> Test data seeded</li>
+<li><input disabled="" type="checkbox"> Baseline metrics established</li>
+<li><input disabled="" type="checkbox"> Progressive load tests completed</li>
+<li><input disabled="" type="checkbox"> Performance goals met</li>
+<li><input disabled="" type="checkbox"> Bottlenecks identified and fixed</li>
+<li><input disabled="" type="checkbox"> Final load test passed</li>
+</ul>
+<p><strong>Post-Launch</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Monitor real user metrics</li>
+<li><input disabled="" type="checkbox"> Compare with load test predictions</li>
+<li><input disabled="" type="checkbox"> Adjust capacity if needed</li>
+<li><input disabled="" type="checkbox"> Update load test scenarios based on actual usage</li>
+</ul>
+<hr>
+<h2>Useful Commands</h2>
+<pre><code class="language-bash"># Quick load test with Artillery
+artillery quick --count 10 --num 1000 https://your-domain.com/health
+
+# Run full load test suite
+artillery run artillery.yml --output results.json
+
+# Generate HTML report
+artillery report results.json --output report.html
+
+# Run k6 load test
+k6 run load-test.js
+
+# Monitor Prometheus metrics
+curl https://your-domain.com/metrics | grep -E &quot;(http_requests|http_request_duration)&quot;
+
+# Check database performance
+psql $DATABASE_URL -c &quot;SELECT query, mean_exec_time, calls FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10;&quot;
+</code></pre>
+<hr>
+<p><strong>Document Version</strong>: 1.0
+<strong>Last Review</strong>: 2025-11-08
+<strong>Next Load Test</strong>: Before next major release</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

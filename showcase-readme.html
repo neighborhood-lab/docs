@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Commons Showcase - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Care Commons Showcase</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Care Commons Showcase</h1>
+<p>An interactive, browser-based demonstration of Care Commons features, designed to run entirely in the browser with no backend dependencies.</p>
+<h2>Overview</h2>
+<p>The Showcase is a <strong>static, client-side demo</strong> that demonstrates the capabilities of Care Commons without requiring server infrastructure. It features a <strong>multi-role experience</strong> that allows you to explore the system from different perspectives: patient, family member, caregiver, care coordinator, and administrator.</p>
+<p>Perfect for:</p>
+<ul>
+<li>Quick demos and presentations</li>
+<li>Feature exploration without setup</li>
+<li>Understanding the UI/UX from multiple user perspectives</li>
+<li>Testing workflows with mock data</li>
+<li>Experiencing real-world care coordination scenarios</li>
+</ul>
+<h2>Key Differences from Full Demo</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Showcase (This)</th>
+<th>Full Demo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Deployment</strong></td>
+<td>GitHub Pages (static)</td>
+<td>Vercel (SSR + API)</td>
+</tr>
+<tr>
+<td><strong>Data Storage</strong></td>
+<td>Browser localStorage</td>
+<td>PostgreSQL + Neon</td>
+</tr>
+<tr>
+<td><strong>API Layer</strong></td>
+<td>Mock provider (in-browser)</td>
+<td>REST API + Serverless Functions</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>None</td>
+<td>Full auth with JWT</td>
+</tr>
+<tr>
+<td><strong>Real-time Sync</strong></td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Data Persistence</strong></td>
+<td>Browser only</td>
+<td>Database</td>
+</tr>
+</tbody></table>
+<h2>Architecture</h2>
+<h3>Role Context System</h3>
+<p>The showcase implements a <strong>role-based context system</strong> that manages the current user perspective:</p>
+<pre><code class="language-typescript">// Role switching
+const { currentRole, setRole } = useRole();
+
+// Access current persona information
+const { currentPersona } = useRole();
+
+// Check role permissions
+const canAccess = isRoleAllowed([&#39;coordinator&#39;, &#39;admin&#39;]);
+</code></pre>
+<h3>Provider Abstraction Pattern</h3>
+<p>The showcase uses a <strong>provider abstraction layer</strong> following SOLID principles:</p>
+<pre><code class="language-typescript">// Core abstraction
+interface DataProvider {
+  getClients(...): Promise&lt;PaginatedResult&lt;Client&gt;&gt;;
+  createClient(...): Promise&lt;Client&gt;;
+  // ... other methods
+}
+
+// Implementations
+- ApiProvider: Wraps real API calls
+- MockProvider: In-memory with localStorage persistence
+</code></pre>
+<p>This architecture allows the <strong>same frontend code</strong> to work with either:</p>
+<ol>
+<li><strong>Real backend</strong> (API provider)</li>
+<li><strong>Mock data</strong> (Mock provider)</li>
+</ol>
+<h3>Technology Stack</h3>
+<ul>
+<li><strong>React 19</strong> - UI framework</li>
+<li><strong>TypeScript</strong> - Type safety</li>
+<li><strong>Vite</strong> - Build tool</li>
+<li><strong>React Query</strong> - Data fetching &amp; caching</li>
+<li><strong>React Router</strong> - Navigation</li>
+<li><strong>Tailwind CSS</strong> - Styling</li>
+<li><strong>Zustand</strong> - Local state (from main app)</li>
+</ul>
+<h3>Project Structure</h3>
+<pre><code>showcase/
+├── src/
+│   ├── components/        # Shared components
+│   │   ├── ShowcaseLayout.tsx
+│   │   └── RoleSwitcher.tsx      # NEW: Role switching UI
+│   ├── contexts/         # React contexts
+│   │   └── RoleContext.tsx       # NEW: Role management
+│   ├── data/             # Mock data
+│   │   └── seed-data.ts
+│   ├── pages/            # Feature pages
+│   │   ├── LandingPage.tsx
+│   │   ├── DashboardPage.tsx     # NEW: Role-based dashboard
+│   │   ├── ClientDemographicsPage.tsx
+│   │   ├── CarePlansPage.tsx
+│   │   ├── TaskManagementPage.tsx
+│   │   ├── CaregiverManagementPage.tsx
+│   │   ├── ShiftMatchingPage.tsx
+│   │   └── BillingPage.tsx
+│   ├── providers/        # Data provider implementation
+│   │   └── mock-provider.ts
+│   ├── types/            # Type definitions
+│   │   └── showcase-types.ts     # NEW: Simplified types
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+└── tailwind.config.js
+</code></pre>
+<h2>Development</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js 22+</li>
+<li>npm 10.9+</li>
+</ul>
+<h3>Install Dependencies</h3>
+<p>From the root of the repository:</p>
+<pre><code class="language-bash">npm install
+</code></pre>
+<h3>Run Development Server</h3>
+<pre><code class="language-bash">cd showcase
+npm run dev
+</code></pre>
+<p>Open <a href="http://localhost:5173/care-commons">http://localhost:5173/care-commons</a></p>
+<h3>Build for Production</h3>
+<pre><code class="language-bash">npm run build
+</code></pre>
+<p>Output will be in <code>dist/</code> directory.</p>
+<h3>Preview Production Build</h3>
+<pre><code class="language-bash">npm run preview
+</code></pre>
+<h2>Deployment</h2>
+<p>The showcase is automatically deployed to GitHub Pages when changes are pushed to the <code>main</code> branch.</p>
+<h3>Manual Deployment</h3>
+<ol>
+<li><p>Build the project:</p>
+<pre><code class="language-bash">npm run build
+</code></pre>
+</li>
+<li><p>Deploy the <code>dist/</code> directory to any static hosting service:</p>
+<ul>
+<li>GitHub Pages</li>
+<li>Netlify</li>
+<li>Vercel (static)</li>
+<li>AWS S3</li>
+<li>Azure Static Web Apps</li>
+</ul>
+</li>
+</ol>
+<h2>Mock Data</h2>
+<p>The showcase includes <strong>comprehensive, realistic demo data</strong> representing a multi-state home healthcare agency:</p>
+<h3>Data Scale (Enhanced!)</h3>
+<ul>
+<li><p><strong>60+ Clients</strong> - Diverse demographics across Texas, Florida, and Ohio</p>
+<ul>
+<li>Various conditions: Alzheimer&#39;s, Parkinson&#39;s, diabetes, stroke recovery, post-surgical care</li>
+<li>Different mobility levels: independent, walker, wheelchair, bedbound</li>
+<li>Realistic emergency contacts and insurance information</li>
+<li>Multiple statuses: active, pending intake, on hold, inquiry</li>
+</ul>
+</li>
+<li><p><strong>35+ Caregivers</strong> - Various certifications, specializations, and availability</p>
+<ul>
+<li>CNAs, HHAs, companions, medication aides</li>
+<li>Specializations: dementia care, medication management, wound care, mobility assistance</li>
+<li>Bilingual capabilities (English, Spanish, Mandarin)</li>
+<li>Different employment types: full-time, part-time, per-diem</li>
+<li>Realistic credential expiration scenarios for compliance demonstrations</li>
+</ul>
+</li>
+<li><p><strong>40+ Care Plans</strong> - All plan types and compliance scenarios</p>
+<ul>
+<li>Personal care, skilled nursing, companion care, therapy</li>
+<li>Various priorities: urgent, high, medium, low</li>
+<li>Compliance statuses: compliant, pending review, needs attention</li>
+<li>Goals with progress tracking</li>
+</ul>
+</li>
+<li><p><strong>100+ Tasks &amp; Visits</strong> - Full lifecycle demonstration</p>
+<ul>
+<li>Scheduled, in-progress, completed, overdue</li>
+<li>EVV requirements and biometric verification</li>
+<li>GPS geolocation data</li>
+<li>Task categories: bathing, medication, vital signs, mobility, companionship</li>
+</ul>
+</li>
+<li><p><strong>30+ Invoices</strong> - Billing workflow scenarios</p>
+<ul>
+<li>Paid, pending, overdue statuses</li>
+<li>Multiple payment methods: Medicaid, Medicare, private insurance, private pay</li>
+<li>Line item details and service dates</li>
+</ul>
+</li>
+<li><p><strong>Payroll Periods</strong> - Processed payroll data</p>
+</li>
+<li><p><strong>Shift Listings</strong> - Open and filled shifts with applications</p>
+</li>
+<li><p><strong>Family Engagement</strong> - Messages and notifications</p>
+</li>
+</ul>
+<p>All data is <strong>different from the production demo</strong> to make environments easily distinguishable.</p>
+<h3>localStorage Persistence</h3>
+<p>Changes you make (creating, updating, deleting) are saved to browser localStorage under the key <code>care-commons-showcase-data</code>. This means:</p>
+<ul>
+<li>✅ Changes persist across page reloads</li>
+<li>✅ Each browser/device has its own data</li>
+<li>❌ Data is not synced across devices</li>
+<li>❌ Clearing browser data resets to seed data</li>
+</ul>
+<h3>Resetting Demo Data</h3>
+<p>To reset to the original comprehensive seed data:</p>
+<p><strong>Option 1: Browser Developer Tools</strong></p>
+<ol>
+<li>Open browser DevTools (F12)</li>
+<li>Go to Application/Storage → Local Storage</li>
+<li>Delete the <code>care-commons-showcase-data</code> key</li>
+<li>Refresh the page</li>
+</ol>
+<p><strong>Option 2: Browser Settings</strong></p>
+<ul>
+<li>Clear browsing data for this domain</li>
+<li>Refresh the page</li>
+</ul>
+<p><strong>Option 3: Database Seed (For PostgreSQL Backend)</strong></p>
+<p>If running showcase with real PostgreSQL backend:</p>
+<pre><code class="language-bash"># From repository root
+npm run db:seed:showcase
+</code></pre>
+<p>This seeds the comprehensive showcase dataset (60+ clients, 35+ caregivers, etc.) into your database.</p>
+<h2>🎭 Multi-Role Experience (New in Part 3!)</h2>
+<p>The showcase now features a <strong>role-based navigation system</strong> that lets you experience the platform from different perspectives:</p>
+<h3>Available Personas</h3>
+<ol>
+<li><strong>Patient (Margaret Thompson)</strong> - View your own care plan, upcoming tasks, and caregiver schedule</li>
+<li><strong>Family Member (Sarah Thompson)</strong> - Monitor loved one&#39;s care status and communicate with care team</li>
+<li><strong>Caregiver (Emily Rodriguez)</strong> - Manage daily schedule, complete tasks, and apply to shifts</li>
+<li><strong>Care Coordinator</strong> - Oversee care plans, assign caregivers, and monitor compliance</li>
+<li><strong>System Administrator</strong> - Full system access including billing, payroll, and analytics</li>
+</ol>
+<h3>How to Use</h3>
+<ul>
+<li><strong>Role Switcher</strong>: Click the persona selector in the top-right corner of any page</li>
+<li><strong>Dashboard</strong>: Each role has a personalized dashboard showing relevant information</li>
+<li><strong>Filtered Views</strong>: Data is automatically filtered based on the selected role</li>
+<li><strong>Quick Actions</strong>: Role-specific actions are highlighted for easy access</li>
+</ul>
+<h2>Features Demonstrated</h2>
+<h3>1. Role-Based Dashboards (NEW!)</h3>
+<ul>
+<li>Personalized views for each user type</li>
+<li>Real-time statistics and metrics</li>
+<li>Role-specific quick actions</li>
+<li>Contextual task lists and schedules</li>
+</ul>
+<h3>2. Client Demographics</h3>
+<ul>
+<li>Comprehensive client profiles</li>
+<li>Emergency contacts</li>
+<li>Insurance information</li>
+<li>Search and filtering</li>
+</ul>
+<h3>2. Care Plans &amp; Goals</h3>
+<ul>
+<li>Multiple plan types</li>
+<li>Goal tracking with progress</li>
+<li>Compliance status</li>
+<li>Review scheduling</li>
+</ul>
+<h3>3. Task Management</h3>
+<ul>
+<li>Task scheduling</li>
+<li>Status tracking</li>
+<li>EVV and signature requirements</li>
+<li>Completion notes</li>
+</ul>
+<h3>4. Caregiver Management</h3>
+<ul>
+<li>Caregiver profiles</li>
+<li>Certification tracking</li>
+<li>Specializations</li>
+<li>Hourly rates</li>
+</ul>
+<h3>5. Shift Matching</h3>
+<ul>
+<li>Shift listings</li>
+<li>Application tracking</li>
+<li>Certification requirements</li>
+<li>Smart matching</li>
+</ul>
+<h3>6. Billing &amp; Invoicing</h3>
+<ul>
+<li>Invoice generation</li>
+<li>Payment tracking</li>
+<li>Line item details</li>
+<li>Multiple payment methods</li>
+</ul>
+<h2>Browser Compatibility</h2>
+<ul>
+<li>Chrome/Edge 90+</li>
+<li>Firefox 88+</li>
+<li>Safari 14+</li>
+</ul>
+<h2>Performance</h2>
+<ul>
+<li>Initial load: ~500KB (gzipped)</li>
+<li>Lazy loading for routes</li>
+<li>React Query caching</li>
+<li>Optimized bundle splitting</li>
+</ul>
+<h2>Development Status</h2>
+<h3>✅ Completed (Parts 1-3)</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Provider abstraction pattern</li>
+<li><input checked="" disabled="" type="checkbox"> Mock data provider with localStorage</li>
+<li><input checked="" disabled="" type="checkbox"> Comprehensive seed data</li>
+<li><input checked="" disabled="" type="checkbox"> Feature pages (Clients, Care Plans, Tasks, Caregivers, Shifts, Billing)</li>
+<li><input checked="" disabled="" type="checkbox"> Role-based context system</li>
+<li><input checked="" disabled="" type="checkbox"> Multi-persona experience</li>
+<li><input checked="" disabled="" type="checkbox"> Role switcher UI component</li>
+<li><input checked="" disabled="" type="checkbox"> Personalized dashboards</li>
+<li><input checked="" disabled="" type="checkbox"> Enhanced landing page</li>
+</ul>
+<h3>🚧 In Progress</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Type alignment between showcase and production types</li>
+<li><input disabled="" type="checkbox"> Complete TypeScript compilation without errors</li>
+<li><input disabled="" type="checkbox"> Build optimization and testing</li>
+</ul>
+<h3>📋 Future Enhancements</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Guided tours/walkthroughs</li>
+<li><input disabled="" type="checkbox"> Scenario-based demonstrations</li>
+<li><input disabled="" type="checkbox"> Interactive tutorials</li>
+<li><input disabled="" type="checkbox"> Data reset/reseed functionality</li>
+<li><input disabled="" type="checkbox"> Export/import demo data</li>
+</ul>
+<h2>Contributing</h2>
+<p>To add new features to the showcase:</p>
+<ol>
+<li>Add data to <code>src/data/seed-data.ts</code></li>
+<li>Implement provider methods in <code>src/providers/mock-provider.ts</code></li>
+<li>Create page components in <code>src/pages/</code></li>
+<li>Add routes to <code>src/App.tsx</code></li>
+<li>Update navigation in <code>src/components/ShowcaseLayout.tsx</code></li>
+<li>Add role-specific logic in <code>src/contexts/RoleContext.tsx</code> if needed</li>
+</ol>
+<h3>Type Alignment Notes</h3>
+<p>The showcase currently uses simplified types in <code>src/types/showcase-types.ts</code>. To align with production types:</p>
+<ol>
+<li>Update mock provider to use production type imports</li>
+<li>Adjust seed data to match production type structure</li>
+<li>Handle type differences between showcase and production features</li>
+</ol>
+<h2>Links</h2>
+<ul>
+<li><strong>Showcase Demo</strong>: <a href="https://neighborhood-lab.github.io/care-commons">https://neighborhood-lab.github.io/care-commons</a></li>
+<li><strong>Full Demo</strong>: <a href="https://care-commons.vercel.app/login">https://care-commons.vercel.app/login</a></li>
+<li><strong>GitHub Repository</strong>: <a href="https://github.com/neighborhood-lab/care-commons">https://github.com/neighborhood-lab/care-commons</a></li>
+</ul>
+<h2>License</h2>
+<p>Same as main Care Commons project.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

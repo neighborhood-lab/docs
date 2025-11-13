@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>State Compliance Documentation - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🏗️ Architecture & Deployment</span> / 
+      <span>State Compliance Documentation</span>
+    </div>
+      <article class="markdown-content">
+        <h1>State Compliance Documentation</h1>
+<p><strong>Care Commons Regulatory Knowledge Base</strong></p>
+<blockquote>
+<p>&quot;Reading Texas HHSC regulations at 2 AM shouldn&#39;t be necessary. The compliance rules should be encoded in the software itself.&quot; — Care Commons Philosophy</p>
+</blockquote>
+<h2>Overview</h2>
+<p>This directory contains comprehensive regulatory compliance documentation for all 50 US states (starting with priority states). Each state has:</p>
+<ol>
+<li><strong>REQUIREMENTS.md</strong> - Detailed regulatory requirements with statutory citations</li>
+<li><strong>IMPLEMENTATION.md</strong> - How Care Commons implements these requirements in code</li>
+<li><strong>TEST_SCENARIOS.md</strong> - Comprehensive test cases for every requirement</li>
+<li><strong>CHANGELOG.md</strong> - Git-tracked history of regulatory changes</li>
+</ol>
+<h2>Why This Matters</h2>
+<p><strong>For Home Health Agencies:</strong></p>
+<ul>
+<li>Confidence in meeting state requirements without hiring expensive compliance consultants</li>
+<li>Clear documentation for surveyors and auditors</li>
+<li>Reduced regulatory risk</li>
+</ul>
+<p><strong>For Developers:</strong></p>
+<ul>
+<li>Regulations as code - requirements are testable and verifiable</li>
+<li>Clear implementation guidance</li>
+<li>Easy onboarding to new states</li>
+</ul>
+<p><strong>For Community Contributors:</strong></p>
+<ul>
+<li>Framework for adding new states</li>
+<li>Template-based documentation</li>
+<li>Git-based change tracking</li>
+</ul>
+<h2>State Coverage</h2>
+<h3>Priority 1: Implemented ✅</h3>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Code</th>
+<th>Aggregator</th>
+<th>Market Size</th>
+<th>Documentation</th>
+<th>Implementation</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Texas</td>
+<td>TX</td>
+<td>HHAeXchange</td>
+<td>10,000+ agencies</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Florida</td>
+<td>FL</td>
+<td>Multi (HHAeXchange, Tellus)</td>
+<td>12,000+ agencies</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody></table>
+<h3>Priority 2: In Progress 🚧</h3>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Code</th>
+<th>Aggregator</th>
+<th>Market Size</th>
+<th>Documentation</th>
+<th>Implementation</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ohio</td>
+<td>OH</td>
+<td>Sandata (FREE)</td>
+<td>5,000+ agencies</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚧</td>
+</tr>
+<tr>
+<td>Pennsylvania</td>
+<td>PA</td>
+<td>Sandata (FREE)</td>
+<td>8,000+ agencies</td>
+<td>✅</td>
+<td>🚧</td>
+<td>⏳</td>
+</tr>
+</tbody></table>
+<h3>Priority 3: Planned 📋</h3>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Code</th>
+<th>Aggregator</th>
+<th>Market Size</th>
+<th>Documentation</th>
+<th>Implementation</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Georgia</td>
+<td>GA</td>
+<td>Tellus</td>
+<td>6,000+ agencies</td>
+<td>⏳</td>
+<td>⏳</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>North Carolina</td>
+<td>NC</td>
+<td>Sandata (FREE)</td>
+<td>5,000+ agencies</td>
+<td>⏳</td>
+<td>⏳</td>
+<td>⏳</td>
+</tr>
+<tr>
+<td>Arizona</td>
+<td>AZ</td>
+<td>Sandata (FREE)</td>
+<td>4,000+ agencies</td>
+<td>⏳</td>
+<td>⏳</td>
+<td>⏳</td>
+</tr>
+</tbody></table>
+<h3>Future States 🔮</h3>
+<p>States will be prioritized based on:</p>
+<ol>
+<li><strong>Community demand</strong> - GitHub issues and votes</li>
+<li><strong>Market size</strong> - Number of agencies</li>
+<li><strong>Regulatory complexity</strong> - Unique requirements</li>
+<li><strong>Contributor availability</strong> - Community expertise</li>
+</ol>
+<p><strong>Request a state</strong>: Open a GitHub issue with tag <code>state-request</code></p>
+<h2>Using This Documentation</h2>
+<h3>For Agencies Using Care Commons</h3>
+<p><strong>Check your state&#39;s compliance status:</strong></p>
+<ol>
+<li>Navigate to your state&#39;s directory (e.g., <code>docs/compliance/texas/</code>)</li>
+<li>Read <code>REQUIREMENTS.md</code> to understand what regulations apply</li>
+<li>Review <code>IMPLEMENTATION.md</code> to see how Care Commons handles compliance</li>
+<li>Check <code>CHANGELOG.md</code> for recent regulatory changes</li>
+</ol>
+<p><strong>Stay updated on regulatory changes:</strong></p>
+<ul>
+<li>Watch this repository for updates</li>
+<li>Subscribe to state-specific change notifications</li>
+<li>Review CHANGELOG.md quarterly</li>
+</ul>
+<h3>For Developers</h3>
+<p><strong>Implementing a new state:</strong></p>
+<ol>
+<li>Copy <code>_template/</code> directory to new state name (e.g., <code>massachusetts/</code>)</li>
+<li>Research state regulations thoroughly</li>
+<li>Complete REQUIREMENTS.md with statutory citations</li>
+<li>Implement validators in <code>packages/core/src/compliance/[state]/</code></li>
+<li>Write comprehensive tests matching TEST_SCENARIOS.md</li>
+<li>Update EVV config in <code>verticals/time-tracking-evv/src/config/state-evv-configs.ts</code></li>
+<li>Document implementation in IMPLEMENTATION.md</li>
+<li>Submit PR with all documentation and tests</li>
+</ol>
+<p><strong>Updating existing state requirements:</strong></p>
+<ol>
+<li>Document change in state&#39;s CHANGELOG.md</li>
+<li>Update REQUIREMENTS.md sections affected</li>
+<li>Modify validator code</li>
+<li>Update test scenarios</li>
+<li>Update state configuration if needed</li>
+<li>Submit PR with regulatory citation</li>
+</ol>
+<h3>For Compliance Officers</h3>
+<p><strong>Verifying regulatory compliance:</strong></p>
+<ol>
+<li>Review state&#39;s REQUIREMENTS.md for current requirements</li>
+<li>Check that regulatory citations are current</li>
+<li>Verify implementation matches requirements</li>
+<li>Run test suite to validate compliance logic</li>
+<li>Review audit trail and logging</li>
+</ol>
+<p><strong>Preparing for surveys/audits:</strong></p>
+<ol>
+<li>Print state&#39;s REQUIREMENTS.md for reference</li>
+<li>Review IMPLEMENTATION.md for system capabilities</li>
+<li>Run compliance reports from the system</li>
+<li>Provide CHANGELOG.md showing regulatory diligence</li>
+</ol>
+<h2>Architecture</h2>
+<h3>Documentation Layer</h3>
+<pre><code>docs/compliance/
+├── _template/          # Template for new states
+├── texas/              # TX-specific docs
+├── florida/            # FL-specific docs
+├── ohio/               # OH-specific docs
+└── [state]/
+    ├── REQUIREMENTS.md      # What regulations require
+    ├── IMPLEMENTATION.md    # How we implement it
+    ├── TEST_SCENARIOS.md    # How we test it
+    └── CHANGELOG.md         # Regulatory change history
+</code></pre>
+<h3>Code Layer</h3>
+<pre><code>packages/core/src/compliance/
+├── types.ts            # Common compliance types
+├── validator.ts        # Base validator interface
+└── [state]/
+    ├── credentials.ts       # Caregiver credential validation
+    ├── authorization.ts     # Client authorization validation
+    ├── documentation.ts     # Visit documentation validation
+    └── __tests__/
+        ├── credentials.test.ts
+        ├── authorization.test.ts
+        └── documentation.test.ts
+</code></pre>
+<h3>EVV State Configuration</h3>
+<pre><code>verticals/time-tracking-evv/src/
+├── config/
+│   └── state-evv-configs.ts    # All state EVV configs
+├── providers/
+│   ├── texas-evv-provider.ts   # TX-specific provider
+│   ├── florida-evv-provider.ts # FL-specific provider
+│   └── [state]-evv-provider.ts
+└── aggregators/
+    ├── sandata-aggregator.ts   # Shared by OH, PA, NC, AZ
+    ├── tellus-aggregator.ts    # Shared by GA (and FL)
+    └── hhaeexchange-aggregator.ts  # TX (and FL)
+</code></pre>
+<h2>Key Compliance Areas</h2>
+<h3>1. Caregiver Credentials</h3>
+<p>Every state requires verification of caregiver credentials, but specifics vary:</p>
+<ul>
+<li><strong>Background Screening</strong>: Level 1, Level 2, fingerprinting, frequency</li>
+<li><strong>Professional Licensure</strong>: RN, LPN, CNA, HHA requirements</li>
+<li><strong>Registry Checks</strong>: State-specific registries (abuse, nurse aide, etc.)</li>
+<li><strong>Training</strong>: Mandatory training requirements</li>
+<li><strong>Competency</strong>: Skills validation and delegation</li>
+</ul>
+<h3>2. Client Authorization</h3>
+<p>Service authorization requirements vary by state and payor:</p>
+<ul>
+<li><strong>Prior Authorization</strong>: Services requiring pre-approval</li>
+<li><strong>Plan of Care</strong>: Frequency of review and physician signature</li>
+<li><strong>Service Limits</strong>: Authorized units and time periods</li>
+<li><strong>Eligibility</strong>: Medicaid program enrollment</li>
+</ul>
+<h3>3. Visit Documentation</h3>
+<p>Documentation standards for each visit:</p>
+<ul>
+<li><strong>Required Elements</strong>: Tasks performed, client response, observations</li>
+<li><strong>Timeliness</strong>: Documentation completion windows</li>
+<li><strong>Quality Standards</strong>: Objective vs. subjective notes</li>
+<li><strong>Signatures</strong>: Electronic vs. wet signatures</li>
+</ul>
+<h3>4. Electronic Visit Verification (EVV)</h3>
+<p>Federal EVV mandate with state variations:</p>
+<ul>
+<li><strong>Six Data Elements</strong>: Type, individual receiving, individual providing, date, location, time</li>
+<li><strong>Aggregators</strong>: State-mandated vs. open choice</li>
+<li><strong>Geofencing</strong>: GPS requirements and tolerances</li>
+<li><strong>Grace Periods</strong>: Clock-in/out flexibility</li>
+<li><strong>Manual Overrides</strong>: Correction procedures</li>
+</ul>
+<h3>5. Data Retention</h3>
+<p>Varying retention requirements:</p>
+<ul>
+<li><strong>Federal Minimum</strong>: 6 years (HIPAA)</li>
+<li><strong>State Requirements</strong>: May be longer (e.g., PA requires 7 years)</li>
+<li><strong>Record Types</strong>: Different retention for different record types</li>
+</ul>
+<h3>6. Privacy &amp; Security</h3>
+<p>HIPAA baseline with state variations:</p>
+<ul>
+<li><strong>Access Control</strong>: Role-based permissions</li>
+<li><strong>Audit Trails</strong>: PHI access logging</li>
+<li><strong>Encryption</strong>: Data protection requirements</li>
+<li><strong>State Privacy Laws</strong>: Additional requirements beyond HIPAA</li>
+</ul>
+<h2>Aggregator Reference</h2>
+<h3>Sandata (4 states)</h3>
+<p><strong>States</strong>: Ohio, Pennsylvania, North Carolina, Arizona</p>
+<p><strong>Code Reuse</strong>: Single implementation serves all 4 states</p>
+<p><strong>API</strong>: RESTful, JSON format</p>
+<p><strong>Features</strong>:</p>
+<ul>
+<li>Real-time and batch submission</li>
+<li>Visit status queries</li>
+<li>Comprehensive error handling</li>
+<li>State-specific routing</li>
+</ul>
+<p><strong>Configuration</strong>: <code>verticals/time-tracking-evv/src/aggregators/sandata-aggregator.ts</code></p>
+<h3>HHAeXchange (Texas mandated)</h3>
+<p><strong>States</strong>: Texas (mandated), Florida (optional)</p>
+<p><strong>API</strong>: RESTful, JSON format</p>
+<p><strong>Features</strong>:</p>
+<ul>
+<li>VMUR (Visit Maintenance Unlock Request) for Texas</li>
+<li>Real-time submission</li>
+<li>Detailed rejection codes</li>
+</ul>
+<p><strong>Configuration</strong>: <code>verticals/time-tracking-evv/src/aggregators/hhaeexchange-aggregator.ts</code></p>
+<h3>Tellus (Netsmart)</h3>
+<p><strong>States</strong>: Georgia (primary), Florida (optional)</p>
+<p><strong>API</strong>: RESTful, JSON format</p>
+<p><strong>Features</strong>:</p>
+<ul>
+<li>HCBS waiver focus</li>
+<li>Flexible rural exceptions</li>
+<li>Multi-payor support</li>
+</ul>
+<p><strong>Configuration</strong>: <code>verticals/time-tracking-evv/src/aggregators/tellus-aggregator.ts</code></p>
+<h2>Testing Philosophy</h2>
+<p><strong>Every regulation must have a test.</strong></p>
+<h3>Test-Driven Compliance</h3>
+<ol>
+<li><strong>Document requirement</strong> in REQUIREMENTS.md with statutory citation</li>
+<li><strong>Write test scenario</strong> in TEST_SCENARIOS.md</li>
+<li><strong>Implement validator</strong> to make test pass</li>
+<li><strong>Verify with stakeholders</strong> that implementation matches regulation</li>
+<li><strong>Monitor for changes</strong> and update when regulations change</li>
+</ol>
+<h3>Test Coverage Requirements</h3>
+<ul>
+<li><strong>Blocking validations</strong>: 100% coverage (prevents regulatory violations)</li>
+<li><strong>Warning validations</strong>: 100% coverage (alerts users to issues)</li>
+<li><strong>Edge cases</strong>: 80% minimum coverage</li>
+<li><strong>Performance</strong>: Must complete in &lt;100ms per validation</li>
+</ul>
+<h3>Continuous Validation</h3>
+<p>All tests run:</p>
+<ul>
+<li>On every commit (pre-commit hook)</li>
+<li>On every PR (GitHub Actions)</li>
+<li>Nightly (full compliance suite)</li>
+<li>Before deployment (smoke tests)</li>
+</ul>
+<h2>Regulatory Change Process</h2>
+<h3>1. Monitoring</h3>
+<p><strong>Who</strong>: Assigned compliance officer per state<br><strong>Frequency</strong>: Weekly scan of state sources<br><strong>Tools</strong>: Google Alerts, state RSS feeds, industry associations</p>
+<p><strong>Sources</strong>:</p>
+<ul>
+<li>State Medicaid websites</li>
+<li>State registers of regulations</li>
+<li>Agency bulletins</li>
+<li>Industry association updates</li>
+</ul>
+<h3>2. Analysis</h3>
+<p><strong>When regulation changes:</strong></p>
+<ol>
+<li><strong>Assess impact</strong>: Critical, high, medium, low</li>
+<li><strong>Identify affected components</strong>: List code modules</li>
+<li><strong>Determine timeline</strong>: Effective date and implementation window</li>
+<li><strong>Estimate effort</strong>: Hours to implement and test</li>
+</ol>
+<h3>3. Implementation</h3>
+<p><strong>Git-based change tracking:</strong></p>
+<pre><code class="language-bash"># Create branch
+git checkout -b update/texas-background-check-frequency
+
+# Update documentation
+vim docs/compliance/texas/REQUIREMENTS.md
+vim docs/compliance/texas/CHANGELOG.md
+
+# Update code
+vim packages/core/src/compliance/texas/credentials.ts
+
+# Update tests
+vim packages/core/src/compliance/__tests__/texas/credentials.test.ts
+
+# Commit with detailed message
+git commit -m &quot;Texas: Background screening now required every 6 months
+
+Updated from annual to semi-annual per 26 TAC §558.353 amendment
+effective 2025-03-01.
+
+Changes:
+- REQUIREMENTS.md: Updated §1.1 frequency and expiration
+- credentials.ts: Changed expiration from 365 to 180 days
+- credentials.test.ts: Updated test scenarios
+
+90-day transitional grace period until 2025-05-30.
+
+References:
+- Texas Register: Vol 50, No 3
+- https://texreg.sos.state.tx.us/...&quot;
+
+# Push and create PR
+git push origin update/texas-background-check-frequency
+gh pr create --title &quot;Texas: Background screening frequency update&quot; --body &quot;...&quot;
+</code></pre>
+<h3>4. Communication</h3>
+<p><strong>Notify customers</strong>:</p>
+<ul>
+<li>Email announcement with effective date</li>
+<li>In-app notification for affected agencies</li>
+<li>Documentation link in help center</li>
+<li>Training session if significant change</li>
+</ul>
+<p><strong>Timeline</strong>:</p>
+<ul>
+<li>30 days before effective date: Initial notification</li>
+<li>7 days before: Reminder</li>
+<li>Effective date: Final reminder and system enforcement</li>
+</ul>
+<h2>Contributing</h2>
+<h3>Adding a New State</h3>
+<p>See <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for detailed guidelines.</p>
+<p><strong>Quick start</strong>:</p>
+<ol>
+<li><strong>Fork the repository</strong></li>
+<li><strong>Copy the template</strong>: <code>cp -r docs/compliance/_template docs/compliance/[state-name]/</code></li>
+<li><strong>Research regulations</strong>: Document requirements with citations</li>
+<li><strong>Implement validators</strong>: Add to <code>packages/core/src/compliance/[state]/</code></li>
+<li><strong>Write tests</strong>: Match TEST_SCENARIOS.md</li>
+<li><strong>Update EVV config</strong>: Add to state-evv-configs.ts</li>
+<li><strong>Submit PR</strong>: Include documentation and tests</li>
+</ol>
+<h3>Updating Existing State</h3>
+<ol>
+<li><strong>Document the change</strong>: Update CHANGELOG.md first</li>
+<li><strong>Update requirements</strong>: Modify REQUIREMENTS.md</li>
+<li><strong>Update implementation</strong>: Change validator code</li>
+<li><strong>Update tests</strong>: Modify test scenarios</li>
+<li><strong>Submit PR</strong>: Reference regulation in commit message</li>
+</ol>
+<h3>Review Process</h3>
+<p><strong>All compliance PRs require</strong>:</p>
+<ol>
+<li><strong>Regulatory citation</strong>: Link to official source</li>
+<li><strong>Effective date</strong>: When change takes effect</li>
+<li><strong>Test coverage</strong>: 100% for blocking validations</li>
+<li><strong>Documentation</strong>: REQUIREMENTS.md and CHANGELOG.md updated</li>
+<li><strong>Review by compliance officer</strong>: Domain expert approval</li>
+</ol>
+<h2>Resources</h2>
+<h3>Official Sources</h3>
+<ul>
+<li><strong>CMS EVV Requirements</strong>: <a href="https://www.medicaid.gov/medicaid/home-community-based-services/guidance/electronic-visit-verification-evv/index.html">https://www.medicaid.gov/medicaid/home-community-based-services/guidance/electronic-visit-verification-evv/index.html</a></li>
+<li><strong>21st Century Cures Act</strong>: <a href="https://www.congress.gov/bill/114th-congress/house-bill/34">https://www.congress.gov/bill/114th-congress/house-bill/34</a></li>
+<li><strong>State Medicaid Agencies</strong>: Links in each state&#39;s REQUIREMENTS.md</li>
+</ul>
+<h3>Industry Associations</h3>
+<ul>
+<li><strong>Home Care Association of America (HCAOA)</strong>: <a href="https://www.hcaoa.org/">https://www.hcaoa.org/</a></li>
+<li><strong>National Association for Home Care &amp; Hospice (NAHC)</strong>: <a href="https://www.nahc.org/">https://www.nahc.org/</a></li>
+<li><strong>Partnership for Medicaid Home-Based Care</strong>: <a href="https://www.medicaidhomecare.org/">https://www.medicaidhomecare.org/</a></li>
+</ul>
+<h3>Care Commons Resources</h3>
+<ul>
+<li><strong>GitHub Repository</strong>: <a href="https://github.com/neighborhood-lab/care-commons">https://github.com/neighborhood-lab/care-commons</a></li>
+<li><strong>Community Forum</strong>: <a href="https://github.com/neighborhood-lab/care-commons/discussions">https://github.com/neighborhood-lab/care-commons/discussions</a></li>
+<li><strong>Issue Tracker</strong>: <a href="https://github.com/neighborhood-lab/care-commons/issues">https://github.com/neighborhood-lab/care-commons/issues</a></li>
+<li><strong>Documentation</strong>: <a href="https://docs.carecommons.org">https://docs.carecommons.org</a> (coming soon)</li>
+</ul>
+<h2>Roadmap</h2>
+<h3>Q1 2025</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Texas compliance documentation ✅</li>
+<li><input checked="" disabled="" type="checkbox"> Florida compliance documentation ✅</li>
+<li><input disabled="" type="checkbox"> Ohio compliance documentation 🚧</li>
+<li><input disabled="" type="checkbox"> Pennsylvania compliance documentation 🚧</li>
+</ul>
+<h3>Q2 2025</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Georgia compliance documentation</li>
+<li><input disabled="" type="checkbox"> North Carolina compliance documentation</li>
+<li><input disabled="" type="checkbox"> Arizona compliance documentation</li>
+<li><input disabled="" type="checkbox"> Automated regulatory monitoring script</li>
+</ul>
+<h3>Q3 2025</h3>
+<ul>
+<li><input disabled="" type="checkbox"> New York compliance documentation</li>
+<li><input disabled="" type="checkbox"> California compliance documentation</li>
+<li><input disabled="" type="checkbox"> Illinois compliance documentation</li>
+<li><input disabled="" type="checkbox"> Regulatory change notification system</li>
+</ul>
+<h3>Q4 2025</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Additional 10 states based on community demand</li>
+<li><input disabled="" type="checkbox"> Machine-readable compliance rules (JSON schema)</li>
+<li><input disabled="" type="checkbox"> Automated compliance reporting dashboard</li>
+</ul>
+<h2>Support</h2>
+<h3>Questions?</h3>
+<ul>
+<li><strong>General questions</strong>: Open a GitHub Discussion</li>
+<li><strong>Bug reports</strong>: Open a GitHub Issue</li>
+<li><strong>Regulatory interpretation</strong>: Tag with <code>compliance</code> label</li>
+<li><strong>New state requests</strong>: Tag with <code>state-request</code> label</li>
+</ul>
+<h3>Commercial Support</h3>
+<p>For agencies needing dedicated compliance support:</p>
+<ul>
+<li><strong>Regulatory consulting</strong>: Domain experts available</li>
+<li><strong>Custom state implementation</strong>: Priority development</li>
+<li><strong>Training and onboarding</strong>: Staff training sessions</li>
+<li><strong>Audit preparation</strong>: Compliance documentation support</li>
+</ul>
+<p>Contact: <strong><a href="mailto:support@carecommons.org">support@carecommons.org</a></strong></p>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

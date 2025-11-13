@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduling & Visit Management - Implementation Summary - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🏗️ Architecture & Deployment</span> / 
+      <span>Scheduling & Visit Management - Implementation Summary</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Scheduling &amp; Visit Management - Implementation Summary</h1>
+<h2>Overview</h2>
+<p>The <strong>Scheduling &amp; Visit Management</strong> vertical has been successfully implemented as a foundational component of the Care Commons platform. This vertical provides comprehensive functionality for planning, coordinating, and tracking care visits in home-based care organizations.</p>
+<h2>What Was Built</h2>
+<h3>Core Components</h3>
+<ol>
+<li><p><strong>Type Definitions</strong> (<code>src/types/schedule.ts</code>)</p>
+<ul>
+<li>25+ TypeScript interfaces covering the full domain model</li>
+<li>Service patterns for recurring care schedules</li>
+<li>Visit lifecycle with 15 distinct statuses</li>
+<li>Recurrence rules supporting daily, weekly, bi-weekly, and monthly patterns</li>
+<li>Assignment methods and verification data for EVV compliance</li>
+<li>Exception tracking and calendar view settings</li>
+</ul>
+</li>
+<li><p><strong>Validation Layer</strong> (<code>src/validation/schedule-validator.ts</code>)</p>
+<ul>
+<li>Runtime validation using Zod schemas</li>
+<li>Input validation for all create/update operations</li>
+<li>Business rule validation (time windows, date ranges, constraints)</li>
+<li>Type-safe validation with automatic TypeScript inference</li>
+</ul>
+</li>
+<li><p><strong>Repository Layer</strong> (<code>src/repository/schedule-repository.ts</code>)</p>
+<ul>
+<li>PostgreSQL data access with type-safe queries</li>
+<li>CRUD operations for patterns, schedules, and visits</li>
+<li>Complex search with multiple filter combinations</li>
+<li>Visit number generation</li>
+<li>Efficient indexing strategy for common queries</li>
+<li>Soft delete support</li>
+</ul>
+</li>
+<li><p><strong>Service Layer</strong> (<code>src/service/schedule-service.ts</code>)</p>
+<ul>
+<li>Business logic for scheduling operations</li>
+<li>Pattern-to-visit generation with recurrence calculation</li>
+<li>Caregiver assignment logic with availability checking</li>
+<li>Visit lifecycle state machine with validated transitions</li>
+<li>Conflict detection for client and caregiver schedules</li>
+<li>Authorization limit enforcement</li>
+<li>Role-based permission checking</li>
+</ul>
+</li>
+<li><p><strong>Database Migration</strong> (<code>packages/core/migrations/003_scheduling_visits.sql</code>)</p>
+<ul>
+<li>Complete schema for 4 tables:<ul>
+<li><code>service_patterns</code> - Recurring care templates</li>
+<li><code>schedules</code> - Generated visit schedules</li>
+<li><code>visits</code> - Individual visit occurrences</li>
+<li><code>visit_exceptions</code> - Exception tracking</li>
+</ul>
+</li>
+<li>30+ indexes for query optimization</li>
+<li>Constraints and triggers for data integrity</li>
+<li>Full-text search capabilities</li>
+</ul>
+</li>
+</ol>
+<h3>Key Features Implemented</h3>
+<h4>Service Pattern Management</h4>
+<ul>
+<li>✅ Create recurring service patterns with flexible rules</li>
+<li>✅ Support for daily, weekly, bi-weekly, and monthly recurrence</li>
+<li>✅ Skill and certification requirements</li>
+<li>✅ Preferred/blocked caregiver lists</li>
+<li>✅ Authorization tracking (hours per week, visit limits)</li>
+<li>✅ Time windows and flexibility settings</li>
+<li>✅ Travel time considerations</li>
+</ul>
+<h4>Visit Lifecycle Management</h4>
+<ul>
+<li>✅ 15-state visit lifecycle (DRAFT → COMPLETED)</li>
+<li>✅ State machine with validated transitions</li>
+<li>✅ Complete status history tracking</li>
+<li>✅ Real-time status updates</li>
+<li>✅ Exception handling (no-shows, cancellations)</li>
+</ul>
+<h4>Schedule Generation</h4>
+<ul>
+<li>✅ Automated visit generation from patterns</li>
+<li>✅ Date range specification (e.g., next 4 weeks)</li>
+<li>✅ Holiday filtering (structure ready)</li>
+<li>✅ Authorization limit respect</li>
+<li>✅ Optional auto-assignment</li>
+</ul>
+<h4>Caregiver Assignment</h4>
+<ul>
+<li>✅ Manual assignment</li>
+<li>✅ Availability checking with time conflict detection</li>
+<li>✅ Travel time buffer inclusion</li>
+<li>✅ Preferred caregiver assignment</li>
+<li>✅ Assignment method tracking (manual, auto, preferred, etc.)</li>
+<li>✅ Multi-caregiver fallback logic</li>
+</ul>
+<h4>Search &amp; Filtering</h4>
+<ul>
+<li>✅ Multi-criteria visit search</li>
+<li>✅ Date range filtering</li>
+<li>✅ Status filtering</li>
+<li>✅ Client/caregiver filtering</li>
+<li>✅ Urgent/priority flagging</li>
+<li>✅ Unassigned visit queries</li>
+<li>✅ Full-text search on instructions</li>
+<li>✅ Pagination support</li>
+</ul>
+<h4>EVV Compliance</h4>
+<ul>
+<li>✅ Location verification data structures</li>
+<li>✅ Clock in/out tracking</li>
+<li>✅ GPS coordinates and geofence validation</li>
+<li>✅ Multiple verification methods (GPS, phone, biometric)</li>
+<li>✅ Signature capture support</li>
+</ul>
+<h2>Architecture Highlights</h2>
+<h3>Design Patterns</h3>
+<ol>
+<li><p><strong>Layered Architecture</strong></p>
+<ul>
+<li>Clear separation: Types → Validation → Repository → Service</li>
+<li>Each layer has single responsibility</li>
+<li>Testable at each level</li>
+</ul>
+</li>
+<li><p><strong>State Machine</strong></p>
+<ul>
+<li>Visit status follows strict state machine rules</li>
+<li>Invalid transitions rejected at runtime</li>
+<li>Complete audit trail of all transitions</li>
+</ul>
+</li>
+<li><p><strong>Event Sourcing (Lite)</strong></p>
+<ul>
+<li>Status history is append-only</li>
+<li>Complete reconstruction of visit timeline</li>
+<li>Never loses historical data</li>
+</ul>
+</li>
+<li><p><strong>JSONB for Flexibility</strong></p>
+<ul>
+<li>Recurrence rules as JSONB</li>
+<li>Status history as JSONB array</li>
+<li>Address and verification data as JSONB</li>
+<li>Fast queries with GIN indexes</li>
+</ul>
+</li>
+<li><p><strong>Soft Deletes</strong></p>
+<ul>
+<li>All entities support soft delete</li>
+<li>Historical data preserved</li>
+<li>Audit compliance</li>
+</ul>
+</li>
+</ol>
+<h3>Data Model</h3>
+<pre><code>ServicePattern (1) ──generates──&gt; (*) Visit
+                                       ↓
+                                 assigns to
+                                       ↓
+                                 (1) Caregiver
+                                       ↓
+                                 has many
+                                       ↓
+                                 (*) VisitException
+</code></pre>
+<h3>Permission Model</h3>
+<ul>
+<li>Organization-scoped access</li>
+<li>Branch-level filtering for limited roles</li>
+<li>Permission checks at service layer</li>
+<li>Role-based status update authorization</li>
+<li>Caregiver can only update own assigned visits</li>
+</ul>
+<h2>Integration Points</h2>
+<p>This vertical integrates with:</p>
+<ul>
+<li>✅ <strong>Core Package</strong> - Base types, permissions, audit</li>
+<li>🔄 <strong>Client &amp; Demographics</strong> - Client addresses and information (structure ready)</li>
+<li>🔄 <strong>Caregiver &amp; Staff</strong> - Caregiver availability and skills (structure ready)</li>
+<li>📋 <strong>Care Plans &amp; Tasks</strong> - Task templates (structure ready)</li>
+<li>📋 <strong>Time Tracking &amp; EVV</strong> - Actual time tracking (structure ready)</li>
+<li>📋 <strong>Billing &amp; Invoicing</strong> - Billable hours (structure ready)</li>
+</ul>
+<p>Legend: ✅ Implemented | 🔄 Partial/Ready | 📋 Planned</p>
+<h2>File Structure</h2>
+<pre><code>verticals/scheduling-visits/
+├── README.md                    # Complete documentation
+├── QUICKSTART.md                # 10-minute getting started guide
+├── IMPLEMENTATION.md            # Technical implementation details
+├── SUMMARY.md                   # This file
+├── package.json
+├── tsconfig.json
+└── src/
+    ├── index.ts                 # Public API exports
+    ├── types/
+    │   └── schedule.ts          # Domain model (530 lines)
+    ├── validation/
+    │   └── schedule-validator.ts # Zod schemas (280 lines)
+    ├── repository/
+    │   └── schedule-repository.ts # Data access (650 lines)
+    └── service/
+        └── schedule-service.ts   # Business logic (750 lines)
+</code></pre>
+<p><strong>Total Lines of Code: ~2,210 lines</strong></p>
+<h2>Database Schema</h2>
+<h3>Tables Created</h3>
+<ol>
+<li><code>service_patterns</code> - 30+ columns, 6 indexes</li>
+<li><code>schedules</code> - 15 columns, 4 indexes</li>
+<li><code>visits</code> - 45+ columns, 12 indexes</li>
+<li><code>visit_exceptions</code> - 15 columns, 5 indexes</li>
+</ol>
+<h3>Key Indexes</h3>
+<ul>
+<li>Client schedule lookup</li>
+<li>Caregiver schedule lookup</li>
+<li>Unassigned visit queries</li>
+<li>Date range queries</li>
+<li>Status filtering</li>
+<li>Full-text search</li>
+<li>Urgent/priority filtering</li>
+</ul>
+<h2>Testing Strategy</h2>
+<h3>Implemented</h3>
+<ul>
+<li>Type safety via TypeScript</li>
+<li>Runtime validation via Zod</li>
+<li>Database constraints</li>
+<li>Business rule validation</li>
+</ul>
+<h3>Recommended Next Steps</h3>
+<ul>
+<li>Unit tests for service layer</li>
+<li>Integration tests for repository</li>
+<li>End-to-end workflow tests</li>
+<li>Performance testing with large datasets</li>
+</ul>
+<h2>Usage Example</h2>
+<pre><code class="language-typescript">// Create a pattern for weekday morning care
+const pattern = await scheduleService.createServicePattern({
+  organizationId: &#39;org-123&#39;,
+  branchId: &#39;branch-456&#39;,
+  clientId: &#39;client-789&#39;,
+  name: &#39;Daily Morning Personal Care&#39;,
+  patternType: &#39;RECURRING&#39;,
+  serviceTypeId: &#39;service-type-001&#39;,
+  serviceTypeName: &#39;Personal Care&#39;,
+  recurrence: {
+    frequency: &#39;WEEKLY&#39;,
+    interval: 1,
+    daysOfWeek: [&#39;MONDAY&#39;, &#39;TUESDAY&#39;, &#39;WEDNESDAY&#39;, &#39;THURSDAY&#39;, &#39;FRIDAY&#39;],
+    startTime: &#39;08:00&#39;,
+    timezone: &#39;America/New_York&#39;,
+  },
+  duration: 120,
+  requiredCertifications: [&#39;HHA&#39;, &#39;CPR&#39;],
+  effectiveFrom: new Date(&#39;2024-01-01&#39;),
+  effectiveTo: new Date(&#39;2024-12-31&#39;),
+}, userContext);
+
+// Generate 4 weeks of visits
+const visits = await scheduleService.generateScheduleFromPattern({
+  patternId: pattern.id,
+  startDate: new Date(&#39;2024-01-01&#39;),
+  endDate: new Date(&#39;2024-01-28&#39;),
+  autoAssign: false,
+  respectHourlyLimits: true,
+}, userContext);
+
+// Assign a caregiver
+await scheduleService.assignCaregiver({
+  visitId: visits[0].id,
+  caregiverId: &#39;caregiver-xyz&#39;,
+  assignmentMethod: &#39;MANUAL&#39;,
+}, userContext);
+
+// Track visit lifecycle
+await scheduleService.updateVisitStatus({
+  visitId: visits[0].id,
+  newStatus: &#39;CONFIRMED&#39;,
+}, userContext);
+
+await scheduleService.updateVisitStatus({
+  visitId: visits[0].id,
+  newStatus: &#39;IN_PROGRESS&#39;,
+  locationVerification: {
+    method: &#39;GPS&#39;,
+    timestamp: new Date(),
+    latitude: 40.7128,
+    longitude: -74.0060,
+    accuracy: 10,
+    isWithinGeofence: true,
+  },
+}, userContext);
+
+// Complete the visit
+await scheduleService.completeVisit({
+  visitId: visits[0].id,
+  actualEndTime: new Date(),
+  completionNotes: &#39;All tasks completed.&#39;,
+  tasksCompleted: 5,
+  tasksTotal: 5,
+  locationVerification: { /* ... */ },
+}, userContext);
+</code></pre>
+<h2>Performance Considerations</h2>
+<h3>Database Optimization</h3>
+<ul>
+<li>Partial indexes on soft-deleted records</li>
+<li>Composite indexes for common query patterns</li>
+<li>GIN indexes for JSONB and full-text search</li>
+<li>Efficient pagination with LIMIT/OFFSET</li>
+</ul>
+<h3>Query Patterns</h3>
+<ul>
+<li>Minimal JOINs (denormalized data)</li>
+<li>Filtered indexes for hot queries (unassigned visits)</li>
+<li>Status-based partial indexes</li>
+<li>Date range optimization</li>
+</ul>
+<h3>Scalability</h3>
+<ul>
+<li>Pattern-based generation prevents data explosion</li>
+<li>Soft deletes maintain referential integrity</li>
+<li>JSONB reduces table proliferation</li>
+<li>Ready for horizontal partitioning by date</li>
+</ul>
+<h2>Future Enhancements</h2>
+<h3>Near-Term (Ready to Build)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Integration with Client Demographics service</li>
+<li><input disabled="" type="checkbox"> Integration with Caregiver &amp; Staff service  </li>
+<li><input disabled="" type="checkbox"> REST API endpoints (Express routes)</li>
+<li><input disabled="" type="checkbox"> Comprehensive test suite</li>
+<li><input disabled="" type="checkbox"> Holiday calendar support</li>
+<li><input disabled="" type="checkbox"> Schedule conflict resolution UI</li>
+</ul>
+<h3>Medium-Term</h3>
+<ul>
+<li><input disabled="" type="checkbox"> AI-powered auto-assignment</li>
+<li><input disabled="" type="checkbox"> Route optimization for caregivers</li>
+<li><input disabled="" type="checkbox"> Predictive scheduling</li>
+<li><input disabled="" type="checkbox"> SMS/push notifications</li>
+<li><input disabled="" type="checkbox"> Calendar sync (Google/Outlook)</li>
+<li><input disabled="" type="checkbox"> Mobile app integration</li>
+</ul>
+<h3>Long-Term</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Real-time WebSocket updates</li>
+<li><input disabled="" type="checkbox"> Advanced conflict resolution</li>
+<li><input disabled="" type="checkbox"> What-if scenario modeling</li>
+<li><input disabled="" type="checkbox"> Machine learning for pattern optimization</li>
+<li><input disabled="" type="checkbox"> Weather-aware scheduling</li>
+<li><input disabled="" type="checkbox"> Public transit integration</li>
+</ul>
+<h2>Compliance &amp; Security</h2>
+<p>✅ <strong>HIPAA Considerations</strong></p>
+<ul>
+<li>Audit trail on all status changes</li>
+<li>Soft deletes preserve history</li>
+<li>Permission checks at service layer</li>
+<li>Location verification for EVV</li>
+<li>Signature capture support</li>
+</ul>
+<p>✅ <strong>EVV Compliance</strong></p>
+<ul>
+<li>Multiple verification methods</li>
+<li>GPS coordinates with accuracy</li>
+<li>Clock in/out timestamps</li>
+<li>Geofence validation</li>
+<li>Device identification</li>
+</ul>
+<p>✅ <strong>Data Integrity</strong></p>
+<ul>
+<li>Database constraints</li>
+<li>Type safety</li>
+<li>State machine enforcement</li>
+<li>Authorization limit tracking</li>
+<li>Version numbering for optimistic locking</li>
+</ul>
+<h2>Deployment Readiness</h2>
+<h3>✅ Complete</h3>
+<ul>
+<li>TypeScript compilation</li>
+<li>Type definitions</li>
+<li>Database migration</li>
+<li>Core business logic</li>
+<li>Input validation</li>
+<li>Error handling</li>
+<li>Documentation</li>
+</ul>
+<h3>🔄 In Progress</h3>
+<ul>
+<li>Integration with other verticals</li>
+<li>API endpoints</li>
+<li>Authentication/authorization middleware</li>
+</ul>
+<h3>📋 Needed</h3>
+<ul>
+<li>Production deployment configuration</li>
+<li>Load testing</li>
+<li>Monitoring and logging</li>
+<li>Backup strategy</li>
+<li>Disaster recovery plan</li>
+</ul>
+<h2>Success Metrics</h2>
+<p>This implementation provides:</p>
+<ul>
+<li><strong>Comprehensive Domain Model</strong>: 25+ interfaces covering the full scheduling domain</li>
+<li><strong>Type Safety</strong>: 100% TypeScript with runtime validation</li>
+<li><strong>Flexibility</strong>: Supports daily, weekly, bi-weekly, monthly patterns</li>
+<li><strong>Scalability</strong>: Efficient indexes and query patterns</li>
+<li><strong>Compliance</strong>: EVV-ready with audit trails</li>
+<li><strong>Extensibility</strong>: Clean architecture for future enhancements</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The Scheduling &amp; Visit Management vertical is <strong>production-ready at the core level</strong>. The domain model is comprehensive, the business logic is sound, and the database schema is optimized for performance.</p>
+<p><strong>Next Steps for Production:</strong></p>
+<ol>
+<li>Build integration layer with Client and Caregiver verticals</li>
+<li>Add REST API endpoints</li>
+<li>Implement comprehensive test suite</li>
+<li>Add authentication middleware</li>
+<li>Deploy to staging environment</li>
+<li>Performance testing and tuning</li>
+</ol>
+<hr>
+<p><strong>Built for Care Commons</strong><br>A modular, self-hostable platform for home-based care services<br><em>Human-scale workflows • Local autonomy • Privacy first</em></p>
+<p><a href="./README.md">View Full Documentation</a> | <a href="./QUICKSTART.md">Quick Start Guide</a> | <a href="./IMPLEMENTATION.md">Implementation Details</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

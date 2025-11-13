@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Deployment Setup Guide for Care Commons - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🏗️ Architecture & Deployment</span> / 
+      <span>Complete Deployment Setup Guide for Care Commons</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Complete Deployment Setup Guide for Care Commons</h1>
+<p><strong>Two Parallel Deployment Configurations</strong>:</p>
+<ol>
+<li><strong>Vercel + Neon</strong> (Primary - Already Configured)</li>
+<li><strong>Cloudflare Pages/Workers + Supabase</strong> (Alternative - This Guide)</li>
+</ol>
+<p>This document provides comprehensive setup instructions for both deployment options, with a focus on production-ready configurations for a home healthcare compliance application.</p>
+<hr>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#option-1-vercel--neon-current-setup">Option 1: Vercel + Neon (Current Setup)</a></li>
+<li><a href="#option-2-cloudflare--supabase-alternative">Option 2: Cloudflare + Supabase (Alternative)</a></li>
+<li><a href="#database-migration-strategy">Database Migration Strategy</a></li>
+<li><a href="#connection-pooling-best-practices">Connection Pooling Best Practices</a></li>
+<li><a href="#secrets-management">Secrets Management</a></li>
+<li><a href="#github-actions-cicd">GitHub Actions CI/CD</a></li>
+<li><a href="#cost-comparison">Cost Comparison</a></li>
+<li><a href="#production-checklist">Production Checklist</a></li>
+</ul>
+<hr>
+<h2>Prerequisites</h2>
+<h3>Required Tools</h3>
+<pre><code class="language-bash"># Node.js 22.x (required for Vercel compatibility)
+nvm install 22
+nvm use 22
+
+# Verify versions
+node --version  # Should be 22.x
+npm --version   # Should be 10.9.4+
+
+# Install global CLI tools
+npm install -g vercel@latest
+npm install -g wrangler@latest
+
+# Optional: Database CLIs
+npm install -g @neondatabase/cli
+npm install -g supabase
+</code></pre>
+<h3>GitHub Repository Setup</h3>
+<ol>
+<li>Fork or clone the Care Commons repository</li>
+<li>Enable GitHub Actions in your repository settings</li>
+<li>Configure branch protection rules:<ul>
+<li><code>main</code> branch: Production deployments</li>
+<li><code>preview</code> branch: Preview/staging deployments</li>
+<li><code>develop</code> branch: Integration testing (no deployment)</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Option 1: Vercel + Neon (Current Setup)</h2>
+<h3>Architecture Overview</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                     Vercel Edge Network                      │
+│  ┌────────────────┐              ┌─────────────────────┐   │
+│  │  Static Assets │              │ Serverless Functions│   │
+│  │  (React SPA)   │              │   (Express API)     │   │
+│  └────────────────┘              └─────────────────────┘   │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+                           │ Pooled Connection
+                           ▼
+                  ┌────────────────────┐
+                  │   Neon PostgreSQL   │
+                  │  (Serverless DB)    │
+                  │  - Auto-scaling     │
+                  │  - Built-in pooling │
+                  └────────────────────┘
+</code></pre>
+<h3>Neon Database Setup</h3>
+<h4>1. Create Neon Project</h4>
+<pre><code class="language-bash"># Login to Neon
+neon auth
+
+# Create project
+neon projects create --name care-commons-prod --region aws-us-east-2
+
+# Create database
+neon databases create --project-id &lt;PROJECT_ID&gt; --name care_commons_production
+
+# Get connection strings
+neon connection-string &lt;DATABASE_ID&gt;
+</code></pre>
+<h4>2. Neon Connection Strings</h4>
+<p>Neon provides two types of connection strings:</p>
+<pre><code class="language-bash"># Pooled connection (use for Vercel serverless functions)
+postgres://user:pass@ep-xxx-xxx.pooler.us-east-2.aws.neon.tech/care_commons_production?sslmode=require
+
+# Direct connection (use for migrations only)
+postgres://user:pass@ep-xxx-xxx.us-east-2.aws.neon.tech/care_commons_production?sslmode=require
+</code></pre>
+<p><strong>CRITICAL</strong>: Always use the pooled connection string (contains <code>.pooler.</code>) for serverless deployments.</p>
+<h4>3. Neon Configuration Best Practices</h4>
+<pre><code class="language-typescript">// For Vercel serverless functions - use Neon&#39;s HTTP driver
+import { neon } from &#39;@neondatabase/serverless&#39;;
+
+export const sql = neon(process.env.DATABASE_URL!);
+
+// For long-running operations (migrations)
+import { Pool } from &#39;pg&#39;;
+
+export const pool = new Pool({
+  connectionString: process.env.DATABASE_URL_UNPOOLED,
+  ssl: { rejectUnauthorized: false },
+  max: 10, // Neon&#39;s pooler handles this
+});
+</code></pre>
+<h3>Vercel Setup</h3>
+<h4>1. Install Vercel CLI and Link Project</h4>
+<pre><code class="language-bash"># Login to Vercel
+vercel login
+
+# Link project
+cd /Users/bedwards/care-commons
+vercel link
+
+# Follow prompts:
+# - Scope: Your Vercel account
+# - Link to existing project? No (if first time)
+# - Project name: care-commons
+</code></pre>
+<h4>2. Configure Environment Variables</h4>
+<pre><code class="language-bash"># Production environment variables
+vercel env add DATABASE_URL production
+# Paste your Neon POOLED connection string
+
+vercel env add DATABASE_URL_UNPOOLED production
+# Paste your Neon DIRECT connection string
+
+vercel env add JWT_SECRET production
+# Generate: openssl rand -base64 32
+
+vercel env add JWT_REFRESH_SECRET production
+# Generate: openssl rand -base64 32
+
+vercel env add SESSION_SECRET production
+# Generate: openssl rand -base64 32
+
+vercel env add ENCRYPTION_KEY production
+# Generate: openssl rand -hex 32
+
+# Preview environment (repeat for preview)
+vercel env add DATABASE_URL preview
+vercel env add JWT_SECRET preview
+vercel env add JWT_REFRESH_SECRET preview
+vercel env add SESSION_SECRET preview
+vercel env add ENCRYPTION_KEY preview
+</code></pre>
+<h4>3. Verify Vercel Configuration</h4>
+<p>Your existing <code>vercel.json</code> is already configured correctly:</p>
+<pre><code class="language-json">{
+  &quot;$schema&quot;: &quot;https://openapi.vercel.sh/vercel.json&quot;,
+  &quot;version&quot;: 2,
+  &quot;regions&quot;: [&quot;iad1&quot;],
+  &quot;functions&quot;: {
+    &quot;api/index.ts&quot;: {
+      &quot;includeFiles&quot;: &quot;{packages,verticals}/**/dist/**&quot;
+    }
+  },
+  &quot;rewrites&quot;: [
+    {
+      &quot;source&quot;: &quot;/api/:path*&quot;,
+      &quot;destination&quot;: &quot;/api&quot;
+    },
+    {
+      &quot;source&quot;: &quot;/health&quot;,
+      &quot;destination&quot;: &quot;/api&quot;
+    },
+    {
+      &quot;source&quot;: &quot;/(.*)&quot;,
+      &quot;destination&quot;: &quot;/index.html&quot;
+    }
+  ]
+}
+</code></pre>
+<h3>GitHub Secrets for Vercel Deployment</h3>
+<p>Add these secrets to your GitHub repository:</p>
+<pre><code class="language-bash"># In GitHub: Settings → Secrets and variables → Actions → New repository secret
+
+VERCEL_TOKEN=&lt;your_vercel_token&gt;
+VERCEL_ORG_ID=&lt;your_vercel_org_id&gt;
+VERCEL_PROJECT_ID=&lt;your_vercel_project_id&gt;
+DATABASE_URL=&lt;neon_pooled_connection_string&gt;
+PREVIEW_DATABASE_URL=&lt;neon_preview_pooled_connection_string&gt;
+JWT_SECRET=&lt;generated_secret&gt;
+JWT_REFRESH_SECRET=&lt;generated_secret&gt;
+SESSION_SECRET=&lt;generated_secret&gt;
+ENCRYPTION_KEY=&lt;generated_key&gt;
+</code></pre>
+<h3>Deploy to Vercel</h3>
+<pre><code class="language-bash"># Manual deployment (for testing)
+npm run build
+vercel deploy --prod
+
+# Automatic deployment (via GitHub Actions)
+git push origin main  # Triggers production deployment
+git push origin preview  # Triggers preview deployment
+</code></pre>
+<h3>Verify Vercel Deployment</h3>
+<pre><code class="language-bash"># Check health endpoint
+curl https://care-commons.vercel.app/health
+
+# Expected response:
+{
+  &quot;status&quot;: &quot;healthy&quot;,
+  &quot;database&quot;: &quot;connected&quot;,
+  &quot;timestamp&quot;: &quot;2025-11-12T...&quot;
+}
+
+# Check frontend
+curl https://care-commons.vercel.app
+
+# Test authentication
+curl -X POST https://care-commons.vercel.app/api/auth/login \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;email&quot;:&quot;admin@carecommons.example&quot;,&quot;password&quot;:&quot;your_password&quot;}&#39;
+</code></pre>
+<hr>
+<h2>Option 2: Cloudflare + Supabase (Alternative)</h2>
+<h3>Architecture Overview</h3>
+<pre><code>┌────────────────────────────────────────────────────────────────┐
+│                  Cloudflare Global Network                      │
+│  ┌──────────────────┐          ┌──────────────────────────┐   │
+│  │ Cloudflare Pages │          │  Cloudflare Workers       │   │
+│  │  (Static Assets) │          │  (Serverless API)         │   │
+│  └──────────────────┘          └──────────────────────────┘   │
+│                                           │                     │
+│                                           ▼                     │
+│                                  ┌─────────────────┐           │
+│                                  │   Hyperdrive    │           │
+│                                  │ (Connection     │           │
+│                                  │  Pooling)       │           │
+│                                  └─────────────────┘           │
+└────────────────────────────────────────┬───────────────────────┘
+                                         │
+                                         ▼
+                              ┌─────────────────────┐
+                              │  Supabase Postgres  │
+                              │  (Managed DB)       │
+                              │  - PgBouncer pooler │
+                              │  - Auto-backups     │
+                              └─────────────────────┘
+</code></pre>
+<h3>Why Hyperdrive is Essential</h3>
+<p><strong>Cloudflare Workers cannot maintain persistent database connections</strong> because:</p>
+<ul>
+<li>Workers are stateless and distributed globally</li>
+<li>Each request may hit a different data center</li>
+<li>Workers spin up and down dynamically</li>
+</ul>
+<p><strong>Hyperdrive solves this by:</strong></p>
+<ul>
+<li>Creating regional connection pools</li>
+<li>Caching connections near your database</li>
+<li>Multiplexing queries over fewer connections</li>
+<li>Reducing latency with smart routing</li>
+</ul>
+<p><strong>Without Hyperdrive</strong>: You&#39;ll quickly exhaust database connections (typically 100-200 max connections) and experience connection errors.</p>
+<h3>Supabase Setup</h3>
+<h4>1. Create Supabase Project</h4>
+<p>Visit <a href="https://supabase.com/dashboard/new/aoxifllwcujpinwfaxmu">https://supabase.com/dashboard/new/aoxifllwcujpinwfaxmu</a></p>
+<p>Or use CLI:</p>
+<pre><code class="language-bash"># Login
+supabase login
+
+# Create project (or link existing)
+supabase projects create care-commons-prod \
+  --org-id &lt;YOUR_ORG_ID&gt; \
+  --db-password &quot;&lt;PASSWORD_FROM_supabase-password.txt&gt;&quot; \
+  --region us-east-1
+
+# Get project details
+supabase projects list
+</code></pre>
+<h4>2. Get Supabase Connection Strings</h4>
+<p>In Supabase Dashboard → Project Settings → Database:</p>
+<pre><code class="language-bash"># Direct connection (for migrations) - Port 5432
+postgres://postgres:[password]@db.[project-ref].supabase.co:5432/postgres
+
+# Transaction pooler (for applications) - Port 6543
+postgres://postgres.[project-ref]:[password]@aws-0-us-east-1.pooler.supabase.com:6543/postgres
+
+# IMPORTANT: Add ?pgbouncer=true query parameter for pooler
+postgres://postgres.[project-ref]:[password]@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+</code></pre>
+<p><strong>Your Supabase Password</strong>: <code>-Q$gsyPD788qv!S</code> (from <code>supabase-password.txt</code>)</p>
+<p><strong>Your Project Reference</strong>: <code>aoxifllwcujpinwfaxmu</code> (from the URL you provided)</p>
+<h4>3. Configure Supabase Connection Pooling</h4>
+<p>Supabase uses PgBouncer with two modes:</p>
+<p><strong>Transaction Mode (Port 6543)</strong> - Use for Cloudflare Workers</p>
+<ul>
+<li>Each transaction gets a connection</li>
+<li>Best for serverless (short-lived operations)</li>
+<li>Add <code>?pgbouncer=true</code> to connection string</li>
+</ul>
+<p><strong>Session Mode (Port 5432)</strong> - Use for migrations</p>
+<ul>
+<li>Each client session gets a connection</li>
+<li>Use for long-running operations</li>
+<li>Direct database access</li>
+</ul>
+<pre><code class="language-typescript">// Example connection strings
+const SUPABASE_DIRECT = &#39;postgres://postgres:[pwd]@db.aoxifllwcujpinwfaxmu.supabase.co:5432/postgres&#39;;
+const SUPABASE_POOLER = &#39;postgres://postgres.aoxifllwcujpinwfaxmu:[pwd]@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true&#39;;
+</code></pre>
+<h3>Cloudflare Setup</h3>
+<h4>1. Install Wrangler CLI</h4>
+<pre><code class="language-bash"># Already installed globally
+wrangler --version
+
+# Login to Cloudflare
+wrangler login
+
+# Get account ID (save this)
+wrangler whoami
+</code></pre>
+<h4>2. Create Hyperdrive Configuration</h4>
+<p><strong>This is CRITICAL for Postgres from Workers</strong>:</p>
+<pre><code class="language-bash"># Create Hyperdrive with your Supabase pooler connection
+wrangler hyperdrive create care-commons-db \
+  --connection-string=&quot;postgres://postgres.aoxifllwcujpinwfaxmu:-Q\$gsyPD788qv\!S@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true&quot;
+
+# Output will include:
+# Successfully created a new Hyperdrive!
+# 
+# [[hyperdrive]]
+# binding = &quot;HYPERDRIVE&quot;
+# id = &quot;a1b2c3d4e5f6...&quot;
+#
+# Copy this ID - you&#39;ll need it for wrangler.toml
+</code></pre>
+<p><strong>Important</strong>: Escape special characters in your password when using command line:</p>
+<ul>
+<li><code>$</code> becomes <code>\$</code></li>
+<li><code>!</code> becomes <code>\!</code></li>
+</ul>
+<h4>3. Update wrangler.toml</h4>
+<p>Replace the <code>REPLACE_WITH_HYPERDRIVE_ID_AFTER_CREATION</code> placeholder with your actual Hyperdrive ID.</p>
+<p>See updated <code>wrangler.toml</code> configuration below.</p>
+<h4>4. Create Cloudflare Pages Project</h4>
+<pre><code class="language-bash"># Create Pages project
+wrangler pages project create care-commons-web
+
+# Or link to existing project
+wrangler pages project list
+</code></pre>
+<h4>5. Configure Cloudflare Secrets</h4>
+<pre><code class="language-bash"># Set secrets for Workers
+wrangler secret put DATABASE_URL
+# Paste: postgres://postgres.aoxifllwcujpinwfaxmu:-Q$gsyPD788qv!S@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+
+wrangler secret put JWT_SECRET
+# Generate: openssl rand -base64 32
+
+wrangler secret put JWT_REFRESH_SECRET
+wrangler secret put SESSION_SECRET
+wrangler secret put ENCRYPTION_KEY
+# Generate: openssl rand -hex 32
+
+wrangler secret put SUPABASE_ANON_KEY
+# From Supabase Dashboard → Settings → API → anon public
+
+wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+# From Supabase Dashboard → Settings → API → service_role (keep secret!)
+
+# List secrets to verify
+wrangler secret list
+</code></pre>
+<h3>GitHub Secrets for Cloudflare Deployment</h3>
+<p>Add these to GitHub: Settings → Secrets and variables → Actions:</p>
+<pre><code>CLOUDFLARE_API_TOKEN=&lt;your_cloudflare_api_token&gt;
+CLOUDFLARE_ACCOUNT_ID=&lt;your_cloudflare_account_id&gt;
+SUPABASE_ACCESS_TOKEN=&lt;supabase_access_token&gt;
+SUPABASE_PROJECT_ID=aoxifllwcujpinwfaxmu
+SUPABASE_DB_PASSWORD=-Q$gsyPD788qv!S
+SUPABASE_DATABASE_URL=postgres://postgres.aoxifllwcujpinwfaxmu:-Q$gsyPD788qv!S@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true
+SUPABASE_ANON_KEY=&lt;from_supabase_dashboard&gt;
+SUPABASE_SERVICE_ROLE_KEY=&lt;from_supabase_dashboard&gt;
+</code></pre>
+<h3>Creating Cloudflare API Token</h3>
+<ol>
+<li>Go to Cloudflare Dashboard → My Profile → API Tokens</li>
+<li>Click &quot;Create Token&quot;</li>
+<li>Use &quot;Edit Cloudflare Workers&quot; template</li>
+<li>Add permissions:<ul>
+<li>Account → Cloudflare Pages → Edit</li>
+<li>Account → Workers Scripts → Edit</li>
+<li>Zone → Workers Routes → Edit</li>
+</ul>
+</li>
+<li>Set Account Resources to your account</li>
+<li>Create token and save securely</li>
+</ol>
+<h3>Deploy to Cloudflare</h3>
+<pre><code class="language-bash"># Deploy Workers (API)
+wrangler deploy --env production
+
+# Deploy Pages (Frontend)
+cd packages/web
+npm run build
+cd ../..
+wrangler pages deploy public --project-name=care-commons-web --branch=main
+
+# Or use GitHub Actions (automatic)
+git push origin main
+</code></pre>
+<h3>Verify Cloudflare Deployment</h3>
+<pre><code class="language-bash"># Check Workers deployment
+curl https://care-commons-api.your-subdomain.workers.dev/health
+
+# Check Pages deployment
+curl https://care-commons-web.pages.dev
+
+# Test with Hyperdrive
+curl https://care-commons-api.your-subdomain.workers.dev/api/health
+</code></pre>
+<hr>
+<h2>Database Migration Strategy</h2>
+<h3>Migration Files Location</h3>
+<pre><code>packages/core/migrations/
+├── 001_initial_schema.sql
+├── 002_add_evv_tables.sql
+├── 003_add_state_compliance.sql
+└── ...
+</code></pre>
+<h3>Running Migrations</h3>
+<h4>For Neon (Vercel)</h4>
+<pre><code class="language-bash"># Use unpooled connection for migrations
+export DATABASE_URL=&quot;postgres://user:pass@ep-xxx.us-east-2.aws.neon.tech/care_commons_production?sslmode=require&quot;
+
+# Run migrations
+npm run db:migrate
+
+# Verify migration status
+npm run db:migrate:status
+
+# Rollback if needed
+npm run db:migrate:rollback
+</code></pre>
+<h4>For Supabase (Cloudflare)</h4>
+<pre><code class="language-bash"># Use direct connection (port 5432) for migrations
+export DATABASE_URL=&quot;postgres://postgres:-Q\$gsyPD788qv\!S@db.aoxifllwcujpinwfaxmu.supabase.co:5432/postgres&quot;
+
+# Run migrations
+npm run db:migrate
+
+# Or use Supabase CLI
+supabase db push
+</code></pre>
+<h3>Migration Best Practices</h3>
+<ol>
+<li><strong>Always test migrations locally first</strong></li>
+<li><strong>Use transactions</strong> for atomic changes</li>
+<li><strong>Add indexes after data loads</strong> to avoid locking</li>
+<li><strong>Use <code>IF NOT EXISTS</code></strong> for idempotent migrations</li>
+<li><strong>Keep migrations reversible</strong> when possible</li>
+</ol>
+<p>Example migration:</p>
+<pre><code class="language-sql">-- Migration: Add visit geofencing fields
+-- Date: 2025-11-12
+
+BEGIN;
+
+-- Add columns with IF NOT EXISTS safety
+ALTER TABLE visits 
+ADD COLUMN IF NOT EXISTS geofence_radius_meters INTEGER DEFAULT 100,
+ADD COLUMN IF NOT EXISTS gps_accuracy_meters DECIMAL(10,2),
+ADD COLUMN IF NOT EXISTS clock_in_location JSONB,
+ADD COLUMN IF NOT EXISTS clock_out_location JSONB;
+
+-- Add indexes for geofencing queries
+CREATE INDEX IF NOT EXISTS idx_visits_geofence 
+ON visits (clock_in_location) 
+WHERE clock_in_location IS NOT NULL;
+
+-- Add check constraint for Texas compliance (100m + accuracy)
+ALTER TABLE visits 
+ADD CONSTRAINT IF NOT EXISTS chk_geofence_texas 
+CHECK (
+  (state &lt;&gt; &#39;TX&#39;) OR 
+  (geofence_radius_meters &gt;= 100)
+);
+
+COMMIT;
+</code></pre>
+<hr>
+<h2>Connection Pooling Best Practices</h2>
+<h3>Vercel + Neon Pooling</h3>
+<p><strong>Use Neon&#39;s built-in pooler</strong> - it&#39;s optimized for serverless:</p>
+<pre><code class="language-typescript">// ✅ CORRECT - Use pooled connection
+import { neon } from &#39;@neondatabase/serverless&#39;;
+
+const sql = neon(process.env.DATABASE_URL); // pooler endpoint
+
+export async function handler(req, res) {
+  const result = await sql`SELECT * FROM clients LIMIT 10`;
+  return res.json(result);
+}
+</code></pre>
+<p><strong>Configuration</strong>:</p>
+<ul>
+<li>Max connections: Handled by Neon pooler (no config needed)</li>
+<li>Connection mode: Transaction mode (automatic)</li>
+<li>SSL: Always enabled (enforced by Neon)</li>
+</ul>
+<p><strong>Why it works</strong>:</p>
+<ul>
+<li>Neon&#39;s pooler is PgBouncer in transaction mode</li>
+<li>Optimized for serverless cold starts</li>
+<li>Automatically manages connection lifecycle</li>
+<li>Includes connection caching</li>
+</ul>
+<h3>Cloudflare + Supabase Pooling</h3>
+<p><strong>Use Hyperdrive + Supabase pooler</strong> - two layers of pooling:</p>
+<pre><code class="language-typescript">// ✅ CORRECT - Use Hyperdrive binding
+import { Pool } from &#39;pg&#39;;
+
+export interface Env {
+  HYPERDRIVE: {
+    connectionString: string;
+  };
+}
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const pool = new Pool({
+      connectionString: env.HYPERDRIVE.connectionString,
+      ssl: { rejectUnauthorized: false },
+      max: 1, // Hyperdrive manages pooling
+    });
+
+    const result = await pool.query(&#39;SELECT * FROM clients LIMIT 10&#39;);
+    return Response.json(result.rows);
+  }
+};
+</code></pre>
+<p><strong>Configuration</strong>:</p>
+<ul>
+<li>Supabase pooler: Transaction mode (port 6543)</li>
+<li>Hyperdrive: Regional caching + connection reuse</li>
+<li>Worker pool: max: 1 (Hyperdrive handles everything)</li>
+</ul>
+<p><strong>Why Hyperdrive is critical</strong>:</p>
+<ul>
+<li>Workers are distributed globally (thousands of edge locations)</li>
+<li>Without Hyperdrive: Each edge location opens new connections</li>
+<li>With Hyperdrive: Regional pools near database, connection reuse</li>
+<li>Result: 100x fewer database connections</li>
+</ul>
+<h3>Connection Pooling Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Neon Pooler</th>
+<th>Supabase + Hyperdrive</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Built-in pooling</td>
+<td>✅ Yes (PgBouncer)</td>
+<td>✅ Yes (PgBouncer + Hyperdrive)</td>
+</tr>
+<tr>
+<td>Serverless optimized</td>
+<td>✅ Excellent</td>
+<td>✅ Excellent</td>
+</tr>
+<tr>
+<td>Global edge support</td>
+<td>⚠️ Limited (US regions)</td>
+<td>✅ Excellent (Cloudflare global)</td>
+</tr>
+<tr>
+<td>Max connections</td>
+<td>~10000</td>
+<td>~100 (pooler) + unlimited (Hyperdrive)</td>
+</tr>
+<tr>
+<td>Cold start latency</td>
+<td>~50ms</td>
+<td>~20ms (with Hyperdrive)</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Included</td>
+<td>Hyperdrive: $5/month</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Secrets Management</h2>
+<h3>Environment Variables Structure</h3>
+<pre><code class="language-bash"># .env.production (never commit!)
+DATABASE_URL=postgres://...pooled_connection
+DATABASE_URL_UNPOOLED=postgres://...direct_connection
+
+# Authentication
+JWT_SECRET=&lt;base64_32_bytes&gt;
+JWT_REFRESH_SECRET=&lt;base64_32_bytes&gt;
+SESSION_SECRET=&lt;random_string&gt;
+
+# Encryption (for SSN, sensitive data)
+ENCRYPTION_KEY=&lt;hex_64_chars&gt;
+
+# OAuth (if using)
+GOOGLE_CLIENT_ID=xxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=xxx
+
+# EVV Aggregators (Texas)
+HHAEXCHANGE_CLIENT_ID=xxx
+HHAEXCHANGE_CLIENT_SECRET=xxx
+HHAEXCHANGE_BASE_URL=https://api.hhaexchange.com/api
+
+# Geocoding
+GEOCODING_PROVIDER=mapbox
+GEOCODING_API_KEY=xxx
+
+# Monitoring (optional)
+SENTRY_DSN=https://...
+</code></pre>
+<h3>Generating Secrets</h3>
+<pre><code class="language-bash"># JWT secrets (base64, 32 bytes)
+openssl rand -base64 32
+
+# Encryption key (hex, 32 bytes = 64 hex chars)
+openssl rand -hex 32
+
+# Session secret (alphanumeric)
+openssl rand -base64 48 | tr -dc &#39;a-zA-Z0-9&#39; | head -c 32
+</code></pre>
+<h3>Secrets Checklist</h3>
+<p><strong>Vercel</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> <code>DATABASE_URL</code> (pooled)</li>
+<li><input disabled="" type="checkbox"> <code>DATABASE_URL_UNPOOLED</code> (migrations)</li>
+<li><input disabled="" type="checkbox"> <code>JWT_SECRET</code></li>
+<li><input disabled="" type="checkbox"> <code>JWT_REFRESH_SECRET</code></li>
+<li><input disabled="" type="checkbox"> <code>SESSION_SECRET</code></li>
+<li><input disabled="" type="checkbox"> <code>ENCRYPTION_KEY</code></li>
+<li><input disabled="" type="checkbox"> <code>HHAEXCHANGE_CLIENT_ID</code> (if using TX EVV)</li>
+<li><input disabled="" type="checkbox"> <code>HHAEXCHANGE_CLIENT_SECRET</code></li>
+</ul>
+<p><strong>Cloudflare</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> <code>DATABASE_URL</code> (Supabase pooler)</li>
+<li><input disabled="" type="checkbox"> <code>HYPERDRIVE</code> binding (configured in wrangler.toml)</li>
+<li><input disabled="" type="checkbox"> <code>JWT_SECRET</code></li>
+<li><input disabled="" type="checkbox"> <code>JWT_REFRESH_SECRET</code></li>
+<li><input disabled="" type="checkbox"> <code>SESSION_SECRET</code></li>
+<li><input disabled="" type="checkbox"> <code>ENCRYPTION_KEY</code></li>
+<li><input disabled="" type="checkbox"> <code>SUPABASE_ANON_KEY</code></li>
+<li><input disabled="" type="checkbox"> <code>SUPABASE_SERVICE_ROLE_KEY</code></li>
+</ul>
+<p><strong>GitHub Secrets</strong> (for CI/CD):</p>
+<ul>
+<li><input disabled="" type="checkbox"> Vercel: <code>VERCEL_TOKEN</code>, <code>VERCEL_ORG_ID</code>, <code>VERCEL_PROJECT_ID</code></li>
+<li><input disabled="" type="checkbox"> Cloudflare: <code>CLOUDFLARE_API_TOKEN</code>, <code>CLOUDFLARE_ACCOUNT_ID</code></li>
+<li><input disabled="" type="checkbox"> Database: <code>DATABASE_URL</code>, <code>PREVIEW_DATABASE_URL</code>, <code>SUPABASE_DATABASE_URL</code></li>
+<li><input disabled="" type="checkbox"> All application secrets (JWT, session, encryption)</li>
+</ul>
+<hr>
+<h2>GitHub Actions CI/CD</h2>
+<h3>Current Workflow Structure</h3>
+<pre><code>.github/workflows/
+├── ci.yml                    # Lint, typecheck, tests
+├── deploy.yml                # Vercel deployment (main, preview)
+├── deploy-cloudflare.yml     # Cloudflare deployment (alternative)
+├── e2e-tests.yml             # End-to-end tests
+└── security.yml              # Security scanning
+</code></pre>
+<h3>Deployment Flow</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│  Push to branch                                              │
+└────────────────┬────────────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────────────┐
+│  CI Workflow (ci.yml)                                        │
+│  - Lint (turbo run lint)                                     │
+│  - Type check (turbo run typecheck)                          │
+│  - Unit tests (turbo run test)                               │
+│  - Build (turbo run build)                                   │
+└────────────────┬────────────────────────────────────────────┘
+                 │ All checks pass
+                 ▼
+┌─────────────────────────────────────────────────────────────┐
+│  Deploy Workflow (deploy.yml or deploy-cloudflare.yml)      │
+│  - Run database migrations                                   │
+│  - Deploy to target environment                              │
+│  - Run smoke tests                                           │
+│  - Health check                                              │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>Branch Strategy</h3>
+<table>
+<thead>
+<tr>
+<th>Branch</th>
+<th>Environment</th>
+<th>Deployed To</th>
+<th>Database</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>main</code></td>
+<td>Production</td>
+<td>Vercel Production / CF Workers</td>
+<td>Neon Production / Supabase</td>
+</tr>
+<tr>
+<td><code>preview</code></td>
+<td>Preview/Staging</td>
+<td>Vercel Preview / CF Staging</td>
+<td>Neon Preview / Supabase Preview</td>
+</tr>
+<tr>
+<td><code>develop</code></td>
+<td>Development</td>
+<td>None (local only)</td>
+<td>Local Postgres</td>
+</tr>
+<tr>
+<td><code>feature/*</code></td>
+<td>Local</td>
+<td>None</td>
+<td>Local Postgres</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Cost Comparison</h2>
+<h3>Free Tier Limits</h3>
+<h4>Vercel Free Tier</h4>
+<ul>
+<li>✅ 100GB bandwidth/month</li>
+<li>✅ Unlimited API requests</li>
+<li>✅ Serverless function execution included</li>
+<li>✅ Automatic HTTPS</li>
+<li>❌ Limited to hobby projects (non-commercial)</li>
+<li><strong>Paid</strong>: $20/month per team member (Pro)</li>
+</ul>
+<h4>Neon Free Tier</h4>
+<ul>
+<li>✅ 512MB storage</li>
+<li>✅ 191.9 compute hours/month</li>
+<li>✅ 1 project</li>
+<li>✅ Automated backups</li>
+<li>❌ Limited to 1 database per project</li>
+<li><strong>Paid</strong>: $19/month (Pro) for more storage/compute</li>
+</ul>
+<h4>Cloudflare Free Tier</h4>
+<ul>
+<li>✅ 100,000 requests/day (Workers)</li>
+<li>✅ 500 builds/month (Pages)</li>
+<li>✅ Unlimited bandwidth</li>
+<li>✅ Global edge network</li>
+<li>❌ 10ms CPU time per request (Workers)</li>
+<li><strong>Paid</strong>: $5/month (Workers Paid), $1/month (Hyperdrive)</li>
+</ul>
+<h4>Supabase Free Tier</h4>
+<ul>
+<li>✅ 500MB database storage</li>
+<li>✅ 2GB file storage</li>
+<li>✅ 50,000 monthly active users</li>
+<li>✅ Unlimited API requests</li>
+<li>❌ Projects pause after 1 week inactivity</li>
+<li><strong>Paid</strong>: $25/month (Pro) for always-on</li>
+</ul>
+<h3>Cost Projections (Production Scale)</h3>
+<p><strong>Scenario</strong>: 10,000 monthly active users, 1M API requests/month</p>
+<h4>Option 1: Vercel + Neon</h4>
+<ul>
+<li>Vercel Pro: $20/user/month</li>
+<li>Neon Pro: $19/month</li>
+<li>Total: <strong>~$39-59/month</strong> (1-2 team members)</li>
+</ul>
+<h4>Option 2: Cloudflare + Supabase</h4>
+<ul>
+<li>Cloudflare Workers Paid: $5/month</li>
+<li>Hyperdrive: $1/month</li>
+<li>Supabase Pro: $25/month</li>
+<li>Total: <strong>~$31/month</strong></li>
+</ul>
+<p><strong>Winner for cost</strong>: Cloudflare + Supabase (~20% cheaper)</p>
+<p><strong>Winner for simplicity</strong>: Vercel + Neon (better DX, integrated)</p>
+<hr>
+<h2>Production Checklist</h2>
+<h3>Pre-Deployment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> All tests passing (<code>npm run test</code>)</li>
+<li><input disabled="" type="checkbox"> Type checking clean (<code>npm run typecheck</code>)</li>
+<li><input disabled="" type="checkbox"> Linting clean (<code>npm run lint</code>)</li>
+<li><input disabled="" type="checkbox"> Build succeeds (<code>npm run build</code>)</li>
+<li><input disabled="" type="checkbox"> Pre-commit hooks enabled (<code>npm run prepare</code>)</li>
+<li><input disabled="" type="checkbox"> Database migrations tested locally</li>
+<li><input disabled="" type="checkbox"> Environment variables documented</li>
+<li><input disabled="" type="checkbox"> Secrets rotated and secured</li>
+</ul>
+<h3>Database</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Connection pooling configured</li>
+<li><input disabled="" type="checkbox"> Migrations run successfully</li>
+<li><input disabled="" type="checkbox"> Indexes created for performance</li>
+<li><input disabled="" type="checkbox"> Backup strategy in place</li>
+<li><input disabled="" type="checkbox"> Connection strings use SSL</li>
+<li><input disabled="" type="checkbox"> Audit logging enabled</li>
+<li><input disabled="" type="checkbox"> Row-level security configured (Supabase)</li>
+</ul>
+<h3>Security</h3>
+<ul>
+<li><input disabled="" type="checkbox"> HTTPS enforced</li>
+<li><input disabled="" type="checkbox"> CORS configured correctly</li>
+<li><input disabled="" type="checkbox"> JWT secrets are strong (32+ bytes)</li>
+<li><input disabled="" type="checkbox"> Encryption key is unique per environment</li>
+<li><input disabled="" type="checkbox"> API rate limiting enabled</li>
+<li><input disabled="" type="checkbox"> Input validation on all endpoints</li>
+<li><input disabled="" type="checkbox"> SQL injection protection (parameterized queries)</li>
+<li><input disabled="" type="checkbox"> XSS protection headers set</li>
+<li><input disabled="" type="checkbox"> CSRF protection enabled</li>
+</ul>
+<h3>Monitoring</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Health check endpoint working (<code>/health</code>)</li>
+<li><input disabled="" type="checkbox"> Error tracking configured (Sentry optional)</li>
+<li><input disabled="" type="checkbox"> Database performance monitoring</li>
+<li><input disabled="" type="checkbox"> API response time tracking</li>
+<li><input disabled="" type="checkbox"> Deployment notifications set up</li>
+</ul>
+<h3>Compliance (Home Healthcare Specific)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> HIPAA compliance validated</li>
+<li><input disabled="" type="checkbox"> PHI encryption at rest and in transit</li>
+<li><input disabled="" type="checkbox"> Audit trail logging all PHI access</li>
+<li><input disabled="" type="checkbox"> User permissions granular and tested</li>
+<li><input disabled="" type="checkbox"> State-specific EVV requirements met</li>
+<li><input disabled="" type="checkbox"> Background check validation working</li>
+<li><input disabled="" type="checkbox"> Session timeout configured (15 min for PHI access)</li>
+<li><input disabled="" type="checkbox"> Data retention policies implemented</li>
+</ul>
+<h3>Post-Deployment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Smoke tests passed</li>
+<li><input disabled="" type="checkbox"> Health check returns 200</li>
+<li><input disabled="" type="checkbox"> Authentication flow working</li>
+<li><input disabled="" type="checkbox"> Database connectivity verified</li>
+<li><input disabled="" type="checkbox"> Static assets loading</li>
+<li><input disabled="" type="checkbox"> API endpoints responding</li>
+<li><input disabled="" type="checkbox"> No console errors in browser</li>
+<li><input disabled="" type="checkbox"> Performance metrics acceptable</li>
+</ul>
+<hr>
+<h2>Testing Deployments Locally</h2>
+<h3>Vercel Local Development</h3>
+<pre><code class="language-bash"># Run Vercel dev server (simulates serverless functions)
+vercel dev
+
+# Access at http://localhost:3000
+</code></pre>
+<h3>Cloudflare Local Development</h3>
+<pre><code class="language-bash"># Run Wrangler dev (simulates Workers)
+wrangler dev --remote  # Uses remote bindings (Hyperdrive)
+
+# Or with local Supabase
+supabase start  # Starts local Postgres on port 54322
+wrangler dev  # Uses local DATABASE_URL
+</code></pre>
+<hr>
+<h2>Troubleshooting</h2>
+<h3>Vercel Issues</h3>
+<p><strong>Problem</strong>: <code>MODULE_NOT_FOUND</code> errors in serverless functions</p>
+<p><strong>Solution</strong>: Ensure <code>vercel.json</code> includes compiled dist files:</p>
+<pre><code class="language-json">{
+  &quot;functions&quot;: {
+    &quot;api/index.ts&quot;: {
+      &quot;includeFiles&quot;: &quot;{packages,verticals}/**/dist/**&quot;
+    }
+  }
+}
+</code></pre>
+<p><strong>Problem</strong>: Database connection timeout</p>
+<p><strong>Solution</strong>: Verify you&#39;re using Neon&#39;s POOLED connection string (contains <code>.pooler.</code>)</p>
+<h3>Cloudflare Issues</h3>
+<p><strong>Problem</strong>: <code>Error: connect ETIMEDOUT</code> from Workers</p>
+<p><strong>Solution</strong>: Configure Hyperdrive binding properly. Workers cannot connect directly to Postgres.</p>
+<p><strong>Problem</strong>: <code>ReferenceError: require is not defined</code></p>
+<p><strong>Solution</strong>: Enable Node.js compatibility in wrangler.toml:</p>
+<pre><code class="language-toml">node_compat = true
+compatibility_flags = [&quot;nodejs_compat&quot;]
+</code></pre>
+<p><strong>Problem</strong>: Hyperdrive binding not found</p>
+<p><strong>Solution</strong>: Verify Hyperdrive ID in wrangler.toml matches your created Hyperdrive:</p>
+<pre><code class="language-bash">wrangler hyperdrive list
+</code></pre>
+<h3>Database Issues</h3>
+<p><strong>Problem</strong>: Too many connections</p>
+<p><strong>Solution</strong>: </p>
+<ul>
+<li>Neon: Use pooled connection string</li>
+<li>Supabase: Ensure using transaction pooler (port 6543) + Hyperdrive</li>
+</ul>
+<p><strong>Problem</strong>: Migration fails with lock timeout</p>
+<p><strong>Solution</strong>: Ensure no active connections during migration:</p>
+<pre><code class="language-sql">-- Check active connections
+SELECT * FROM pg_stat_activity WHERE datname = &#39;care_commons_production&#39;;
+
+-- Terminate if needed (carefully!)
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity 
+WHERE datname = &#39;care_commons_production&#39; AND pid &lt;&gt; pg_backend_pid();
+</code></pre>
+<hr>
+<h2>Next Steps</h2>
+<ol>
+<li><p><strong>Choose your deployment strategy</strong>:</p>
+<ul>
+<li>Vercel + Neon: Better DX, simpler setup, slightly higher cost</li>
+<li>Cloudflare + Supabase: Lower cost, more control, global edge</li>
+</ul>
+</li>
+<li><p><strong>Set up database</strong>:</p>
+<ul>
+<li>Create project (Neon or Supabase)</li>
+<li>Configure connection pooling</li>
+<li>Run migrations</li>
+<li>Verify connectivity</li>
+</ul>
+</li>
+<li><p><strong>Configure deployment platform</strong>:</p>
+<ul>
+<li>Install CLI tools</li>
+<li>Link project</li>
+<li>Set environment variables</li>
+<li>Configure GitHub secrets</li>
+</ul>
+</li>
+<li><p><strong>Deploy</strong>:</p>
+<ul>
+<li>Test locally first</li>
+<li>Deploy to preview/staging</li>
+<li>Run smoke tests</li>
+<li>Deploy to production</li>
+</ul>
+</li>
+<li><p><strong>Monitor and iterate</strong>:</p>
+<ul>
+<li>Watch error rates</li>
+<li>Monitor database performance</li>
+<li>Collect user feedback</li>
+<li>Optimize as needed</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>Support and Resources</h2>
+<h3>Documentation</h3>
+<ul>
+<li><a href="https://vercel.com/docs">Vercel Deployment Docs</a></li>
+<li><a href="https://neon.tech/docs">Neon Database Docs</a></li>
+<li><a href="https://developers.cloudflare.com/workers/">Cloudflare Workers Docs</a></li>
+<li><a href="https://supabase.com/docs">Supabase Docs</a></li>
+<li><a href="https://developers.cloudflare.com/hyperdrive/">Hyperdrive Docs</a></li>
+</ul>
+<h3>Care Commons Specific</h3>
+<ul>
+<li>Main README: <code>/Users/bedwards/care-commons/README.md</code></li>
+<li>Architecture: <code>/Users/bedwards/care-commons/docs/</code></li>
+<li>Compliance Guide: <code>/Users/bedwards/care-commons/docs/compliance/</code></li>
+<li>EVV Integration: <code>/Users/bedwards/care-commons/verticals/time-tracking-evv/</code></li>
+</ul>
+<h3>Community</h3>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/neighborhood-lab/care-commons/issues">https://github.com/neighborhood-lab/care-commons/issues</a></li>
+<li>Discussions: <a href="https://github.com/neighborhood-lab/care-commons/discussions">https://github.com/neighborhood-lab/care-commons/discussions</a></li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

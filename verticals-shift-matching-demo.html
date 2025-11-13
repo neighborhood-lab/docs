@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shift Matching & Assignment Demo - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>📖 User Guides</span> / 
+      <span>Shift Matching & Assignment Demo</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Shift Matching &amp; Assignment Demo</h1>
+<p>This document provides hands-on demonstrations of the Shift Matching &amp; Assignment vertical, showing real-world workflows for schedulers, caregivers, and administrators.</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#scheduler-workflows">Scheduler Workflows</a></li>
+<li><a href="#caregiver-workflows">Caregiver Workflows</a></li>
+<li><a href="#admin-workflows">Admin Workflows</a></li>
+<li><a href="#analytics--reporting">Analytics &amp; Reporting</a></li>
+</ol>
+<hr>
+<h2>Setup</h2>
+<h3>Database Setup</h3>
+<ol>
+<li>Run the core migration:</li>
+</ol>
+<pre><code class="language-bash">psql -d care_commons -f packages/core/migrations/007_shift_matching.sql
+</code></pre>
+<ol start="2">
+<li>Seed demo data:</li>
+</ol>
+<pre><code class="language-bash">cd packages/core
+npx ts-node scripts/seed-shift-matching.ts
+</code></pre>
+<p>This creates:</p>
+<ul>
+<li><strong>1 default matching configuration</strong> with balanced weights</li>
+<li><strong>10 unassigned visits</strong> spread over the next 7 days</li>
+<li><strong>10 open shifts</strong> with varying requirements and priorities</li>
+<li><strong>Caregiver preferences</strong> for all active caregivers</li>
+<li><strong>3 proposal scenarios</strong>: accepted, rejected, and pending</li>
+</ul>
+<h3>Import the Service</h3>
+<pre><code class="language-typescript">import { Pool } from &#39;pg&#39;;
+import { ShiftMatchingService, ShiftMatchingHandlers } from &#39;@care-commons/shift-matching&#39;;
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const service = new ShiftMatchingService(pool);
+const handlers = new ShiftMatchingHandlers(pool);
+</code></pre>
+<hr>
+<h2>Scheduler Workflows</h2>
+<h3>Workflow 1: Create an Open Shift</h3>
+<p><strong>Scenario</strong>: A client calls to request a visit, but no caregiver is assigned yet.</p>
+<pre><code class="language-typescript">import { UserContext } from &#39;@care-commons/core&#39;;
+
+const context: UserContext = {
+  userId: &#39;scheduler-uuid&#39;,
+  organizationId: &#39;org-uuid&#39;,
+  branchIds: [&#39;branch-uuid&#39;],
+  roles: [&#39;SCHEDULER&#39;],
+  permissions: [&#39;shifts:create&#39;, &#39;shifts:match&#39;],
+};
+
+// Create open shift from an unassigned visit
+const openShift = await handlers.createOpenShift(
+  {
+    visitId: &#39;visit-uuid&#39;,
+    priority: &#39;HIGH&#39;,
+    fillByDate: new Date(&#39;2025-01-30T08:00:00Z&#39;),
+    internalNotes: &#39;Client prefers morning shifts&#39;,
+  },
+  context
+);
+
+console.log(&#39;Open shift created:&#39;, openShift.id);
+console.log(&#39;Status:&#39;, openShift.matchingStatus); // &#39;NEW&#39;
+console.log(&#39;Priority:&#39;, openShift.priority); // &#39;HIGH&#39;
+</code></pre>
+<h3>Workflow 2: Run Matching Algorithm</h3>
+<p><strong>Scenario</strong>: Find the best caregivers for an open shift and send proposals.</p>
+<pre><code class="language-typescript">// Run matching for the open shift
+const result = await handlers.matchOpenShift(
+  openShift.id,
+  {
+    autoPropose: true, // Automatically send proposals to top matches
+    maxCandidates: 5,   // Send to top 5 matches
+  },
+  context
+);
+
+console.log(&#39;Matching complete!&#39;);
+console.log(&#39;Eligible candidates:&#39;, result.eligibleCount);
+console.log(&#39;Ineligible candidates:&#39;, result.ineligibleCount);
+console.log(&#39;Proposals sent:&#39;, result.proposalsCreated.length);
+
+// Review top candidates
+result.candidates.slice(0, 5).forEach((candidate, index) =&gt; {
+  console.log(`\n${index + 1}. ${candidate.caregiverName}`);
+  console.log(`   Score: ${candidate.overallScore}/100 (${candidate.matchQuality})`);
+  console.log(`   Distance: ${candidate.distanceFromShift?.toFixed(1)} miles`);
+  console.log(`   Eligible: ${candidate.isEligible ? &#39;Yes&#39; : &#39;No&#39;}`);
+  
+  if (!candidate.isEligible) {
+    console.log(`   Issues:`);
+    candidate.eligibilityIssues.forEach((issue) =&gt; {
+      console.log(`     - [${issue.severity}] ${issue.message}`);
+    });
+  }
+  
+  console.log(`   Reasons:`);
+  candidate.matchReasons.forEach((reason) =&gt; {
+    const sign = reason.impact === &#39;POSITIVE&#39; ? &#39;+&#39; : reason.impact === &#39;NEGATIVE&#39; ? &#39;-&#39; : &#39;=&#39;;
+    console.log(`     ${sign} ${reason.description}`);
+  });
+});
+</code></pre>
+<p><strong>Example Output</strong>:</p>
+<pre><code>Matching complete!
+Eligible candidates: 6
+Ineligible candidates: 2
+Proposals sent: 5
+
+1. Sarah Johnson
+   Score: 92/100 (EXCELLENT)
+   Distance: 3.2 miles
+   Eligible: Yes
+   Reasons:
+     + Has all required skills and certifications
+     + No schedule conflicts
+     + Close to client location
+     + Preferred by client
+     + Highly reliable performer
+
+2. Michael Chen
+   Score: 85/100 (EXCELLENT)
+   Distance: 7.5 miles
+   Eligible: Yes
+   Reasons:
+     + Has required skills
+     + Available for shift
+     + Has 8 previous visit(s) with this client
+     + Client rating: 4.8/5
+
+3. Emily Rodriguez
+   Score: 78/100 (GOOD)
+   Distance: 12.1 miles
+   Eligible: Yes
+   Reasons:
+     + Perfect skill match
+     + No conflicts
+     = Moderate distance from client
+</code></pre>
+<h3>Workflow 3: Monitor Proposal Responses</h3>
+<p><strong>Scenario</strong>: Check which proposals have been accepted/rejected.</p>
+<pre><code class="language-typescript">// Get all proposals for a shift
+const proposals = await handlers.getProposalsForShift(openShift.id, context);
+
+proposals.forEach((proposal) =&gt; {
+  console.log(`\nCaregiver: ${proposal.caregiverId}`);
+  console.log(`Status: ${proposal.proposalStatus}`);
+  console.log(`Match Score: ${proposal.matchScore}`);
+  console.log(`Sent: ${proposal.sentAt}`);
+  
+  if (proposal.viewedAt) {
+    console.log(`Viewed: ${proposal.viewedAt}`);
+  }
+  
+  if (proposal.proposalStatus === &#39;ACCEPTED&#39;) {
+    console.log(`✅ Accepted at: ${proposal.acceptedAt}`);
+  } else if (proposal.proposalStatus === &#39;REJECTED&#39;) {
+    console.log(`❌ Rejected: ${proposal.rejectionReason}`);
+    console.log(`   Category: ${proposal.rejectionCategory}`);
+  }
+});
+</code></pre>
+<h3>Workflow 4: Manually Create a Proposal</h3>
+<p><strong>Scenario</strong>: Scheduler manually assigns a specific caregiver to a shift.</p>
+<pre><code class="language-typescript">const proposal = await handlers.createManualProposal(
+  {
+    openShiftId: openShift.id,
+    caregiverId: &#39;preferred-caregiver-uuid&#39;,
+    proposalMethod: &#39;MANUAL&#39;,
+    sendNotification: true,
+    notificationMethod: &#39;SMS&#39;,
+    urgencyFlag: true,
+    notes: &#39;Client specifically requested this caregiver&#39;,
+  },
+  context
+);
+
+console.log(&#39;Manual proposal created:&#39;, proposal.id);
+console.log(&#39;Match score:&#39;, proposal.matchScore);
+</code></pre>
+<h3>Workflow 5: Search Open Shifts</h3>
+<p><strong>Scenario</strong>: Find all urgent open shifts that need attention.</p>
+<pre><code class="language-typescript">const urgentShifts = await handlers.searchOpenShifts(
+  {
+    organizationId: &#39;org-uuid&#39;,
+    priority: [&#39;HIGH&#39;, &#39;CRITICAL&#39;],
+    isUrgent: true,
+    matchingStatus: [&#39;NEW&#39;, &#39;NO_MATCH&#39;, &#39;MATCHED&#39;],
+    dateFrom: new Date(),
+    dateTo: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Next 7 days
+  },
+  { page: 1, limit: 20, sortBy: &#39;fill_by_date&#39;, sortOrder: &#39;asc&#39; },
+  context
+);
+
+console.log(`Found ${urgentShifts.total} urgent shifts:`);
+urgentShifts.items.forEach((shift) =&gt; {
+  console.log(`\n- ${shift.scheduledDate} ${shift.startTime}`);
+  console.log(`  Client: ${shift.clientId}`);
+  console.log(`  Priority: ${shift.priority}`);
+  console.log(`  Status: ${shift.matchingStatus}`);
+  console.log(`  Fill by: ${shift.fillByDate}`);
+  console.log(`  Attempts: ${shift.matchAttempts}`);
+});
+</code></pre>
+<hr>
+<h2>Caregiver Workflows</h2>
+<h3>Workflow 1: Browse Available Shifts</h3>
+<p><strong>Scenario</strong>: Caregiver opens the app to see shifts they&#39;re eligible for.</p>
+<pre><code class="language-typescript">const caregiverContext: UserContext = {
+  userId: &#39;caregiver-uuid&#39;,
+  organizationId: &#39;org-uuid&#39;,
+  branchIds: [&#39;branch-uuid&#39;],
+  roles: [&#39;CAREGIVER&#39;],
+  permissions: [&#39;shifts:view&#39;, &#39;proposals:respond&#39;],
+};
+
+const availableShifts = await handlers.getAvailableShifts(
+  caregiverContext.userId,
+  caregiverContext
+);
+
+console.log(`\n📋 Available Shifts for You (${availableShifts.length}):\n`);
+
+availableShifts.forEach((candidate, index) =&gt; {
+  console.log(`${index + 1}. ${candidate.openShift.scheduledDate} ${candidate.openShift.startTime}-${candidate.openShift.endTime}`);
+  console.log(`   Client: ${candidate.openShift.clientId}`);
+  console.log(`   Location: ${candidate.distanceFromShift?.toFixed(1)} miles away`);
+  console.log(`   Match: ${candidate.overallScore}/100 (${candidate.matchQuality})`);
+  console.log(`   Duration: ${candidate.openShift.duration} minutes`);
+  
+  if (candidate.previousVisitsWithClient &gt; 0) {
+    console.log(`   💙 You&#39;ve visited this client ${candidate.previousVisitsWithClient} times before`);
+  }
+  
+  if (candidate.warnings.length &gt; 0) {
+    console.log(`   ⚠️  ${candidate.warnings.join(&#39;, &#39;)}`);
+  }
+  
+  console.log(&#39;&#39;);
+});
+</code></pre>
+<p><strong>Example Output</strong>:</p>
+<pre><code>📋 Available Shifts for You (8):
+
+1. 2025-01-26 08:00:00-10:00:00
+   Client: client-abc-123
+   Location: 3.2 miles away
+   Match: 92/100 (EXCELLENT)
+   Duration: 120 minutes
+   💙 You&#39;ve visited this client 5 times before
+
+2. 2025-01-26 14:00:00-16:00:00
+   Client: client-def-456
+   Location: 8.7 miles away
+   Match: 78/100 (GOOD)
+   Duration: 120 minutes
+   ⚠️  Some credentials are expiring soon
+
+3. 2025-01-27 09:00:00-11:00:00
+   Client: client-ghi-789
+   Location: 5.1 miles away
+   Match: 85/100 (EXCELLENT)
+   Duration: 120 minutes
+</code></pre>
+<h3>Workflow 2: View Pending Proposals</h3>
+<p><strong>Scenario</strong>: Check shift proposals sent by the scheduler.</p>
+<pre><code class="language-typescript">const proposals = await handlers.getCaregiverProposals(
+  caregiverContext.userId,
+  [&#39;PENDING&#39;, &#39;SENT&#39;, &#39;VIEWED&#39;],
+  caregiverContext
+);
+
+console.log(`\n🔔 You have ${proposals.length} pending shift offer(s):\n`);
+
+proposals.forEach((proposal, index) =&gt; {
+  console.log(`${index + 1}. Shift on ${proposal.scheduledDate} ${proposal.startTime}`);
+  console.log(`   Match Score: ${proposal.matchScore}/100`);
+  console.log(`   Sent: ${proposal.sentAt}`);
+  console.log(`   ${proposal.urgencyFlag ? &#39;🚨 URGENT&#39; : &#39;&#39;}`);
+  console.log(`   Proposal ID: ${proposal.id}`);
+  console.log(&#39;&#39;);
+});
+</code></pre>
+<h3>Workflow 3: Accept a Shift Proposal</h3>
+<p><strong>Scenario</strong>: Caregiver accepts an offered shift.</p>
+<pre><code class="language-typescript">// Mark as viewed first
+await handlers.markProposalViewed(proposal.id, caregiverContext);
+
+// Accept the proposal
+const accepted = await handlers.acceptProposal(
+  proposal.id,
+  &#39;Happy to take this shift! Looking forward to seeing this client again.&#39;,
+  caregiverContext
+);
+
+console.log(&#39;✅ Shift accepted successfully!&#39;);
+console.log(&#39;Accepted at:&#39;, accepted.acceptedAt);
+console.log(&#39;Visit ID:&#39;, accepted.visitId);
+</code></pre>
+<h3>Workflow 4: Reject a Shift Proposal</h3>
+<p><strong>Scenario</strong>: Caregiver cannot take the shift.</p>
+<pre><code class="language-typescript">const rejected = await handlers.rejectProposal(
+  proposal.id,
+  &#39;I have a family commitment that day. Sorry!&#39;,
+  &#39;PERSONAL_REASON&#39;,
+  undefined,
+  caregiverContext
+);
+
+console.log(&#39;Shift declined.&#39;);
+console.log(&#39;Reason:&#39;, rejected.rejectionReason);
+</code></pre>
+<h3>Workflow 5: Self-Select a Shift</h3>
+<p><strong>Scenario</strong>: Caregiver claims an available shift proactively.</p>
+<pre><code class="language-typescript">const claimedProposal = await handlers.claimShift(
+  openShift.id,
+  caregiverContext.userId,
+  caregiverContext
+);
+
+console.log(&#39;🎉 Shift claimed!&#39;);
+console.log(&#39;Proposal:&#39;, claimedProposal.id);
+console.log(&#39;Match score:&#39;, claimedProposal.matchScore);
+console.log(&#39;Auto-accepted:&#39;, claimedProposal.proposalStatus === &#39;ACCEPTED&#39;);
+</code></pre>
+<h3>Workflow 6: Update Shift Preferences</h3>
+<p><strong>Scenario</strong>: Caregiver sets their availability and preferences.</p>
+<pre><code class="language-typescript">await handlers.updateCaregiverPreferences(
+  caregiverContext.userId,
+  {
+    preferredDaysOfWeek: [&#39;MONDAY&#39;, &#39;WEDNESDAY&#39;, &#39;FRIDAY&#39;],
+    preferredTimeRanges: [
+      { startTime: &#39;08:00&#39;, endTime: &#39;16:00&#39; },
+    ],
+    maxTravelDistance: 20, // miles
+    maxHoursPerWeek: 35,
+    willingToAcceptUrgentShifts: true,
+    willingToWorkWeekends: false,
+    willingToWorkHolidays: false,
+    acceptAutoAssignment: true, // Auto-accept excellent matches
+    notificationMethods: [&#39;PUSH&#39;, &#39;SMS&#39;],
+    quietHoursStart: &#39;22:00&#39;,
+    quietHoursEnd: &#39;07:00&#39;,
+  },
+  caregiverContext
+);
+
+console.log(&#39;✅ Preferences updated successfully&#39;);
+</code></pre>
+<hr>
+<h2>Admin Workflows</h2>
+<h3>Workflow 1: Configure Matching Rules</h3>
+<p><strong>Scenario</strong>: Adjust matching algorithm weights for the organization.</p>
+<pre><code class="language-typescript">const adminContext: UserContext = {
+  userId: &#39;admin-uuid&#39;,
+  organizationId: &#39;org-uuid&#39;,
+  branchIds: [],
+  roles: [&#39;ORG_ADMIN&#39;],
+  permissions: [&#39;config:write&#39;],
+};
+
+// Create a new configuration
+const config = await handlers.createConfiguration(
+  {
+    organizationId: adminContext.organizationId,
+    name: &#39;High Priority Configuration&#39;,
+    description: &#39;Optimized for urgent shift fill rates&#39;,
+    weights: {
+      skillMatch: 25,          // Emphasize skills
+      availabilityMatch: 25,   // Must be available
+      proximityMatch: 20,      // Proximity matters
+      preferenceMatch: 5,      // Less weight on preferences
+      experienceMatch: 10,
+      reliabilityMatch: 10,
+      complianceMatch: 5,
+      capacityMatch: 0,
+    },
+    maxTravelDistance: 25,
+    requireExactSkillMatch: true,  // Strict skill matching
+    minScoreForProposal: 70,       // Higher threshold
+    maxProposalsPerShift: 3,       // Fewer proposals
+    proposalExpirationMinutes: 60, // Faster response needed
+    optimizeFor: &#39;FASTEST_FILL&#39;,
+    isActive: true,
+    isDefault: false,
+  },
+  adminContext
+);
+
+console.log(&#39;Configuration created:&#39;, config.id);
+</code></pre>
+<h3>Workflow 2: Expire Stale Proposals</h3>
+<p><strong>Scenario</strong>: Clean up old proposals that weren&#39;t responded to.</p>
+<pre><code class="language-typescript">const result = await handlers.expireStaleProposals(adminContext);
+
+console.log(`${result.expiredCount} stale proposals expired`);
+</code></pre>
+<hr>
+<h2>Analytics &amp; Reporting</h2>
+<h3>Workflow 1: Matching Performance Metrics</h3>
+<p><strong>Scenario</strong>: Review how well the matching system is performing.</p>
+<pre><code class="language-typescript">const metrics = await handlers.getMatchingMetrics(
+  new Date(&#39;2025-01-01&#39;),
+  new Date(&#39;2025-01-31&#39;),
+  adminContext
+);
+
+console.log(&#39;\n📊 Matching Performance (January 2025)\n&#39;);
+console.log(&#39;Total Open Shifts:&#39;, metrics.totalOpenShifts);
+console.log(&#39;Successfully Matched:&#39;, metrics.shiftsMatched);
+console.log(&#39;Match Rate:&#39;, `${metrics.matchRate.toFixed(1)}%`);
+console.log(&#39;Average Match Score:&#39;, metrics.averageMatchScore.toFixed(1));
+console.log(&#39;Average Response Time:&#39;, `${metrics.averageResponseTimeMinutes.toFixed(1)} minutes`);
+console.log(&#39;\nProposal Outcomes:&#39;);
+console.log(&#39;  Accepted:&#39;, metrics.proposalsAccepted);
+console.log(&#39;  Rejected:&#39;, metrics.proposalsRejected);
+console.log(&#39;  Expired:&#39;, metrics.proposalsExpired);
+</code></pre>
+<h3>Workflow 2: Caregiver Performance</h3>
+<p><strong>Scenario</strong>: Evaluate a specific caregiver&#39;s matching behavior.</p>
+<pre><code class="language-typescript">const performance = await handlers.getCaregiverPerformance(
+  &#39;caregiver-uuid&#39;,
+  new Date(&#39;2025-01-01&#39;),
+  new Date(&#39;2025-01-31&#39;),
+  adminContext
+);
+
+console.log(&#39;\n👤 Caregiver Performance\n&#39;);
+console.log(&#39;Proposals Received:&#39;, performance.proposalsReceived);
+console.log(&#39;Acceptance Rate:&#39;, `${performance.acceptanceRate.toFixed(1)}%`);
+console.log(&#39;Average Match Score:&#39;, performance.averageMatchScore.toFixed(1));
+console.log(&#39;Average Response Time:&#39;, `${performance.averageResponseTimeMinutes.toFixed(1)} minutes`);
+</code></pre>
+<h3>Workflow 3: Top Rejection Reasons</h3>
+<p><strong>Scenario</strong>: Identify why caregivers are rejecting shifts.</p>
+<pre><code class="language-typescript">const rejectionReasons = await handlers.getTopRejectionReasons(
+  new Date(&#39;2025-01-01&#39;),
+  new Date(&#39;2025-01-31&#39;),
+  adminContext
+);
+
+console.log(&#39;\n📉 Top Rejection Reasons\n&#39;);
+rejectionReasons.forEach((reason, index) =&gt; {
+  console.log(`${index + 1}. ${reason.category}: ${reason.count} (${reason.percentage}%)`);
+});
+</code></pre>
+<p><strong>Example Output</strong>:</p>
+<pre><code>📉 Top Rejection Reasons
+
+1. TOO_FAR: 45 (32.1%)
+2. TIME_CONFLICT: 38 (27.1%)
+3. PERSONAL_REASON: 25 (17.9%)
+4. PREFER_DIFFERENT_CLIENT: 15 (10.7%)
+5. ALREADY_BOOKED: 12 (8.6%)
+</code></pre>
+<hr>
+<h2>Testing the Demo</h2>
+<h3>Quick Test Script</h3>
+<pre><code class="language-typescript">// demo.ts
+import { Pool } from &#39;pg&#39;;
+import { ShiftMatchingHandlers } from &#39;@care-commons/shift-matching&#39;;
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const handlers = new ShiftMatchingHandlers(pool);
+
+async function runDemo() {
+  // Get first open shift
+  const shifts = await handlers.searchOpenShifts(
+    { matchingStatus: [&#39;NEW&#39;] },
+    { page: 1, limit: 1 },
+    context
+  );
+
+  if (shifts.items.length === 0) {
+    console.log(&#39;No open shifts found. Run seed script first.&#39;);
+    return;
+  }
+
+  const openShift = shifts.items[0];
+  console.log(&#39;Testing with shift:&#39;, openShift.id);
+
+  // Run matching
+  const result = await handlers.matchOpenShift(
+    openShift.id,
+    { autoPropose: true, maxCandidates: 3 },
+    context
+  );
+
+  console.log(`\nMatching complete!`);
+  console.log(`Found ${result.eligibleCount} eligible caregivers`);
+  console.log(`Sent ${result.proposalsCreated.length} proposals`);
+}
+
+runDemo()
+  .then(() =&gt; pool.end())
+  .catch((err) =&gt; {
+    console.error(err);
+    pool.end();
+  });
+</code></pre>
+<p>Run with:</p>
+<pre><code class="language-bash">npx ts-node demo.ts
+</code></pre>
+<hr>
+<h2>Next Steps</h2>
+<ol>
+<li><strong>Integrate with notification service</strong> to send real push/SMS notifications</li>
+<li><strong>Add mobile app integration</strong> for caregiver self-service</li>
+<li><strong>Implement machine learning</strong> to improve match scores over time</li>
+<li><strong>Add route optimization</strong> for consecutive shifts</li>
+<li><strong>Build scheduler dashboard</strong> for visual shift management</li>
+<li><strong>Create caregiver mobile SDK</strong> for easy integration</li>
+</ol>
+<hr>
+<p>For more details, see the <a href="./README.md">README</a> and <a href="./IMPLEMENTATION.md">implementation guide</a>.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

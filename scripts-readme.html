@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Commons Deployment Scripts - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Care Commons Deployment Scripts</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Care Commons Deployment Scripts</h1>
+<p>This directory contains automated setup scripts for deploying Care Commons to production.</p>
+<h2>Available Scripts</h2>
+<h3>🌐 Documentation Website Generator</h3>
+<p><strong>File</strong>: <code>generate-docs-site.ts</code></p>
+<p>Generate a beautiful, searchable static documentation website.</p>
+<pre><code class="language-bash"># Generate documentation site
+npx tsx scripts/generate-docs-site.ts
+
+# Preview locally
+cd docs-site/
+python3 -m http.server 8000
+open http://localhost:8000
+</code></pre>
+<p><strong>What it does</strong>:</p>
+<ol>
+<li>✅ Finds all markdown files in the repository</li>
+<li>✅ Converts them to HTML with syntax highlighting</li>
+<li>✅ Creates responsive navigation with search</li>
+<li>✅ Organizes into 4 categories (Getting Started, Guides, Architecture, Details)</li>
+<li>✅ Generates static site ready for GitHub Pages</li>
+</ol>
+<p><strong>Output</strong>: <code>docs-site/</code> directory (git-ignored, ~196 HTML pages)</p>
+<p>See <code>scripts/DOCS_SITE.md</code> for deployment instructions and customization.</p>
+<hr>
+<h3>📚 Documentation to PDF</h3>
+<p><strong>Files</strong>: <code>combine-docs-simple.ts</code>, <code>combine-docs-to-pdf.ts</code>, <code>docs-to-pdf.sh</code></p>
+<p>Generate a single PDF combining all markdown documentation files.</p>
+<pre><code class="language-bash"># Simple approach (recommended)
+./scripts/docs-to-pdf.sh
+
+# Or with custom output name
+./scripts/docs-to-pdf.sh my-documentation
+
+# Or run TypeScript directly
+npx tsx scripts/combine-docs-simple.ts output.md
+</code></pre>
+<p><strong>What it does</strong>:</p>
+<ol>
+<li>✅ Finds all markdown files in the repository</li>
+<li>✅ Categorizes them (end-user overview, guides, architecture, implementation)</li>
+<li>✅ Combines into a single markdown file</li>
+<li>✅ Converts to PDF with table of contents (if pandoc installed)</li>
+</ol>
+<p><strong>Output</strong>: ~2MB markdown file, ~500+ page PDF</p>
+<p>See <code>scripts/DOCS_TO_PDF.md</code> for detailed instructions.</p>
+<hr>
+<h3>🔷 Vercel + Neon Setup</h3>
+<p><strong>File</strong>: <code>setup-vercel-neon.sh</code></p>
+<p>Automated setup for Vercel + Neon deployment (primary option).</p>
+<pre><code class="language-bash">./scripts/setup-vercel-neon.sh
+</code></pre>
+<p><strong>What it does</strong>:</p>
+<ol>
+<li>✅ Checks Node.js 22.x and npm installation</li>
+<li>✅ Installs Vercel and Neon CLIs</li>
+<li>✅ Creates/links Neon database project</li>
+<li>✅ Generates connection strings (pooled + direct)</li>
+<li>✅ Links Vercel project</li>
+<li>✅ Generates secure secrets (JWT, encryption keys)</li>
+<li>✅ Configures Vercel environment variables</li>
+<li>✅ Runs database migrations</li>
+<li>✅ Seeds demo data (optional)</li>
+<li>✅ Deploys to Vercel</li>
+</ol>
+<p><strong>Time</strong>: ~10 minutes</p>
+<hr>
+<h3>🟠 Cloudflare + Supabase Setup</h3>
+<p><strong>File</strong>: <code>setup-cloudflare-supabase.sh</code></p>
+<p>Automated setup for Cloudflare + Supabase deployment (alternative option).</p>
+<pre><code class="language-bash">./scripts/setup-cloudflare-supabase.sh
+</code></pre>
+<p><strong>What it does</strong>:</p>
+<ol>
+<li>✅ Checks Node.js 22.x and npm installation</li>
+<li>✅ Installs Wrangler and Supabase CLIs</li>
+<li>✅ Configures Supabase connection strings</li>
+<li>✅ Creates Hyperdrive configuration (CRITICAL for Postgres)</li>
+<li>✅ Updates <code>wrangler.toml</code> with Hyperdrive ID</li>
+<li>✅ Generates secure secrets</li>
+<li>✅ Sets Cloudflare Worker secrets</li>
+<li>✅ Runs database migrations</li>
+<li>✅ Seeds demo data (optional)</li>
+<li>✅ Deploys Workers and Pages</li>
+</ol>
+<p><strong>Time</strong>: ~15 minutes</p>
+<hr>
+<h2>Prerequisites</h2>
+<p>Both scripts require:</p>
+<ul>
+<li>✅ Node.js 22.x (<code>nvm install 22 &amp;&amp; nvm use 22</code>)</li>
+<li>✅ npm 10.9.4+ (<code>npm install -g npm@10.9.4</code>)</li>
+<li>✅ Git repository initialized</li>
+<li>✅ Account on deployment platform (Vercel or Cloudflare)</li>
+<li>✅ Account on database platform (Neon or Supabase)</li>
+</ul>
+<hr>
+<h2>Usage</h2>
+<h3>First Time Setup</h3>
+<ol>
+<li><p><strong>Choose your deployment option</strong>:</p>
+<ul>
+<li>Vercel + Neon: Simpler, already configured</li>
+<li>Cloudflare + Supabase: Lower cost, global edge</li>
+</ul>
+</li>
+<li><p><strong>Run the appropriate script</strong>:</p>
+<pre><code class="language-bash"># For Vercel + Neon
+./scripts/setup-vercel-neon.sh
+
+# OR for Cloudflare + Supabase
+./scripts/setup-cloudflare-supabase.sh
+</code></pre>
+</li>
+<li><p><strong>Follow the prompts</strong>:</p>
+<ul>
+<li>Scripts are interactive</li>
+<li>You&#39;ll be asked to confirm each step</li>
+<li>You can skip optional steps (like demo data)</li>
+</ul>
+</li>
+<li><p><strong>Test your deployment</strong>:</p>
+<pre><code class="language-bash"># Vercel
+curl https://your-app.vercel.app/health
+
+# Cloudflare
+curl https://care-commons-api.your-subdomain.workers.dev/health
+</code></pre>
+</li>
+</ol>
+<hr>
+<h2>What Gets Created</h2>
+<h3>Vercel + Neon Script</h3>
+<p><strong>Files created</strong>:</p>
+<ul>
+<li><code>.vercel/project.json</code> - Vercel project configuration</li>
+<li>Connection strings stored in Vercel (not locally)</li>
+</ul>
+<p><strong>Services configured</strong>:</p>
+<ul>
+<li>✅ Neon database project</li>
+<li>✅ Neon database with pooled/direct connections</li>
+<li>✅ Vercel project linked</li>
+<li>✅ Environment variables set (production + preview)</li>
+<li>✅ Database migrated and seeded</li>
+</ul>
+<p><strong>Next steps</strong>:</p>
+<ul>
+<li>Add GitHub secrets for CI/CD</li>
+<li>Push to <code>main</code> or <code>preview</code> branch</li>
+</ul>
+<hr>
+<h3>Cloudflare + Supabase Script</h3>
+<p><strong>Files modified</strong>:</p>
+<ul>
+<li><code>wrangler.toml</code> - Updated with Hyperdrive binding ID</li>
+<li><code>wrangler.toml.bak</code> - Backup of original</li>
+</ul>
+<p><strong>Services configured</strong>:</p>
+<ul>
+<li>✅ Supabase database (existing project)</li>
+<li>✅ Hyperdrive connection pool</li>
+<li>✅ Cloudflare Worker secrets</li>
+<li>✅ Cloudflare Pages project</li>
+<li>✅ Database migrated and seeded</li>
+</ul>
+<p><strong>Next steps</strong>:</p>
+<ul>
+<li>Add GitHub secrets for CI/CD</li>
+<li>Push to <code>main</code> branch</li>
+</ul>
+<hr>
+<h2>Secrets Generated</h2>
+<p>Both scripts generate:</p>
+<pre><code class="language-bash">JWT_SECRET              # 32 bytes, base64 encoded
+JWT_REFRESH_SECRET      # 32 bytes, base64 encoded
+SESSION_SECRET          # 32 bytes, base64 encoded
+ENCRYPTION_KEY          # 32 bytes, hex encoded (64 chars)
+</code></pre>
+<p><strong>IMPORTANT</strong>: These are set automatically but not saved locally. If you need to set them manually later, use:</p>
+<pre><code class="language-bash"># Generate new secrets
+openssl rand -base64 32  # For JWT and session secrets
+openssl rand -hex 32     # For encryption key
+</code></pre>
+<hr>
+<h2>Troubleshooting</h2>
+<h3>Script fails with &quot;Permission denied&quot;</h3>
+<p><strong>Solution</strong>: Make script executable</p>
+<pre><code class="language-bash">chmod +x scripts/setup-vercel-neon.sh
+chmod +x scripts/setup-cloudflare-supabase.sh
+</code></pre>
+<hr>
+<h3>&quot;Command not found: vercel&quot; or &quot;Command not found: wrangler&quot;</h3>
+<p><strong>Solution</strong>: Install CLIs globally</p>
+<pre><code class="language-bash">npm install -g vercel@latest
+npm install -g wrangler@latest
+</code></pre>
+<hr>
+<h3>&quot;Node version mismatch&quot;</h3>
+<p><strong>Solution</strong>: Use Node.js 22.x</p>
+<pre><code class="language-bash">nvm install 22
+nvm use 22
+</code></pre>
+<hr>
+<h3>Hyperdrive creation fails</h3>
+<p><strong>Solution</strong>: Escape special characters in password</p>
+<pre><code class="language-bash"># If password is: -Q$gsyPD788qv!S
+# Use in command: -Q\$gsyPD788qv\!S
+
+wrangler hyperdrive create care-commons-db \
+  --connection-string=&quot;postgres://postgres.aoxifllwcujpinwfaxmu:-Q\$gsyPD788qv\!S@...&quot;
+</code></pre>
+<hr>
+<h3>&quot;Migration failed&quot; errors</h3>
+<p><strong>Solution</strong>: Check database connection</p>
+<pre><code class="language-bash"># Test connection (Neon)
+psql &quot;postgres://user:pass@ep-xxx.us-east-2.aws.neon.tech/care_commons?sslmode=require&quot; -c &quot;SELECT 1&quot;
+
+# Test connection (Supabase)
+psql &quot;postgres://postgres:pass@db.aoxifllwcujpinwfaxmu.supabase.co:5432/postgres&quot; -c &quot;SELECT 1&quot;
+</code></pre>
+<hr>
+<h2>Manual Alternative</h2>
+<p>If you prefer manual setup, see:</p>
+<ul>
+<li><strong>Full guide</strong>: <code>docs/DEPLOYMENT_SETUP_COMPLETE.md</code></li>
+<li><strong>GitHub secrets</strong>: <code>docs/GITHUB_SECRETS.md</code></li>
+</ul>
+<p>Manual setup gives you more control but takes longer.</p>
+<hr>
+<h2>Re-running Scripts</h2>
+<p><strong>Can I run the script again?</strong></p>
+<p>Yes, but:</p>
+<ul>
+<li>⚠️ It may fail if resources already exist</li>
+<li>⚠️ It will regenerate secrets (breaking existing deployments)</li>
+<li>✅ Safe to run for testing/validation</li>
+</ul>
+<p><strong>Better approach</strong>:</p>
+<ul>
+<li>Use <code>vercel env add</code> or <code>wrangler secret put</code> to update individual values</li>
+<li>Use deployment platform dashboards for ongoing management</li>
+</ul>
+<hr>
+<h2>Security Notes</h2>
+<h3>✅ What scripts do:</h3>
+<ul>
+<li>Generate cryptographically secure random secrets</li>
+<li>Set secrets in deployment platforms (not local files)</li>
+<li>Use SSL/TLS for database connections</li>
+<li>Follow least-privilege principles</li>
+</ul>
+<h3>⚠️ What scripts DON&#39;T do:</h3>
+<ul>
+<li>Commit secrets to git</li>
+<li>Save secrets in plain text files</li>
+<li>Reuse secrets across environments</li>
+<li>Expose secrets in logs</li>
+</ul>
+<h3>🔒 Best practices:</h3>
+<ol>
+<li>Run scripts in a secure environment</li>
+<li>Rotate secrets every 90 days</li>
+<li>Use different secrets for prod/preview</li>
+<li>Don&#39;t share terminal history after running scripts</li>
+<li>Review <code>wrangler.toml</code> before committing (secrets should be in comments)</li>
+</ol>
+<hr>
+<h2>Getting Help</h2>
+<p><strong>Script-specific issues</strong>:</p>
+<ul>
+<li>Check script output for error messages</li>
+<li>Verify prerequisites are met</li>
+<li>Review troubleshooting section above</li>
+</ul>
+<p><strong>Deployment issues</strong>:</p>
+<ul>
+<li>See <code>docs/DEPLOYMENT_SETUP_COMPLETE.md#troubleshooting</code></li>
+<li>Check platform status pages:<ul>
+<li>Vercel: <a href="https://www.vercel-status.com/">https://www.vercel-status.com/</a></li>
+<li>Cloudflare: <a href="https://www.cloudflarestatus.com/">https://www.cloudflarestatus.com/</a></li>
+<li>Neon: <a href="https://neonstatus.com/">https://neonstatus.com/</a></li>
+<li>Supabase: <a href="https://status.supabase.com/">https://status.supabase.com/</a></li>
+</ul>
+</li>
+</ul>
+<p><strong>General questions</strong>:</p>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/neighborhood-lab/care-commons/issues">https://github.com/neighborhood-lab/care-commons/issues</a></li>
+<li>Documentation: <code>/docs</code> directory</li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Automated deployment made simple!</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

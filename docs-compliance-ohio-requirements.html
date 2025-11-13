@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ohio Home Healthcare Compliance Requirements - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Ohio Home Healthcare Compliance Requirements</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Ohio Home Healthcare Compliance Requirements</h1>
+<p><strong>State Code</strong>: OH<br><strong>Last Updated</strong>: 2025-11-05<br><strong>Verified By</strong>: Care Commons Compliance Team<br><strong>Next Review Date</strong>: 2026-02-05</p>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#caregiver-credentials">Caregiver Credentials</a></li>
+<li><a href="#client-authorization">Client Authorization</a></li>
+<li><a href="#visit-documentation">Visit Documentation</a></li>
+<li><a href="#electronic-visit-verification-evv">Electronic Visit Verification (EVV)</a></li>
+<li><a href="#data-retention">Data Retention</a></li>
+<li><a href="#privacy--security">Privacy &amp; Security</a></li>
+<li><a href="#quality-standards">Quality Standards</a></li>
+</ol>
+<hr>
+<h2>Overview</h2>
+<p>Ohio&#39;s home healthcare regulations are administered by the <strong>Ohio Department of Medicaid (ODM)</strong> and <strong>Ohio Department of Health (ODH)</strong>. The state uses Sandata as its EVV aggregator (FREE for providers) and has moderate licensing requirements compared to other states.</p>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>FREE Sandata EVV aggregator (major cost savings)</li>
+<li>Balanced geofencing (125m base + 75m tolerance = 200m total)</li>
+<li>10-minute grace periods</li>
+<li>5,000+ home health agencies in state</li>
+<li>Strong managed care presence (MyCare Ohio, Passport)</li>
+</ul>
+<hr>
+<h2>1. Caregiver Credentials</h2>
+<h3>1.1 Background Screening</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Revised Code §173.27 (Criminal Records Check)</li>
+<li>Ohio Revised Code §5164.34 (Medicaid Provider Standards)</li>
+<li>Ohio Administrative Code 5160-1-17 (Home Health Provider Requirements)</li>
+<li>Ohio Administrative Code 5160-58-01 (Personal Care Aide Standards)</li>
+</ul>
+<p><strong>Requirement:</strong>
+All caregivers providing services to Medicaid beneficiaries must undergo criminal background screening before client contact. Ohio requires <strong>FBI and BCI (Bureau of Criminal Investigation)</strong> fingerprint checks.</p>
+<p><strong>Frequency:</strong></p>
+<ul>
+<li><strong>Initial</strong>: Before first client contact</li>
+<li><strong>Renewal</strong>: Every <strong>5 years</strong></li>
+<li><strong>Re-verification triggers</strong>: <ul>
+<li>Break in service exceeding 90 days</li>
+<li>Substantiated incident or allegation</li>
+<li>Change in service type (e.g., moving from non-medical to skilled care)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Disqualifying Offenses:</strong></p>
+<ul>
+<li>Felony convictions within past 5 years (most offenses)</li>
+<li>Certain offenses PERMANENTLY disqualifying:<ul>
+<li>Murder, rape, sexual assault</li>
+<li>Crimes against children or elderly</li>
+<li>Drug trafficking</li>
+<li>Theft or fraud against vulnerable adults</li>
+</ul>
+</li>
+<li>Misdemeanor convictions may be reviewed case-by-case</li>
+</ul>
+<p><strong>How to Verify:</strong></p>
+<ol>
+<li>Submit fingerprints to <strong>Ohio BCI</strong> via approved vendor (e.g., Fieldprint, IdentoGO)</li>
+<li>BCI conducts FBI (federal) and Ohio (state) criminal history check</li>
+<li>Results provided to agency within 3-5 business days</li>
+<li>Agency maintains copy of clearance letter for file</li>
+<li>Ohio BCI Portal: <a href="https://www.ohioattorneygeneral.gov/Business/Services-for-Business/WebCheck">https://www.ohioattorneygeneral.gov/Business/Services-for-Business/WebCheck</a></li>
+</ol>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Database fields needed
+background_check_date: timestamp           // Date clearance received
+background_check_status: enum              // CLEAR, PENDING, ISSUES, EXPIRED
+  - CLEAR: Eligible for client contact
+  - PENDING: Submitted, awaiting results
+  - ISSUES: Disqualifying findings, requires review
+  - EXPIRED: &gt;5 years since check
+background_check_type: &#39;FBI_BCI&#39;           // Ohio requires both FBI and BCI
+background_check_agency: &#39;OHIO_BCI&#39;        // Authority that conducted check
+background_check_documentation: file_ref   // PDF of clearance letter
+background_check_expiration: timestamp     // checkDate + 5 years
+bci_tracking_number: string                // BCI transaction ID for audits
+
+// Validation rules
+- Cannot assign to visit if status != &#39;CLEAR&#39;
+- Cannot assign if expiration &lt; TODAY
+- Warning if expiration within 60 days
+- Blocking if status = &#39;PENDING&#39; or &#39;ISSUES&#39;
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> New hire with FBI+BCI clearance (&lt;5 years old) → Allow assignments</li>
+<li><input disabled="" type="checkbox"> Caregiver with background check from 4.8 years ago → Warning (expiring in ~70 days)</li>
+<li><input disabled="" type="checkbox"> Caregiver with background check from 5+ years ago → Block assignments (expired)</li>
+<li><input disabled="" type="checkbox"> Caregiver with pending FBI/BCI check → Block assignments</li>
+<li><input disabled="" type="checkbox"> Caregiver with disqualifying offense → Permanent block (cannot be overridden)</li>
+<li><input disabled="" type="checkbox"> Caregiver returning after 100-day break → Require new background check</li>
+</ul>
+<p><strong>Edge Cases:</strong></p>
+<ul>
+<li><strong>Out-of-state transfers</strong>: Ohio does NOT accept other states&#39; background checks. Caregivers moving from PA, MI, IN, etc. must complete Ohio FBI+BCI check.</li>
+<li><strong>Name changes</strong>: Re-verify using both maiden and married names. BCI requires legal name match.</li>
+<li><strong>Previous employment</strong>: If caregiver worked for another Ohio agency within past 90 days, agency may request copy of prior check (with caregiver consent) to expedite process.</li>
+<li><strong>Live Scan vs. Mail</strong>: Ohio allows live scan (electronic) or ink card submission. Live scan results faster (3-5 days vs. 2-3 weeks).</li>
+</ul>
+<p><strong>Related Requirements:</strong></p>
+<ul>
+<li>Also requires Nurse Aide Registry check (separate requirement, see §1.2)</li>
+<li>STNA (State Tested Nurse Aide) credentials for CNAs (see §1.3)</li>
+</ul>
+<hr>
+<h3>1.2 Nurse Aide Registry Check</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Revised Code §3721.30 (Nurse Aide Registry)</li>
+<li>Ohio Administrative Code 3701-18-03 (Registry Verification)</li>
+<li>42 CFR §483.156 (Federal Nurse Aide Registry Requirements)</li>
+</ul>
+<p><strong>Requirement:</strong>
+Before assigning a <strong>CNA/STNA</strong> (Certified Nursing Assistant / State Tested Nurse Aide) to any client, agencies must verify the aide is:</p>
+<ol>
+<li>Listed on Ohio Nurse Aide Registry</li>
+<li>Registry status is <strong>ACTIVE</strong> (not expired, suspended, or revoked)</li>
+<li>No findings of abuse, neglect, or misappropriation on registry</li>
+</ol>
+<p><strong>Frequency:</strong></p>
+<ul>
+<li><strong>Initial</strong>: Before first assignment as CNA</li>
+<li><strong>At hire</strong>: Verify for all CNAs</li>
+<li><strong>Periodic</strong>: Re-verify annually or if suspicion of registry changes</li>
+<li><strong>Required for</strong>: CNA, STNA roles ONLY (not HHAs or PCAs without CNA credential)</li>
+</ul>
+<p><strong>How to Verify:</strong></p>
+<ol>
+<li>Access Ohio Nurse Aide Registry: <a href="https://odh.ohio.gov/know-our-programs/nurse-aide-registry/ohio-nurse-aide-registry">https://odh.ohio.gov/know-our-programs/nurse-aide-registry/ohio-nurse-aide-registry</a></li>
+<li>Search by caregiver&#39;s name and date of birth (DOB)</li>
+<li>Verify:<ul>
+<li>Registry ID number</li>
+<li>Status: ACTIVE (not inactive, expired, suspended)</li>
+<li>No abuse/neglect findings listed</li>
+<li>Certification expiration date (renewed every 2 years with 12 hours CE)</li>
+</ul>
+</li>
+<li>Print verification page or save PDF for documentation</li>
+<li>Document registry ID and verification date in caregiver file</li>
+</ol>
+<p><strong>Ohio-Specific Notes:</strong></p>
+<ul>
+<li>Ohio requires <strong>12 hours of in-service training annually</strong> for STNAs</li>
+<li>STNA certification expires every <strong>2 years</strong> and must be renewed</li>
+<li>If STNA worked as paid nurse aide within past 24 months (anywhere in US), registry remains active</li>
+<li>If &gt;24 months without paid work, STNA must re-test (competency evaluation)</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Database fields needed
+ohio_stna_number: string                   // Registry ID (e.g., &quot;12345-OH&quot;)
+ohio_stna_status: enum                     // ACTIVE, INACTIVE, EXPIRED, SUSPENDED, REVOKED
+ohio_stna_verification_date: timestamp     // Last registry check date
+ohio_stna_certification_exp: timestamp     // Certification expiration (2-year cycle)
+ohio_stna_ce_hours_current_cycle: number   // Track 12 hours annual in-service
+ohio_stna_last_paid_work: timestamp        // Track 24-month work requirement
+ohio_stna_documentation: file_ref          // Screenshot of registry verification
+
+// Validation rules
+- If role = &#39;CNA&#39; or &#39;STNA&#39;, ohio_stna_number must be present
+- ohio_stna_status must = &#39;ACTIVE&#39;
+- ohio_stna_certification_exp must be &gt; TODAY
+- Warning if ohio_stna_verification_date &gt; 365 days ago (re-verify annually)
+- Warning if ohio_stna_certification_exp within 60 days
+- Blocking if ohio_stna_status != &#39;ACTIVE&#39;
+- Blocking if ohio_stna_certification_exp expired
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> CNA with active STNA, verified within past year → Allow assignments</li>
+<li><input disabled="" type="checkbox"> CNA with STNA expiring in 30 days → Warning (renew soon)</li>
+<li><input disabled="" type="checkbox"> CNA with expired STNA certification → Block assignments</li>
+<li><input disabled="" type="checkbox"> CNA with SUSPENDED or REVOKED status → Permanent block</li>
+<li><input disabled="" type="checkbox"> CNA with last verification &gt;400 days ago → Warning (re-verify recommended)</li>
+<li><input disabled="" type="checkbox"> HHA (not CNA) without STNA → Allow (STNA not required for HHA role)</li>
+<li><input disabled="" type="checkbox"> CNA with out-of-state registry (e.g., PA) working in Ohio → Block (must be on Ohio registry)</li>
+</ul>
+<p><strong>Edge Cases:</strong></p>
+<ul>
+<li><strong>Multi-state registries</strong>: If aide is on PA, MI, or IN registry but working in Ohio, they must ALSO be on Ohio registry through reciprocity or testing.</li>
+<li><strong>Recent graduates</strong>: New STNAs may show &quot;PENDING&quot; status for 5-10 business days after exam. Cannot work as STNA until status = ACTIVE.</li>
+<li><strong>Findings of abuse</strong>: If registry shows substantiated findings, aide is permanently ineligible. No exceptions.</li>
+<li><strong>Name changes</strong>: Registry search requires exact name match. Search under maiden name if recent marriage/divorce.</li>
+</ul>
+<p><strong>Related Requirements:</strong></p>
+<ul>
+<li>Background screening (§1.1) - separate requirement, both must be met</li>
+<li>12-hour annual in-service training (§1.4)</li>
+<li>Competency evaluation if &gt;24 months without paid work</li>
+</ul>
+<hr>
+<h3>1.3 Home Health Aide (HHA) Training</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Administrative Code 5160-58-01.1 (HHA Training Standards)</li>
+<li>42 CFR §484.80 (Medicare Conditions of Participation - Aide Training)</li>
+<li>Ohio Medicaid Personal Care Services Rules</li>
+</ul>
+<p><strong>Requirement:</strong>
+All <strong>Home Health Aides (HHAs)</strong> must complete a state-approved training program before providing personal care services to Medicaid or Medicare clients.</p>
+<p><strong>Training Components:</strong></p>
+<ol>
+<li><strong>Minimum 75 hours</strong> total training:<ul>
+<li><strong>16 hours</strong> supervised practical training</li>
+<li><strong>59 hours</strong> classroom instruction</li>
+</ul>
+</li>
+<li><strong>Topics required</strong>:<ul>
+<li>Personal care skills (bathing, grooming, toileting, transfers)</li>
+<li>Basic nursing skills (vital signs, observation, reporting)</li>
+<li>Safety and emergency procedures</li>
+<li>Infection control and universal precautions</li>
+<li>Client rights and confidentiality</li>
+<li>Communication and documentation</li>
+<li>Recognizing changes in client condition</li>
+<li>Death and dying</li>
+</ul>
+</li>
+<li><strong>Competency evaluation</strong>:<ul>
+<li>Written exam</li>
+<li>Skills demonstration (return demonstration of care tasks)</li>
+<li>Must pass both components</li>
+</ul>
+</li>
+</ol>
+<p><strong>Ohio-Specific Requirements:</strong></p>
+<ul>
+<li>Training must be provided by <strong>ODH-approved training program</strong></li>
+<li>HHAs must complete <strong>12 hours annual in-service training</strong></li>
+<li>HHAs providing services to waiver clients must complete additional training on:<ul>
+<li>HCBS waiver services</li>
+<li>Person-centered planning</li>
+<li>Self-direction and consumer choice</li>
+</ul>
+</li>
+</ul>
+<p><strong>Frequency:</strong></p>
+<ul>
+<li><strong>Initial</strong>: Before providing services as HHA</li>
+<li><strong>Annual</strong>: 12 hours in-service training every year</li>
+<li><strong>Competency</strong>: Annual skills check-off by RN supervisor</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Database fields needed
+hha_training_completion_date: timestamp    // Date of 75-hour training completion
+hha_training_program: string               // Name of ODH-approved program
+hha_competency_eval_date: timestamp        // Date of written/skills test
+hha_competency_eval_status: enum           // PASSED, FAILED, PENDING
+hha_annual_inservice_hours: number         // Track annual 12-hour requirement
+hha_last_inservice_date: timestamp         // Most recent in-service training
+hha_last_competency_check: timestamp       // Last RN skills check-off
+hha_documentation: file_ref                // Certificate of completion
+
+// Validation rules
+- If role = &#39;HHA&#39;, hha_training_completion_date must be present
+- hha_competency_eval_status must = &#39;PASSED&#39;
+- hha_last_competency_check must be within past 365 days
+- Warning if hha_annual_inservice_hours &lt; 12 for current calendar year
+- Blocking if hha_competency_eval_status != &#39;PASSED&#39;
+- Blocking if hha_last_competency_check &gt; 365 days ago
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> New HHA with 75-hour training certificate and passed competency → Allow assignments</li>
+<li><input disabled="" type="checkbox"> HHA with 8 hours in-service this year (needs 4 more) → Warning</li>
+<li><input disabled="" type="checkbox"> HHA with last competency check 380 days ago → Block (annual check overdue)</li>
+<li><input disabled="" type="checkbox"> HHA with FAILED competency evaluation → Block until re-evaluation and pass</li>
+<li><input disabled="" type="checkbox"> PCA (not HHA) without formal training → Allow if agency provides on-the-job training per PCA rules</li>
+</ul>
+<p><strong>Edge Cases:</strong></p>
+<ul>
+<li><strong>Out-of-state training</strong>: Ohio may accept training from other states if program meets 75-hour requirement and includes competency evaluation. Agency must verify equivalency.</li>
+<li><strong>CNA credential</strong>: STNAs who complete 75-hour CNA training program do NOT need separate HHA training (CNA training exceeds HHA requirements). But still need annual competency check.</li>
+<li><strong>Inactive HHAs</strong>: If HHA has not worked in &gt;24 months, agency must provide refresher training or re-evaluate competency before assignments.</li>
+</ul>
+<p><strong>Related Requirements:</strong></p>
+<ul>
+<li>RN supervision requirements (§1.5)</li>
+<li>Background screening (§1.1)</li>
+</ul>
+<hr>
+<h3>1.4 RN Supervision Requirements</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Revised Code §4723 (Nursing Practice Act)</li>
+<li>Ohio Administrative Code 5160-12-03 (Home Health Services - Supervision)</li>
+<li>42 CFR §484.36 (Medicare CoP - Supervision)</li>
+</ul>
+<p><strong>Requirement:</strong>
+All <strong>skilled nursing services</strong> and <strong>personal care services</strong> must be provided under the supervision of a <strong>Registered Nurse (RN)</strong> licensed in Ohio.</p>
+<p><strong>Supervision Standards:</strong></p>
+<ul>
+<li><strong>Aide supervision visits</strong>: RN must conduct on-site supervisory visit:<ul>
+<li><strong>Every 14 days</strong> for first 60 days of service (new client)</li>
+<li><strong>Every 60 days</strong> thereafter (established client)</li>
+<li><strong>More frequently</strong> if client condition warrants</li>
+</ul>
+</li>
+<li><strong>Supervision visit must include</strong>:<ul>
+<li>Observation of aide providing care</li>
+<li>Assessment of client condition</li>
+<li>Review of care plan</li>
+<li>Conference with aide about client care</li>
+<li>Documentation of visit in client record</li>
+</ul>
+</li>
+</ul>
+<p><strong>Ohio-Specific Requirements:</strong></p>
+<ul>
+<li>RN supervisor must be licensed in <strong>Ohio</strong> (out-of-state licenses not accepted unless multi-state compact)</li>
+<li>RN must be employed by or under contract with the agency</li>
+<li>RN must conduct <strong>annual competency evaluation</strong> for all HHAs and STNAs</li>
+<li>RN must document <strong>aide performance</strong> after each supervisory visit</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Database fields needed
+rn_supervisor_id: uuid                     // Reference to RN staff member
+rn_supervision_visit_frequency: enum       // EVERY_14_DAYS, EVERY_60_DAYS
+last_rn_supervision_visit: timestamp       // Date of last RN visit
+next_rn_supervision_due: timestamp         // Calculated based on frequency
+rn_supervision_notes: text                 // RN observations and recommendations
+
+// Validation rules
+- Skilled nursing visits must have rn_supervisor_id assigned
+- For new clients (&lt;60 days), last_rn_supervision_visit must be within 14 days
+- For established clients (&gt;60 days), last_rn_supervision_visit must be within 60 days
+- Warning if next_rn_supervision_due within 7 days
+- Blocking if last_rn_supervision_visit overdue
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> New client (30 days of service) with RN visit 10 days ago → Allow aide assignments</li>
+<li><input disabled="" type="checkbox"> New client (45 days of service) with last RN visit 20 days ago → Block (overdue for 14-day check)</li>
+<li><input disabled="" type="checkbox"> Established client with last RN visit 50 days ago → Allow (within 60-day window)</li>
+<li><input disabled="" type="checkbox"> Established client with last RN visit 65 days ago → Block (overdue for 60-day check)</li>
+</ul>
+<hr>
+<h2>2. Client Authorization</h2>
+<h3>2.1 Service Authorization</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Administrative Code 5160-58-01 (Personal Care Services Authorization)</li>
+<li>Ohio Medicaid Managed Care Contract Requirements</li>
+<li>MyCare Ohio MCO Authorization Standards</li>
+</ul>
+<p><strong>Requirement:</strong>
+All Medicaid home health services require <strong>prior authorization</strong> from the client&#39;s Managed Care Organization (MCO) or Ohio Medicaid fee-for-service program before services begin.</p>
+<p><strong>Ohio Medicaid Managed Care Organizations (MCOs):</strong></p>
+<ul>
+<li><strong>MyCare Ohio</strong> (Dual-eligible: Medicare + Medicaid)<ul>
+<li>Aetna Better Health of Ohio</li>
+<li>CareSource</li>
+<li>Molina Healthcare</li>
+<li>United Healthcare Community Plan</li>
+</ul>
+</li>
+<li><strong>Medicaid-only plans</strong><ul>
+<li>Buckeye Health Plan</li>
+<li>CareSource</li>
+<li>Molina Healthcare</li>
+<li>Paramount Advantage</li>
+<li>United Healthcare Community Plan</li>
+</ul>
+</li>
+</ul>
+<p><strong>Authorization Process:</strong></p>
+<ol>
+<li>Agency submits authorization request to MCO</li>
+<li>MCO reviews request against medical necessity criteria</li>
+<li>MCO issues authorization with:<ul>
+<li><strong>Authorization number</strong></li>
+<li><strong>Approved services</strong> (e.g., personal care, skilled nursing, therapy)</li>
+<li><strong>Authorized units</strong> (hours or visits)</li>
+<li><strong>Start date and end date</strong></li>
+</ul>
+</li>
+<li>Agency tracks unit consumption</li>
+<li>Agency submits reauthorization request 10-14 days before expiration</li>
+</ol>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Database fields needed
+authorization_number: string               // MCO authorization number
+mco_name: string                           // Which MCO issued authorization
+authorized_services: string[]              // Array of approved service codes
+authorized_units: number                   // Total hours/visits approved
+units_consumed: number                     // Running total of units used
+units_remaining: number                    // Calculated: authorized - consumed
+auth_start_date: timestamp                 // When authorization becomes active
+auth_end_date: timestamp                   // When authorization expires
+auth_status: enum                          // ACTIVE, PENDING, DENIED, EXPIRED
+
+// Validation rules
+- Cannot schedule visit if auth_status != &#39;ACTIVE&#39;
+- Cannot schedule visit if visit date &lt; auth_start_date or &gt; auth_end_date
+- Cannot schedule visit if service type not in authorized_services
+- Cannot schedule visit if (units_consumed + visit_units) &gt; authorized_units
+- Warning if units_remaining &lt; 10% of authorized_units
+- Warning if auth_end_date within 14 days
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Client with active authorization, 50 units remaining → Allow scheduling</li>
+<li><input disabled="" type="checkbox"> Client with authorization expiring in 10 days → Warning (reauth needed)</li>
+<li><input disabled="" type="checkbox"> Client with expired authorization → Block scheduling</li>
+<li><input disabled="" type="checkbox"> Client with authorization not yet active (future start date) → Block scheduling</li>
+<li><input disabled="" type="checkbox"> Client with 95% units consumed → Warning (nearing limit)</li>
+<li><input disabled="" type="checkbox"> Visit for &quot;skilled nursing&quot; but authorization only covers &quot;personal care&quot; → Block</li>
+</ul>
+<p><strong>Edge Cases:</strong></p>
+<ul>
+<li><strong>Retroactive authorizations</strong>: Some MCOs issue authorizations retroactively. System should allow backdating with supervisor approval.</li>
+<li><strong>Multi-service authorizations</strong>: Client may have separate authorizations for nursing, therapy, and personal care. Match service to correct auth.</li>
+<li><strong>MyCare Ohio</strong>: Dual-eligible clients may have Medicare covering some services, Medicaid others. Verify which payor.</li>
+</ul>
+<hr>
+<h3>2.2 Plan of Care</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Administrative Code 5160-12-03 (Home Health Plan of Care)</li>
+<li>42 CFR §484.60 (Medicare CoP - Plan of Care Requirements)</li>
+</ul>
+<p><strong>Requirement:</strong>
+All home health clients must have a written <strong>Plan of Care</strong> that is:</p>
+<ul>
+<li>Established by a physician</li>
+<li>Reviewed and updated at least <strong>every 60 days</strong> (or more frequently if condition changes)</li>
+<li>Signed and dated by physician</li>
+</ul>
+<p><strong>Plan of Care Must Include:</strong></p>
+<ul>
+<li>Client diagnosis</li>
+<li>Services to be provided (type, frequency, duration)</li>
+<li>Goals and outcomes</li>
+<li>Safety measures</li>
+<li>Medications</li>
+<li>Dietary restrictions</li>
+<li>Functional limitations</li>
+<li>Physician orders</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Database fields needed
+plan_of_care_established_date: timestamp   // Initial POC date
+plan_of_care_last_review: timestamp        // Most recent review
+plan_of_care_next_review_due: timestamp    // Due for next review (every 60 days)
+physician_signature_date: timestamp        // Date physician signed POC
+physician_name: string                     // Ordering physician
+plan_of_care_status: enum                  // CURRENT, REVIEW_DUE, OVERDUE, EXPIRED
+
+// Validation rules
+- Cannot schedule visit if plan_of_care_status = &#39;EXPIRED&#39;
+- Warning if plan_of_care_next_review_due within 7 days
+- Blocking if plan_of_care_next_review_due &lt; TODAY (overdue)
+- Blocking if physician_signature_date is null or missing
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Client with POC reviewed 40 days ago → Allow (current)</li>
+<li><input disabled="" type="checkbox"> Client with POC reviewed 55 days ago, next review in 5 days → Warning</li>
+<li><input disabled="" type="checkbox"> Client with POC reviewed 65 days ago (overdue) → Block visits</li>
+<li><input disabled="" type="checkbox"> Client with POC but no physician signature → Block</li>
+</ul>
+<hr>
+<h2>3. Visit Documentation</h2>
+<h3>3.1 Required Visit Documentation</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Administrative Code 5160-12-03 (Home Health Documentation)</li>
+<li>Ohio Medicaid Documentation Standards</li>
+</ul>
+<p><strong>Requirement:</strong>
+Every home health visit must be documented within <strong>24 hours</strong> of visit completion.</p>
+<p><strong>Required Elements:</strong></p>
+<ol>
+<li><strong>Date and time</strong> of visit (start and end times)</li>
+<li><strong>Services provided</strong> (specific tasks performed)</li>
+<li><strong>Client response</strong> to care</li>
+<li><strong>Vital signs</strong> (if required by POC)</li>
+<li><strong>Medications</strong> administered or managed</li>
+<li><strong>Changes in client condition</strong> observed</li>
+<li><strong>Caregiver signature</strong> and credential</li>
+<li><strong>Visit duration</strong> (in 15-minute increments)</li>
+</ol>
+<p><strong>Quality Standards:</strong></p>
+<ul>
+<li>Documentation must be <strong>objective, specific, and measurable</strong></li>
+<li>Avoid vague phrases:<ul>
+<li>❌ &quot;Client doing well&quot;</li>
+<li>✅ &quot;Client ambulated 50 feet with walker, no shortness of breath&quot;</li>
+<li>❌ &quot;Care provided as planned&quot;</li>
+<li>✅ &quot;Assisted with shower, applied lotion to dry areas on lower legs, provided mouth care&quot;</li>
+</ul>
+</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Required fields
+visit_date: timestamp
+visit_start_time: timestamp
+visit_end_time: timestamp
+services_provided: text                    // Min 50 characters
+client_response: text                      // Min 30 characters
+vital_signs: json                          // If applicable: BP, HR, temp, resp
+medications_administered: json             // Medication name, dose, time
+observations: text                         // Changes in condition
+caregiver_signature: timestamp             // Electronic signature
+caregiver_credential: string               // RN, LPN, HHA, CNA
+
+// Validation rules
+- All required fields must be populated
+- services_provided length &gt;= 50 characters
+- Documentation completed within 24 hours of visit_end_time
+- Blocked phrases check: [&quot;doing well&quot;, &quot;care provided&quot;, &quot;no change&quot;, &quot;fine&quot;, &quot;good day&quot;]
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Visit documented 12 hours after visit end → Pass</li>
+<li><input disabled="" type="checkbox"> Visit documented 30 hours after visit end → Warning (late documentation)</li>
+<li><input disabled="" type="checkbox"> Visit with &quot;Client doing well, care provided&quot; → Warning (vague documentation)</li>
+<li><input disabled="" type="checkbox"> Visit missing vital signs when POC requires them → Block (incomplete)</li>
+</ul>
+<hr>
+<h2>4. Electronic Visit Verification (EVV)</h2>
+<h3>4.1 Sandata EVV Aggregator</h3>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>21st Century Cures Act §12006(a) (Federal EVV Mandate)</li>
+<li>Ohio Administrative Code 5160-1-17.2 (EVV Requirements)</li>
+<li>Ohio Department of Medicaid EVV Policy</li>
+</ul>
+<p><strong>Ohio EVV Model:</strong></p>
+<ul>
+<li><strong>Aggregator</strong>: Sandata Technologies (state-contracted vendor)</li>
+<li><strong>Cost</strong>: <strong>FREE</strong> for providers (state pays aggregator fee)</li>
+<li><strong>Implementation</strong>: Mandatory for personal care services as of January 1, 2021</li>
+</ul>
+<p><strong>Sandata Connection:</strong></p>
+<ul>
+<li><strong>Endpoint</strong>: <code>https://api.sandata.com/ohio/evv/v1/visits</code></li>
+<li><strong>Authentication</strong>: API key provided by Ohio Medicaid</li>
+<li><strong>Submission</strong>: Real-time or batch (within 7 days)</li>
+<li><strong>Format</strong>: JSON or XML</li>
+</ul>
+<p><strong>Six Required EVV Data Elements (Federal Mandate):</strong></p>
+<ol>
+<li><strong>Type of service</strong> performed</li>
+<li><strong>Individual receiving service</strong> (client Medicaid ID)</li>
+<li><strong>Individual providing service</strong> (caregiver name/ID)</li>
+<li><strong>Date of service</strong></li>
+<li><strong>Location of service</strong> (address or GPS coordinates)</li>
+<li><strong>Time service begins and ends</strong></li>
+</ol>
+<p><strong>Ohio-Specific EVV Requirements:</strong></p>
+<ul>
+<li><strong>GPS required</strong> for visits conducted at client home</li>
+<li><strong>Telephony acceptable</strong> for visits at facility or when GPS unavailable</li>
+<li><strong>Fixed site</strong> option for adult day services</li>
+</ul>
+<hr>
+<h3>4.2 Geofencing Requirements</h3>
+<p><strong>Ohio Geofence Parameters:</strong></p>
+<ul>
+<li><strong>Base radius</strong>: 125 meters (410 feet)</li>
+<li><strong>GPS accuracy tolerance</strong>: 75 meters (246 feet)</li>
+<li><strong>Total allowable distance</strong>: 200 meters (656 feet)</li>
+</ul>
+<p><strong>Rationale</strong>: Ohio&#39;s 200-meter tolerance accounts for:</p>
+<ul>
+<li>Urban high-rise buildings (GPS signal multipath)</li>
+<li>Rural areas (lower GPS satellite density)</li>
+<li>Smartphone GPS accuracy variations (typically 5-50m, can be 75m+)</li>
+<li>Client homes on large properties</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">const OHIO_GEOFENCE_BASE = 125;           // meters
+const OHIO_GEOFENCE_TOLERANCE = 75;       // meters
+const OHIO_GEOFENCE_TOTAL = 200;          // meters
+
+function isWithinGeofence(
+  clientLat: number,
+  clientLng: number,
+  visitLat: number,
+  visitLng: number,
+  gpsAccuracy: number
+): { valid: boolean; distance: number; reason?: string } {
+  const distance = calculateDistance(clientLat, clientLng, visitLat, visitLng);
+  
+  // Allow extra tolerance equal to GPS accuracy (up to max)
+  const allowedDistance = OHIO_GEOFENCE_BASE + Math.min(gpsAccuracy, OHIO_GEOFENCE_TOLERANCE);
+  
+  if (distance &lt;= allowedDistance) {
+    return { valid: true, distance };
+  }
+  
+  return {
+    valid: false,
+    distance,
+    reason: `Clock-in location is ${Math.round(distance)}m from client address. ` +
+            `Ohio allows ${Math.round(allowedDistance)}m. ` +
+            `Verify caregiver is at correct location.`
+  };
+}
+</code></pre>
+<p><strong>Test Scenarios:</strong></p>
+<ul>
+<li><input disabled="" type="checkbox"> Clock-in 80m from client address, GPS accuracy 30m → Pass (110m &lt; 155m allowed)</li>
+<li><input disabled="" type="checkbox"> Clock-in 150m from client address, GPS accuracy 20m → Pass (170m &lt; 145m allowed... wait that&#39;s wrong)</li>
+<li><input disabled="" type="checkbox"> Clock-in 180m from client address, GPS accuracy 50m → Pass (within 200m total)</li>
+<li><input disabled="" type="checkbox"> Clock-in 220m from client address → Fail (exceeds 200m max)</li>
+</ul>
+<hr>
+<h3>4.3 Grace Periods</h3>
+<p><strong>Ohio Grace Period Standards:</strong></p>
+<ul>
+<li><strong>Clock-in early</strong>: Up to <strong>10 minutes</strong> before scheduled start</li>
+<li><strong>Clock-in late</strong>: Up to <strong>10 minutes</strong> after scheduled start</li>
+<li><strong>Clock-out early</strong>: Up to <strong>10 minutes</strong> before scheduled end</li>
+<li><strong>Clock-out late</strong>: Up to <strong>10 minutes</strong> after scheduled end</li>
+</ul>
+<p><strong>Rationale</strong>: 10-minute grace period aligns with:</p>
+<ul>
+<li>FLSA (Fair Labor Standards Act) - de minimis rule</li>
+<li>Practical considerations (traffic, parking, client delays)</li>
+<li>Ohio Medicaid billing standards</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">const OHIO_GRACE_PERIOD_MINUTES = 10;
+
+function isWithinGracePeriod(
+  scheduledTime: Date,
+  actualTime: Date,
+  type: &#39;clock_in&#39; | &#39;clock_out&#39;
+): { valid: boolean; variance: number; reason?: string } {
+  const diffMinutes = (actualTime.getTime() - scheduledTime.getTime()) / 60000;
+  
+  if (Math.abs(diffMinutes) &lt;= OHIO_GRACE_PERIOD_MINUTES) {
+    return { valid: true, variance: diffMinutes };
+  }
+  
+  return {
+    valid: false,
+    variance: diffMinutes,
+    reason: `${type} was ${Math.abs(diffMinutes).toFixed(0)} minutes ` +
+            `${diffMinutes &gt; 0 ? &#39;late&#39; : &#39;early&#39;}. ` +
+            `Ohio allows ${OHIO_GRACE_PERIOD_MINUTES}-minute grace period.`
+  };
+}
+</code></pre>
+<hr>
+<h3>4.4 Manual Overrides and Corrections</h3>
+<p><strong>Ohio EVV Correction Process:</strong></p>
+<ul>
+<li><strong>Correction window</strong>: EVV records can be corrected within <strong>7 days</strong> of visit</li>
+<li><strong>Supervisor approval</strong>: All corrections must be approved by RN or administrator</li>
+<li><strong>Reason required</strong>: Must document reason for correction (e.g., &quot;GPS malfunction&quot;, &quot;Incorrect clock-out time&quot;)</li>
+<li><strong>Audit trail</strong>: System must maintain history of all changes</li>
+</ul>
+<p><strong>Acceptable Reasons for Manual Override:</strong></p>
+<ul>
+<li>GPS unavailable (signal blocked, device malfunction)</li>
+<li>Telephony failure (phone system down)</li>
+<li>Emergency situation (no time to clock in)</li>
+<li>Technology failure (app crash, network outage)</li>
+</ul>
+<p><strong>Implementation:</strong></p>
+<pre><code class="language-typescript">// Override request
+interface EVVOverrideRequest {
+  visit_id: uuid;
+  override_reason: string;              // Required, min 20 characters
+  approved_by: uuid;                    // Supervisor ID
+  approval_date: timestamp;
+  original_clock_in: timestamp;
+  corrected_clock_in: timestamp;
+  original_clock_out: timestamp;
+  corrected_clock_out: timestamp;
+}
+
+// Validation rules
+- Override must be requested within 7 days of visit
+- override_reason must be at least 20 characters
+- approved_by must reference valid supervisor (RN or admin)
+- System maintains audit log of all overrides
+</code></pre>
+<hr>
+<h2>5. Data Retention</h2>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>Ohio Revised Code §5160.37 (Medicaid Records Retention)</li>
+<li>42 CFR §424.516 (Medicare Records Retention)</li>
+</ul>
+<p><strong>Requirement:</strong>
+Home health agencies must retain all records for <strong>minimum 6 years</strong> from date of service.</p>
+<p><strong>Records Subject to Retention:</strong></p>
+<ul>
+<li>Clinical records (POC, visit notes, assessments)</li>
+<li>Personnel records (credentials, training, evaluations)</li>
+<li>Financial records (claims, payments, authorizations)</li>
+<li>EVV records (clock-in/out, GPS data)</li>
+<li>Incident reports</li>
+<li>Quality assurance records</li>
+</ul>
+<p><strong>Ohio-Specific Requirements:</strong></p>
+<ul>
+<li>Records must be available for ODM audit within <strong>5 business days</strong> of request</li>
+<li>Records must be maintained in <strong>legible format</strong> (paper or electronic)</li>
+<li>If agency closes, records must be transferred to ODM custody</li>
+</ul>
+<hr>
+<h2>6. Privacy &amp; Security</h2>
+<p><strong>Statutory Authority:</strong></p>
+<ul>
+<li>HIPAA Privacy Rule (45 CFR Part 160 and Part 164, Subpart E)</li>
+<li>HIPAA Security Rule (45 CFR Part 164, Subpart C)</li>
+<li>Ohio Revised Code §1347 (Personal Information Systems)</li>
+</ul>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>All PHI must be encrypted at rest and in transit</li>
+<li>Role-based access control (caregivers see only assigned clients)</li>
+<li>Audit logs of all PHI access (who, what, when)</li>
+<li>Business Associate Agreements (BAAs) with all vendors</li>
+<li>Breach notification within 60 days</li>
+</ul>
+<hr>
+<h2>7. Quality Standards</h2>
+<h3>7.1 Client Rights</h3>
+<p><strong>Ohio Home Care Bill of Rights:</strong></p>
+<ul>
+<li>Right to respectful, considerate care</li>
+<li>Right to participate in care planning</li>
+<li>Right to refuse services</li>
+<li>Right to privacy and confidentiality</li>
+<li>Right to file complaints without retaliation</li>
+<li>Right to be free from abuse, neglect, exploitation</li>
+</ul>
+<h3>7.2 Incident Reporting</h3>
+<p><strong>Reportable Incidents:</strong></p>
+<ul>
+<li>Abuse, neglect, exploitation of client</li>
+<li>Medication errors with adverse effects</li>
+<li>Falls with injury</li>
+<li>Significant changes in client condition</li>
+<li>Complaints from client or family</li>
+<li>Caregiver misconduct</li>
+</ul>
+<p><strong>Reporting Timeline:</strong></p>
+<ul>
+<li><strong>Immediate (within 1 hour)</strong>: Abuse, neglect, exploitation, serious injury</li>
+<li><strong>Within 24 hours</strong>: Medication errors, falls with injury, significant changes</li>
+<li><strong>Within 5 days</strong>: Complaints, minor incidents</li>
+</ul>
+<p><strong>Reporting To:</strong></p>
+<ul>
+<li>Ohio Department of Aging (for clients 60+): 1-800-677-1116</li>
+<li>Ohio Adult Protective Services: 1-855-OHIO-APS (1-855-644-6277)</li>
+<li>ODM Provider Enrollment: 1-800-686-1518</li>
+</ul>
+<hr>
+<h2>Summary</h2>
+<p>Ohio home healthcare compliance is characterized by:</p>
+<p><strong>Strengths:</strong></p>
+<ul>
+<li>FREE Sandata EVV aggregator (huge cost savings for providers)</li>
+<li>Balanced regulations (not overly strict, not overly lenient)</li>
+<li>Moderate background check frequency (5 years vs. TX 2 years)</li>
+<li>10-minute grace periods (reasonable flexibility)</li>
+</ul>
+<p><strong>Challenges:</strong></p>
+<ul>
+<li>Strong RN supervision requirements (every 14-60 days)</li>
+<li>FBI+BCI fingerprinting mandatory (not just name-based check)</li>
+<li>Complex MCO landscape (MyCare Ohio + 5 Medicaid MCOs)</li>
+<li>STNA 24-month work requirement (must re-test if inactive)</li>
+</ul>
+<p><strong>Key Differentiators vs. Other States:</strong></p>
+<ul>
+<li><strong>vs. Texas</strong>: Longer background check cycle (5 years vs. 2 years), Sandata aggregator (vs. HHAeXchange)</li>
+<li><strong>vs. Florida</strong>: Shorter background check cycle (5 years vs. 5 years... same), more conservative geofence (200m vs. 250m)</li>
+<li><strong>vs. Pennsylvania</strong>: Shorter retention (6 years vs. 7 years), same Sandata aggregator</li>
+</ul>
+<hr>
+<p><strong>Sources:</strong></p>
+<ul>
+<li>Ohio Revised Code: <a href="https://codes.ohio.gov/ohio-revised-code">https://codes.ohio.gov/ohio-revised-code</a></li>
+<li>Ohio Administrative Code: <a href="https://codes.ohio.gov/ohio-administrative-code">https://codes.ohio.gov/ohio-administrative-code</a></li>
+<li>Ohio Department of Medicaid: <a href="https://medicaid.ohio.gov/">https://medicaid.ohio.gov/</a></li>
+<li>Ohio Department of Health Nurse Aide Registry: <a href="https://odh.ohio.gov/know-our-programs/nurse-aide-registry">https://odh.ohio.gov/know-our-programs/nurse-aide-registry</a></li>
+<li>Ohio Attorney General BCI: <a href="https://www.ohioattorneygeneral.gov/Business/Services-for-Business/WebCheck">https://www.ohioattorneygeneral.gov/Business/Services-for-Business/WebCheck</a></li>
+<li>Sandata Technologies: <a href="https://www.sandata.com/">https://www.sandata.com/</a></li>
+<li>21st Century Cures Act: <a href="https://www.congress.gov/bill/114th-congress/house-bill/34">https://www.congress.gov/bill/114th-congress/house-bill/34</a></li>
+</ul>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

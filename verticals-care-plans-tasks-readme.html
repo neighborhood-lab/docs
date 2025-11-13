@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Plans & Tasks Library - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Care Plans & Tasks Library</span>
+    </div>
+      <article class="markdown-content">
+        <blockquote>
+<p><strong>Status</strong>: ✅ Backend Complete | 🚧 Frontend In Progress | 📝 Testing Needed</p>
+</blockquote>
+<hr>
+<h1>Care Plans &amp; Tasks Library</h1>
+<blockquote>
+<p>Structured plan of care with task management and progress tracking</p>
+</blockquote>
+<p>The <strong>Care Plans &amp; Tasks Library</strong> vertical provides comprehensive functionality for creating, managing, and tracking care plans with associated tasks, interventions, and progress documentation. It enables care coordinators to define structured care strategies and field staff to execute and document care delivery in real-time.</p>
+<h2>Features</h2>
+<h3>Core Functionality</h3>
+<ul>
+<li><strong>Care Plan Management</strong> - Create comprehensive, client-specific care plans</li>
+<li><strong>Goal Setting</strong> - Define measurable, time-bound care objectives</li>
+<li><strong>Intervention Planning</strong> - Specify evidence-based interventions to achieve goals</li>
+<li><strong>Task Templates</strong> - Create reusable task definitions for consistent care delivery</li>
+<li><strong>Task Instances</strong> - Generate visit-specific tasks from templates</li>
+<li><strong>Progress Tracking</strong> - Monitor goal achievement and care plan effectiveness</li>
+<li><strong>Progress Notes</strong> - Capture detailed observations and care narratives</li>
+<li><strong>Compliance Management</strong> - Track regulatory requirements and authorization</li>
+<li><strong>Signature Capture</strong> - Electronic signatures for verification and consent</li>
+</ul>
+<h3>Care Plan Features</h3>
+<ul>
+<li><strong>Multiple Plan Types</strong> - Personal care, companion, skilled nursing, therapy, hospice, respite</li>
+<li><strong>Authorization Tracking</strong> - Hours, dates, payer source, authorization numbers</li>
+<li><strong>Service Frequency</strong> - Define visit patterns and scheduling requirements</li>
+<li><strong>Care Team Assignment</strong> - Coordinator, primary caregiver, supervisor, physician</li>
+<li><strong>Medical Context</strong> - Diagnosis, functional limitations, allergies, contraindications</li>
+<li><strong>Documentation Requirements</strong> - Specify required forms, assessments, reviews</li>
+<li><strong>Modification History</strong> - Complete audit trail of plan changes</li>
+<li><strong>Expiration Tracking</strong> - Alerts for plans requiring review or renewal</li>
+</ul>
+<h3>Goal Management</h3>
+<ul>
+<li><strong>Structured Goals</strong> - Name, description, category, priority, target date</li>
+<li><strong>Measurable Outcomes</strong> - Quantitative, qualitative, or binary measurement</li>
+<li><strong>Milestone Tracking</strong> - Break goals into achievable milestones</li>
+<li><strong>Progress Percentage</strong> - Visual indicator of goal completion</li>
+<li><strong>Multiple Categories</strong> - Mobility, ADL, IADL, nutrition, safety, cognitive, emotional</li>
+<li><strong>Status Tracking</strong> - Not started, in progress, on track, at risk, achieved</li>
+<li><strong>Barrier Documentation</strong> - Capture obstacles to goal achievement</li>
+</ul>
+<h3>Intervention Management</h3>
+<ul>
+<li><strong>Detailed Instructions</strong> - Step-by-step guidance for care delivery</li>
+<li><strong>Frequency Specification</strong> - Daily, weekly, as-needed, custom patterns</li>
+<li><strong>Performer Assignment</strong> - Role-based task assignment</li>
+<li><strong>Equipment &amp; Supplies</strong> - Required resources for intervention</li>
+<li><strong>Safety Precautions</strong> - Warnings and contraindications</li>
+<li><strong>Documentation Requirements</strong> - Link to required forms and notes</li>
+<li><strong>Goal Alignment</strong> - Connect interventions to specific goals</li>
+</ul>
+<h3>Task Management</h3>
+<ul>
+<li><strong>Task Templates</strong> - Reusable definitions for common care activities</li>
+<li><strong>Task Instances</strong> - Visit-specific tasks generated from templates</li>
+<li><strong>25+ Task Categories</strong> - Bathing, dressing, medication, mobility, monitoring, etc.</li>
+<li><strong>Scheduling</strong> - Date, time, time-of-day, estimated duration</li>
+<li><strong>Step-by-Step Instructions</strong> - Break complex tasks into manageable steps</li>
+<li><strong>Quality Checks</strong> - Embedded questions to ensure quality care</li>
+<li><strong>Custom Fields</strong> - Capture specific data points for each task</li>
+<li><strong>Skip Reasons</strong> - Document why tasks weren&#39;t completed</li>
+<li><strong>Issue Reporting</strong> - Flag problems for coordinator follow-up</li>
+</ul>
+<h3>Task Completion</h3>
+<ul>
+<li><strong>Status Tracking</strong> - Scheduled, in progress, completed, skipped, missed</li>
+<li><strong>Completion Notes</strong> - Narrative documentation of care provided</li>
+<li><strong>Electronic Signatures</strong> - Touchscreen, stylus, or digital signature</li>
+<li><strong>Photo Verification</strong> - Visual evidence of task completion</li>
+<li><strong>GPS Verification</strong> - Location-based verification</li>
+<li><strong>Vital Signs Capture</strong> - Blood pressure, heart rate, temperature, O2 sat, pain scale</li>
+<li><strong>Quality Check Responses</strong> - Structured quality assurance data</li>
+<li><strong>Custom Field Values</strong> - Task-specific data collection</li>
+</ul>
+<h3>Progress Documentation</h3>
+<ul>
+<li><strong>Multiple Note Types</strong> - Visit notes, weekly summaries, monthly reviews, incidents</li>
+<li><strong>Goal Progress Tracking</strong> - Status updates for each goal</li>
+<li><strong>Structured Observations</strong> - Physical, cognitive, emotional, behavioral, social, safety</li>
+<li><strong>Concerns &amp; Recommendations</strong> - Document issues and suggest interventions</li>
+<li><strong>Review &amp; Approval</strong> - Supervisor review workflow</li>
+<li><strong>Signature Support</strong> - Sign notes for compliance</li>
+<li><strong>Attachment Support</strong> - Link photos, documents, forms</li>
+</ul>
+<h3>Compliance &amp; Authorization</h3>
+<ul>
+<li><strong>Authorization Management</strong> - Track approved hours and service dates</li>
+<li><strong>Payer Source Tracking</strong> - Medicare, Medicaid, private insurance, private pay</li>
+<li><strong>Regulatory Requirements</strong> - Document compliance with state/federal regulations</li>
+<li><strong>Compliance Status</strong> - Compliant, pending review, expired, non-compliant</li>
+<li><strong>Required Documentation</strong> - Track mandatory forms and assessments</li>
+<li><strong>Signature Requirements</strong> - Client, family, caregiver, physician signatures</li>
+<li><strong>Audit Trail</strong> - Complete history of all changes</li>
+</ul>
+<h2>Data Model</h2>
+<h3>Care Plan</h3>
+<p>The core entity representing a comprehensive care strategy:</p>
+<pre><code class="language-typescript">interface CarePlan {
+  // Identity
+  id: UUID;
+  planNumber: string;
+  name: string;
+  
+  // Associations
+  clientId: UUID;
+  organizationId: UUID;
+  branchId?: UUID;
+  
+  // Plan details
+  planType: CarePlanType;
+  status: CarePlanStatus;
+  priority: Priority;
+  effectiveDate: Date;
+  expirationDate?: Date;
+  
+  // Care content
+  goals: CarePlanGoal[];
+  interventions: Intervention[];
+  taskTemplates: TaskTemplate[];
+  
+  // Team
+  coordinatorId?: UUID;
+  primaryCaregiverId?: UUID;
+  
+  // Authorization
+  authorizationNumber?: string;
+  payerSource?: PayerSource;
+  authorizationHours?: number;
+  authorizationStartDate?: Date;
+  authorizationEndDate?: Date;
+  
+  // Compliance
+  complianceStatus: ComplianceStatus;
+  
+  // Audit
+  createdAt: Date;
+  updatedAt: Date;
+  version: number;
+}
+</code></pre>
+<h3>Goal</h3>
+<p>Measurable objectives within a care plan:</p>
+<pre><code class="language-typescript">interface CarePlanGoal {
+  id: UUID;
+  name: string;
+  description: string;
+  category: GoalCategory;
+  status: GoalStatus;
+  priority: Priority;
+  targetDate?: Date;
+  
+  // Measurement
+  measurementType?: &#39;QUANTITATIVE&#39; | &#39;QUALITATIVE&#39; | &#39;BINARY&#39;;
+  targetValue?: number;
+  currentValue?: number;
+  progressPercentage?: number;
+  
+  // Tracking
+  milestones?: Milestone[];
+  achievedDate?: Date;
+  outcome?: string;
+}
+</code></pre>
+<h3>Task Template</h3>
+<p>Reusable task definition:</p>
+<pre><code class="language-typescript">interface TaskTemplate {
+  id: UUID;
+  name: string;
+  description: string;
+  category: TaskCategory;
+  
+  // Scheduling
+  frequency: Frequency;
+  estimatedDuration?: number;
+  timeOfDay?: TimeOfDay[];
+  
+  // Instructions
+  instructions: string;
+  steps?: TaskStep[];
+  
+  // Requirements
+  requiresSignature: boolean;
+  requiresNote: boolean;
+  requiresPhoto?: boolean;
+  requiresVitals?: boolean;
+  
+  // Quality
+  qualityChecks?: QualityCheck[];
+  
+  status: &#39;ACTIVE&#39; | &#39;INACTIVE&#39; | &#39;ARCHIVED&#39;;
+}
+</code></pre>
+<h3>Task Instance</h3>
+<p>Actual task to be performed:</p>
+<pre><code class="language-typescript">interface TaskInstance {
+  id: UUID;
+  carePlanId: UUID;
+  templateId?: UUID;
+  visitId?: UUID;
+  clientId: UUID;
+  assignedCaregiverId?: UUID;
+  
+  name: string;
+  description: string;
+  category: TaskCategory;
+  instructions: string;
+  
+  scheduledDate: Date;
+  scheduledTime?: string;
+  
+  status: TaskStatus;
+  
+  // Completion
+  completedAt?: Date;
+  completedBy?: UUID;
+  completionNote?: string;
+  completionSignature?: Signature;
+  verificationData?: VerificationData;
+}
+</code></pre>
+<h2>Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js 18+ and npm</li>
+<li>PostgreSQL 14+ running locally</li>
+<li>All migrations applied: <code>npm run db:migrate</code> (✅ Complete)</li>
+</ul>
+<h3>Backend Setup (✅ Complete)</h3>
+<p>The backend API is fully implemented and ready to use:</p>
+<pre><code class="language-bash"># 1. Install dependencies
+npm install
+
+# 2. Verify migrations (should show 12 migrations applied)
+npm run db:migrate:status
+
+# 3. Load demo data
+npm run db:seed:care-plans
+
+# 4. Start the API server
+npm run dev:server
+# Server runs at http://localhost:3000
+</code></pre>
+<h3>Testing the API</h3>
+<p>See <code>DEMO.md</code> for comprehensive curl examples. Quick test:</p>
+<pre><code class="language-bash"># Get care plan analytics
+curl -H &quot;X-User-Id: user-123&quot; \
+     -H &quot;X-Organization-Id: org-123&quot; \
+     http://localhost:3000/api/analytics/care-plans
+</code></pre>
+<h3>Frontend Setup (🚧 In Progress)</h3>
+<p>The frontend implementation is planned. Follow the pattern from <code>client-demographics</code> vertical:</p>
+<ol>
+<li>Create types in <code>packages/web/src/verticals/care-plans/types/</code></li>
+<li>Create API service in <code>packages/web/src/verticals/care-plans/services/</code></li>
+<li>Create React Query hooks in <code>packages/web/src/verticals/care-plans/hooks/</code></li>
+<li>Create components and pages</li>
+</ol>
+<p>See Task 3 in the project improvement tasks for detailed instructions.</p>
+<h2>Usage</h2>
+<h3>Creating a Care Plan</h3>
+<pre><code class="language-typescript">import { CarePlanService } from &#39;@care-commons/care-plans-tasks&#39;;
+import { Database } from &#39;@care-commons/core&#39;;
+
+const db = new Database(config);
+const service = new CarePlanService(db);
+
+const carePlan = await service.createCarePlan({
+  clientId: &#39;client-123&#39;,
+  organizationId: &#39;org-456&#39;,
+  name: &#39;Comprehensive Personal Care Plan&#39;,
+  planType: &#39;PERSONAL_CARE&#39;,
+  effectiveDate: new Date(&#39;2024-01-01&#39;),
+  expirationDate: new Date(&#39;2024-12-31&#39;),
+  coordinatorId: &#39;coord-789&#39;,
+  
+  goals: [{
+    name: &#39;Improve Mobility&#39;,
+    description: &#39;Increase ability to walk independently for 15 minutes&#39;,
+    category: &#39;MOBILITY&#39;,
+    status: &#39;NOT_STARTED&#39;,
+    priority: &#39;HIGH&#39;,
+    targetDate: new Date(&#39;2024-06-01&#39;),
+    measurementType: &#39;QUANTITATIVE&#39;,
+    targetValue: 15,
+    unit: &#39;minutes&#39;,
+  }],
+  
+  interventions: [{
+    name: &#39;Ambulation Assistance&#39;,
+    description: &#39;Assist client with walking exercises&#39;,
+    category: &#39;AMBULATION_ASSISTANCE&#39;,
+    goalIds: [&#39;goal-1&#39;],
+    frequency: {
+      pattern: &#39;DAILY&#39;,
+      timesPerDay: 2,
+    },
+    duration: 20,
+    instructions: &#39;Help client walk around home for 10-15 minutes...&#39;,
+    performedBy: [&#39;CAREGIVER&#39;, &#39;CNA&#39;],
+    requiresDocumentation: true,
+    status: &#39;ACTIVE&#39;,
+    startDate: new Date(),
+  }],
+  
+  taskTemplates: [{
+    name: &#39;Morning Ambulation&#39;,
+    description: &#39;Assist with morning walk&#39;,
+    category: &#39;AMBULATION&#39;,
+    frequency: {
+      pattern: &#39;DAILY&#39;,
+      specificTimes: [&#39;09:00&#39;],
+    },
+    instructions: &#39;Walk with client for 15 minutes...&#39;,
+    requiresSignature: true,
+    requiresNote: true,
+    isOptional: false,
+    allowSkip: true,
+    skipReasons: [&#39;Client refused&#39;, &#39;Client too fatigued&#39;, &#39;Safety concern&#39;],
+    status: &#39;ACTIVE&#39;,
+  }],
+}, userContext);
+</code></pre>
+<h3>Activating a Care Plan</h3>
+<pre><code class="language-typescript">const activated = await service.activateCarePlan(
+  carePlan.id,
+  userContext
+);
+</code></pre>
+<h3>Creating Tasks for a Visit</h3>
+<pre><code class="language-typescript">const tasks = await service.createTasksForVisit(
+  carePlanId,
+  visitId,
+  visitDate,
+  userContext
+);
+
+console.log(`Created ${tasks.length} tasks for visit`);
+</code></pre>
+<h3>Completing a Task</h3>
+<pre><code class="language-typescript">const completed = await service.completeTask(
+  taskId,
+  {
+    completionNote: &#39;Client walked for 15 minutes with minimal assistance. Good endurance today.&#39;,
+    signature: {
+      signatureData: &#39;base64-encoded-signature...&#39;,
+      signedBy: caregiverId,
+      signedByName: &#39;Jane Smith, CNA&#39;,
+      signatureType: &#39;TOUCHSCREEN&#39;,
+    },
+    verificationData: {
+      verificationType: &#39;GPS&#39;,
+      gpsLocation: {
+        latitude: 47.6062,
+        longitude: -122.3321,
+        accuracy: 10,
+      },
+      vitalSigns: {
+        heartRate: 78,
+        bloodPressureSystolic: 120,
+        bloodPressureDiastolic: 80,
+        oxygenSaturation: 98,
+      },
+    },
+    qualityCheckResponses: [{
+      checkId: &#39;check-1&#39;,
+      question: &#39;Client able to ambulate safely?&#39;,
+      response: true,
+    }],
+  },
+  userContext
+);
+</code></pre>
+<h3>Skipping a Task</h3>
+<pre><code class="language-typescript">const skipped = await service.skipTask(
+  taskId,
+  &#39;Client refused&#39;,
+  &#39;Client stated feeling too tired after physical therapy session&#39;,
+  userContext
+);
+</code></pre>
+<h3>Creating a Progress Note</h3>
+<pre><code class="language-typescript">const note = await service.createProgressNote({
+  carePlanId,
+  clientId,
+  visitId,
+  noteType: &#39;VISIT_NOTE&#39;,
+  content: &#39;Client continues to make progress with mobility goals...&#39;,
+  
+  goalProgress: [{
+    goalId: &#39;goal-1&#39;,
+    goalName: &#39;Improve Mobility&#39;,
+    status: &#39;ON_TRACK&#39;,
+    progressDescription: &#39;Client now walking 12 minutes independently&#39;,
+    progressPercentage: 80,
+    barriers: [&#39;Some days client too fatigued&#39;],
+    nextSteps: [&#39;Continue daily ambulation&#39;, &#39;Monitor vital signs&#39;],
+  }],
+  
+  observations: [{
+    category: &#39;PHYSICAL&#39;,
+    observation: &#39;Client ambulated for 15 minutes today with steady gait&#39;,
+    severity: &#39;NORMAL&#39;,
+  }],
+  
+  concerns: [&#39;Occasional dizziness upon standing&#39;],
+  recommendations: [&#39;Consider blood pressure monitoring before ambulation&#39;],
+  
+  signature: {
+    signatureData: &#39;base64...&#39;,
+    signedBy: caregiverId,
+    signedByName: &#39;Jane Smith, CNA&#39;,
+    signatureType: &#39;TOUCHSCREEN&#39;,
+  },
+}, userContext);
+</code></pre>
+<h3>Searching Care Plans</h3>
+<pre><code class="language-typescript">const results = await service.searchCarePlans({
+  organizationId: &#39;org-456&#39;,
+  status: [&#39;ACTIVE&#39;],
+  expiringWithinDays: 30,
+}, {
+  page: 1,
+  limit: 20,
+  sortBy: &#39;expiration_date&#39;,
+  sortOrder: &#39;asc&#39;,
+}, userContext);
+
+console.log(`Found ${results.total} care plans expiring soon`);
+</code></pre>
+<h3>Getting Analytics</h3>
+<pre><code class="language-typescript">const analytics = await service.getCarePlanAnalytics(
+  &#39;org-456&#39;,
+  userContext
+);
+
+console.log(`Active plans: ${analytics.activePlans}`);
+console.log(`Goal completion rate: ${analytics.goalCompletionRate}%`);
+console.log(`Task completion rate: ${analytics.taskCompletionRate}%`);
+
+const taskMetrics = await service.getTaskCompletionMetrics({
+  dateFrom: new Date(&#39;2024-01-01&#39;),
+  dateTo: new Date(&#39;2024-01-31&#39;),
+  organizationId: &#39;org-456&#39;,
+}, userContext);
+
+console.log(`Completed: ${taskMetrics.completedTasks}/${taskMetrics.totalTasks}`);
+console.log(`Completion rate: ${taskMetrics.completionRate}%`);
+</code></pre>
+<h2>Database Schema</h2>
+<p>The vertical uses three main tables:</p>
+<h3>care_plans</h3>
+<p>Stores comprehensive care plan information with JSONB columns for flexible nested data:</p>
+<ul>
+<li><strong>goals</strong> - Array of goal objects</li>
+<li><strong>interventions</strong> - Array of intervention objects</li>
+<li><strong>task_templates</strong> - Array of task template objects</li>
+<li><strong>service_frequency</strong> - Service frequency specification</li>
+<li><strong>allergies</strong> - Array of allergy objects</li>
+<li><strong>modification_history</strong> - Array of modification records</li>
+</ul>
+<h3>task_instances</h3>
+<p>Stores individual task instances created from templates or manually:</p>
+<ul>
+<li><strong>verification_data</strong> - JSONB for flexible verification methods</li>
+<li><strong>completion_signature</strong> - JSONB signature object</li>
+<li><strong>quality_check_responses</strong> - Array of quality check responses</li>
+<li><strong>custom_field_values</strong> - JSONB for task-specific data</li>
+</ul>
+<h3>progress_notes</h3>
+<p>Stores narrative documentation and structured progress tracking:</p>
+<ul>
+<li><strong>goal_progress</strong> - Array of goal progress objects</li>
+<li><strong>observations</strong> - Array of structured observations</li>
+<li><strong>concerns</strong> - Array of concern strings</li>
+<li><strong>recommendations</strong> - Array of recommendation strings</li>
+<li><strong>signature</strong> - JSONB signature object</li>
+</ul>
+<h3>Key Indexes</h3>
+<ul>
+<li>Full-text search on plan name and number</li>
+<li>GIN indexes on JSONB columns for efficient queries</li>
+<li>Indexes on client_id, organization_id, status, dates</li>
+<li>Composite indexes for common query patterns</li>
+</ul>
+<h2>Permissions</h2>
+<p>The vertical implements fine-grained permissions:</p>
+<ul>
+<li><strong>care-plans:create</strong> - Create new care plans</li>
+<li><strong>care-plans:read</strong> - View care plan details</li>
+<li><strong>care-plans:update</strong> - Modify care plans</li>
+<li><strong>care-plans:activate</strong> - Activate pending care plans</li>
+<li><strong>care-plans:delete</strong> - Soft-delete care plans</li>
+<li><strong>tasks:create</strong> - Create task instances</li>
+<li><strong>tasks:read</strong> - View tasks</li>
+<li><strong>tasks:complete</strong> - Mark tasks as completed</li>
+<li><strong>tasks:skip</strong> - Skip tasks with reason</li>
+<li><strong>progress-notes:create</strong> - Create progress notes</li>
+<li><strong>progress-notes:read</strong> - View progress notes</li>
+<li><strong>analytics:read</strong> - View analytics and metrics</li>
+</ul>
+<h2>Integration Points</h2>
+<p>This vertical integrates with:</p>
+<ul>
+<li><strong>Client &amp; Demographics</strong> - Link care plans to clients</li>
+<li><strong>Caregiver &amp; Staff Management</strong> - Assign caregivers to tasks</li>
+<li><strong>Scheduling &amp; Visit Management</strong> - Generate tasks for visits</li>
+<li><strong>Time Tracking &amp; EVV</strong> - Verify task completion with visit data</li>
+<li><strong>Billing &amp; Invoicing</strong> - Bill for authorized services</li>
+<li><strong>Compliance &amp; Documentation</strong> - Track regulatory requirements</li>
+<li><strong>Mobile App</strong> - Field staff task completion interface</li>
+</ul>
+<h2>Compliance Features</h2>
+<ul>
+<li><strong>Complete audit trail</strong> - All changes tracked with user, timestamp, reason</li>
+<li><strong>Electronic signatures</strong> - Legally compliant signature capture</li>
+<li><strong>Authorization tracking</strong> - Hours, dates, payer source</li>
+<li><strong>Required documentation</strong> - Ensure all mandatory forms completed</li>
+<li><strong>Expiration alerts</strong> - Notify when plans need review</li>
+<li><strong>Goal progress tracking</strong> - Demonstrate care effectiveness</li>
+<li><strong>Quality checks</strong> - Embedded quality assurance</li>
+<li><strong>Incident reporting</strong> - Flag issues for follow-up</li>
+</ul>
+<h2>Best Practices</h2>
+<ol>
+<li><strong>Define clear, measurable goals</strong> - Use SMART goal format</li>
+<li><strong>Link interventions to goals</strong> - Establish clear cause-effect relationships</li>
+<li><strong>Create comprehensive templates</strong> - Reduce manual task creation</li>
+<li><strong>Document thoroughly</strong> - Detailed notes support quality care</li>
+<li><strong>Review plans regularly</strong> - Schedule monthly or quarterly reviews</li>
+<li><strong>Track authorization hours</strong> - Prevent service overages</li>
+<li><strong>Use quality checks</strong> - Embed quality assurance in daily work</li>
+<li><strong>Capture signatures</strong> - Obtain required approvals and consents</li>
+<li><strong>Monitor expiration dates</strong> - Renew plans before expiration</li>
+<li><strong>Analyze outcomes</strong> - Use analytics to improve care delivery</li>
+</ol>
+<h2>Future Enhancements</h2>
+<ul>
+<li><input disabled="" type="checkbox"> AI-powered goal suggestions based on assessment</li>
+<li><input disabled="" type="checkbox"> Template library with evidence-based interventions</li>
+<li><input disabled="" type="checkbox"> Outcome prediction based on historical data</li>
+<li><input disabled="" type="checkbox"> Integration with clinical guidelines databases</li>
+<li><input disabled="" type="checkbox"> Voice-to-text for progress notes</li>
+<li><input disabled="" type="checkbox"> Photo annotation for wound care tracking</li>
+<li><input disabled="" type="checkbox"> Family portal for goal progress visibility</li>
+<li><input disabled="" type="checkbox"> Automated care plan generation from assessments</li>
+<li><input disabled="" type="checkbox"> Medication reconciliation within care plans</li>
+<li><input disabled="" type="checkbox"> Integration with telehealth platforms</li>
+</ul>
+<h2>Support</h2>
+<p>For questions or issues with the Care Plans &amp; Tasks Library vertical:</p>
+<ul>
+<li>Open an issue on GitHub</li>
+<li>Check the <a href="https://docs.care-commons.org">documentation</a></li>
+<li>Join our community discussions</li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

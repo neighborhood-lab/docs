@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing & Invoicing - Usage Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Billing & Invoicing - Usage Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Billing &amp; Invoicing - Usage Guide</h1>
+<p>This guide demonstrates how to use the Billing &amp; Invoicing vertical for common operations.</p>
+<h2>Setup</h2>
+<pre><code class="language-typescript">import { Pool } from &#39;pg&#39;;
+import { BillingRepository } from &#39;@care-commons/billing-invoicing&#39;;
+import {
+  validateCreateBillableItem,
+  validateCreateInvoice,
+  validateCreatePayment,
+  calculateUnits,
+  calculateBaseAmount,
+  applyModifiers,
+  calculateInvoiceTotal,
+} from &#39;@care-commons/billing-invoicing&#39;;
+
+// Initialize database connection
+const pool = new Pool({
+  host: &#39;localhost&#39;,
+  port: 5432,
+  database: &#39;care_commons&#39;,
+  user: &#39;postgres&#39;,
+  password: &#39;postgres&#39;,
+});
+
+// Create repository instance
+const billingRepo = new BillingRepository(pool);
+</code></pre>
+<h2>Seed Demo Data</h2>
+<p>To populate the database with realistic billing data:</p>
+<pre><code class="language-bash"># First, seed base data (organizations, clients, caregivers)
+npm run seed
+
+# Then seed billing data
+npm run seed:billing
+</code></pre>
+<p>This creates:</p>
+<ul>
+<li>5 payers (Medicare, Medicaid, Blue Cross, VA, Private Pay)</li>
+<li>3 rate schedules with different pricing</li>
+<li>Service authorizations for clients</li>
+<li>15 billable items with various statuses</li>
+<li>Invoices grouped by payer</li>
+<li>Payments applied to invoices</li>
+</ul>
+<h2>Common Operations</h2>
+<h3>1. Create a Billable Item from a Completed Visit</h3>
+<pre><code class="language-typescript">import { v4 as uuid } from &#39;uuid&#39;;
+
+async function createBillableItemFromVisit(visitData: any) {
+  // Calculate units based on duration
+  const units = calculateUnits(
+    visitData.durationMinutes,
+    &#39;HOUR&#39;,
+    &#39;QUARTER_HOUR&#39; // Round to 15-minute increments
+  );
+
+  // Calculate amounts
+  const unitRate = 28.00; // From rate schedule
+  const subtotal = calculateBaseAmount(units, unitRate);
+  const finalAmount = applyModifiers(subtotal, visitData.modifiers);
+
+  // Prepare input
+  const input = {
+    organizationId: visitData.organizationId,
+    branchId: visitData.branchId,
+    clientId: visitData.clientId,
+    visitId: visitData.visitId,
+    evvRecordId: visitData.evvRecordId,
+    serviceTypeId: visitData.serviceTypeId,
+    serviceTypeCode: &#39;S5126&#39;,
+    serviceTypeName: &#39;Personal Care Services&#39;,
+    serviceDate: visitData.serviceDate,
+    startTime: visitData.startTime,
+    endTime: visitData.endTime,
+    durationMinutes: visitData.durationMinutes,
+    caregiverId: visitData.caregiverId,
+    caregiverName: visitData.caregiverName,
+    unitType: &#39;HOUR&#39;,
+    units,
+    payerId: visitData.payerId,
+    payerType: visitData.payerType,
+    payerName: visitData.payerName,
+    createdBy: visitData.userId,
+    updatedBy: visitData.userId,
+  };
+
+  // Validate
+  const validation = validateCreateBillableItem(input);
+  if (!validation.valid) {
+    throw new Error(`Validation failed: ${validation.errors.join(&#39;, &#39;)}`);
+  }
+
+  // Create billable item
+  const billableItem = await billingRepo.createBillableItem({
+    ...input,
+    unitRate,
+    subtotal,
+    finalAmount,
+    status: &#39;PENDING&#39;,
+    statusHistory: [],
+    isHold: false,
+    requiresReview: false,
+    isAuthorized: false,
+    isDenied: false,
+    isAppealable: false,
+    isPaid: false,
+  });
+
+  console.log(`Created billable item: ${billableItem.id}`);
+  return billableItem;
+}
+</code></pre>
+<h3>2. Generate an Invoice from Ready Billable Items</h3>
+<pre><code class="language-typescript">import { generateInvoiceNumber, calculateInvoiceTotal } from &#39;@care-commons/billing-invoicing&#39;;
+
+async function generateInvoiceForPayer(
+  organizationId: string,
+  branchId: string,
+  payerId: string,
+  periodStart: Date,
+  periodEnd: Date,
+  userId: string
+) {
+  // Find ready billable items for this payer
+  const items = await billingRepo.searchBillableItems({
+    organizationId,
+    payerId,
+    status: [&#39;READY&#39;],
+    startDate: periodStart,
+    endDate: periodEnd,
+  });
+
+  if (items.length === 0) {
+    throw new Error(&#39;No billable items ready for invoicing&#39;);
+  }
+
+  // Calculate totals
+  const subtotal = items.reduce((sum, item) =&gt; sum + item.finalAmount, 0);
+  const taxAmount = 0; // Healthcare services typically not taxed
+  const discountAmount = 0;
+  const adjustmentAmount = 0;
+  const totalAmount = calculateInvoiceTotal(
+    subtotal,
+    taxAmount,
+    discountAmount,
+    adjustmentAmount
+  );
+
+  // Generate invoice number
+  const invoiceNumber = generateInvoiceNumber(&#39;CCHH&#39;, 1, 2024);
+
+  // Prepare invoice input
+  const invoiceDate = new Date();
+  const dueDate = new Date(invoiceDate);
+  dueDate.setDate(dueDate.getDate() + 30); // Net 30
+
+  const input = {
+    organizationId,
+    branchId,
+    invoiceNumber,
+    invoiceType: &#39;STANDARD&#39; as const,
+    payerId,
+    payerType: items[0].payerType,
+    payerName: items[0].payerName,
+    periodStart,
+    periodEnd,
+    invoiceDate,
+    dueDate,
+    billableItemIds: items.map((item) =&gt; item.id),
+    lineItems: items.map((item) =&gt; ({
+      id: uuid(),
+      billableItemId: item.id,
+      serviceDate: item.serviceDate,
+      serviceCode: item.serviceTypeCode,
+      serviceDescription: item.serviceTypeName,
+      unitType: item.unitType,
+      units: item.units,
+      unitRate: item.unitRate,
+      subtotal: item.subtotal,
+      adjustments: 0,
+      total: item.finalAmount,
+    })),
+    subtotal,
+    taxAmount,
+    discountAmount,
+    adjustmentAmount,
+    totalAmount,
+    paidAmount: 0,
+    balanceDue: totalAmount,
+    status: &#39;DRAFT&#39; as const,
+    statusHistory: [],
+    payments: [],
+    createdBy: userId,
+    updatedBy: userId,
+  };
+
+  // Validate
+  const validation = validateCreateInvoice(input);
+  if (!validation.valid) {
+    throw new Error(`Validation failed: ${validation.errors.join(&#39;, &#39;)}`);
+  }
+
+  // Create invoice
+  const invoice = await billingRepo.createInvoice(input);
+
+  // Update billable items to INVOICED status
+  for (const item of items) {
+    await billingRepo.updateBillableItemStatus(
+      item.id,
+      &#39;INVOICED&#39;,
+      {
+        id: uuid(),
+        fromStatus: &#39;READY&#39;,
+        toStatus: &#39;INVOICED&#39;,
+        timestamp: new Date().toISOString(),
+        changedBy: userId,
+        reason: `Included in invoice ${invoiceNumber}`,
+      },
+      userId
+    );
+  }
+
+  console.log(`Created invoice: ${invoice.invoiceNumber}`);
+  return invoice;
+}
+</code></pre>
+<h3>3. Record and Allocate a Payment</h3>
+<pre><code class="language-typescript">import { generatePaymentNumber } from &#39;@care-commons/billing-invoicing&#39;;
+
+async function recordPayment(
+  organizationId: string,
+  branchId: string,
+  payerId: string,
+  amount: number,
+  referenceNumber: string,
+  userId: string
+) {
+  // Get payer info
+  const payer = await billingRepo.findPayerById(payerId);
+  if (!payer) {
+    throw new Error(&#39;Payer not found&#39;);
+  }
+
+  // Generate payment number
+  const paymentNumber = generatePaymentNumber(&#39;CCHH&#39;, 1, 2024);
+
+  // Prepare payment input
+  const input = {
+    organizationId,
+    branchId,
+    paymentNumber,
+    paymentType: &#39;FULL&#39; as const,
+    payerId,
+    payerType: payer.payerType,
+    payerName: payer.payerName,
+    amount,
+    paymentDate: new Date(),
+    receivedDate: new Date(),
+    paymentMethod: &#39;CHECK&#39; as const,
+    referenceNumber,
+    createdBy: userId,
+    updatedBy: userId,
+  };
+
+  // Validate
+  const validation = validateCreatePayment(input);
+  if (!validation.valid) {
+    throw new Error(`Validation failed: ${validation.errors.join(&#39;, &#39;)}`);
+  }
+
+  // Create payment
+  const payment = await billingRepo.createPayment({
+    ...input,
+    currency: &#39;USD&#39;,
+    allocations: [],
+    unappliedAmount: amount,
+    status: &#39;RECEIVED&#39;,
+    statusHistory: [],
+    isReconciled: false,
+  });
+
+  console.log(`Recorded payment: ${payment.paymentNumber}`);
+  return payment;
+}
+
+async function allocatePaymentToInvoices(
+  paymentId: string,
+  allocations: Array&lt;{ invoiceId: string; amount: number }&gt;,
+  userId: string
+) {
+  // Validate each allocation
+  for (const alloc of allocations) {
+    const invoice = await billingRepo.findInvoiceById(alloc.invoiceId);
+    if (!invoice) {
+      throw new Error(`Invoice ${alloc.invoiceId} not found`);
+    }
+    if (alloc.amount &gt; invoice.balanceDue) {
+      throw new Error(`Allocation exceeds balance due on invoice ${invoice.invoiceNumber}`);
+    }
+  }
+
+  // Apply allocations
+  for (const alloc of allocations) {
+    const invoice = await billingRepo.findInvoiceById(alloc.invoiceId);
+    
+    // Record allocation in payment
+    await billingRepo.allocatePayment(
+      paymentId,
+      {
+        id: uuid(),
+        invoiceId: alloc.invoiceId,
+        invoiceNumber: invoice!.invoiceNumber,
+        amount: alloc.amount,
+        appliedAt: new Date().toISOString(),
+        appliedBy: userId,
+      },
+      userId
+    );
+
+    // Update invoice payment
+    await billingRepo.updateInvoicePayment(
+      alloc.invoiceId,
+      alloc.amount,
+      {
+        paymentId,
+        amount: alloc.amount,
+        date: new Date(),
+      },
+      userId
+    );
+  }
+
+  console.log(`Allocated payment to ${allocations.length} invoices`);
+}
+</code></pre>
+<h3>4. Check Service Authorization</h3>
+<pre><code class="language-typescript">async function checkAuthorization(
+  clientId: string,
+  serviceTypeId: string,
+  units: number
+) {
+  // Find active authorizations
+  const authorizations = await billingRepo.findActiveAuthorizationsForClient(
+    clientId,
+    serviceTypeId
+  );
+
+  if (authorizations.length === 0) {
+    return {
+      isAuthorized: false,
+      reason: &#39;No active authorization found&#39;,
+    };
+  }
+
+  // Use first available authorization
+  const auth = authorizations[0];
+
+  if (auth.remainingUnits &lt; units) {
+    return {
+      isAuthorized: false,
+      reason: `Insufficient units: ${auth.remainingUnits} remaining, ${units} requested`,
+      authorizationId: auth.id,
+      remainingUnits: auth.remainingUnits,
+    };
+  }
+
+  return {
+    isAuthorized: true,
+    authorizationId: auth.id,
+    authorizationNumber: auth.authorizationNumber,
+    remainingUnits: auth.remainingUnits,
+  };
+}
+</code></pre>
+<h3>5. Search and Report</h3>
+<pre><code class="language-typescript">async function getOutstandingInvoices(organizationId: string) {
+  const invoices = await billingRepo.searchInvoices({
+    organizationId,
+    hasBalance: true,
+    status: [&#39;SENT&#39;, &#39;SUBMITTED&#39;, &#39;PARTIALLY_PAID&#39;, &#39;PAST_DUE&#39;],
+  });
+
+  const total = invoices.reduce((sum, inv) =&gt; sum + inv.balanceDue, 0);
+  
+  console.log(`Outstanding invoices: ${invoices.length}`);
+  console.log(`Total outstanding: $${total.toFixed(2)}`);
+  
+  return {
+    invoices,
+    count: invoices.length,
+    totalOutstanding: total,
+  };
+}
+
+async function getPastDueInvoices(organizationId: string) {
+  const invoices = await billingRepo.searchInvoices({
+    organizationId,
+    isPastDue: true,
+  });
+
+  return invoices.map((invoice) =&gt; ({
+    invoiceNumber: invoice.invoiceNumber,
+    payerName: invoice.payerName,
+    dueDate: invoice.dueDate,
+    balanceDue: invoice.balanceDue,
+    daysPastDue: Math.floor(
+      (new Date().getTime() - new Date(invoice.dueDate).getTime()) /
+        (1000 * 60 * 60 * 24)
+    ),
+  }));
+}
+
+async function getPayerPerformance(organizationId: string, payerId: string) {
+  // Get all invoices for payer
+  const invoices = await billingRepo.searchInvoices({
+    organizationId,
+    payerId,
+  });
+
+  const totalBilled = invoices.reduce((sum, inv) =&gt; sum + inv.totalAmount, 0);
+  const totalPaid = invoices.reduce((sum, inv) =&gt; sum + inv.paidAmount, 0);
+  const totalOutstanding = invoices.reduce((sum, inv) =&gt; sum + inv.balanceDue, 0);
+
+  // Calculate average payment days for paid invoices
+  const paidInvoices = invoices.filter((inv) =&gt; inv.paidAmount &gt; 0);
+  const paymentDays = paidInvoices.map((inv) =&gt;
+    Math.floor(
+      (new Date(inv.updatedAt).getTime() - new Date(inv.invoiceDate).getTime()) /
+        (1000 * 60 * 60 * 24)
+    )
+  );
+  const avgPaymentDays =
+    paymentDays.length &gt; 0
+      ? Math.round(paymentDays.reduce((a, b) =&gt; a + b, 0) / paymentDays.length)
+      : 0;
+
+  return {
+    totalInvoices: invoices.length,
+    totalBilled,
+    totalPaid,
+    totalOutstanding,
+    collectionRate: totalBilled &gt; 0 ? (totalPaid / totalBilled) * 100 : 0,
+    averagePaymentDays: avgPaymentDays,
+  };
+}
+</code></pre>
+<h2>Working with Rate Schedules</h2>
+<pre><code class="language-typescript">async function getApplicableRate(
+  organizationId: string,
+  payerId: string,
+  serviceTypeCode: string,
+  serviceDate: Date
+) {
+  // Find active rate schedule for payer
+  const schedule = await billingRepo.findActiveRateSchedule(
+    organizationId,
+    payerId,
+    serviceDate
+  );
+
+  if (!schedule) {
+    throw new Error(&#39;No active rate schedule found&#39;);
+  }
+
+  // Find rate for service type
+  const rate = schedule.rates.find(
+    (r) =&gt; r.serviceTypeCode === serviceTypeCode
+  );
+
+  if (!rate) {
+    throw new Error(`No rate found for service type ${serviceTypeCode}`);
+  }
+
+  return rate;
+}
+</code></pre>
+<h2>Error Handling</h2>
+<p>All operations should include proper error handling:</p>
+<pre><code class="language-typescript">import { ValidationResult } from &#39;@care-commons/billing-invoicing&#39;;
+
+async function handleBillingOperation() {
+  try {
+    // Perform operation
+    const result = await someOperation();
+    return result;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(&#39;Billing operation failed:&#39;, error.message);
+      // Handle specific error types
+      if (error.message.includes(&#39;Validation failed&#39;)) {
+        // Handle validation errors
+      } else if (error.message.includes(&#39;not found&#39;)) {
+        // Handle not found errors
+      }
+    }
+    throw error;
+  }
+}
+</code></pre>
+<h2>Best Practices</h2>
+<ol>
+<li><strong>Always validate input</strong> before creating entities</li>
+<li><strong>Use transactions</strong> for multi-step operations</li>
+<li><strong>Check authorizations</strong> before creating billable items</li>
+<li><strong>Apply rate schedules</strong> consistently</li>
+<li><strong>Track status history</strong> for audit trails</li>
+<li><strong>Handle EVV records</strong> for Medicaid/Medicare compliance</li>
+<li><strong>Implement retry logic</strong> for external submissions</li>
+<li><strong>Monitor past due invoices</strong> regularly</li>
+<li><strong>Reconcile payments</strong> promptly</li>
+<li><strong>Generate reports</strong> for financial oversight</li>
+</ol>
+<h2>Next Steps</h2>
+<ul>
+<li>Implement service layer with business workflows</li>
+<li>Add API handlers for external integrations</li>
+<li>Create automated invoicing schedules</li>
+<li>Implement claims submission to clearinghouses</li>
+<li>Add ERA (Electronic Remittance Advice) processing</li>
+<li>Build reporting dashboards</li>
+<li>Add payment plan management</li>
+<li>Implement collections workflows</li>
+</ul>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

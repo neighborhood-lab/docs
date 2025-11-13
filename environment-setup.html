@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Environment Configuration Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Environment Configuration Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Environment Configuration Guide</h1>
+<p><strong>Complete reference for all environment variables, secrets, and external system configuration required for Care Commons deployment.</strong></p>
+<hr>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#local-development">Local Development</a></li>
+<li><a href="#github-secrets">GitHub Secrets</a></li>
+<li><a href="#vercel-configuration">Vercel Configuration</a></li>
+<li><a href="#neon-database">Neon Database</a></li>
+<li><a href="#codecov">Codecov</a></li>
+<li><a href="#environment-variables-reference">Environment Variables Reference</a></li>
+</ul>
+<hr>
+<h2>Overview</h2>
+<p>Care Commons uses different configurations for each environment:</p>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Branch</th>
+<th>Database</th>
+<th>URL</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Local</strong></td>
+<td>Any</td>
+<td>Local PostgreSQL</td>
+<td>localhost:3000</td>
+<td>Development</td>
+</tr>
+<tr>
+<td><strong>Preview</strong></td>
+<td><code>preview</code></td>
+<td>Neon Preview DB</td>
+<td><code>*.vercel.app</code></td>
+<td>Pre-production testing</td>
+</tr>
+<tr>
+<td><strong>Production</strong></td>
+<td><code>main</code></td>
+<td>Neon Production DB</td>
+<td><code>care-commons.vercel.app</code></td>
+<td>Live system</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Local Development</h2>
+<h3>Required Environment Variables</h3>
+<p>Create a <code>.env</code> file in the project root:</p>
+<pre><code class="language-bash"># Database Configuration (Local PostgreSQL)
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/care_commons
+
+# OR use individual variables:
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=care_commons
+DB_USER=postgres
+DB_PASSWORD=your_password_here
+DB_SSL=false
+
+# JWT Secrets (generate with: openssl rand -base64 32)
+JWT_ACCESS_SECRET=your-access-secret-here
+JWT_REFRESH_SECRET=your-refresh-secret-here
+
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# CORS Configuration (comma-separated origins)
+CORS_ORIGIN=http://localhost:5173,http://localhost:3000
+</code></pre>
+<h3>Local Database Setup</h3>
+<ol>
+<li><p><strong>Install PostgreSQL 15+</strong>:</p>
+<pre><code class="language-bash"># macOS
+brew install postgresql@15
+brew services start postgresql@15
+
+# Ubuntu
+sudo apt install postgresql-15
+sudo systemctl start postgresql
+</code></pre>
+</li>
+<li><p><strong>Create Database</strong>:</p>
+<pre><code class="language-bash">createdb care_commons
+createdb care_commons_test
+</code></pre>
+</li>
+<li><p><strong>Run Migrations</strong>:</p>
+<pre><code class="language-bash">npm run db:migrate
+</code></pre>
+</li>
+<li><p><strong>Seed Data</strong> (optional):</p>
+<pre><code class="language-bash">npm run db:seed
+</code></pre>
+</li>
+</ol>
+<h3>Running Locally</h3>
+<pre><code class="language-bash"># Install dependencies
+npm install
+
+# Build all packages
+npm run build
+
+# Start development server
+npm run dev
+</code></pre>
+<p>Access the application:</p>
+<ul>
+<li><strong>Backend API</strong>: <a href="http://localhost:3000">http://localhost:3000</a></li>
+<li><strong>Frontend</strong>: <a href="http://localhost:5173">http://localhost:5173</a> (if using Vite dev server)</li>
+<li><strong>Health Check</strong>: <a href="http://localhost:3000/health">http://localhost:3000/health</a></li>
+</ul>
+<hr>
+<h2>GitHub Secrets</h2>
+<h3>Navigate to GitHub Settings</h3>
+<p>Go to: <strong>Repository → Settings → Secrets and variables → Actions → New repository secret</strong></p>
+<h3>Required Secrets</h3>
+<h4>1. Database Secrets</h4>
+<table>
+<thead>
+<tr>
+<th>Secret Name</th>
+<th>Description</th>
+<th>Example</th>
+<th>Used By</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DATABASE_URL</code></td>
+<td>Production Neon database connection string</td>
+<td><code>postgresql://user:pass@host/db?sslmode=require</code></td>
+<td>Production deployment</td>
+</tr>
+<tr>
+<td><code>PREVIEW_DATABASE_URL</code></td>
+<td>Preview Neon database connection string</td>
+<td><code>postgresql://user:pass@host/db_preview?sslmode=require</code></td>
+<td>Preview deployment</td>
+</tr>
+</tbody></table>
+<h4>2. Vercel Secrets</h4>
+<table>
+<thead>
+<tr>
+<th>Secret Name</th>
+<th>Description</th>
+<th>How to Get</th>
+<th>Used By</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>VERCEL_TOKEN</code></td>
+<td>Vercel API token for deployments</td>
+<td><a href="https://vercel.com/account/tokens">Vercel Account Settings</a></td>
+<td>All deployments</td>
+</tr>
+<tr>
+<td><code>VERCEL_ORG_ID</code></td>
+<td>Vercel organization/team ID</td>
+<td>Project Settings → General</td>
+<td>All deployments</td>
+</tr>
+<tr>
+<td><code>VERCEL_PROJECT_ID</code></td>
+<td>Vercel project ID</td>
+<td>Project Settings → General</td>
+<td>All deployments</td>
+</tr>
+</tbody></table>
+<p><strong>To get Vercel IDs</strong>:</p>
+<ol>
+<li>Go to <a href="https://vercel.com/neighborhood-lab/care-commons/settings">https://vercel.com/neighborhood-lab/care-commons/settings</a></li>
+<li>Copy <strong>Project ID</strong> and <strong>Team ID</strong></li>
+<li>Add to GitHub Secrets</li>
+</ol>
+<h4>3. Security &amp; Monitoring Secrets</h4>
+<table>
+<thead>
+<tr>
+<th>Secret Name</th>
+<th>Description</th>
+<th>How to Get</th>
+<th>Used By</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CODECOV_TOKEN</code></td>
+<td>Codecov upload token</td>
+<td><a href="https://codecov.io/gh/neighborhood-lab/care-commons/settings">Codecov Settings</a></td>
+<td>CI workflow</td>
+</tr>
+</tbody></table>
+<h4>4. JWT Secrets (Production)</h4>
+<table>
+<thead>
+<tr>
+<th>Secret Name</th>
+<th>Description</th>
+<th>How to Generate</th>
+<th>Used By</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>JWT_ACCESS_SECRET</code></td>
+<td>JWT access token signing key</td>
+<td><code>openssl rand -base64 32</code></td>
+<td>Production app</td>
+</tr>
+<tr>
+<td><code>JWT_REFRESH_SECRET</code></td>
+<td>JWT refresh token signing key</td>
+<td><code>openssl rand -base64 32</code></td>
+<td>Production app</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Vercel Configuration</h2>
+<h3>Project Setup</h3>
+<ol>
+<li><p><strong>Link Repository</strong>:</p>
+<ul>
+<li>Go to <a href="https://vercel.com">https://vercel.com</a></li>
+<li>Click &quot;Add New&quot; → &quot;Project&quot;</li>
+<li>Import GitHub repository: <code>neighborhood-lab/care-commons</code></li>
+</ul>
+</li>
+<li><p><strong>Configure Build Settings</strong>:</p>
+<ul>
+<li><strong>Framework Preset</strong>: Other</li>
+<li><strong>Build Command</strong>: <code>npm run build</code></li>
+<li><strong>Output Directory</strong>: <code>public</code></li>
+<li><strong>Install Command</strong>: <code>npm install</code></li>
+<li><strong>Node.js Version</strong>: 22.x (CRITICAL - do not change)</li>
+</ul>
+</li>
+<li><p><strong>Root Directory</strong>: Leave empty (monorepo at root)</p>
+</li>
+</ol>
+<h3>Environment Variables (Vercel Dashboard)</h3>
+<p>Navigate to: <strong>Project Settings → Environment Variables</strong></p>
+<h4>Production Environment Variables</h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+<th>Environment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DATABASE_URL</code></td>
+<td><code>postgresql://...</code> (from Neon)</td>
+<td>Production</td>
+</tr>
+<tr>
+<td><code>JWT_ACCESS_SECRET</code></td>
+<td>Random 32-byte base64 string</td>
+<td>Production</td>
+</tr>
+<tr>
+<td><code>JWT_REFRESH_SECRET</code></td>
+<td>Random 32-byte base64 string</td>
+<td>Production</td>
+</tr>
+<tr>
+<td><code>NODE_ENV</code></td>
+<td><code>production</code></td>
+<td>Production</td>
+</tr>
+<tr>
+<td><code>CORS_ORIGIN</code></td>
+<td><code>https://care-commons.vercel.app</code></td>
+<td>Production</td>
+</tr>
+</tbody></table>
+<h4>Preview Environment Variables</h4>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+<th>Environment</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DATABASE_URL</code></td>
+<td><code>postgresql://...</code> (preview DB from Neon)</td>
+<td>Preview</td>
+</tr>
+<tr>
+<td><code>JWT_ACCESS_SECRET</code></td>
+<td>Random 32-byte base64 string</td>
+<td>Preview</td>
+</tr>
+<tr>
+<td><code>JWT_REFRESH_SECRET</code></td>
+<td>Random 32-byte base64 string</td>
+<td>Preview</td>
+</tr>
+<tr>
+<td><code>NODE_ENV</code></td>
+<td><code>production</code></td>
+<td>Preview</td>
+</tr>
+<tr>
+<td><code>CORS_ORIGIN</code></td>
+<td><code>https://*.vercel.app</code></td>
+<td>Preview</td>
+</tr>
+</tbody></table>
+<h3>Vercel Deployment Configuration</h3>
+<p>The <code>vercel.json</code> file is critical for proper deployment:</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 2,
+  &quot;buildCommand&quot;: &quot;npm run build&quot;,
+  &quot;framework&quot;: null,
+  &quot;installCommand&quot;: &quot;npm install&quot;,
+  &quot;functions&quot;: {
+    &quot;api/index.mts&quot;: {
+      &quot;runtime&quot;: &quot;nodejs22.x&quot;,
+      &quot;maxDuration&quot;: 30
+    }
+  },
+  &quot;rewrites&quot;: [
+    {
+      &quot;source&quot;: &quot;/health&quot;,
+      &quot;destination&quot;: &quot;/api/index.mts&quot;
+    },
+    {
+      &quot;source&quot;: &quot;/api/:path*&quot;,
+      &quot;destination&quot;: &quot;/api/index.mts&quot;
+    },
+    {
+      &quot;source&quot;: &quot;/(.*)&quot;,
+      &quot;destination&quot;: &quot;/index.html&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>DO NOT MODIFY</strong> the Node.js version (22.x) - Vercel requires this for ESM support.</p>
+<hr>
+<h2>Neon Database</h2>
+<h3>Production Database Setup</h3>
+<ol>
+<li><p><strong>Create Neon Account</strong>: <a href="https://neon.tech">https://neon.tech</a></p>
+</li>
+<li><p><strong>Create Production Database</strong>:</p>
+<ul>
+<li>Project Name: <code>care-commons-production</code></li>
+<li>Region: Choose closest to your users</li>
+<li>PostgreSQL Version: 15+</li>
+<li>Compute Size: Start with 0.25 vCPU, scale as needed</li>
+</ul>
+</li>
+<li><p><strong>Get Connection String</strong>:</p>
+<ul>
+<li>Go to Project Dashboard</li>
+<li>Click &quot;Connection Details&quot;</li>
+<li>Copy connection string (format: <code>postgresql://user:pass@host/dbname?sslmode=require</code>)</li>
+<li>Add to GitHub Secrets as <code>DATABASE_URL</code></li>
+</ul>
+</li>
+<li><p><strong>Configure Pooling</strong> (recommended for Vercel):</p>
+<ul>
+<li>Enable &quot;Pooled connection&quot; in Neon dashboard</li>
+<li>Use pooled connection string for <code>DATABASE_URL</code></li>
+</ul>
+</li>
+</ol>
+<h3>Preview Database Setup</h3>
+<ol>
+<li><p><strong>Create Preview Database</strong>:</p>
+<ul>
+<li>Same project or separate project</li>
+<li>Name: <code>care-commons-preview</code></li>
+<li>Same configuration as production</li>
+</ul>
+</li>
+<li><p><strong>Get Connection String</strong>:</p>
+<ul>
+<li>Copy preview database connection string</li>
+<li>Add to GitHub Secrets as <code>PREVIEW_DATABASE_URL</code></li>
+</ul>
+</li>
+</ol>
+<h3>Database Migrations</h3>
+<p>Migrations run automatically during deployment via GitHub Actions:</p>
+<pre><code class="language-yaml">- name: Run Database Migrations (Production)
+  env:
+    DATABASE_URL: ${{ secrets.DATABASE_URL }}
+  run: npm run db:migrate
+</code></pre>
+<p><strong>Manual migration</strong> (if needed):</p>
+<pre><code class="language-bash">DATABASE_URL=&quot;postgresql://...&quot; npm run db:migrate
+</code></pre>
+<hr>
+<h2>Codecov</h2>
+<h3>Setup</h3>
+<ol>
+<li><p><strong>Create Codecov Account</strong>: <a href="https://codecov.io">https://codecov.io</a></p>
+</li>
+<li><p><strong>Connect GitHub Repository</strong>:</p>
+<ul>
+<li>Go to <a href="https://codecov.io/gh">https://codecov.io/gh</a></li>
+<li>Add repository: <code>neighborhood-lab/care-commons</code></li>
+</ul>
+</li>
+<li><p><strong>Get Upload Token</strong>:</p>
+<ul>
+<li>Go to <a href="https://codecov.io/gh/neighborhood-lab/care-commons/settings">https://codecov.io/gh/neighborhood-lab/care-commons/settings</a></li>
+<li>Copy &quot;Repository Upload Token&quot;</li>
+<li>Add to GitHub Secrets as <code>CODECOV_TOKEN</code></li>
+</ul>
+</li>
+</ol>
+<h3>Coverage Reporting</h3>
+<p>The CI workflow automatically uploads coverage:</p>
+<pre><code class="language-yaml">- name: Upload coverage reports
+  uses: codecov/codecov-action@v4
+  with:
+    token: ${{ secrets.CODECOV_TOKEN }}
+    files: ./packages/*/coverage/lcov.info
+</code></pre>
+<hr>
+<h2>Environment Variables Reference</h2>
+<h3>Complete List</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Database</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>DATABASE_URL</code></td>
+<td>Yes (prod)</td>
+<td>-</td>
+<td>PostgreSQL connection string (preferred)</td>
+</tr>
+<tr>
+<td><code>DB_HOST</code></td>
+<td>If no DATABASE_URL</td>
+<td><code>localhost</code></td>
+<td>Database host</td>
+</tr>
+<tr>
+<td><code>DB_PORT</code></td>
+<td>If no DATABASE_URL</td>
+<td><code>5432</code></td>
+<td>Database port</td>
+</tr>
+<tr>
+<td><code>DB_NAME</code></td>
+<td>If no DATABASE_URL</td>
+<td><code>care_commons</code></td>
+<td>Database name</td>
+</tr>
+<tr>
+<td><code>DB_USER</code></td>
+<td>If no DATABASE_URL</td>
+<td><code>postgres</code></td>
+<td>Database user</td>
+</tr>
+<tr>
+<td><code>DB_PASSWORD</code></td>
+<td>If no DATABASE_URL</td>
+<td>-</td>
+<td>Database password</td>
+</tr>
+<tr>
+<td><code>DB_SSL</code></td>
+<td>No</td>
+<td><code>false</code></td>
+<td>Enable SSL for database connection</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>JWT_ACCESS_SECRET</code></td>
+<td>Yes (prod)</td>
+<td>-</td>
+<td>Secret for signing access tokens</td>
+</tr>
+<tr>
+<td><code>JWT_REFRESH_SECRET</code></td>
+<td>Yes (prod)</td>
+<td>-</td>
+<td>Secret for signing refresh tokens</td>
+</tr>
+<tr>
+<td><code>JWT_ACCESS_EXPIRY</code></td>
+<td>No</td>
+<td><code>15m</code></td>
+<td>Access token expiration</td>
+</tr>
+<tr>
+<td><code>JWT_REFRESH_EXPIRY</code></td>
+<td>No</td>
+<td><code>7d</code></td>
+<td>Refresh token expiration</td>
+</tr>
+<tr>
+<td><strong>Server</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>PORT</code></td>
+<td>No</td>
+<td><code>3000</code></td>
+<td>Server port</td>
+</tr>
+<tr>
+<td><code>NODE_ENV</code></td>
+<td>No</td>
+<td><code>development</code></td>
+<td>Environment (<code>development</code>, <code>production</code>, <code>test</code>)</td>
+</tr>
+<tr>
+<td><code>CORS_ORIGIN</code></td>
+<td>Recommended</td>
+<td>-</td>
+<td>Comma-separated allowed origins</td>
+</tr>
+<tr>
+<td><strong>External Services</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>VERCEL_TOKEN</code></td>
+<td>Yes (deploy)</td>
+<td>-</td>
+<td>Vercel API token</td>
+</tr>
+<tr>
+<td><code>VERCEL_ORG_ID</code></td>
+<td>Yes (deploy)</td>
+<td>-</td>
+<td>Vercel organization ID</td>
+</tr>
+<tr>
+<td><code>VERCEL_PROJECT_ID</code></td>
+<td>Yes (deploy)</td>
+<td>-</td>
+<td>Vercel project ID</td>
+</tr>
+<tr>
+<td><code>CODECOV_TOKEN</code></td>
+<td>Yes (coverage)</td>
+<td>-</td>
+<td>Codecov upload token</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Quick Reference: Setup Checklist</h2>
+<h3>Local Development</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Install Node.js 22.x</li>
+<li><input disabled="" type="checkbox"> Install PostgreSQL 15+</li>
+<li><input disabled="" type="checkbox"> Create <code>.env</code> file with database credentials</li>
+<li><input disabled="" type="checkbox"> Run <code>npm install</code></li>
+<li><input disabled="" type="checkbox"> Run <code>npm run db:migrate</code></li>
+<li><input disabled="" type="checkbox"> Run <code>npm run dev</code></li>
+<li><input disabled="" type="checkbox"> Test: <code>curl http://localhost:3000/health</code></li>
+</ul>
+<h3>GitHub Repository</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Add <code>DATABASE_URL</code> secret (production)</li>
+<li><input disabled="" type="checkbox"> Add <code>PREVIEW_DATABASE_URL</code> secret (preview)</li>
+<li><input disabled="" type="checkbox"> Add <code>VERCEL_TOKEN</code> secret</li>
+<li><input disabled="" type="checkbox"> Add <code>VERCEL_ORG_ID</code> secret</li>
+<li><input disabled="" type="checkbox"> Add <code>VERCEL_PROJECT_ID</code> secret</li>
+<li><input disabled="" type="checkbox"> Add <code>CODECOV_TOKEN</code> secret</li>
+<li><input disabled="" type="checkbox"> Enable branch protection for <code>main</code> and <code>preview</code></li>
+<li><input disabled="" type="checkbox"> Require CI checks to pass before merging</li>
+</ul>
+<h3>Vercel Project</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Link GitHub repository</li>
+<li><input disabled="" type="checkbox"> Set build command: <code>npm run build</code></li>
+<li><input disabled="" type="checkbox"> Set output directory: <code>public</code></li>
+<li><input disabled="" type="checkbox"> Set Node.js version: 22.x</li>
+<li><input disabled="" type="checkbox"> Add production environment variables</li>
+<li><input disabled="" type="checkbox"> Add preview environment variables</li>
+<li><input disabled="" type="checkbox"> Test deployment to preview</li>
+<li><input disabled="" type="checkbox"> Test deployment to production</li>
+<li><input disabled="" type="checkbox"> Verify health check: <code>https://care-commons.vercel.app/health</code></li>
+</ul>
+<h3>Neon Database</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Create production database project</li>
+<li><input disabled="" type="checkbox"> Create preview database project</li>
+<li><input disabled="" type="checkbox"> Copy production connection string to GitHub Secrets</li>
+<li><input disabled="" type="checkbox"> Copy preview connection string to GitHub Secrets</li>
+<li><input disabled="" type="checkbox"> Enable connection pooling</li>
+<li><input disabled="" type="checkbox"> Test connection from local environment</li>
+<li><input disabled="" type="checkbox"> Run migrations on production</li>
+<li><input disabled="" type="checkbox"> Run migrations on preview</li>
+</ul>
+<h3>Security &amp; Monitoring</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Connect Codecov to repository</li>
+<li><input disabled="" type="checkbox"> Add Codecov token to GitHub Secrets</li>
+<li><input disabled="" type="checkbox"> Enable Dependabot alerts</li>
+<li><input disabled="" type="checkbox"> Configure GitHub security advisories</li>
+</ul>
+<hr>
+<h2>Troubleshooting</h2>
+<h3>Database Connection Issues</h3>
+<p><strong>Error</strong>: <code>ECONNREFUSED</code> or <code>Connection timeout</code></p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li>Verify <code>DATABASE_URL</code> is correct</li>
+<li>Check Neon database is running</li>
+<li>Verify SSL mode: <code>?sslmode=require</code> for Neon</li>
+<li>Test connection: <code>psql &quot;$DATABASE_URL&quot;</code></li>
+</ol>
+<h3>Vercel Deployment Failures</h3>
+<p><strong>Error</strong>: <code>Module not found</code> or <code>Cannot find module</code></p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li>Verify Node.js version is 22.x in <code>vercel.json</code></li>
+<li>Check ESM imports include <code>.js</code> extension</li>
+<li>Run <code>npm run build</code> locally to verify</li>
+<li>Check build logs in Vercel dashboard</li>
+</ol>
+<h3>Health Check Failing</h3>
+<p><strong>Error</strong>: Health check returns 404 or 500</p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li>Verify <code>vercel.json</code> rewrites are correct</li>
+<li>Check <code>api/index.mts</code> exists and compiles</li>
+<li>Test locally: <code>npm run build &amp;&amp; node packages/app/dist/index.js</code></li>
+<li>Check Vercel function logs for errors</li>
+</ol>
+<h3>Authentication Issues</h3>
+<p><strong>Error</strong>: <code>Invalid token</code> or <code>Token expired</code></p>
+<p><strong>Solutions</strong>:</p>
+<ol>
+<li>Verify <code>JWT_ACCESS_SECRET</code> is set in Vercel</li>
+<li>Regenerate secrets: <code>openssl rand -base64 32</code></li>
+<li>Update secrets in both GitHub and Vercel</li>
+<li>Redeploy after updating secrets</li>
+</ol>
+<hr>
+<h2>Security Best Practices</h2>
+<ol>
+<li><strong>Never commit</strong> <code>.env</code> files or secrets to Git</li>
+<li><strong>Rotate secrets</strong> regularly (every 90 days recommended)</li>
+<li><strong>Use different secrets</strong> for each environment</li>
+<li><strong>Enable 2FA</strong> on all external accounts (GitHub, Vercel, Neon)</li>
+<li><strong>Review security alerts</strong> weekly (Dependabot)</li>
+<li><strong>Monitor Vercel logs</strong> for suspicious activity</li>
+<li><strong>Use branch protection</strong> to prevent direct commits to <code>main</code> and <code>preview</code></li>
+</ol>
+<hr>
+<h2>Support &amp; Resources</h2>
+<ul>
+<li><strong>Vercel Documentation</strong>: <a href="https://vercel.com/docs">https://vercel.com/docs</a></li>
+<li><strong>Neon Documentation</strong>: <a href="https://neon.tech/docs">https://neon.tech/docs</a></li>
+<li><strong>GitHub Actions</strong>: <a href="https://docs.github.com/actions">https://docs.github.com/actions</a></li>
+<li><strong>Codecov Documentation</strong>: <a href="https://docs.codecov.com">https://docs.codecov.com</a></li>
+</ul>
+<hr>
+<p><strong>Last Updated</strong>: November 2025<br><strong>Maintained By</strong>: Neighborhood Lab<br><strong>Repository</strong>: <a href="https://github.com/neighborhood-lab/care-commons">https://github.com/neighborhood-lab/care-commons</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

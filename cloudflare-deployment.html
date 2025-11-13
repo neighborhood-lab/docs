@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloudflare Deployment Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🏗️ Architecture & Deployment</span> / 
+      <span>Cloudflare Deployment Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Cloudflare Deployment Guide</h1>
+<p>This guide covers deploying Care Commons to Cloudflare&#39;s edge platform. We maintain <strong>dual deployment support</strong> for both Vercel (default) and Cloudflare.</p>
+<h2>Architecture Overview</h2>
+<h3>Cloudflare Deployment Stack</h3>
+<ul>
+<li><strong>Frontend</strong>: Cloudflare Pages (React SPA)</li>
+<li><strong>API</strong>: Cloudflare Workers (Express on edge)</li>
+<li><strong>Database</strong>: Neon PostgreSQL (via Hyperdrive for connection pooling)</li>
+<li><strong>Cache</strong>: Cloudflare KV (optional, alternative to Redis)</li>
+<li><strong>Storage</strong>: Cloudflare R2 (optional, for file uploads)</li>
+<li><strong>CDN</strong>: Cloudflare global edge network</li>
+</ul>
+<h3>vs Vercel Deployment</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Vercel</th>
+<th>Cloudflare</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frontend</td>
+<td>Vercel Edge</td>
+<td>Cloudflare Pages</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Vercel Serverless</td>
+<td>Cloudflare Workers</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>Neon PostgreSQL</td>
+<td>Neon PostgreSQL via Hyperdrive</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>Redis/Upstash</td>
+<td>Cloudflare KV</td>
+</tr>
+<tr>
+<td>File Storage</td>
+<td>Vercel Blob</td>
+<td>Cloudflare R2</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>$20/mo per member</td>
+<td>~$5/mo for typical usage</td>
+</tr>
+</tbody></table>
+<h2>Prerequisites</h2>
+<ol>
+<li><p><strong>Cloudflare Account</strong> (Free or Pro)</p>
+<ul>
+<li>Sign up at <a href="https://dash.cloudflare.com/sign-up">https://dash.cloudflare.com/sign-up</a></li>
+</ul>
+</li>
+<li><p><strong>Wrangler CLI</strong> (Already installed globally)</p>
+<pre><code class="language-bash">wrangler --version  # Should show 4.47.0+
+</code></pre>
+</li>
+<li><p><strong>Domain</strong> (Optional but recommended)</p>
+<ul>
+<li>Add your domain to Cloudflare</li>
+<li>Update DNS to use Cloudflare nameservers</li>
+</ul>
+</li>
+<li><p><strong>Neon Database</strong> (Existing PostgreSQL database)</p>
+<ul>
+<li>Connection string from Neon dashboard</li>
+</ul>
+</li>
+</ol>
+<h2>Initial Setup</h2>
+<h3>1. Authenticate with Cloudflare</h3>
+<pre><code class="language-bash">wrangler login
+</code></pre>
+<p>This opens a browser to authenticate. Grant Wrangler access to your account.</p>
+<h3>2. Create Hyperdrive Configuration (Recommended)</h3>
+<p>Hyperdrive provides connection pooling and reduces latency for PostgreSQL:</p>
+<pre><code class="language-bash"># Get your Neon connection string
+export DATABASE_URL=&quot;postgresql://user:pass@host.neon.tech:5432/dbname?sslmode=require&quot;
+
+# Create Hyperdrive configuration
+wrangler hyperdrive create care-commons-db --connection-string=&quot;$DATABASE_URL&quot;
+
+# Save the returned ID and update wrangler.toml:
+# [[hyperdrive]]
+# binding = &quot;DATABASE&quot;
+# id = &quot;YOUR_HYPERDRIVE_ID&quot;
+</code></pre>
+<h3>3. Set Secrets</h3>
+<pre><code class="language-bash"># Database (if not using Hyperdrive)
+wrangler secret put DATABASE_URL
+
+# JWT secrets (generate with: openssl rand -base64 32)
+wrangler secret put JWT_SECRET
+wrangler secret put JWT_REFRESH_SECRET
+wrangler secret put SESSION_SECRET
+
+# Encryption key (generate with: openssl rand -hex 32)
+wrangler secret put ENCRYPTION_KEY
+
+# Google OAuth (optional)
+wrangler secret put GOOGLE_CLIENT_ID
+wrangler secret put GOOGLE_CLIENT_SECRET
+
+# Geocoding API key
+wrangler secret put GEOCODING_API_KEY
+
+# Sentry DSN (optional)
+wrangler secret put SENTRY_DSN
+</code></pre>
+<h3>4. Configure KV Namespaces (Optional - for caching)</h3>
+<pre><code class="language-bash"># Create KV namespace for caching
+wrangler kv:namespace create &quot;CACHE&quot;
+wrangler kv:namespace create &quot;CACHE&quot; --preview
+
+# Update wrangler.toml with the returned IDs:
+# [[kv_namespaces]]
+# binding = &quot;CACHE&quot;
+# id = &quot;YOUR_KV_NAMESPACE_ID&quot;
+# preview_id = &quot;YOUR_PREVIEW_KV_NAMESPACE_ID&quot;
+</code></pre>
+<h3>5. Configure R2 Bucket (Optional - for file uploads)</h3>
+<pre><code class="language-bash"># Create R2 bucket for uploads
+wrangler r2 bucket create care-commons-uploads
+wrangler r2 bucket create care-commons-uploads-preview
+
+# Update wrangler.toml
+</code></pre>
+<h2>Deployment</h2>
+<h3>Deploy API (Cloudflare Workers)</h3>
+<pre><code class="language-bash"># Staging environment
+npm run deploy:cloudflare:staging
+
+# Production environment
+npm run deploy:cloudflare:production
+
+# Or use wrangler directly
+wrangler deploy --env production
+</code></pre>
+<h3>Deploy Frontend (Cloudflare Pages)</h3>
+<h4>Option 1: CLI Deployment</h4>
+<pre><code class="language-bash"># Build frontend
+npm run build:web
+
+# Deploy to Cloudflare Pages
+npm run deploy:cloudflare:pages
+</code></pre>
+<h4>Option 2: Git Integration (Recommended for CI/CD)</h4>
+<ol>
+<li><p>Go to Cloudflare Dashboard → Pages</p>
+</li>
+<li><p>Click &quot;Create a project&quot;</p>
+</li>
+<li><p>Connect to GitHub repository</p>
+</li>
+<li><p>Configure build settings:</p>
+<ul>
+<li><strong>Build command</strong>: <code>npm run build:web</code></li>
+<li><strong>Build output directory</strong>: <code>packages/web/dist</code></li>
+<li><strong>Root directory</strong>: <code>/</code></li>
+<li><strong>Node version</strong>: <code>22</code></li>
+</ul>
+</li>
+<li><p>Set environment variables:</p>
+<pre><code>NODE_ENV=production
+VITE_API_URL=https://api.care-commons.com
+</code></pre>
+</li>
+<li><p>Deploy</p>
+</li>
+</ol>
+<h3>Custom Domain Setup</h3>
+<h4>API Domain (Cloudflare Workers)</h4>
+<ol>
+<li><p>Add route in <code>wrangler.toml</code>:</p>
+<pre><code class="language-toml">routes = [
+  { pattern = &quot;api.care-commons.com/*&quot;, zone_name = &quot;care-commons.com&quot; }
+]
+</code></pre>
+</li>
+<li><p>Deploy: <code>wrangler deploy --env production</code></p>
+</li>
+<li><p>DNS will be configured automatically</p>
+</li>
+</ol>
+<h4>Frontend Domain (Cloudflare Pages)</h4>
+<ol>
+<li>Go to Pages project → Custom domains</li>
+<li>Add <code>care-commons.com</code> and <code>www.care-commons.com</code></li>
+<li>Cloudflare will configure DNS automatically</li>
+</ol>
+<h2>Environment Variables</h2>
+<h3>Worker Environment Variables (wrangler.toml)</h3>
+<pre><code class="language-toml">[vars]
+NODE_ENV = &quot;production&quot;
+LOG_LEVEL = &quot;info&quot;
+CORS_ORIGIN = &quot;https://care-commons.com,https://www.care-commons.com&quot;
+</code></pre>
+<h3>Worker Secrets (Sensitive)</h3>
+<p>Use <code>wrangler secret put &lt;NAME&gt;</code>:</p>
+<ul>
+<li><code>DATABASE_URL</code> - PostgreSQL connection string</li>
+<li><code>JWT_SECRET</code> - JWT signing secret</li>
+<li><code>JWT_REFRESH_SECRET</code> - Refresh token secret</li>
+<li><code>SESSION_SECRET</code> - Session encryption secret</li>
+<li><code>ENCRYPTION_KEY</code> - Field encryption key (SSN, etc.)</li>
+<li><code>GOOGLE_CLIENT_ID</code> - OAuth client ID</li>
+<li><code>GOOGLE_CLIENT_SECRET</code> - OAuth client secret</li>
+<li><code>GEOCODING_API_KEY</code> - Mapbox/Google geocoding key</li>
+</ul>
+<h3>Pages Environment Variables</h3>
+<p>Set in Cloudflare Dashboard → Pages → Settings → Environment variables:</p>
+<ul>
+<li><code>VITE_API_URL</code> - API endpoint URL</li>
+<li><code>NODE_ENV</code> - <code>production</code> or <code>staging</code></li>
+</ul>
+<h2>Database Migrations</h2>
+<p>Run migrations <strong>before</strong> deploying:</p>
+<pre><code class="language-bash"># Set DATABASE_URL to your environment
+export DATABASE_URL=&quot;your_database_url_here&quot;
+
+# Run migrations
+npm run db:migrate
+
+# Verify
+npm run db:migrate:status
+</code></pre>
+<h2>Monitoring and Debugging</h2>
+<h3>View Logs</h3>
+<pre><code class="language-bash"># Real-time logs (tail)
+wrangler tail
+
+# Filter by environment
+wrangler tail --env production
+
+# Filter by status
+wrangler tail --status error
+</code></pre>
+<h3>View Metrics</h3>
+<pre><code class="language-bash"># View deployment details
+wrangler deployments list
+
+# View analytics
+wrangler analytics
+</code></pre>
+<h3>Debugging</h3>
+<pre><code class="language-bash"># Local development with Miniflare
+wrangler dev
+
+# Test worker locally
+curl http://localhost:8787/health
+</code></pre>
+<h2>Rollback</h2>
+<h3>Rollback Worker Deployment</h3>
+<pre><code class="language-bash"># List recent deployments
+wrangler deployments list
+
+# Rollback to previous version
+wrangler rollback &lt;DEPLOYMENT_ID&gt;
+</code></pre>
+<h3>Rollback Pages Deployment</h3>
+<ol>
+<li>Go to Cloudflare Dashboard → Pages → Project</li>
+<li>Deployments tab</li>
+<li>Click &quot;...&quot; on previous successful deployment</li>
+<li>Select &quot;Rollback to this deployment&quot;</li>
+</ol>
+<h2>Cost Estimation</h2>
+<p>Cloudflare pricing is usage-based. Typical costs for a small-medium home health agency:</p>
+<h3>Workers (API)</h3>
+<ul>
+<li><strong>Free tier</strong>: 100,000 requests/day</li>
+<li><strong>Paid</strong>: $5/mo for 10M requests</li>
+<li><strong>Typical usage</strong>: ~$5-10/mo</li>
+</ul>
+<h3>Pages (Frontend)</h3>
+<ul>
+<li><strong>Free tier</strong>: Unlimited bandwidth</li>
+<li><strong>Builds</strong>: 500 builds/month free</li>
+<li><strong>Typical usage</strong>: $0/mo</li>
+</ul>
+<h3>R2 Storage (if used)</h3>
+<ul>
+<li><strong>Free tier</strong>: 10GB storage</li>
+<li><strong>Operations</strong>: First 1M free</li>
+<li><strong>Typical usage</strong>: $0-5/mo</li>
+</ul>
+<h3>KV (if used)</h3>
+<ul>
+<li><strong>Free tier</strong>: 100,000 reads/day</li>
+<li><strong>Paid</strong>: $0.50 per million reads</li>
+<li><strong>Typical usage</strong>: $0-2/mo</li>
+</ul>
+<h3>Hyperdrive (Database pooling)</h3>
+<ul>
+<li><strong>Included</strong> in Workers Paid plan</li>
+<li><strong>No additional cost</strong></li>
+</ul>
+<h3>Total Estimated Cost</h3>
+<ul>
+<li><strong>Small agency (&lt; 10k requests/day)</strong>: ~$0-5/mo</li>
+<li><strong>Medium agency (100k requests/day)</strong>: ~$10-20/mo</li>
+<li><strong>Large agency (1M requests/day)</strong>: ~$50-100/mo</li>
+</ul>
+<p>Compare to Vercel Pro at $20/member/mo.</p>
+<h2>CI/CD Integration</h2>
+<h3>GitHub Actions (Recommended)</h3>
+<p>Create <code>.github/workflows/cloudflare-deploy.yml</code>:</p>
+<pre><code class="language-yaml">name: Deploy to Cloudflare
+
+on:
+  push:
+    branches:
+      - main
+      - preview
+
+jobs:
+  deploy-api:
+    runs-on: ubuntu-latest
+    name: Deploy API to Cloudflare Workers
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: &#39;22&#39;
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          environment: ${{ github.ref == &#39;refs/heads/main&#39; &amp;&amp; &#39;production&#39; || &#39;staging&#39; }}
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    name: Deploy Frontend to Cloudflare Pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: &#39;22&#39;
+      - run: npm ci
+      - run: npm run build:web
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: care-commons
+          directory: packages/web/dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+</code></pre>
+<h3>Required Secrets</h3>
+<p>Add to GitHub repository settings → Secrets:</p>
+<ul>
+<li><code>CLOUDFLARE_API_TOKEN</code> - Create at Cloudflare Dashboard → Profile → API Tokens</li>
+<li><code>CLOUDFLARE_ACCOUNT_ID</code> - Found in Cloudflare Dashboard → Workers &amp; Pages</li>
+</ul>
+<h2>Troubleshooting</h2>
+<h3>Issue: Worker fails to start</h3>
+<p><strong>Error</strong>: <code>Module worker script timed out</code></p>
+<p><strong>Solution</strong>: Check that all dependencies are compatible with Workers runtime. Some Node.js APIs are not available.</p>
+<h3>Issue: Database connection fails</h3>
+<p><strong>Error</strong>: <code>ECONNREFUSED</code> or timeout</p>
+<p><strong>Solution</strong>: </p>
+<ol>
+<li>Verify DATABASE_URL secret is set correctly</li>
+<li>Use Hyperdrive for better connection pooling</li>
+<li>Check Neon IP allowlist (Cloudflare IPs must be allowed)</li>
+</ol>
+<h3>Issue: CORS errors</h3>
+<p><strong>Solution</strong>: Update CORS_ORIGIN in wrangler.toml to include your frontend domain</p>
+<h3>Issue: Build fails</h3>
+<p><strong>Error</strong>: <code>Cannot find module ...</code></p>
+<p><strong>Solution</strong>: Ensure all packages are built before deploying:</p>
+<pre><code class="language-bash">npm run build
+wrangler deploy
+</code></pre>
+<h2>Support</h2>
+<p>For Cloudflare-specific issues:</p>
+<ul>
+<li>Cloudflare Workers Docs: <a href="https://developers.cloudflare.com/workers/">https://developers.cloudflare.com/workers/</a></li>
+<li>Cloudflare Pages Docs: <a href="https://developers.cloudflare.com/pages/">https://developers.cloudflare.com/pages/</a></li>
+<li>Community Discord: <a href="https://discord.cloudflare.com">https://discord.cloudflare.com</a></li>
+</ul>
+<p>For Care Commons deployment issues:</p>
+<ul>
+<li>GitHub Issues: <a href="https://github.com/neighborhood-lab/care-commons/issues">https://github.com/neighborhood-lab/care-commons/issues</a></li>
+<li>Email: <a href="mailto:support@neighborhoodlab.org">support@neighborhoodlab.org</a></li>
+</ul>
+<h2>Migration from Vercel</h2>
+<p>To migrate an existing Vercel deployment to Cloudflare:</p>
+<ol>
+<li><strong>Deploy to Cloudflare</strong> (following this guide)</li>
+<li><strong>Test thoroughly</strong> on Cloudflare staging</li>
+<li><strong>Update DNS</strong> to point to Cloudflare Pages</li>
+<li><strong>Monitor</strong> for 24-48 hours</li>
+<li><strong>Decommission</strong> Vercel deployment once stable</li>
+</ol>
+<p>Both platforms can run simultaneously during migration.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

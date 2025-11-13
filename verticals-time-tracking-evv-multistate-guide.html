@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-State EVV Integration Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>📖 User Guides</span> / 
+      <span>Multi-State EVV Integration Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Multi-State EVV Integration Guide</h1>
+<p><strong>Version</strong>: 1.0.0<br><strong>Date</strong>: November 2025<br><strong>Supported States</strong>: TX, FL, OH, PA, GA, NC, AZ</p>
+<h2>Overview</h2>
+<p>Care Commons now supports Electronic Visit Verification (EVV) across 7 states, expanding the addressable market from ~8,000 agencies to ~36,000+ home healthcare agencies (3x+ market expansion).</p>
+<h3>Key Achievement: Massive Code Reuse</h3>
+<p><strong>Single Sandata aggregator implementation serves 4 states:</strong></p>
+<ul>
+<li>Ohio (OH)</li>
+<li>Pennsylvania (PA)</li>
+<li>North Carolina (NC)</li>
+<li>Arizona (AZ)</li>
+</ul>
+<p>This architectural decision reduces maintenance burden while maximizing market coverage.</p>
+<hr>
+<h2>Quick Start</h2>
+<h3>1. Import the Aggregator Router</h3>
+<pre><code class="language-typescript">import { getAggregatorRouter } from &#39;@care-commons/time-tracking-evv&#39;;
+
+const router = getAggregatorRouter();
+</code></pre>
+<h3>2. Submit EVV Record to State Aggregator</h3>
+<pre><code class="language-typescript">// Automatically routes to correct aggregator based on state
+const result = await router.submit(evvRecord, &#39;OH&#39;); // Ohio → Sandata
+</code></pre>
+<h3>3. Get State-Specific Configuration</h3>
+<pre><code class="language-typescript">import { getStateConfig } from &#39;@care-commons/time-tracking-evv&#39;;
+
+const config = getStateConfig(&#39;PA&#39;); // Pennsylvania config
+console.log(config.geofenceRadiusMeters); // 100
+console.log(config.gracePeriodMinutes); // 15
+</code></pre>
+<hr>
+<h2>State-by-State Configuration</h2>
+<h3>Ohio (OH) - Sandata</h3>
+<p><strong>Aggregator</strong>: Sandata<br><strong>Department</strong>: ODM (Ohio Department of Medicaid)<br><strong>Geofence</strong>: 125m base + 75m tolerance = 200m total<br><strong>Grace Period</strong>: 10 minutes<br><strong>Retention</strong>: 6 years  </p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Standard Medicaid EVV requirements</li>
+<li>Moderate geofence tolerance</li>
+<li>Supports MY CARE and PASSPORT waiver programs</li>
+</ul>
+<p><strong>Endpoint</strong>: <code>https://api.sandata.com/ohio/evv/v1/visits</code></p>
+<hr>
+<h3>Pennsylvania (PA) - Sandata</h3>
+<p><strong>Aggregator</strong>: Sandata<br><strong>Department</strong>: DHS (Department of Human Services)<br><strong>Geofence</strong>: 100m base + 50m tolerance = 150m total (conservative)<br><strong>Grace Period</strong>: 15 minutes<br><strong>Retention</strong>: <strong>7 years</strong> (LONGEST OF ALL STATES)  </p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Strictest retention requirements (7 years vs. 6 years for others)</li>
+<li>Community HealthChoices program focus</li>
+<li>OBRA and Aging waiver support</li>
+</ul>
+<p><strong>Endpoint</strong>: <code>https://api.sandata.com/pennsylvania/evv/v1/visits</code></p>
+<p><strong>⚠️ Important</strong>: Pennsylvania requires 7-year data retention. Ensure your backup and archival policies account for this extended requirement.</p>
+<hr>
+<h3>Georgia (GA) - Tellus</h3>
+<p><strong>Aggregator</strong>: Tellus (Netsmart)<br><strong>Department</strong>: DCH (Department of Community Health)<br><strong>Geofence</strong>: 150m base + 100m tolerance = 250m total (MOST LENIENT)<br><strong>Grace Period</strong>: 15 minutes<br><strong>Retention</strong>: 6 years  </p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Most lenient geofence policy (250m total tolerance)</li>
+<li>Strong focus on HCBS waiver programs</li>
+<li>Lenient rural exception handling (45-day correction window)</li>
+<li>Requires service authorization for waiver services</li>
+</ul>
+<p><strong>Endpoint</strong>: <code>https://api.tellus.netsmart.com/georgia/evv/v1/visits</code></p>
+<p><strong>💡 Pro Tip</strong>: Georgia&#39;s lenient policies reduce submission failures in rural areas with poor GPS accuracy.</p>
+<hr>
+<h3>North Carolina (NC) - Sandata</h3>
+<p><strong>Aggregator</strong>: Sandata<br><strong>Department</strong>: DHHS (Department of Health and Human Services)<br><strong>Geofence</strong>: 120m base + 60m tolerance = 180m total<br><strong>Grace Period</strong>: 10 minutes<br><strong>Retention</strong>: 6 years  </p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Balanced approach (moderate geofence, standard grace period)</li>
+<li>Community Alternatives Program (CAP) focus</li>
+<li>Innovations Waiver support</li>
+</ul>
+<p><strong>Endpoint</strong>: <code>https://api.sandata.com/northcarolina/evv/v1/visits</code></p>
+<hr>
+<h3>Arizona (AZ) - Sandata</h3>
+<p><strong>Aggregator</strong>: Sandata<br><strong>Department</strong>: AHCCCS (Arizona Health Care Cost Containment System)<br><strong>Geofence</strong>: 100m base + 50m tolerance = 150m total<br><strong>Grace Period</strong>: 10 minutes<br><strong>Retention</strong>: 6 years  </p>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li><strong>Non-medical services exempt from NPI requirement</strong></li>
+<li>ALTCS (Long Term Care System) focus</li>
+<li>DDD (Division of Developmental Disabilities) waiver support</li>
+</ul>
+<p><strong>Endpoint</strong>: <code>https://api.sandata.com/arizona/evv/v1/visits</code></p>
+<p><strong>💡 Pro Tip</strong>: For non-medical personal care services in Arizona, NPI is not required. Set <code>nonMedicalExempt: true</code> in state config.</p>
+<hr>
+<h2>Aggregator Integration Patterns</h2>
+<h3>Pattern 1: Sandata States (OH, PA, NC, AZ)</h3>
+<p>All Sandata states use the <strong>same aggregator implementation</strong> with state-specific configuration:</p>
+<pre><code class="language-typescript">import { SandataAggregator, getStateConfig } from &#39;@care-commons/time-tracking-evv&#39;;
+
+const aggregator = new SandataAggregator();
+
+// Works for OH, PA, NC, AZ
+const result = await aggregator.submit(evvRecord, getStateConfig(&#39;OH&#39;));
+</code></pre>
+<p><strong>Authentication</strong>: OAuth 2.0 Client Credentials Flow</p>
+<pre><code class="language-typescript">// Production setup (stub in codebase - replace with actual implementation)
+const token = await getOAuthToken({
+  endpoint: config.aggregatorAuthEndpoint,
+  clientId: config.aggregatorClientId,
+  clientSecret: config.aggregatorClientSecret,
+});
+
+// Use token in API request
+headers: {
+  &#39;Authorization&#39;: `Bearer ${token}`,
+  &#39;Content-Type&#39;: &#39;application/json&#39;,
+}
+</code></pre>
+<hr>
+<h3>Pattern 2: Tellus/Georgia (GA)</h3>
+<p>Georgia uses Tellus with API key authentication:</p>
+<pre><code class="language-typescript">import { TellusAggregator, getStateConfig } from &#39;@care-commons/time-tracking-evv&#39;;
+
+const aggregator = new TellusAggregator();
+const result = await aggregator.submit(evvRecord, getStateConfig(&#39;GA&#39;));
+</code></pre>
+<p><strong>Authentication</strong>: API Key</p>
+<pre><code class="language-typescript">headers: {
+  &#39;X-API-Key&#39;: config.aggregatorApiKey,
+  &#39;Content-Type&#39;: &#39;application/json&#39;,
+}
+</code></pre>
+<hr>
+<h3>Pattern 3: Automatic Routing</h3>
+<p>Let the router handle state detection:</p>
+<pre><code class="language-typescript">import { EVVService } from &#39;@care-commons/time-tracking-evv&#39;;
+
+// EVVService automatically routes based on evvRecord.serviceAddress.state
+const result = await evvService.submitToStateAggregator(evvRecordId, userContext);
+</code></pre>
+<hr>
+<h2>Database Migration</h2>
+<h3>Running the Migration</h3>
+<pre><code class="language-bash"># Development
+npm run db:migrate
+
+# Production
+npm run db:migrate:production
+</code></pre>
+<h3>Migration Details</h3>
+<p><strong>File</strong>: <code>packages/core/migrations/20251104000011_multistate_evv_expansion.ts</code></p>
+<p><strong>Changes</strong>:</p>
+<ol>
+<li>Expands <code>state_code</code> constraints from <code>(&#39;TX&#39;, &#39;FL&#39;)</code> to <code>(&#39;TX&#39;, &#39;FL&#39;, &#39;OH&#39;, &#39;PA&#39;, &#39;GA&#39;, &#39;NC&#39;, &#39;AZ&#39;)</code></li>
+<li>Adds <code>evv_state_validation_rules</code> table with seeded data for all 7 states</li>
+<li>Adds state-specific columns to <code>evv_state_config</code> table</li>
+<li>Creates indexes for Sandata states batch queries</li>
+</ol>
+<h3>Rollback</h3>
+<p>If needed, rollback is fully supported:</p>
+<pre><code class="language-bash">npm run db:rollback
+</code></pre>
+<p><strong>Rollback actions</strong>:</p>
+<ul>
+<li>Removes <code>evv_state_validation_rules</code> table</li>
+<li>Removes new columns from <code>evv_state_config</code></li>
+<li>Restores original constraints (TX, FL only)</li>
+<li>Drops new indexes</li>
+</ul>
+<hr>
+<h2>Testing Your Integration</h2>
+<h3>Unit Tests</h3>
+<p>All aggregator code is fully tested:</p>
+<pre><code class="language-bash">cd verticals/time-tracking-evv
+npm run test -- multistate-aggregators.test.ts
+</code></pre>
+<p><strong>Coverage</strong>: 26 tests covering:</p>
+<ul>
+<li>State configuration validation</li>
+<li>Aggregator routing</li>
+<li>State-specific rules (geofence, grace periods, retention)</li>
+<li>Sandata validation for all 4 states</li>
+<li>Tellus validation for Georgia</li>
+</ul>
+<h3>Integration Testing</h3>
+<p>Test with sample EVV records:</p>
+<pre><code class="language-typescript">import { createMockEVVRecord } from &#39;./test-helpers&#39;;
+
+// Test Ohio submission
+const ohioRecord = createMockEVVRecord(&#39;OH&#39;);
+const router = getAggregatorRouter();
+const result = await router.validate(ohioRecord, &#39;OH&#39;);
+
+console.log(result.isValid); // true
+console.log(result.errors); // []
+console.log(result.warnings); // []
+</code></pre>
+<hr>
+<h2>Production Deployment Checklist</h2>
+<h3>Pre-Deployment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Run database migration on staging environment</li>
+<li><input disabled="" type="checkbox"> Verify migration success with state validation rules query</li>
+<li><input disabled="" type="checkbox"> Test state router with sample data for each new state</li>
+<li><input disabled="" type="checkbox"> Configure aggregator credentials (OAuth tokens, API keys)</li>
+<li><input disabled="" type="checkbox"> Set up monitoring for aggregator submissions</li>
+<li><input disabled="" type="checkbox"> Review state-specific retention policies</li>
+</ul>
+<h3>Deployment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Run database migration on production</li>
+<li><input disabled="" type="checkbox"> Update environment variables with aggregator credentials</li>
+<li><input disabled="" type="checkbox"> Deploy application code</li>
+<li><input disabled="" type="checkbox"> Verify health checks pass</li>
+<li><input disabled="" type="checkbox"> Test one EVV submission per new state</li>
+</ul>
+<h3>Post-Deployment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Monitor aggregator submission success rates</li>
+<li><input disabled="" type="checkbox"> Check for failed submissions and retry queue</li>
+<li><input disabled="" type="checkbox"> Verify state-specific validation rules are applied</li>
+<li><input disabled="" type="checkbox"> Confirm retention policies are respected</li>
+<li><input disabled="" type="checkbox"> Set up alerts for aggregator errors</li>
+</ul>
+<hr>
+<h2>Configuration Management</h2>
+<h3>Environment Variables</h3>
+<p><strong>Sandata (OH, PA, NC, AZ)</strong>:</p>
+<pre><code class="language-bash">SANDATA_OAUTH_ENDPOINT=https://auth.sandata.com/oauth/token
+SANDATA_CLIENT_ID=your_client_id
+SANDATA_CLIENT_SECRET=your_client_secret
+
+# State-specific endpoints
+SANDATA_OH_ENDPOINT=https://api.sandata.com/ohio/evv/v1/visits
+SANDATA_PA_ENDPOINT=https://api.sandata.com/pennsylvania/evv/v1/visits
+SANDATA_NC_ENDPOINT=https://api.sandata.com/northcarolina/evv/v1/visits
+SANDATA_AZ_ENDPOINT=https://api.sandata.com/arizona/evv/v1/visits
+</code></pre>
+<p><strong>Tellus (GA)</strong>:</p>
+<pre><code class="language-bash">TELLUS_API_KEY=your_api_key
+TELLUS_GA_ENDPOINT=https://api.tellus.netsmart.com/georgia/evv/v1/visits
+</code></pre>
+<h3>Runtime Configuration</h3>
+<p>Store aggregator credentials in database (encrypted):</p>
+<pre><code class="language-sql">-- Example for Ohio Sandata configuration
+INSERT INTO evv_state_config (
+  organization_id,
+  state_code,
+  aggregator_type,
+  aggregator_endpoint,
+  aggregator_auth_endpoint,
+  aggregator_client_id,
+  aggregator_client_secret_encrypted, -- ENCRYPTED!
+  geo_perimeter_tolerance,
+  clock_in_grace_period,
+  retention_years
+) VALUES (
+  &#39;org-uuid&#39;,
+  &#39;OH&#39;,
+  &#39;SANDATA&#39;,
+  &#39;https://api.sandata.com/ohio/evv/v1/visits&#39;,
+  &#39;https://auth.sandata.com/oauth/token&#39;,
+  &#39;client_id&#39;,
+  encrypt_secret(&#39;client_secret&#39;), -- Use encryption function
+  125,
+  10,
+  6
+);
+</code></pre>
+<hr>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<p><strong>Issue</strong>: Submission fails with &quot;State not supported&quot;<br><strong>Solution</strong>: Verify state code in <code>evvRecord.serviceAddress.state</code> is one of: TX, FL, OH, PA, GA, NC, AZ</p>
+<p><strong>Issue</strong>: OAuth token expired for Sandata<br><strong>Solution</strong>: Implement token refresh logic with 5-minute buffer before expiration</p>
+<p><strong>Issue</strong>: Geofence validation failing in rural areas<br><strong>Solution</strong>: Georgia (GA) has most lenient tolerance (250m). Consider using Georgia as reference for rural clients in other states.</p>
+<p><strong>Issue</strong>: Pennsylvania retention policy not respected<br><strong>Solution</strong>: PA requires 7 years (not 6). Update your archival policies accordingly.</p>
+<h3>Debug Mode</h3>
+<p>Enable debug logging for aggregator submissions:</p>
+<pre><code class="language-typescript">import { AggregatorRouter } from &#39;@care-commons/time-tracking-evv&#39;;
+
+const router = new AggregatorRouter();
+// Enable debug in production with environment variable
+if (process.env.DEBUG_AGGREGATOR === &#39;true&#39;) {
+  console.log(&#39;Submitting to aggregator:&#39;, config);
+}
+</code></pre>
+<hr>
+<h2>Performance Optimization</h2>
+<h3>Batch Submissions (Sandata States)</h3>
+<p>For Sandata states (OH, PA, NC, AZ), leverage single aggregator instance:</p>
+<pre><code class="language-typescript">const router = getAggregatorRouter();
+const sandataStates = router.getSandataStates(); // [&#39;OH&#39;, &#39;PA&#39;, &#39;NC&#39;, &#39;AZ&#39;]
+
+// Batch process all Sandata submissions together
+const sandataRecords = records.filter(r =&gt; 
+  sandataStates.includes(r.serviceAddress.state)
+);
+
+// Process in parallel (Sandata supports high concurrency)
+await Promise.all(
+  sandataRecords.map(record =&gt; 
+    router.submit(record, record.serviceAddress.state)
+  )
+);
+</code></pre>
+<h3>Caching OAuth Tokens</h3>
+<p>Cache Sandata OAuth tokens to reduce authentication overhead:</p>
+<pre><code class="language-typescript">let tokenCache = {
+  token: null,
+  expiresAt: null,
+};
+
+async function getToken() {
+  if (tokenCache.token &amp;&amp; tokenCache.expiresAt &gt; Date.now() + 300000) {
+    return tokenCache.token; // Reuse if &gt;5 minutes remaining
+  }
+  
+  // Fetch new token
+  const response = await fetchOAuthToken();
+  tokenCache = {
+    token: response.access_token,
+    expiresAt: Date.now() + (response.expires_in * 1000),
+  };
+  
+  return tokenCache.token;
+}
+</code></pre>
+<hr>
+<h2>State-Specific Considerations</h2>
+<h3>Pennsylvania (PA)</h3>
+<ul>
+<li><strong>7-year retention</strong>: Plan storage capacity accordingly</li>
+<li><strong>OBRA waiver</strong>: Ensure caregivers have proper credentialing</li>
+<li><strong>Conservative geofence</strong>: More failures in rural areas - plan for manual overrides</li>
+</ul>
+<h3>Georgia (GA)</h3>
+<ul>
+<li><strong>HCBS focus</strong>: Many clients on waiver programs - track service authorization numbers</li>
+<li><strong>Lenient policy</strong>: Best state for rural operations</li>
+<li><strong>45-day correction window</strong>: Most forgiving of all states</li>
+</ul>
+<h3>Arizona (AZ)</h3>
+<ul>
+<li><strong>Non-medical exemption</strong>: Don&#39;t require NPI for personal care services</li>
+<li><strong>DDD waivers</strong>: Developmental disability services have specific requirements</li>
+<li><strong>Desert climate</strong>: GPS accuracy can be affected by extreme heat - plan accordingly</li>
+</ul>
+<h3>Ohio (OH)</h3>
+<ul>
+<li><strong>MY CARE</strong>: MCO coordination required for managed care clients</li>
+<li><strong>PASSPORT</strong>: Aging waiver program - specific service codes required</li>
+</ul>
+<h3>North Carolina (NC)</h3>
+<ul>
+<li><strong>CAP programs</strong>: Community alternatives have strict authorization requirements</li>
+<li><strong>Innovations Waiver</strong>: Developmental disability services - track service plans carefully</li>
+</ul>
+<hr>
+<h2>Support and Resources</h2>
+<h3>Documentation</h3>
+<ul>
+<li><a href="https://www.medicaid.gov/medicaid/home-community-based-services/guidance/electronic-visit-verification-systems/index.html">Federal EVV Requirements (21st Century Cures Act)</a></li>
+<li><a href="https://developer.sandata.com/">Sandata API Documentation</a></li>
+<li><a href="https://developer.netsmart.com/tellus">Tellus API Documentation</a></li>
+</ul>
+<h3>State Resources</h3>
+<ul>
+<li><strong>Ohio</strong>: <a href="https://medicaid.ohio.gov/evv">ODM EVV</a></li>
+<li><strong>Pennsylvania</strong>: <a href="https://www.dhs.pa.gov/evv">DHS EVV</a></li>
+<li><strong>Georgia</strong>: <a href="https://dch.georgia.gov/evv">DCH EVV</a></li>
+<li><strong>North Carolina</strong>: <a href="https://www.ncdhhs.gov/evv">DHHS EVV</a></li>
+<li><strong>Arizona</strong>: <a href="https://www.azahcccs.gov/evv">AHCCCS EVV</a></li>
+</ul>
+<h3>Internal Support</h3>
+<ul>
+<li><strong>Architecture Questions</strong>: Review <code>/verticals/time-tracking-evv/src/aggregators/</code></li>
+<li><strong>Database Issues</strong>: Check <code>/packages/core/migrations/20251104000011_multistate_evv_expansion.ts</code></li>
+<li><strong>Testing</strong>: Run <code>npm run test -- multistate-aggregators.test.ts</code></li>
+</ul>
+<hr>
+<h2>Changelog</h2>
+<h3>Version 1.0.0 (November 2025)</h3>
+<ul>
+<li>✅ Added support for 5 new states (OH, PA, GA, NC, AZ)</li>
+<li>✅ Implemented Sandata aggregator (serves 4 states)</li>
+<li>✅ Implemented Tellus aggregator (serves Georgia)</li>
+<li>✅ Created state router pattern for automatic routing</li>
+<li>✅ Added comprehensive state configurations</li>
+<li>✅ Created database migration with validation rules</li>
+<li>✅ Added 26 unit tests (all passing)</li>
+<li>✅ Updated documentation</li>
+</ul>
+<hr>
+<p><strong>Questions?</strong> Review the codebase at <code>/verticals/time-tracking-evv/</code> or consult this guide.</p>
+<p><strong>Next Steps</strong>: Configure aggregator credentials → Run migration → Test with sample data → Deploy to production → Monitor submissions</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

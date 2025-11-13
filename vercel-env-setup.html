@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vercel Environment Variables Setup - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Vercel Environment Variables Setup</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Vercel Environment Variables Setup</h1>
+<h2>Problem</h2>
+<p>The application needs secrets (JWT_SECRET, ENCRYPTION_KEY, etc.) to function, but these are:</p>
+<ol>
+<li><strong>Not in git</strong> (correctly gitignored in <code>.env.preview</code> and <code>.env.production</code>)</li>
+<li><strong>Not in Vercel</strong> (need to be added via Vercel dashboard or CLI)</li>
+</ol>
+<h2>Quick Fix: Set Environment Variables in Vercel</h2>
+<h3>Option 1: Via Vercel Dashboard (Easiest)</h3>
+<ol>
+<li><strong>Go to your Vercel project</strong>: <a href="https://vercel.com/dashboard">https://vercel.com/dashboard</a></li>
+<li><strong>Select your project</strong>: <code>care-commons</code></li>
+<li><strong>Go to Settings → Environment Variables</strong></li>
+<li><strong>Add these variables</strong> for <strong>Preview</strong> and <strong>Production</strong> environments:</li>
+</ol>
+<h4>Required Variables</h4>
+<p>Copy these values (already generated for you):</p>
+<pre><code class="language-bash"># JWT Authentication
+JWT_SECRET=CUKaqpTVKrMzhVFRlV0vUIDValoClhjqjrfkNgbPf+E=
+JWT_REFRESH_SECRET=eXaRVJ0Rxt0jr3Ru0QrqRHVxxdE0jg0rvY1ylOltOLU=
+SESSION_SECRET=dLkXj8ftiY4fGMhQtqHu5wpmCNNkOgP7LXXS5anibB8=
+
+# Encryption
+ENCRYPTION_KEY=3e070612e4d91bad0129cc46c5bcb35b2670fb174918c1fc6a6cd398442c9b5f
+
+# Database (already set via secrets)
+DATABASE_URL=[your preview database URL]
+PREVIEW_DATABASE_URL=[your preview database URL]
+
+# Environment
+NODE_ENV=production
+</code></pre>
+<h4>For Each Variable:</h4>
+<ol>
+<li>Click <strong>&quot;Add New&quot;</strong></li>
+<li><strong>Name</strong>: Enter the variable name (e.g., <code>JWT_SECRET</code>)</li>
+<li><strong>Value</strong>: Paste the generated value</li>
+<li><strong>Environments</strong>: Select <strong>Preview</strong> and <strong>Production</strong> (or specific as needed)</li>
+<li>Click <strong>&quot;Save&quot;</strong></li>
+</ol>
+<h3>Option 2: Via Vercel CLI (Faster)</h3>
+<pre><code class="language-bash"># Install Vercel CLI if not already installed
+npm install -g vercel@latest
+
+# Login
+vercel login
+
+# Link to your project (if not already linked)
+vercel link
+
+# Add environment variables
+vercel env add JWT_SECRET
+# Paste: CUKaqpTVKrMzhVFRlV0vUIDValoClhjqjrfkNgbPf+E=
+# Select: Preview, Production
+
+vercel env add JWT_REFRESH_SECRET
+# Paste: eXaRVJ0Rxt0jr3Ru0QrqRHVxxdE0jg0rvY1ylOltOLU=
+# Select: Preview, Production
+
+vercel env add SESSION_SECRET
+# Paste: dLkXj8ftiY4fGMhQtqHu5wpmCNNkOgP7LXXS5anibB8=
+# Select: Preview, Production
+
+vercel env add ENCRYPTION_KEY
+# Paste: 3e070612e4d91bad0129cc46c5bcb35b2670fb174918c1fc6a6cd398442c9b5f
+# Select: Preview, Production
+</code></pre>
+<h3>Option 3: Bulk Add via Script (Fastest)</h3>
+<p>Create a temporary script:</p>
+<pre><code class="language-bash">cat &gt; /tmp/add-vercel-env.sh &lt;&lt; &#39;SCRIPT&#39;
+#!/bin/bash
+echo &quot;CUKaqpTVKrMzhVFRlV0vUIDValoClhjqjrfkNgbPf+E=&quot; | vercel env add JWT_SECRET preview production
+echo &quot;eXaRVJ0Rxt0jr3Ru0QrqRHVxxdE0jg0rvY1ylOltOLU=&quot; | vercel env add JWT_REFRESH_SECRET preview production
+echo &quot;dLkXj8ftiY4fGMhQtqHu5wpmCNNkOgP7LXXS5anibB8=&quot; | vercel env add SESSION_SECRET preview production
+echo &quot;3e070612e4d91bad0129cc46c5bcb35b2670fb174918c1fc6a6cd398442c9b5f&quot; | vercel env add ENCRYPTION_KEY preview production
+SCRIPT
+
+chmod +x /tmp/add-vercel-env.sh
+/tmp/add-vercel-env.sh
+rm /tmp/add-vercel-env.sh
+</code></pre>
+<h2>After Adding Environment Variables</h2>
+<h3>1. Redeploy Preview</h3>
+<p>The easiest way is to push a new commit or trigger a redeploy:</p>
+<pre><code class="language-bash"># Option A: Trigger redeploy via dashboard
+# Go to Vercel → Deployments → Click &quot;...&quot; → Redeploy
+
+# Option B: Push a dummy commit
+git commit --allow-empty -m &quot;chore: trigger redeployment with new env vars&quot;
+git push origin preview
+</code></pre>
+<h3>2. Test Login</h3>
+<p>Once redeployed, try logging in at:</p>
+<ul>
+<li>Preview: <code>https://care-commons-&lt;hash&gt;.vercel.app/login</code></li>
+<li>Email: <code>admin@carecommons.example</code></li>
+<li>Password: <code>Admin123!</code></li>
+</ul>
+<h3>3. Check Logs</h3>
+<p>If still having issues, check Vercel logs:</p>
+<pre><code class="language-bash">vercel logs
+</code></pre>
+<h2>Environment Variables Summary</h2>
+<h3>Already Set (via GitHub Secrets)</h3>
+<ul>
+<li>✅ <code>DATABASE_URL</code> - Production database</li>
+<li>✅ <code>PREVIEW_DATABASE_URL</code> - Preview database</li>
+<li>✅ <code>VERCEL_TOKEN</code> - Deployment token</li>
+<li>✅ <code>VERCEL_ORG_ID</code> - Organization ID</li>
+<li>✅ <code>VERCEL_PROJECT_ID</code> - Project ID</li>
+</ul>
+<h3>Need to Add (This Guide)</h3>
+<ul>
+<li>❌ <code>JWT_SECRET</code> - JWT signing secret</li>
+<li>❌ <code>JWT_REFRESH_SECRET</code> - Refresh token secret</li>
+<li>❌ <code>SESSION_SECRET</code> - Session signing secret</li>
+<li>❌ <code>ENCRYPTION_KEY</code> - Field encryption key</li>
+</ul>
+<h3>Optional (Can Add Later)</h3>
+<ul>
+<li><code>CORS_ORIGIN</code> - Custom domains (Vercel domains already allowed)</li>
+<li><code>LOG_LEVEL</code> - Logging verbosity (defaults to <code>info</code>)</li>
+<li><code>GOOGLE_CLIENT_ID</code> - Google OAuth (if using)</li>
+<li><code>GOOGLE_CLIENT_SECRET</code> - Google OAuth (if using)</li>
+</ul>
+<h2>Security Notes</h2>
+<h3>⚠️ IMPORTANT</h3>
+<ul>
+<li><strong>Different secrets for preview vs production</strong>: For maximum security, generate separate secrets for each environment</li>
+<li><strong>Never commit secrets</strong>: All <code>.env*</code> files are gitignored</li>
+<li><strong>Rotate regularly</strong>: Change secrets periodically (JWT secrets, encryption keys)</li>
+<li><strong>Use Vercel environment-specific</strong>: Mark secrets as &quot;Preview&quot; or &quot;Production&quot; appropriately</li>
+</ul>
+<h3>Generating New Secrets (If Needed)</h3>
+<p>If you want different secrets for preview vs production:</p>
+<pre><code class="language-bash"># For Preview Environment
+echo &quot;Preview JWT_SECRET:&quot; &amp;&amp; openssl rand -base64 32
+echo &quot;Preview JWT_REFRESH_SECRET:&quot; &amp;&amp; openssl rand -base64 32
+echo &quot;Preview SESSION_SECRET:&quot; &amp;&amp; openssl rand -base64 32
+echo &quot;Preview ENCRYPTION_KEY:&quot; &amp;&amp; openssl rand -hex 32
+
+# For Production Environment
+echo &quot;Production JWT_SECRET:&quot; &amp;&amp; openssl rand -base64 32
+echo &quot;Production JWT_REFRESH_SECRET:&quot; &amp;&amp; openssl rand -base64 32
+echo &quot;Production SESSION_SECRET:&quot; &amp;&amp; openssl rand -base64 32
+echo &quot;Production ENCRYPTION_KEY:&quot; &amp;&amp; openssl rand -hex 32
+</code></pre>
+<h2>Troubleshooting</h2>
+<h3>&quot;JWT_SECRET environment variable not set&quot;</h3>
+<ul>
+<li><strong>Cause</strong>: Environment variable not added to Vercel</li>
+<li><strong>Fix</strong>: Add via dashboard or CLI (see above)</li>
+<li><strong>Verify</strong>: Run <code>vercel env ls</code> to list all environment variables</li>
+</ul>
+<h3>&quot;Origin not allowed by CORS&quot;</h3>
+<ul>
+<li><strong>Cause</strong>: CORS configuration (should be fixed now)</li>
+<li><strong>Fix</strong>: Already handled - Vercel domains automatically allowed</li>
+</ul>
+<h3>&quot;Database connection failed&quot;</h3>
+<ul>
+<li><strong>Cause</strong>: DATABASE_URL not set or incorrect</li>
+<li><strong>Fix</strong>: Verify <code>DATABASE_URL</code> in Vercel environment variables matches Neon connection string</li>
+</ul>
+<h3>Still not working?</h3>
+<p>Check the Vercel function logs:</p>
+<pre><code class="language-bash">vercel logs --follow
+</code></pre>
+<p>Look for startup errors related to environment variables.</p>
+<h2>Quick Reference</h2>
+<h3>Check Current Environment Variables</h3>
+<pre><code class="language-bash">vercel env ls
+</code></pre>
+<h3>Pull Environment Variables Locally</h3>
+<pre><code class="language-bash">vercel env pull .env.local
+</code></pre>
+<h3>Remove an Environment Variable</h3>
+<pre><code class="language-bash">vercel env rm JWT_SECRET
+</code></pre>
+<hr>
+<p><strong>Next Steps:</strong></p>
+<ol>
+<li>✅ Add the 4 secrets to Vercel (JWT_SECRET, JWT_REFRESH_SECRET, SESSION_SECRET, ENCRYPTION_KEY)</li>
+<li>✅ Redeploy preview (push commit or manual redeploy)</li>
+<li>✅ Test login at preview URL</li>
+<li>✅ If successful, push to main for production deployment</li>
+</ol>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

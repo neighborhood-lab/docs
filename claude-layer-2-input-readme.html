@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layer 2 Implementation Tasks - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Layer 2 Implementation Tasks</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Layer 2 Implementation Tasks</h1>
+<p>This directory contains detailed implementation tasks created by the Layer 1 central planner. Each task is designed to be executed by Layer 2 implementor instances.</p>
+<p><strong>Last Reorganization</strong>: 2025-11-10 (Prioritized exposing backend features in UIs)</p>
+<hr>
+<h2>Current Priorities</h2>
+<h3>1. <strong>Expose Backend Features in UIs</strong> (Tasks 0000-0014)</h3>
+<p>Make all implemented backend functionality visible and usable in:</p>
+<ul>
+<li>Showcase environment (for evaluation and demos)</li>
+<li>Production-demo (for onboarding and exploration)</li>
+<li>Mobile app (for caregivers in the field)</li>
+<li>Web app (for coordinators and administrators)</li>
+</ul>
+<h3>2. <strong>Complete Backend Integrations</strong> (Tasks 0015-0017)</h3>
+<p>Finish critical backend work that enables features:</p>
+<ul>
+<li>Notification delivery system</li>
+<li>Data integrations between verticals</li>
+<li>Service layer completions</li>
+</ul>
+<h3>3. <strong>Improve Dev Speed &amp; Onboarding</strong> (Tasks 0020-0024)</h3>
+<p>Accelerate development and reduce time-to-productivity:</p>
+<ul>
+<li>User onboarding guides</li>
+<li>E2E validation workflows</li>
+<li>Deployment automation</li>
+</ul>
+<hr>
+<h2>Task Queue</h2>
+<h3>🔴 TIER 1: EXPOSE FEATURES IN UI (Weeks 1-4) - HIGHEST PRIORITY</h3>
+<p><strong>Goal</strong>: Make 100% of implemented backend features discoverable and usable</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Title</th>
+<th>Effort</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="0000-showcase-demo-data.md">0000</a></td>
+<td>Showcase Demo Data Seeding</td>
+<td>3-5 days</td>
+<td>Showcase / Demo</td>
+</tr>
+<tr>
+<td><a href="0001-showcase-tours.md">0001</a></td>
+<td>Showcase Interactive Tours</td>
+<td>1 week</td>
+<td>Showcase / UX</td>
+</tr>
+<tr>
+<td><a href="0014-showcase-vertical-exposure.md">0014</a></td>
+<td>Showcase Vertical Feature Exposure</td>
+<td>1-2 weeks</td>
+<td>Showcase / Discovery</td>
+</tr>
+<tr>
+<td><a href="0002-mobile-clockin.md">0002</a></td>
+<td>Mobile ClockIn Screen</td>
+<td>2-3 days</td>
+<td>Mobile / Caregiver UX</td>
+</tr>
+<tr>
+<td><a href="0003-mobile-tasks.md">0003</a></td>
+<td>Mobile Tasks Screen</td>
+<td>2-3 days</td>
+<td>Mobile / Caregiver UX</td>
+</tr>
+<tr>
+<td><a href="0004-mobile-schedule.md">0004</a></td>
+<td>Mobile Schedule Screen</td>
+<td>2-3 days</td>
+<td>Mobile / Caregiver UX</td>
+</tr>
+<tr>
+<td><a href="0005-mobile-profile.md">0005</a></td>
+<td>Mobile Profile Screen</td>
+<td>2-3 days</td>
+<td>Mobile / Settings</td>
+</tr>
+<tr>
+<td><a href="0006-shift-matching-ui.md">0006</a></td>
+<td>Shift Matching UI Implementation</td>
+<td>1-2 weeks</td>
+<td>Web / Coordinator UX</td>
+</tr>
+<tr>
+<td><a href="0007-payroll-ui.md">0007</a></td>
+<td>Payroll Processing Frontend UI</td>
+<td>1 week</td>
+<td>Web / Admin UX</td>
+</tr>
+<tr>
+<td><a href="0008-analytics-ui.md">0008</a></td>
+<td>Analytics Dashboard Completion</td>
+<td>1 week</td>
+<td>Web / Insights</td>
+</tr>
+<tr>
+<td><a href="0009-qa-module-ui.md">0009</a></td>
+<td>Quality Assurance Module Implementation</td>
+<td>2 weeks</td>
+<td>Web / Compliance</td>
+</tr>
+<tr>
+<td><a href="0010-medication-tracking.md">0010</a></td>
+<td>Medication Tracking Module</td>
+<td>2 weeks</td>
+<td>New Vertical / Healthcare</td>
+</tr>
+<tr>
+<td><a href="0011-emergency-alerts.md">0011</a></td>
+<td>Emergency Contact &amp; Alert System</td>
+<td>1 week</td>
+<td>New Vertical / Safety</td>
+</tr>
+<tr>
+<td><a href="0012-client-intake.md">0012</a></td>
+<td>Client Intake Workflow</td>
+<td>1 week</td>
+<td>Workflow / UX</td>
+</tr>
+<tr>
+<td><a href="0013-global-search.md">0013</a></td>
+<td>Global Search Functionality</td>
+<td>1 week</td>
+<td>UX / DevEx</td>
+</tr>
+</tbody></table>
+<p><strong>Total Tier 1</strong>: ~9-12 weeks (parallelizable across multiple developers)</p>
+<hr>
+<h3>🟠 TIER 2: BACKEND COMPLETIONS (Weeks 3-5) - CRITICAL</h3>
+<p><strong>Goal</strong>: Complete missing backend functionality that blocks UI features</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Title</th>
+<th>Effort</th>
+<th>Blocker For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="0015-notifications.md">0015</a></td>
+<td>Notification Delivery System</td>
+<td>1-2 weeks</td>
+<td>Family engagement usability</td>
+</tr>
+<tr>
+<td><a href="0016-family-data-integration.md">0016</a></td>
+<td>Family Engagement Data Integration</td>
+<td>1 week</td>
+<td>Family portal completeness</td>
+</tr>
+<tr>
+<td><a href="0017-billing-completion.md">0017</a></td>
+<td>Billing &amp; Invoicing Service Completion</td>
+<td>2 weeks</td>
+<td>Billing UI</td>
+</tr>
+</tbody></table>
+<p><strong>Total Tier 2</strong>: ~4-5 weeks</p>
+<hr>
+<h3>🟡 TIER 3: DEV SPEED &amp; ONBOARDING (Weeks 6-8) - HIGH VALUE</h3>
+<p><strong>Goal</strong>: Reduce time-to-value for new users and developers</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Title</th>
+<th>Effort</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="0020-mobile-onboarding.md">0020</a></td>
+<td>Caregiver Mobile Onboarding Flow</td>
+<td>2-3 days</td>
+<td>First-time caregiver experience</td>
+</tr>
+<tr>
+<td><a href="0021-admin-guide.md">0021</a></td>
+<td>Administrator Quick Start Guide</td>
+<td>3-4 days</td>
+<td>Admin onboarding</td>
+</tr>
+<tr>
+<td><a href="0022-coordinator-guide.md">0022</a></td>
+<td>Coordinator Quick Start Guide</td>
+<td>3-4 days</td>
+<td>Coordinator training</td>
+</tr>
+<tr>
+<td><a href="0023-e2e-validation.md">0023</a></td>
+<td>End-to-End User Journey Validation</td>
+<td>1 week</td>
+<td>Catch integration bugs</td>
+</tr>
+<tr>
+<td><a href="0024-deployment-runbook.md">0024</a></td>
+<td>Production Deployment Runbook</td>
+<td>1 week</td>
+<td>Agency self-deployment</td>
+</tr>
+</tbody></table>
+<p><strong>Total Tier 3</strong>: ~3-4 weeks</p>
+<hr>
+<h2>Effort Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Tasks</th>
+<th>Estimated Weeks</th>
+<th>Can Parallelize?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🔴 Tier 1 (UI Exposure)</td>
+<td>15</td>
+<td>9-12 weeks</td>
+<td>✅ Yes (4-6 devs)</td>
+</tr>
+<tr>
+<td>🟠 Tier 2 (Backend)</td>
+<td>3</td>
+<td>4-5 weeks</td>
+<td>⚠️ Some dependencies</td>
+</tr>
+<tr>
+<td>🟡 Tier 3 (DevEx)</td>
+<td>5</td>
+<td>3-4 weeks</td>
+<td>✅ Yes (2-3 devs)</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>23</strong></td>
+<td><strong>16-21 weeks</strong></td>
+<td><strong>2-4 weeks with team</strong></td>
+</tr>
+</tbody></table>
+<p><strong>With 4-6 parallel developers focusing on Tier 1 (UI exposure), estimated timeline: 2-4 weeks for critical path</strong></p>
+<hr>
+<h2>Strategic Rationale</h2>
+<h3>Why This Organization?</h3>
+<p><strong>Previous Priority</strong>: Infrastructure, testing, refactoring (tasks like rate limiting, caching, security hardening, performance optimization)</p>
+<p><strong>Current Priority</strong>: <strong>Expose features in UIs</strong></p>
+<p><strong>Reasoning</strong>:</p>
+<ol>
+<li><strong>Backend is 85-90% complete</strong> - significant investment already made</li>
+<li><strong>Hidden value</strong> - features exist but users can&#39;t discover/use them</li>
+<li><strong>First impressions matter</strong> - showcase determines adoption</li>
+<li><strong>Parallelizable</strong> - UI tasks can be done simultaneously by multiple developers</li>
+<li><strong>User validation</strong> - can&#39;t get feedback on features users can&#39;t see</li>
+<li><strong>Demo quality</strong> - evaluators need to see platform capabilities immediately</li>
+</ol>
+<h3>What Was Removed?</h3>
+<p>Deleted 16 tasks focused on infrastructure, performance, and refactoring:</p>
+<ul>
+<li>API rate limiting</li>
+<li>Security hardening (post-launch priority)</li>
+<li>Monitoring/observability (basic monitoring already exists)</li>
+<li>Load testing</li>
+<li>Performance optimization</li>
+<li>SOLID refactoring</li>
+<li>DevEx improvements (beyond critical onboarding)</li>
+<li>Mobile test automation</li>
+<li>SQL optimization</li>
+<li>TODO cleanup</li>
+</ul>
+<p><strong>Why delete these?</strong></p>
+<ul>
+<li>Can be added back easily when needed</li>
+<li>Lower ROI than exposing existing features</li>
+<li>Not blockers for initial production launch</li>
+<li>Better to validate features with users first, then optimize</li>
+</ul>
+<hr>
+<h2>Dependencies</h2>
+<h3>Critical Path</h3>
+<pre><code>┌─────────────────────────────────────────────────┐
+│ SHOWCASE &amp; DEMO (0000, 0001, 0014)             │
+│ ↓ (Foundation for all UI exposure)             │
+├─────────────────────────────────────────────────┤
+│ MOBILE SCREENS (0002-0005)                     │
+│ Can work in parallel →                         │
+│                                                 │
+│ WEB UIs (0006-0009, 0012-0013)                │
+│ Some depend on backend tasks ↓                 │
+├─────────────────────────────────────────────────┤
+│ BACKEND COMPLETIONS (0015-0017)                │
+│ Required for: 0001, 0006, 0007, 0008          │
+├─────────────────────────────────────────────────┤
+│ NEW VERTICALS (0010-0011)                      │
+│ Independent - can work anytime                 │
+├─────────────────────────────────────────────────┤
+│ ONBOARDING &amp; DEVEX (0020-0024)                 │
+│ Final polish after features exposed            │
+└─────────────────────────────────────────────────┘
+</code></pre>
+<h3>Task Dependencies</h3>
+<ul>
+<li><strong>0000 → 0001, 0014</strong>: Demo data needed before tours and feature exposure</li>
+<li><strong>0015 → 0016</strong>: Notifications needed for family engagement</li>
+<li><strong>0017 → 0007</strong>: Billing service completion needed for billing UI</li>
+<li><strong>0006, 0007, 0008</strong>: Can be done in parallel (different verticals)</li>
+<li><strong>0002-0005</strong>: Mobile screens independent of each other</li>
+<li><strong>0010, 0011</strong>: New verticals can start anytime</li>
+<li><strong>0020-0024</strong>: Should come after main features exposed</li>
+</ul>
+<hr>
+<h2>How to Use These Tasks</h2>
+<h3>For Layer 2 Implementors:</h3>
+<ol>
+<li><strong>Start with Tier 1</strong> - highest impact (exposing features)</li>
+<li><strong>Parallelize</strong>: Multiple devs can work on different UI tasks simultaneously</li>
+<li><strong>Each task file contains</strong>:<ul>
+<li>Complete implementation instructions</li>
+<li>Code examples and mockups</li>
+<li>Testing requirements</li>
+<li>Success criteria</li>
+</ul>
+</li>
+<li><strong>Pre-commit hooks MUST pass</strong> - zero warnings/errors</li>
+<li><strong>Create PR when complete</strong> - all CI checks must pass</li>
+</ol>
+<h3>For Project Managers:</h3>
+<ul>
+<li><strong>Tier 1 is critical path</strong> - determines when platform is &quot;demo-ready&quot;</li>
+<li><strong>Assign by expertise</strong>:<ul>
+<li>Mobile developers → Tasks 0002-0005, 0020</li>
+<li>React developers → Tasks 0006-0009, 0012-0014</li>
+<li>Fullstack → Tasks 0010-0011, 0015-0017</li>
+<li>UX/Content → Tasks 0000-0001, 0021-0022</li>
+</ul>
+</li>
+<li><strong>Track via GitHub Projects</strong> - create issues from task files</li>
+</ul>
+<h3>Suggested Sprint Breakdown</h3>
+<p><strong>Sprint 1 (Week 1-2)</strong>: Showcase Foundation</p>
+<ul>
+<li>Tasks: 0000, 0001, 0014</li>
+<li>Goal: Compelling demo environment</li>
+</ul>
+<p><strong>Sprint 2 (Week 3-4)</strong>: Mobile App Completion</p>
+<ul>
+<li>Tasks: 0002, 0003, 0004, 0005, 0020</li>
+<li>Goal: Functional caregiver mobile experience</li>
+</ul>
+<p><strong>Sprint 3 (Week 3-4, parallel)</strong>: Web UI Priority 1</p>
+<ul>
+<li>Tasks: 0006, 0007, 0015, 0017</li>
+<li>Goal: Shift matching and payroll UIs</li>
+</ul>
+<p><strong>Sprint 4 (Week 5-6)</strong>: Web UI Priority 2</p>
+<ul>
+<li>Tasks: 0008, 0009, 0012, 0013, 0016</li>
+<li>Goal: Analytics, QA, intake, search</li>
+</ul>
+<p><strong>Sprint 5 (Week 7-8)</strong>: New Verticals &amp; Polish</p>
+<ul>
+<li>Tasks: 0010, 0011, 0021-0024</li>
+<li>Goal: Medications, emergency alerts, onboarding</li>
+</ul>
+<hr>
+<h2>Task Structure</h2>
+<p>Each task file includes:</p>
+<ol>
+<li><strong>Priority &amp; Estimated Effort</strong></li>
+<li><strong>Context</strong>: Why this task exists and current state</li>
+<li><strong>Objectives</strong>: What needs to be built</li>
+<li><strong>Detailed Implementation</strong>: Step-by-step guide with code examples</li>
+<li><strong>UI Mockups</strong>: Visual representation of deliverables</li>
+<li><strong>API Integration</strong>: Backend endpoints needed</li>
+<li><strong>Testing Requirements</strong>: Unit, integration, and manual tests</li>
+<li><strong>Success Criteria</strong>: Definition of done</li>
+<li><strong>Related Tasks</strong>: Dependencies and follow-ups</li>
+</ol>
+<hr>
+<h2>Monitoring Progress</h2>
+<p>Create <code>STATUS.md</code> in this directory to track completion:</p>
+<pre><code class="language-markdown"># Implementation Status
+
+Last Updated: YYYY-MM-DD
+
+## Tier 1: UI Exposure (15 tasks)
+
+| Task | Status | Assignee | PR | Completed |
+|------|--------|----------|----|-----------| 
+| 0000 | ✅ Complete | @dev1 | #234 | 2025-11-12 |
+| 0001 | ⏳ In Progress | @dev2 | #235 | |
+| 0002 | 📋 Not Started | | | |
+...
+
+## Tier 2: Backend (3 tasks)
+
+| Task | Status | Assignee | PR | Completed |
+|------|--------|----------|----|-----------| 
+| 0015 | ⏳ In Progress | @dev3 | #236 | |
+...
+
+## Tier 3: DevEx (5 tasks)
+
+| Task | Status | Assignee | PR | Completed |
+|------|--------|----------|----|-----------| 
+| 0020 | 📋 Not Started | | | |
+...
+</code></pre>
+<hr>
+<h2>Contact &amp; Resources</h2>
+<ul>
+<li><strong>Vision Document</strong>: <code>claude/layer-1/memory.md</code></li>
+<li><strong>Central Planner Instructions</strong>: <code>claude/layer-1/input.md</code></li>
+<li><strong>Architecture</strong>: Root <code>README.md</code></li>
+<li><strong>Deployment</strong>: <code>DEPLOYMENT.md</code></li>
+<li><strong>Contributing</strong>: <code>CONTRIBUTING.md</code></li>
+</ul>
+<hr>
+<p><strong>Last Updated</strong>: 2025-11-10<br><strong>Generated By</strong>: Layer 1 Central Planner<br><strong>Total Tasks</strong>: 23 (down from 39 after prioritization cleanup)<br><strong>Focus</strong>: Expose backend features in UIs, improve first impressions</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-State Compliance System - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🏗️ Architecture & Deployment</span> / 
+      <span>Multi-State Compliance System</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Multi-State Compliance System</h1>
+<h2>Overview</h2>
+<p>This directory contains the multi-state compliance validation system for Care Commons. The system ensures that caregiver assignments comply with state-specific home healthcare regulations for <strong>Ohio (OH)</strong>, <strong>Texas (TX)</strong>, and <strong>Florida (FL)</strong>.</p>
+<h2>Quick Start</h2>
+<pre><code class="language-typescript">import { ValidatorFactory } from &#39;./validator-factory.js&#39;;
+import { CaregiverCredentials, VisitDetails, ClientDetails } from &#39;./types/index.js&#39;;
+
+// Get validator for a specific state
+const validator = ValidatorFactory.getValidator(&#39;OH&#39;);
+
+// Validate caregiver can be assigned to visit
+const result = await validator.canAssignToVisit(caregiver, visit, client);
+
+if (!result.canProceed) {
+  console.log(&#39;Assignment blocked by compliance issues:&#39;);
+  result.issues
+    .filter(i =&gt; i.severity === &#39;BLOCKING&#39;)
+    .forEach(issue =&gt; console.log(`- ${issue.message}`));
+}
+</code></pre>
+<h2>Architecture</h2>
+<h3>Core Components</h3>
+<pre><code>compliance/
+├── base-validator.ts          # Base validator with common logic
+├── validator-factory.ts       # Factory for getting state validators
+├── state-registry.ts          # Centralized state configuration
+├── types/                     # Type definitions and interfaces
+│   └── index.ts
+├── ohio/                      # Ohio-specific implementation
+│   ├── validator.ts
+│   └── __tests__/
+│       └── validator.test.ts
+├── texas/                     # Texas-specific implementation
+│   ├── validator.ts
+│   └── __tests__/
+│       └── validator.test.ts
+└── florida/                   # Florida-specific implementation
+    ├── validator.ts
+    └── __tests__/
+        └── validator.test.ts
+</code></pre>
+<h3>Design Patterns</h3>
+<ul>
+<li><strong>Strategy Pattern</strong>: State-specific validators implement <code>StateComplianceValidator</code> interface</li>
+<li><strong>Factory Pattern</strong>: <code>ValidatorFactory</code> creates appropriate validator based on state code</li>
+<li><strong>Template Method</strong>: <code>BaseComplianceValidator</code> defines common validation flow</li>
+<li><strong>Registry Pattern</strong>: <code>STATE_REGISTRY</code> centralizes state configurations</li>
+</ul>
+<h2>Supported States</h2>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Code</th>
+<th>Strictness</th>
+<th>Background Check Cycle</th>
+<th>EVV Aggregator</th>
+<th>Free EVV</th>
+<th>Test Coverage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Ohio</strong></td>
+<td>OH</td>
+<td>MODERATE</td>
+<td>5 years</td>
+<td>Sandata</td>
+<td>✅ Yes</td>
+<td>15 tests</td>
+</tr>
+<tr>
+<td><strong>Texas</strong></td>
+<td>TX</td>
+<td>STRICT</td>
+<td>2 years</td>
+<td>HHAeXchange</td>
+<td>❌ No</td>
+<td>10 tests</td>
+</tr>
+<tr>
+<td><strong>Florida</strong></td>
+<td>FL</td>
+<td>LENIENT</td>
+<td>5 years</td>
+<td>Multi-aggregator</td>
+<td>❌ No</td>
+<td>13 tests</td>
+</tr>
+</tbody></table>
+<h3>State Characteristics</h3>
+<h4>Ohio (OH)</h4>
+<ul>
+<li><strong>Strictness</strong>: Moderate</li>
+<li><strong>Key Features</strong>:<ul>
+<li>FREE Sandata EVV aggregator (major cost advantage)</li>
+<li>FBI+BCI fingerprint background check (5-year cycle)</li>
+<li>STNA registry for CNAs (2-year certification)</li>
+<li>HHA 75-hour training + annual competency</li>
+<li>RN supervision: 14 days (new clients), 60 days (established)</li>
+</ul>
+</li>
+<li><strong>Regulations</strong>: Ohio Revised Code §173.27, §3721.30, §5164.34; OAC 3701-18-03, 5160-12-03, 5160-58-01</li>
+</ul>
+<h4>Texas (TX)</h4>
+<ul>
+<li><strong>Strictness</strong>: STRICT (toughest state in US)</li>
+<li><strong>Key Features</strong>:<ul>
+<li>HHAeXchange mandatory EVV aggregator</li>
+<li>Employee Misconduct Registry (PERMANENT disqualification if listed)</li>
+<li>2-year background check cycle (shortest in US)</li>
+<li>VMUR 30-day correction window for EVV</li>
+<li>STAR+PLUS emergency plan requirement</li>
+</ul>
+</li>
+<li><strong>Regulations</strong>: Texas Human Resources Code §40.053, §32.00131, §250.006; 26 TAC §558</li>
+</ul>
+<h4>Florida (FL)</h4>
+<ul>
+<li><strong>Strictness</strong>: LENIENT (most flexible)</li>
+<li><strong>Key Features</strong>:<ul>
+<li>Multi-aggregator support (HHAeXchange, Tellus, iConnect)</li>
+<li>Level 2 background screening (5-year cycle)</li>
+<li>HIV/AIDS training mandatory</li>
+<li>Most lenient geofencing (250m total tolerance)</li>
+<li>15-minute grace periods (most lenient)</li>
+</ul>
+</li>
+<li><strong>Regulations</strong>: Florida Statutes Chapter 400, 409, 435; Florida Administrative Code 59A-8</li>
+</ul>
+<h2>Validation Flow</h2>
+<h3>1. Base Validator Checks</h3>
+<p>Common validations applied to ALL states:</p>
+<pre><code class="language-typescript">// In BaseComplianceValidator.canAssignToVisit()
+1. Background Screening
+   - Missing: BLOCKING
+   - Pending: BLOCKING
+   - Issues found: BLOCKING
+   - Expired: BLOCKING
+   - Expiring soon (within warning days): WARNING
+
+2. Professional Licensure
+   - No license for visit state: BLOCKING
+   - Inactive license: BLOCKING
+   - Expired license: BLOCKING
+   - Expiring soon: WARNING
+
+3. Registry Checks
+   - Missing check: BLOCKING
+   - Listed on registry: BLOCKING
+   - Pending results: BLOCKING
+   - Expired check: BLOCKING
+   - Expiring soon: WARNING
+</code></pre>
+<h3>2. State-Specific Validator Checks</h3>
+<p>Each state validator extends base checks with state-specific requirements:</p>
+<h4>Ohio Validator (<code>OhioComplianceValidator</code>)</h4>
+<pre><code class="language-typescript">// In validateStateSpecificCredentials()
+1. FBI+BCI Background Check
+   - Must be fingerprint-based (not name-based)
+   - 5-year expiration cycle
+   - Status must be CLEAR
+
+2. STNA Registry (for CNAs)
+   - Must have STNA number
+   - Status must be ACTIVE
+   - 2-year certification renewal
+   - 12 hours CE per 2-year cycle
+   - Must work 24 months within 5-year period
+
+3. HHA Training
+   - 75-hour training completion
+   - Annual competency check
+   - 12 hours in-service annually
+
+4. RN Supervision
+   - New clients: 14-day frequency
+   - Established clients: 60-day frequency
+</code></pre>
+<h4>Texas Validator (<code>TexasComplianceValidator</code>)</h4>
+<pre><code class="language-typescript">// In validateStateSpecificCredentials()
+1. Employee Misconduct Registry (EMR)
+   - PERMANENT disqualification if listed
+   - Annual verification required
+
+2. Nurse Aide Registry (NAR)
+   - Required for CNAs
+   - Must be ACTIVE status
+
+3. HHSC Orientation
+   - Mandatory for all caregivers
+   - One-time requirement
+
+4. EVV Enrollment
+   - Must be enrolled in HHAeXchange
+   - Required for EVV-mandated services
+
+5. STAR+PLUS Emergency Plan
+   - Required for STAR+PLUS clients
+   - Must be current (updated annually)
+</code></pre>
+<h4>Florida Validator (<code>FloridaComplianceValidator</code>)</h4>
+<pre><code class="language-typescript">// In validateStateSpecificCredentials()
+1. Level 2 Background Screening
+   - 5-year cycle
+   - Status must be CLEARED
+   - AHCA screening ID required
+
+2. Professional Licensure
+   - Must have active FL license
+   - Verified through FL Board of Nursing
+
+3. HIV/AIDS Training
+   - Mandatory one-time training
+   - Per Florida Administrative Code 59A-8.0095
+
+4. RN Supervision Assignment
+   - Required for skilled services
+   - On-site visits every 60 days
+
+5. Plan of Care Review
+   - 60 or 90-day review frequency
+   - Physician signature required
+</code></pre>
+<h3>3. Result Determination</h3>
+<pre><code class="language-typescript">// In createFailureResult() helper
+const blockingIssues = issues.filter(i =&gt; i.severity === &#39;BLOCKING&#39;);
+return {
+  canProceed: blockingIssues.length === 0,  // TRUE if only WARNINGs
+  issues,  // All issues (BLOCKING + WARNING)
+};
+</code></pre>
+<p><strong>Key Rule</strong>: Assignment can proceed if there are ONLY <code>WARNING</code> severity issues. Any <code>BLOCKING</code> issues prevent assignment.</p>
+<h2>Compliance Issue Types</h2>
+<h3>Severity Levels</h3>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Description</th>
+<th>Can Assign?</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>BLOCKING</code></td>
+<td>Critical compliance violation</td>
+<td>❌ No</td>
+<td>Expired license, missing background check</td>
+</tr>
+<tr>
+<td><code>WARNING</code></td>
+<td>Non-critical issue, needs attention</td>
+<td>✅ Yes</td>
+<td>Credential expiring soon, registry check due</td>
+</tr>
+<tr>
+<td><code>INFO</code></td>
+<td>Informational notice</td>
+<td>✅ Yes</td>
+<td>Reminder to schedule training</td>
+</tr>
+</tbody></table>
+<h3>Issue Categories</h3>
+<pre><code class="language-typescript">type ComplianceCategory =
+  | &#39;CAREGIVER_CREDENTIALS&#39;    // Background, licenses, registries
+  | &#39;CLIENT_AUTHORIZATION&#39;     // Service auth, plan of care
+  | &#39;VISIT_DOCUMENTATION&#39;      // Visit notes, signatures
+  | &#39;EVV_COMPLIANCE&#39;           // Electronic visit verification
+  | &#39;DATA_RETENTION&#39;           // Records retention
+  | &#39;PRIVACY_SECURITY&#39;         // HIPAA, data security
+  | &#39;QUALITY_STANDARDS&#39;        // Quality metrics
+  | &#39;INCIDENT_REPORTING&#39;;      // Incidents, complaints
+</code></pre>
+<h3>Issue Structure</h3>
+<pre><code class="language-typescript">interface ComplianceIssue {
+  type: string;                    // e.g., &#39;OH_FBI_BCI_EXPIRED&#39;
+  severity: &#39;BLOCKING&#39; | &#39;WARNING&#39; | &#39;INFO&#39;;
+  category: ComplianceCategory;
+  message: string;                 // Human-readable explanation
+  regulation: string;              // Statutory citation
+  remediation: string;             // How to fix
+  canBeOverridden: boolean;        // Can compliance officer override?
+  requiresComplianceReview?: boolean;  // Needs manual review?
+  metadata?: Record&lt;string, unknown&gt;;  // Additional context
+}
+</code></pre>
+<h2>Testing</h2>
+<h3>Test Coverage</h3>
+<ul>
+<li><strong>Base Validator</strong>: 12 tests</li>
+<li><strong>Ohio Validator</strong>: 15 tests</li>
+<li><strong>Texas Validator</strong>: 10 tests</li>
+<li><strong>Florida Validator</strong>: 13 tests</li>
+<li><strong>Total</strong>: 50 tests</li>
+</ul>
+<h3>Running Tests</h3>
+<pre><code class="language-bash"># Run all compliance tests
+npm test src/compliance
+
+# Run state-specific tests
+npm test src/compliance/ohio/__tests__/validator.test.ts
+npm test src/compliance/texas/__tests__/validator.test.ts
+npm test src/compliance/florida/__tests__/validator.test.ts
+
+# Run with coverage
+npm test -- --coverage src/compliance
+</code></pre>
+<h3>Test Scenarios</h3>
+<p>Each state has comprehensive test scenarios covering:</p>
+<ol>
+<li><p><strong>Background Screening</strong></p>
+<ul>
+<li>Missing, pending, issues, expired, expiring soon</li>
+<li>Wrong type (name-based vs fingerprint)</li>
+</ul>
+</li>
+<li><p><strong>Licensure</strong></p>
+<ul>
+<li>Missing, inactive, expired, expiring soon</li>
+<li>Wrong state, wrong role</li>
+</ul>
+</li>
+<li><p><strong>Registry Checks</strong></p>
+<ul>
+<li>Missing, listed, pending, expired, expiring soon</li>
+<li>State-specific registries (STNA, NAR, EMR)</li>
+</ul>
+</li>
+<li><p><strong>State-Specific Requirements</strong></p>
+<ul>
+<li>Training and competency</li>
+<li>Supervision frequencies</li>
+<li>Authorization requirements</li>
+</ul>
+</li>
+<li><p><strong>Edge Cases</strong></p>
+<ul>
+<li>Multiple issues simultaneously</li>
+<li>Grace periods and tolerances</li>
+<li>Override scenarios</li>
+</ul>
+</li>
+</ol>
+<h2>State-Specific Data Structures</h2>
+<h3>Ohio (OH)</h3>
+<pre><code class="language-typescript">interface OhioCredentials {
+  backgroundCheck?: {
+    type: &#39;FBI_BCI&#39;;
+    checkDate: Date;
+    expirationDate: Date;
+    bciTrackingNumber: string;
+    status: &#39;CLEAR&#39; | &#39;PENDING&#39; | &#39;ISSUES&#39; | &#39;EXPIRED&#39;;
+  };
+  stnaNumber?: string;
+  stnaStatus?: &#39;ACTIVE&#39; | &#39;INACTIVE&#39; | &#39;EXPIRED&#39;;
+  stnaCertificationExpiration?: Date;
+  hhaTrainingCompletion?: Date;
+  hhaCompetencyStatus?: &#39;PASSED&#39; | &#39;FAILED&#39; | &#39;PENDING&#39;;
+  lastCompetencyCheck?: Date;
+}
+
+interface OhioClientData {
+  mcoName?: string;
+  lastRNSupervisionVisit?: Date;
+  isNewClient?: boolean;
+  odmProviderNumber?: string;
+}
+</code></pre>
+<h3>Texas (TX)</h3>
+<pre><code class="language-typescript">interface TexasCredentials {
+  emrCheckDate?: Date;
+  emrStatus?: &#39;CLEAR&#39; | &#39;PENDING&#39; | &#39;LISTED&#39;;
+  narNumber?: string;
+  narStatus?: &#39;ACTIVE&#39; | &#39;EXPIRED&#39; | &#39;SUSPENDED&#39;;
+  hhscOrientationCompleted?: boolean;
+  evvEnrollmentStatus?: &#39;ACTIVE&#39; | &#39;PENDING&#39; | &#39;INACTIVE&#39;;
+}
+
+interface TexasClientData {
+  medicaidProgram?: string;  // &#39;STAR_PLUS&#39;, etc.
+  emergencyPlanOnFile?: boolean;
+  authorizedServices?: Array&lt;{
+    serviceCode: string;
+    authorizedUnits: number;
+    usedUnits: number;
+    requiresEVV: boolean;
+  }&gt;;
+}
+</code></pre>
+<h3>Florida (FL)</h3>
+<pre><code class="language-typescript">interface FloridaCredentials {
+  level2ScreeningDate?: Date;
+  level2ScreeningExpiration?: Date;
+  level2ScreeningStatus?: &#39;CLEARED&#39; | &#39;PENDING&#39; | &#39;DISQUALIFIED&#39;;
+  level2ScreeningId?: string;
+  hivAidsTrainingCompleted?: boolean;
+  medicaidProviderId?: string;
+}
+
+interface FloridaClientData {
+  mcoName?: string;
+  mcoProgram?: &#39;LTC&#39; | &#39;MMA&#39;;
+  pocNextReviewDue?: Date;
+  lastRNSupervisoryVisit?: Date;
+  preferredAggregator?: &#39;HHAEEXCHANGE&#39; | &#39;TELLUS&#39; | &#39;ICONNECT&#39;;
+}
+</code></pre>
+<h2>EVV Integration</h2>
+<p>Each state has specific EVV (Electronic Visit Verification) requirements:</p>
+<h3>State EVV Configurations</h3>
+<pre><code class="language-typescript">// From verticals/time-tracking-evv/src/config/state-evv-configs.ts
+
+OH: {
+  aggregatorType: &#39;SANDATA&#39;,
+  aggregatorFree: true,              // FREE for Ohio providers!
+  geofenceRadiusMeters: 125,
+  geofenceToleranceMeters: 75,       // 200m total
+  gracePeriodMinutes: 10,
+}
+
+TX: {
+  aggregatorType: &#39;HHAEEXCHANGE&#39;,
+  aggregatorFree: false,
+  geofenceRadiusMeters: 100,
+  geofenceToleranceMeters: 50,       // 150m total (strict)
+  gracePeriodMinutes: 10,
+  requiresVMUR: true,                // Visit Maintenance Unlock Request
+  vmurWindowDays: 30,
+}
+
+FL: {
+  aggregatorType: &#39;MULTI&#39;,
+  aggregatorFree: false,
+  geofenceRadiusMeters: 150,
+  geofenceToleranceMeters: 100,      // 250m total (lenient)
+  gracePeriodMinutes: 15,
+  multiAggregatorSupport: true,
+}
+</code></pre>
+<h2>Adding a New State</h2>
+<p>To add support for a new state:</p>
+<ol>
+<li><p><strong>Create State Validator</strong> (<code>src/compliance/{state}/validator.ts</code>):</p>
+<pre><code class="language-typescript">export class NewStateComplianceValidator extends BaseComplianceValidator {
+  readonly state: StateCode = &#39;NS&#39;;
+
+  protected readonly credentialConfig: StateCredentialConfig = { /* config */ };
+  protected readonly authorizationConfig: StateAuthorizationConfig = { /* config */ };
+
+  protected override async validateStateSpecificCredentials(
+    caregiver: CaregiverCredentials,
+    visit: VisitDetails,
+    client: ClientDetails
+  ): Promise&lt;ComplianceIssue[]&gt; {
+    // State-specific validation logic
+  }
+}
+</code></pre>
+</li>
+<li><p><strong>Add State Types</strong> (extend <code>CaregiverCredentials</code> and <code>ClientDetails</code>):</p>
+<pre><code class="language-typescript">interface NewStateCredentials {
+  // State-specific credential fields
+}
+
+interface NewStateClientData {
+  // State-specific client fields
+}
+</code></pre>
+</li>
+<li><p><strong>Register State</strong> (<code>src/compliance/state-registry.ts</code>):</p>
+<pre><code class="language-typescript">NS: {
+  code: &#39;NS&#39;,
+  name: &#39;New State&#39;,
+  evvAggregator: &#39;AggregatorName&#39;,
+  strictness: &#39;MODERATE&#39;,
+  backgroundCheckCycle: &#39;EVERY_5_YEARS&#39;,
+  // ... other config
+}
+</code></pre>
+</li>
+<li><p><strong>Create Tests</strong> (<code>src/compliance/{state}/__tests__/validator.test.ts</code>):</p>
+<ul>
+<li>Cover all state-specific validations</li>
+<li>Test BLOCKING and WARNING scenarios</li>
+<li>Include edge cases</li>
+</ul>
+</li>
+<li><p><strong>Update EVV Config</strong> (<code>verticals/time-tracking-evv/src/config/state-evv-configs.ts</code>):</p>
+<pre><code class="language-typescript">NS: {
+  state: &#39;NS&#39;,
+  aggregatorType: &#39;VENDOR&#39;,
+  geofenceRadiusMeters: 125,
+  // ... other EVV settings
+}
+</code></pre>
+</li>
+</ol>
+<h2>Regulatory References</h2>
+<h3>Ohio</h3>
+<ul>
+<li><a href="https://codes.ohio.gov/ohio-revised-code/section-173.27">Ohio Revised Code §173.27</a> - Background Screening</li>
+<li><a href="https://codes.ohio.gov/ohio-revised-code/section-3721.30">Ohio Revised Code §3721.30</a> - Nurse Aide Registry</li>
+<li><a href="http://codes.ohio.gov/oac/5160-58-01">Ohio Administrative Code 5160-58-01</a> - Personal Care Aide Standards</li>
+<li><a href="https://medicaid.ohio.gov/providers-partners/providers/electronic-visit-verification-evv">Ohio Sandata EVV</a></li>
+</ul>
+<h3>Texas</h3>
+<ul>
+<li><a href="https://statutes.capitol.texas.gov/Docs/HR/htm/HR.40.htm#40.053">Texas Human Resources Code §40.053</a> - Employee Misconduct Registry</li>
+<li><a href="https://www.sos.texas.gov/texreg/index.shtml">26 TAC §558</a> - HHSC Home Health Rules</li>
+<li><a href="https://www.hhs.texas.gov/providers/long-term-care-providers/electronic-visit-verification-evv">Texas EVV Requirements</a></li>
+</ul>
+<h3>Florida</h3>
+<ul>
+<li><a href="http://www.leg.state.fl.us/statutes/index.cfm?App_mode=Display_Statute&Title=-%3E2024-%3EChapter%20400">Florida Statutes Chapter 400</a> - Home Health Agencies</li>
+<li><a href="https://www.flrules.org/gateway/ChapterHome.asp?Chapter=59A-8">Florida Administrative Code 59A-8</a> - Home Health Regulations</li>
+<li><a href="https://ahca.myflorida.com/medicaid/Policy_and_Quality/Quality/Electronic_Visit_Verification.shtml">Florida EVV</a></li>
+</ul>
+<h2>Troubleshooting</h2>
+<h3>Common Issues</h3>
+<p><strong>Issue</strong>: <code>canProceed</code> is <code>false</code> but test expects <code>true</code></p>
+<ul>
+<li><strong>Cause</strong>: Test has BLOCKING issues present</li>
+<li><strong>Solution</strong>: Check test data includes all required credentials (background screening, licenses, registry checks)</li>
+</ul>
+<p><strong>Issue</strong>: Expected issue type not found</p>
+<ul>
+<li><strong>Cause</strong>: Date calculations off or wrong issue being generated</li>
+<li><strong>Solution</strong>: Verify test dates are within warning/expiration thresholds</li>
+</ul>
+<p><strong>Issue</strong>: Validator not found for state</p>
+<ul>
+<li><strong>Cause</strong>: State not registered in <code>STATE_REGISTRY</code></li>
+<li><strong>Solution</strong>: Add state to <code>state-registry.ts</code> and implement validator</li>
+</ul>
+<h2>Performance</h2>
+<ul>
+<li><strong>Average validation time</strong>: &lt; 10ms per assignment</li>
+<li><strong>Test suite execution</strong>: ~2 seconds (50 tests)</li>
+<li><strong>Memory usage</strong>: Minimal (validators are stateless singletons)</li>
+</ul>
+<h2>Contributing</h2>
+<p>When contributing to compliance validators:</p>
+<ol>
+<li><strong>Follow regulatory documentation exactly</strong> - cite specific statutes/regulations</li>
+<li><strong>Write comprehensive tests</strong> - cover all validation scenarios</li>
+<li><strong>Document state-specific quirks</strong> - explain unusual requirements</li>
+<li><strong>Use consistent naming</strong> - follow <code>{STATE}_{CHECK_TYPE}_{STATUS}</code> pattern for issue types</li>
+<li><strong>Keep validators focused</strong> - one validator per state, delegate common logic to base</li>
+</ol>
+<h2>License</h2>
+<p>Copyright © 2025 Care Commons. All rights reserved.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

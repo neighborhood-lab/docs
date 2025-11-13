@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deployment Options for Care Commons - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🏗️ Architecture & Deployment</span> / 
+      <span>Deployment Options for Care Commons</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Deployment Options for Care Commons</h1>
+<h2>Overview</h2>
+<p>This document outlines <strong>always-free deployment options</strong> for Care Commons, prioritizing cost-effective solutions for development, staging, and small-scale production deployments.</p>
+<hr>
+<h2>Option 1: 100% Vercel (Recommended for Node.js/Next.js)</h2>
+<h3>✅ Vercel Platform + Vercel Postgres</h3>
+<p><strong>Compute</strong>: Vercel Serverless Functions<br><strong>Database</strong>: Vercel Postgres (powered by Neon)<br><strong>Storage</strong>: Vercel Blob Storage  </p>
+<h3>Free Tier Limits</h3>
+<p><strong>Vercel Hobby (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>Unlimited deployments</strong></li>
+<li>✅ <strong>100 GB bandwidth/month</strong></li>
+<li>✅ <strong>100 GB-hours serverless function execution</strong></li>
+<li>✅ <strong>6,000 build minutes/month</strong></li>
+<li>✅ <strong>Unlimited preview deployments</strong></li>
+<li>✅ <strong>Automatic HTTPS</strong></li>
+<li>✅ <strong>Custom domains</strong> (free SSL)</li>
+<li>✅ <strong>Edge Network</strong> (global CDN)</li>
+<li>❌ No team collaboration (single developer)</li>
+<li>❌ Pauses after 7 days inactivity (projects, not functions)</li>
+</ul>
+<p><strong>Vercel Postgres (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>512 MB database storage</strong></li>
+<li>✅ <strong>60 hours compute time/month</strong> (~2 days)</li>
+<li>✅ <strong>5 GB data transfer/month</strong></li>
+<li>✅ <strong>Connection pooling built-in</strong></li>
+<li>✅ <strong>Automatic backups</strong> (1 day retention)</li>
+<li>✅ <strong>PostgreSQL 15+</strong></li>
+<li>❌ Compute pauses after 5 minutes inactivity</li>
+<li>❌ Max 1 database</li>
+</ul>
+<p><strong>Vercel Blob Storage (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>100 MB storage</strong></li>
+<li>✅ <strong>10 GB bandwidth/month</strong></li>
+<li>✅ <strong>CDN-backed</strong> (global edge)</li>
+</ul>
+<h3>Setup Commands</h3>
+<pre><code class="language-bash"># 1. Login to Vercel
+vercel login
+
+# 2. Link project to Vercel
+cd /Users/bedwards/care-commons
+vercel link
+
+# 3. Create Vercel Postgres database
+vercel postgres create care-commons-db
+
+# 4. Pull environment variables
+vercel env pull .env.local
+
+# 5. Deploy
+vercel deploy --prod
+</code></pre>
+<h3>Environment Variables</h3>
+<p>Vercel automatically sets these for Vercel Postgres:</p>
+<pre><code class="language-bash">POSTGRES_URL=&quot;postgres://...&quot;          # Connection string
+POSTGRES_PRISMA_URL=&quot;postgres://...&quot;   # Prisma-optimized
+POSTGRES_URL_NON_POOLING=&quot;postgres://...&quot; # Direct connection
+POSTGRES_USER=&quot;...&quot;
+POSTGRES_HOST=&quot;...&quot;
+POSTGRES_PASSWORD=&quot;...&quot;
+POSTGRES_DATABASE=&quot;...&quot;
+</code></pre>
+<h3>Configuration</h3>
+<p><strong>vercel.json</strong> (already configured):</p>
+<pre><code class="language-json">{
+  &quot;version&quot;: 2,
+  &quot;framework&quot;: &quot;vite&quot;,
+  &quot;buildCommand&quot;: &quot;npm run build&quot;,
+  &quot;outputDirectory&quot;: &quot;public&quot;,
+  &quot;installCommand&quot;: &quot;npm install&quot;,
+  &quot;devCommand&quot;: &quot;npm run dev&quot;,
+  &quot;env&quot;: {
+    &quot;NODE_ENV&quot;: &quot;production&quot;,
+    &quot;NODE_VERSION&quot;: &quot;22.x&quot;
+  }
+}
+</code></pre>
+<h3>Pros &amp; Cons</h3>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>✅ <strong>Easiest setup</strong> - One platform, one login</li>
+<li>✅ <strong>Integrated</strong> - Database, functions, storage all in one place</li>
+<li>✅ <strong>Fast cold starts</strong> - Vercel-optimized infrastructure</li>
+<li>✅ <strong>Preview deployments</strong> - Every PR gets a unique URL</li>
+<li>✅ <strong>Edge functions</strong> - Run at the edge for low latency</li>
+<li>✅ <strong>Great DX</strong> - Best developer experience</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>❌ <strong>Compute limits</strong> - Database pauses after 5 min inactivity</li>
+<li>❌ <strong>Storage limits</strong> - Only 512 MB database (enough for dev/small prod)</li>
+<li>❌ <strong>No team collaboration</strong> on free tier</li>
+<li>❌ <strong>Vendor lock-in</strong> - Harder to migrate off Vercel</li>
+</ul>
+<h3>Best For</h3>
+<ul>
+<li><strong>Development</strong> and <strong>staging</strong> environments</li>
+<li><strong>Small production</strong> deployments (&lt;10,000 users)</li>
+<li><strong>Demos</strong> and <strong>MVPs</strong></li>
+<li><strong>Single developer</strong> projects</li>
+</ul>
+<hr>
+<h2>Option 2: 100% Cloudflare (Best for Global Scale)</h2>
+<h3>✅ Cloudflare Workers + D1 Database</h3>
+<p><strong>Compute</strong>: Cloudflare Workers (Edge Runtime)<br><strong>Database</strong>: Cloudflare D1 (SQLite at the edge) <strong>OR</strong> Neon/Supabase via Hyperdrive<br><strong>Storage</strong>: Cloudflare R2  </p>
+<h3>Free Tier Limits</h3>
+<p><strong>Cloudflare Workers (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>100,000 requests/day</strong> (~3M/month)</li>
+<li>✅ <strong>Unlimited deployments</strong></li>
+<li>✅ <strong>Runs in 300+ cities</strong> (true edge)</li>
+<li>✅ <strong>10ms CPU time/invocation</strong></li>
+<li>✅ <strong>Custom domains</strong> (free SSL)</li>
+<li>✅ <strong>Automatic HTTPS</strong></li>
+<li>✅ <strong>No cold starts</strong> (instant)</li>
+<li>✅ <strong>Team collaboration</strong></li>
+<li>❌ No Node.js built-ins (V8 isolates, not containers)</li>
+<li>❌ Limited npm packages (must be ESM-compatible)</li>
+</ul>
+<p><strong>Cloudflare D1 (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>500 MB storage/database</strong></li>
+<li>✅ <strong>5M reads/day</strong></li>
+<li>✅ <strong>100K writes/day</strong></li>
+<li>✅ <strong>Unlimited databases</strong></li>
+<li>✅ <strong>SQLite at the edge</strong> (read replicas everywhere)</li>
+<li>✅ <strong>No cold starts</strong></li>
+<li>✅ <strong>Point-in-time recovery</strong> (PITR)</li>
+<li>❌ <strong>SQLite not Postgres</strong> (limited ecosystem)</li>
+<li>❌ <strong>No extensions</strong> (PostGIS, pg_vector unavailable)</li>
+</ul>
+<p><strong>Cloudflare R2 (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>10 GB storage</strong></li>
+<li>✅ <strong>1M Class A operations/month</strong> (writes)</li>
+<li>✅ <strong>10M Class B operations/month</strong> (reads)</li>
+<li>✅ <strong>No egress fees</strong> (major advantage over S3)</li>
+<li>✅ <strong>S3-compatible API</strong></li>
+</ul>
+<h3>Setup Commands</h3>
+<pre><code class="language-bash"># 1. Login to Cloudflare
+wrangler login
+
+# 2. Create wrangler.toml configuration
+cat &gt; wrangler.toml &lt;&lt; &#39;EOF&#39;
+name = &quot;care-commons&quot;
+main = &quot;api/index.ts&quot;
+compatibility_date = &quot;2024-11-12&quot;
+node_compat = true
+
+[[d1_databases]]
+binding = &quot;DB&quot;
+database_name = &quot;care-commons-db&quot;
+database_id = &quot;&lt;will-be-generated&gt;&quot;
+
+[[r2_buckets]]
+binding = &quot;STORAGE&quot;
+bucket_name = &quot;care-commons-files&quot;
+EOF
+
+# 3. Create D1 database
+wrangler d1 create care-commons-db
+
+# 4. Create R2 bucket
+wrangler r2 bucket create care-commons-files
+
+# 5. Deploy
+wrangler deploy
+</code></pre>
+<h3>Pros &amp; Cons</h3>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>✅ <strong>Truly global</strong> - Runs in 300+ cities, not just 1 region</li>
+<li>✅ <strong>No cold starts</strong> - Instant response times</li>
+<li>✅ <strong>Generous limits</strong> - 3M requests/month free</li>
+<li>✅ <strong>No egress fees</strong> - R2 has no bandwidth charges</li>
+<li>✅ <strong>Team collaboration</strong> on free tier</li>
+<li>✅ <strong>Scales automatically</strong> - No configuration needed</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>❌ <strong>SQLite not Postgres</strong> - Different SQL dialect, no extensions</li>
+<li>❌ <strong>No Node.js runtime</strong> - V8 isolates only (limited npm packages)</li>
+<li>❌ <strong>Migration effort</strong> - Requires code changes from Express to Workers</li>
+<li>❌ <strong>Learning curve</strong> - Different mental model than traditional servers</li>
+</ul>
+<h3>Best For</h3>
+<ul>
+<li><strong>High-scale applications</strong> needing global distribution</li>
+<li><strong>Public APIs</strong> with heavy read traffic</li>
+<li><strong>Static sites</strong> with serverless functions</li>
+<li><strong>Projects without Postgres-specific needs</strong></li>
+</ul>
+<hr>
+<h2>Option 3: Vercel + Neon Postgres (Best Postgres Free Tier)</h2>
+<h3>✅ Vercel Functions + Neon Database</h3>
+<p><strong>Compute</strong>: Vercel Serverless Functions<br><strong>Database</strong>: Neon Postgres (serverless Postgres)<br><strong>Storage</strong>: Vercel Blob or R2  </p>
+<h3>Free Tier Limits</h3>
+<p><strong>Vercel Hobby</strong> (same as Option 1)</p>
+<p><strong>Neon Free Tier</strong>:</p>
+<ul>
+<li>✅ <strong>512 MB storage/branch</strong></li>
+<li>✅ <strong>3 GB data transfer/month</strong></li>
+<li>✅ <strong>1 project with unlimited branches</strong></li>
+<li>✅ <strong>Unlimited databases per project</strong></li>
+<li>✅ <strong>PostgreSQL 15+</strong></li>
+<li>✅ <strong>Connection pooling</strong> built-in</li>
+<li>✅ <strong>Instant branching</strong> (copy-on-write, perfect for previews)</li>
+<li>✅ <strong>Point-in-time recovery</strong> (7 days)</li>
+<li>✅ <strong>Autoscaling compute</strong> (0.25 - 2 vCPU)</li>
+<li>❌ <strong>Autosuspends after 5 min</strong> inactivity (cold start ~1s)</li>
+<li>❌ <strong>Max 100 hours compute/month</strong> (~3 days)</li>
+</ul>
+<h3>Setup Commands</h3>
+<pre><code class="language-bash"># 1. Install Neon CLI (already installed)
+# neon is at /opt/homebrew/bin/neon
+
+# 2. Login to Neon
+neon auth
+
+# 3. Create project
+neon projects create --name care-commons
+
+# 4. Get connection string
+neon connection-string care-commons
+
+# 5. Add to Vercel
+vercel env add POSTGRES_URL
+# Paste Neon connection string
+
+# 6. Deploy to Vercel
+vercel deploy --prod
+</code></pre>
+<h3>Database Branching (Powerful Feature)</h3>
+<pre><code class="language-bash"># Create branch for preview deployment (instant, copy-on-write)
+neon branches create --project care-commons --name preview-pr-123
+
+# Get connection string for branch
+neon connection-string care-commons --branch preview-pr-123
+
+# Each Vercel preview deployment can have its own database branch!
+</code></pre>
+<h3>Pros &amp; Cons</h3>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>✅ <strong>Best free Postgres</strong> - 512 MB storage, full Postgres features</li>
+<li>✅ <strong>Database branching</strong> - Perfect for preview deployments</li>
+<li>✅ <strong>True Postgres</strong> - PostGIS, pg_vector, all extensions work</li>
+<li>✅ <strong>Longer compute time</strong> - 100 hours vs Vercel Postgres 60 hours</li>
+<li>✅ <strong>More storage</strong> - 512 MB per branch (unlimited branches)</li>
+<li>✅ <strong>Better cold starts</strong> - ~1s vs ~2-3s for Vercel Postgres</li>
+<li>✅ <strong>No vendor lock-in</strong> - Standard Postgres protocol</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>❌ <strong>Two platforms</strong> - Manage Vercel + Neon separately</li>
+<li>❌ <strong>Still autosuspends</strong> - 5 min inactivity (but cold start faster)</li>
+<li>❌ <strong>Manual env vars</strong> - Need to copy connection strings</li>
+</ul>
+<h3>Best For</h3>
+<ul>
+<li><strong>Production-ready free tier</strong> - Best Postgres limits</li>
+<li><strong>Branch-based workflows</strong> - Database per PR</li>
+<li><strong>Postgres-specific features</strong> - PostGIS, pg_vector, extensions</li>
+<li><strong>Future scaling</strong> - Easy upgrade path to paid</li>
+</ul>
+<hr>
+<h2>Option 4: Cloudflare Workers + Neon/Supabase via Hyperdrive</h2>
+<h3>✅ Cloudflare Workers + Postgres via Hyperdrive</h3>
+<p><strong>Compute</strong>: Cloudflare Workers<br><strong>Database</strong>: Neon or Supabase Postgres via Hyperdrive<br><strong>Storage</strong>: Cloudflare R2  </p>
+<h3>Free Tier Limits</h3>
+<p><strong>Cloudflare Workers</strong> (same as Option 2)</p>
+<p><strong>Cloudflare Hyperdrive (Free)</strong>:</p>
+<ul>
+<li>✅ <strong>Free tier</strong> (currently in beta, may change)</li>
+<li>✅ <strong>Connection pooling</strong> for Workers → Postgres</li>
+<li>✅ <strong>Caching</strong> at the edge</li>
+<li>✅ <strong>Reduces latency</strong> to Postgres by ~80%</li>
+<li>✅ <strong>Works with any Postgres</strong> (Neon, Supabase, RDS, etc.)</li>
+</ul>
+<p><strong>Neon or Supabase</strong> (same limits as Option 3)</p>
+<h3>Setup Commands</h3>
+<pre><code class="language-bash"># 1. Create Neon database
+neon projects create --name care-commons
+
+# 2. Get connection string
+NEON_URL=$(neon connection-string care-commons)
+
+# 3. Create Hyperdrive configuration
+wrangler hyperdrive create care-commons-db --connection-string=&quot;$NEON_URL&quot;
+
+# 4. Update wrangler.toml
+cat &gt;&gt; wrangler.toml &lt;&lt; &#39;EOF&#39;
+
+[[hyperdrive]]
+binding = &quot;HYPERDRIVE&quot;
+id = &quot;&lt;hyperdrive-id-from-step-3&gt;&quot;
+EOF
+
+# 5. Deploy
+wrangler deploy
+</code></pre>
+<h3>Pros &amp; Cons</h3>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>✅ <strong>Best of both worlds</strong> - Cloudflare edge + real Postgres</li>
+<li>✅ <strong>Global edge</strong> - 300+ cities with Workers</li>
+<li>✅ <strong>Full Postgres</strong> - All extensions (PostGIS, pg_vector)</li>
+<li>✅ <strong>Connection pooling</strong> - Hyperdrive handles connections efficiently</li>
+<li>✅ <strong>Reduced latency</strong> - Edge caching + smart routing</li>
+<li>✅ <strong>No vendor lock-in</strong> - Standard Postgres</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>❌ <strong>Most complex</strong> - Three platforms (Cloudflare, Neon, Hyperdrive)</li>
+<li>❌ <strong>Workers limitations</strong> - No Node.js built-ins</li>
+<li>❌ <strong>Migration effort</strong> - Rewrite from Express to Workers</li>
+<li>❌ <strong>Beta features</strong> - Hyperdrive still evolving</li>
+</ul>
+<h3>Best For</h3>
+<ul>
+<li><strong>Global applications</strong> needing Postgres</li>
+<li><strong>High-traffic APIs</strong> with complex queries</li>
+<li><strong>Real-time features</strong> with edge compute</li>
+<li><strong>Advanced use cases</strong> (PostGIS geofencing, pg_vector search)</li>
+</ul>
+<hr>
+<h2>Option 5: Vercel + Supabase Postgres (Best Auth + Storage)</h2>
+<h3>✅ Vercel Functions + Supabase Backend</h3>
+<p><strong>Compute</strong>: Vercel Serverless Functions<br><strong>Database</strong>: Supabase Postgres<br><strong>Storage</strong>: Supabase Storage (with CDN)<br><strong>Auth</strong>: Supabase Auth (built-in)<br><strong>Realtime</strong>: Supabase Realtime subscriptions  </p>
+<h3>Free Tier Limits</h3>
+<p><strong>Vercel Hobby</strong> (same as Option 1)</p>
+<p><strong>Supabase Free Tier</strong>:</p>
+<ul>
+<li>✅ <strong>500 MB database storage</strong></li>
+<li>✅ <strong>Unlimited API requests</strong></li>
+<li>✅ <strong>50,000 monthly active users</strong></li>
+<li>✅ <strong>1 GB file storage</strong></li>
+<li>✅ <strong>2 GB bandwidth</strong></li>
+<li>✅ <strong>Realtime subscriptions</strong> (unlimited)</li>
+<li>✅ <strong>Auto-generated REST APIs</strong> from schema</li>
+<li>✅ <strong>Auto-generated GraphQL APIs</strong> (optional)</li>
+<li>✅ <strong>Row Level Security</strong> (RLS)</li>
+<li>✅ <strong>Auth</strong> (Email, OAuth, Magic Links, Phone)</li>
+<li>✅ <strong>Storage CDN</strong> (global distribution)</li>
+<li>✅ <strong>PostgreSQL 15+</strong> with extensions</li>
+<li>❌ <strong>Pauses after 7 days</strong> of inactivity (easily resumed)</li>
+</ul>
+<h3>Setup Commands</h3>
+<pre><code class="language-bash"># 1. Login to Supabase
+supabase login
+
+# 2. Create project (via dashboard.supabase.com)
+# Get your project URL and anon key
+
+# 3. Initialize locally
+cd /Users/bedwards/care-commons
+supabase init
+
+# 4. Link to remote project
+supabase link --project-ref &lt;your-project-ref&gt;
+
+# 5. Add to Vercel environment
+vercel env add SUPABASE_URL
+vercel env add SUPABASE_ANON_KEY
+vercel env add SUPABASE_SERVICE_ROLE_KEY
+
+# 6. Deploy
+vercel deploy --prod
+</code></pre>
+<h3>Using Supabase Features</h3>
+<pre><code class="language-typescript">// Auto-generated REST API
+const { data, error } = await supabase
+  .from(&#39;clients&#39;)
+  .select(&#39;*&#39;)
+  .eq(&#39;organization_id&#39;, orgId);
+
+// Realtime subscriptions
+supabase
+  .channel(&#39;visits&#39;)
+  .on(&#39;postgres_changes&#39;, 
+    { event: &#39;INSERT&#39;, schema: &#39;public&#39;, table: &#39;visits&#39; },
+    (payload) =&gt; console.log(&#39;New visit:&#39;, payload)
+  )
+  .subscribe();
+
+// Storage with CDN
+const { data, error } = await supabase.storage
+  .from(&#39;clinical-photos&#39;)
+  .upload(&#39;wound-assessment.jpg&#39;, file);
+
+// Auth
+const { user, session, error } = await supabase.auth.signInWithPassword({
+  email: &#39;user@example.com&#39;,
+  password: &#39;password&#39;
+});
+</code></pre>
+<h3>Pros &amp; Cons</h3>
+<p><strong>Pros</strong>:</p>
+<ul>
+<li>✅ <strong>Complete backend</strong> - Database, Auth, Storage, Realtime all-in-one</li>
+<li>✅ <strong>Auto-generated APIs</strong> - REST and GraphQL from schema</li>
+<li>✅ <strong>Real-time subscriptions</strong> - Built-in WebSocket support</li>
+<li>✅ <strong>Row Level Security</strong> - Perfect for multi-tenant (Care Commons!)</li>
+<li>✅ <strong>Auth built-in</strong> - OAuth, Magic Links, Phone, Email</li>
+<li>✅ <strong>Storage with CDN</strong> - Perfect for clinical photos/documents</li>
+<li>✅ <strong>Great free tier</strong> - 500 MB database, 1 GB storage, unlimited requests</li>
+<li>✅ <strong>PostGIS support</strong> - For EVV geofencing</li>
+<li>✅ <strong>pg_vector support</strong> - For AI/ML features</li>
+</ul>
+<p><strong>Cons</strong>:</p>
+<ul>
+<li>❌ <strong>Pauses after 7 days</strong> inactivity (but easy resume)</li>
+<li>❌ <strong>Two platforms</strong> - Vercel + Supabase</li>
+<li>❌ <strong>Learning curve</strong> - Supabase-specific patterns (RLS, etc.)</li>
+</ul>
+<h3>Best For</h3>
+<ul>
+<li><strong>Multi-tenant SaaS</strong> (Row Level Security perfect for Care Commons)</li>
+<li><strong>Real-time features</strong> (visit updates, schedule changes)</li>
+<li><strong>File storage needs</strong> (clinical photos, documents)</li>
+<li><strong>Authentication</strong> (built-in, no custom code)</li>
+<li><strong>Rapid development</strong> (auto-generated APIs)</li>
+</ul>
+<hr>
+<h2>Recommended Setup for Care Commons</h2>
+<h3>🏆 <strong>Phase 1: Development (Current)</strong></h3>
+<p><strong>Option 3: Vercel + Neon</strong></p>
+<ul>
+<li>Free tier sufficient for development</li>
+<li>Database branching for PR previews</li>
+<li>Full Postgres with PostGIS (EVV geofencing)</li>
+<li>pg_vector for ML-based shift matching</li>
+<li>Easy migration to production</li>
+</ul>
+<pre><code class="language-bash"># Setup commands
+neon auth
+neon projects create --name care-commons-dev
+neon connection-string care-commons-dev | vercel env add POSTGRES_URL
+vercel link
+vercel deploy
+</code></pre>
+<h3>🚀 <strong>Phase 2: Staging + Small Production</strong></h3>
+<p><strong>Option 5: Vercel + Supabase</strong></p>
+<ul>
+<li>Real-time updates (visit status, scheduling)</li>
+<li>Row Level Security (multi-tenant isolation)</li>
+<li>Built-in Auth (caregivers, admins, family)</li>
+<li>Storage for clinical photos</li>
+<li>Auto-generated APIs reduce backend code</li>
+</ul>
+<pre><code class="language-bash"># Setup commands
+supabase login
+# Create project on supabase.com
+supabase link --project-ref &lt;ref&gt;
+vercel env add SUPABASE_URL
+vercel env add SUPABASE_ANON_KEY
+vercel deploy
+</code></pre>
+<h3>🌍 <strong>Phase 3: Global Scale Production</strong></h3>
+<p><strong>Option 4: Cloudflare Workers + Neon via Hyperdrive</strong></p>
+<ul>
+<li>300+ edge locations (low latency globally)</li>
+<li>3M requests/month free (upgradeable to 10M+)</li>
+<li>Full Postgres with extensions</li>
+<li>R2 storage (no egress fees)</li>
+<li>True horizontal scaling</li>
+</ul>
+<pre><code class="language-bash"># Migration required - rewrite Express → Workers
+wrangler init
+# Create Hyperdrive connection to Neon
+wrangler hyperdrive create --connection-string=&quot;&lt;neon-url&gt;&quot;
+wrangler deploy
+</code></pre>
+<hr>
+<h2>Cost Comparison (Monthly)</h2>
+<h3>Free Tier Comparison</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Vercel + Vercel Postgres</th>
+<th>Vercel + Neon</th>
+<th>Vercel + Supabase</th>
+<th>Cloudflare + D1</th>
+<th>Cloudflare + Neon</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Compute</strong></td>
+<td>100 GB-hrs</td>
+<td>100 GB-hrs</td>
+<td>100 GB-hrs</td>
+<td>3M requests</td>
+<td>3M requests</td>
+</tr>
+<tr>
+<td><strong>Database</strong></td>
+<td>512 MB</td>
+<td>512 MB/branch</td>
+<td>500 MB</td>
+<td>500 MB</td>
+<td>512 MB/branch</td>
+</tr>
+<tr>
+<td><strong>Bandwidth</strong></td>
+<td>100 GB</td>
+<td>100 GB</td>
+<td>100 GB + 2 GB (DB)</td>
+<td>Unlimited</td>
+<td>Unlimited</td>
+</tr>
+<tr>
+<td><strong>Storage</strong></td>
+<td>100 MB</td>
+<td>100 MB</td>
+<td>1 GB</td>
+<td>10 GB (R2)</td>
+<td>10 GB (R2)</td>
+</tr>
+<tr>
+<td><strong>Features</strong></td>
+<td>Basic</td>
+<td>Branching</td>
+<td>Auth+Realtime+APIs</td>
+<td>Edge+SQLite</td>
+<td>Edge+Postgres</td>
+</tr>
+<tr>
+<td><strong>Cold Start</strong></td>
+<td>~2-3s</td>
+<td>~1s</td>
+<td>~1s</td>
+<td>None (instant)</td>
+<td>~1s</td>
+</tr>
+<tr>
+<td><strong>Global</strong></td>
+<td>Single region</td>
+<td>Single region</td>
+<td>Single region</td>
+<td>300+ cities</td>
+<td>300+ cities</td>
+</tr>
+<tr>
+<td><strong>Team</strong></td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h3>Paid Tier Costs (When Scaling)</h3>
+<p><strong>Vercel Pro</strong>: $20/month (team features, more bandwidth)<br><strong>Neon Pro</strong>: $19/month (always-on, more compute)<br><strong>Supabase Pro</strong>: $25/month (no pause, more storage)<br><strong>Cloudflare Workers Paid</strong>: $5/month (10M requests)  </p>
+<hr>
+<h2>Decision Matrix</h2>
+<h3>Choose <strong>Vercel + Neon</strong> if:</h3>
+<ul>
+<li>✅ You want the best free Postgres tier</li>
+<li>✅ You need database branching for PRs</li>
+<li>✅ You need PostGIS or pg_vector</li>
+<li>✅ You want fastest path to production</li>
+<li>✅ Current Express/Node.js app (no rewrite)</li>
+</ul>
+<h3>Choose <strong>Vercel + Supabase</strong> if:</h3>
+<ul>
+<li>✅ You need real-time subscriptions</li>
+<li>✅ You want auto-generated APIs</li>
+<li>✅ You need built-in auth</li>
+<li>✅ You need file storage with CDN</li>
+<li>✅ Multi-tenant with Row Level Security</li>
+<li>✅ You want fastest development speed</li>
+</ul>
+<h3>Choose <strong>Cloudflare Workers + D1</strong> if:</h3>
+<ul>
+<li>✅ You need global edge distribution</li>
+<li>✅ You don&#39;t need Postgres-specific features</li>
+<li>✅ You want zero cold starts</li>
+<li>✅ You have high read traffic</li>
+<li>✅ You&#39;re willing to rewrite for Workers</li>
+</ul>
+<h3>Choose <strong>Cloudflare Workers + Neon</strong> if:</h3>
+<ul>
+<li>✅ You need global edge + full Postgres</li>
+<li>✅ You have high traffic (3M+ requests/month)</li>
+<li>✅ You need advanced Postgres features</li>
+<li>✅ You want lowest latency globally</li>
+<li>✅ You&#39;re willing to invest in migration</li>
+</ul>
+<hr>
+<h2>Current Care Commons Setup</h2>
+<h3>✅ Already Configured</h3>
+<p><strong>Platform</strong>: Vercel (deployed to production)<br><strong>Database</strong>: Neon Postgres<br><strong>Branch</strong>: <code>main</code> → production, <code>preview</code> → staging  </p>
+<p><strong>Environment Variables</strong> (already set):</p>
+<pre><code class="language-bash">POSTGRES_URL=&lt;neon-connection-string&gt;
+DATABASE_URL=&lt;neon-connection-string&gt;
+NODE_ENV=production
+</code></pre>
+<p><strong>Deployment</strong>:</p>
+<ul>
+<li><code>main</code> branch → <strong>care-commons.vercel.app</strong> (production)</li>
+<li><code>preview</code> branch → <strong>preview-*.vercel.app</strong> (staging)</li>
+<li>PRs → automatic preview URLs</li>
+</ul>
+<h3>Next Steps</h3>
+<ol>
+<li><p><strong>Verify Neon project</strong>:</p>
+<pre><code class="language-bash">neon projects list
+</code></pre>
+</li>
+<li><p><strong>Create database branches</strong> for preview environments:</p>
+<pre><code class="language-bash">neon branches create --project care-commons --name preview
+</code></pre>
+</li>
+<li><p><strong>Consider migrating to Supabase</strong> for Phase 2:</p>
+<ul>
+<li>Real-time visit updates</li>
+<li>Built-in auth for caregivers/admins</li>
+<li>Storage for clinical photos</li>
+<li>Auto-generated REST APIs</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>CLI Quick Reference</h2>
+<h3>Vercel CLI</h3>
+<pre><code class="language-bash">vercel login              # Login
+vercel link               # Link project
+vercel env ls             # List environment variables
+vercel env add KEY        # Add environment variable
+vercel deploy             # Deploy to preview
+vercel deploy --prod      # Deploy to production
+vercel logs               # View logs
+vercel postgres create    # Create Vercel Postgres DB
+</code></pre>
+<h3>Neon CLI</h3>
+<pre><code class="language-bash">neon auth                         # Login
+neon projects list                # List projects
+neon projects create              # Create project
+neon branches list                # List branches
+neon branches create              # Create branch
+neon connection-string &lt;project&gt;  # Get connection string
+neon sql &lt;project&gt; -f schema.sql  # Run SQL file
+</code></pre>
+<h3>Supabase CLI</h3>
+<pre><code class="language-bash">supabase login              # Login
+supabase init               # Initialize local project
+supabase start              # Start local Supabase
+supabase link               # Link to remote project
+supabase db push            # Push migrations
+supabase db pull            # Pull schema
+supabase functions deploy   # Deploy Edge Functions
+supabase projects list      # List projects
+</code></pre>
+<h3>Wrangler CLI (Cloudflare)</h3>
+<pre><code class="language-bash">wrangler login               # Login
+wrangler init                # Initialize project
+wrangler dev                 # Local development
+wrangler deploy              # Deploy to production
+wrangler d1 create &lt;name&gt;    # Create D1 database
+wrangler r2 bucket create    # Create R2 bucket
+wrangler hyperdrive create   # Create Hyperdrive
+wrangler tail                # Live logs
+</code></pre>
+<hr>
+<h2>Summary</h2>
+<p>For <strong>Care Commons</strong> specifically:</p>
+<ol>
+<li><p><strong>Now (Development)</strong>: Stay on <strong>Vercel + Neon</strong> ✅</p>
+<ul>
+<li>Already configured and working</li>
+<li>Best free Postgres tier</li>
+<li>Database branching available</li>
+</ul>
+</li>
+<li><p><strong>Next (Staging/Small Production)</strong>: Migrate to <strong>Vercel + Supabase</strong></p>
+<ul>
+<li>Real-time updates for scheduling/visits</li>
+<li>Row Level Security for multi-tenant</li>
+<li>Built-in auth</li>
+<li>Storage for clinical documentation photos</li>
+<li>Auto-generated APIs reduce backend code</li>
+</ul>
+</li>
+<li><p><strong>Future (Scale)</strong>: Consider <strong>Cloudflare Workers + Neon via Hyperdrive</strong></p>
+<ul>
+<li>When traffic exceeds 3M requests/month</li>
+<li>Global edge distribution</li>
+<li>Lower latency worldwide</li>
+<li>Requires code migration from Express to Workers</li>
+</ul>
+</li>
+</ol>
+<p><strong>Recommendation</strong>: Start exploring Supabase integration for Phase 2 to get real-time features and built-in auth, while staying on Vercel for compute.</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

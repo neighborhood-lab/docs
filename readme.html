@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Commons - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>🚀 Getting Started</span> / 
+      <span>Care Commons</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Care Commons</h1>
+<p><a href="https://github.com/neighborhood-lab/care-commons/actions/workflows/ci.yml"><img src="https://github.com/neighborhood-lab/care-commons/actions/workflows/ci.yml/badge.svg?branch=develop" alt="CI"></a>
+<a href="https://codecov.io/gh/neighborhood-lab/care-commons/tree/develop"><img src="https://codecov.io/gh/neighborhood-lab/care-commons/branch/develop/graph/badge.svg" alt="codecov"></a></p>
+<blockquote>
+<p>Shared care software, community owned.</p>
+</blockquote>
+<p><strong>Care Commons</strong> is a modular, self-hostable software platform designed to support the administration and daily operations of home-based care services. Built by the people at <strong>Neighborhood Lab</strong>.</p>
+<p><strong><a href="https://neighborhood-lab.github.io/care-commons/">🎮 Interactive Showcase</a></strong> - Experience the platform through realistic scenarios<br><a href="https://care-commons.vercel.app/">Care Commons Web App</a> (full application demo)</p>
+<p><a href="https://discord.gg/EkeXQZFq">Discord</a>
+<a href="https://neighborhoodlab.substack.com/">Substack</a> (updates, news and commentary)<br><a href="https://www.patreon.com/cw/neighborhood_lab">Patreon</a> (give your financial support for continued development)</p>
+<p><a href="https://neighborhood-lab.github.io/product/">Care Commons</a> (product marketing website)<br><a href="https://neighborhood-lab.github.io/">Neighborhood Lab</a> (organization website)</p>
+<h2>Vision</h2>
+<p>A human-scale alternative to enterprise care management systems. Care Commons emphasizes:</p>
+<ul>
+<li>🏡 <strong>Human-scale workflows</strong> - Not enterprise excess</li>
+<li>🔒 <strong>Local autonomy</strong> - Runs offline and on-premises if needed</li>
+<li>🔌 <strong>Interoperability by design</strong> - APIs, import/export, open schema</li>
+<li>🛡️ <strong>Privacy and consent first</strong> - Least-privilege access across roles</li>
+<li>📦 <strong>Incremental adoption</strong> - Start with one vertical, add others later</li>
+</ul>
+<h2>Architecture</h2>
+<p>Care Commons is structured as a set of independently deployable <strong>verticals</strong> that share a common core:</p>
+<ul>
+<li>Unified domain model shared across verticals</li>
+<li>Event-driven data flows for visit lifecycle</li>
+<li>Fine-grained permissions and perspective-based UI</li>
+<li>Durable offline data capture with conflict resolution</li>
+<li>Extensible APIs that allow community-developed modules</li>
+<li>Encryption for sensitive health and payroll-related data</li>
+<li>Automated validation, audit trails, and revision history</li>
+</ul>
+<h2>Technology Stack</h2>
+<ul>
+<li><strong>Backend</strong>: TypeScript/Node.js with Express</li>
+<li><strong>Database</strong>: PostgreSQL with JSONB for flexible data models</li>
+<li><strong>Monorepo</strong>: Turborepo for efficient builds</li>
+<li><strong>Validation</strong>: Zod for runtime type safety</li>
+<li><strong>Testing</strong>: Vitest</li>
+</ul>
+<h2>Project Structure</h2>
+<pre><code>care-commons/
+├── packages/
+│   └── core/              # Shared core functionality
+│       ├── src/
+│       │   ├── types/     # Base types and interfaces
+│       │   ├── db/        # Database connection and repository
+│       │   ├── permissions/  # Permission service
+│       │   └── audit/     # Audit logging
+│       └── migrations/    # Database migrations
+│
+└── verticals/             # Feature verticals
+    ├── client-demographics/   ✅ Implemented
+    ├── caregiver-staff/       ✅ Implemented
+    ├── scheduling-visits/     ✅ Implemented
+    └── ...
+</code></pre>
+<h2>Verticals</h2>
+<h3>✅ Production Ready (Backend + Frontend Complete)</h3>
+<ul>
+<li><strong><a href="./verticals/client-demographics/">Client &amp; Demographics Management</a></strong> - Foundational record system for individuals receiving care</li>
+<li><strong><a href="./verticals/caregiver-staff/">Caregiver &amp; Staff Management</a></strong> - Secure directory of personnel providing care services</li>
+<li><strong><a href="./verticals/scheduling-visits/">Scheduling &amp; Visit Management</a></strong> - Service patterns, automated scheduling, and real-time visit tracking</li>
+<li><strong><a href="./verticals/time-tracking-evv/">Time Tracking &amp; EVV</a></strong> - Electronic Visit Verification with GPS, geofencing, and state compliance (TX/FL)</li>
+<li><strong><a href="./verticals/shift-matching/">Shift Matching</a></strong> - ML-based automated caregiver-to-visit matching and schedule optimization</li>
+<li><strong><a href="./verticals/care-plans-tasks/">Care Plans &amp; Tasks</a></strong> - Structured care plans with goals, interventions, and task management (17 components + 7 pages)</li>
+<li><strong><a href="./verticals/family-engagement/">Family Engagement</a></strong> - Family portal with transparency, notifications, and messaging (implemented November 2024)</li>
+<li><strong><a href="./verticals/billing-invoicing/">Billing &amp; Invoicing</a></strong> - Claims generation, invoice management, and payment tracking</li>
+</ul>
+<h3>🚧 In Progress (Backend Complete, Frontend Partial)</h3>
+<ul>
+<li><strong><a href="./verticals/payroll-processing/">Payroll Processing</a></strong> - Timesheet processing, tax calculations, direct deposit (70% complete - backend done)</li>
+<li><strong><a href="./verticals/analytics-reporting/">Analytics &amp; Reporting</a></strong> - Dashboards, KPIs, and compliance reports (70% complete - backend done)</li>
+</ul>
+<h3>📋 Planned</h3>
+<ul>
+<li><strong><a href="./verticals/quality-assurance-audits/">Quality Assurance &amp; Audits</a></strong> - Quality metrics and audit workflows (40% - schema ready)</li>
+<li>Compliance &amp; Documentation</li>
+<li>Care Notes &amp; Progress Reporting</li>
+<li>Incident &amp; Risk Reporting</li>
+<li>Referral &amp; Intake Management</li>
+<li>Medication Management</li>
+<li>Training &amp; Certification Tracking</li>
+<li>Communication &amp; Messaging</li>
+<li>Document Management &amp; eSignatures</li>
+<li>Inventory &amp; Supplies Tracking</li>
+<li>HR &amp; Onboarding</li>
+<li>Mileage &amp; Expense Tracking</li>
+</ul>
+<h2>Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js 20+</li>
+<li>PostgreSQL 14+</li>
+<li>npm 10+</li>
+</ul>
+<h3>Installation</h3>
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/neighborhood-lab/care-commons.git
+cd care-commons
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Run database migrations (DDL only - creates schema)
+npm run db:migrate
+
+# Seed minimal operational data (org, branch, admin user)
+npm run db:seed
+
+# Optional: Seed comprehensive demo data (900+ records - recommended for showcase)
+npm run db:seed:showcase-comprehensive
+
+# Or: Seed small demo dataset for quick development
+npm run db:seed:demo
+
+# Build all packages
+npm run build
+
+# Start development
+npm run dev
+</code></pre>
+<h3>Environment Variables</h3>
+<p>Create a <code>.env</code> file in the root directory:</p>
+<pre><code class="language-env">DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=care_commons
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_SSL=false
+
+# Development Mock Authentication
+MOCK_USER_PASSWORD=password123
+</code></pre>
+<h3>Development Login Credentials</h3>
+<p>The development environment includes three mock users for testing:</p>
+<table>
+<thead>
+<tr>
+<th>Email</th>
+<th>Password</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>admin@example.com</code></td>
+<td><code>password123</code></td>
+<td>ADMIN</td>
+</tr>
+<tr>
+<td><code>coordinator@example.com</code></td>
+<td><code>password123</code></td>
+<td>COORDINATOR</td>
+</tr>
+<tr>
+<td><code>caregiver@example.com</code></td>
+<td><code>password123</code></td>
+<td>CAREGIVER</td>
+</tr>
+</tbody></table>
+<p><strong>Note:</strong> These credentials are for development only. In production, proper authentication with hashed passwords and JWT tokens should be implemented.</p>
+<h3>Demo Data &amp; Showcase</h3>
+<p>Care Commons includes comprehensive seed scripts for generating realistic demo data:</p>
+<h4>Quick Start with Demo Data</h4>
+<pre><code class="language-bash"># 1. Set up database schema and minimal data
+npm run db:migrate
+npm run db:seed
+
+# 2. Generate comprehensive showcase data (900+ records)
+npm run db:seed:showcase-comprehensive
+</code></pre>
+<h4>Available Seed Scripts</h4>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Records</th>
+<th>Purpose</th>
+<th>Time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>npm run db:seed</code></td>
+<td>~10</td>
+<td>Org, branch, admin user (required first)</td>
+<td>5s</td>
+</tr>
+<tr>
+<td><code>npm run db:seed:demo</code></td>
+<td>~20</td>
+<td>Small demo dataset for development</td>
+<td>30s</td>
+</tr>
+<tr>
+<td><code>npm run db:seed:showcase-comprehensive</code></td>
+<td><strong>900+</strong></td>
+<td><strong>Full showcase with realistic data</strong></td>
+<td>2-5min</td>
+</tr>
+</tbody></table>
+<h4>What&#39;s Generated (Comprehensive Seed)</h4>
+<p>The <code>db:seed:showcase-comprehensive</code> script creates:</p>
+<ul>
+<li><p><strong>60 clients</strong> - Distributed across TX, FL, OH states</p>
+<ul>
+<li>Realistic demographics (ages 65-95)</li>
+<li>State-specific phone numbers and addresses</li>
+<li>Medicaid/Medicare coverage</li>
+<li>Emergency contacts</li>
+<li>Various diagnoses and mobility levels</li>
+</ul>
+</li>
+<li><p><strong>35 caregivers</strong> - Mix of CNAs, HHAs, and companions</p>
+<ul>
+<li>Multiple certifications (CNA, CPR, Medication Aide, etc.)</li>
+<li>Specializations (Alzheimer&#39;s, Diabetic Care, Wound Care, etc.)</li>
+<li>Multiple languages</li>
+<li>Varying hourly rates and employment types</li>
+</ul>
+</li>
+<li><p><strong>600 visits</strong> - Past, present, and future (-30 to +30 days)</p>
+<ul>
+<li>Completed visits with full EVV records</li>
+<li>GPS clock-in/out coordinates</li>
+<li>Visit statuses: completed, scheduled, in-progress, no-show, cancelled</li>
+<li>Visit notes for completed visits</li>
+</ul>
+</li>
+<li><p><strong>50 care plans</strong> - ~83% of clients have active care plans</p>
+<ul>
+<li>Goals with progress tracking</li>
+<li>Compliance status</li>
+<li>Plan types: Personal Care, Skilled Nursing, Companion, Therapy</li>
+</ul>
+</li>
+<li><p><strong>40 family members</strong> - ~67% of clients have family portal access</p>
+<ul>
+<li>Portal access levels</li>
+<li>Contact preferences</li>
+<li>Notification settings</li>
+</ul>
+</li>
+<li><p><strong>30-50 invoices</strong> - Generated from completed visits</p>
+<ul>
+<li>Grouped by month per client</li>
+<li>Line items with hourly breakdowns</li>
+<li>Medicaid vs Private Pay</li>
+<li>Various statuses: Draft, Sent, Paid, Overdue</li>
+</ul>
+</li>
+</ul>
+<h4>Cleaning Up Demo Data</h4>
+<p>All demo data is tagged with <code>is_demo_data = true</code> for easy cleanup:</p>
+<pre><code class="language-sql">-- Clear all demo data
+DELETE FROM visit_evv_records WHERE is_demo_data = true;
+DELETE FROM visits WHERE is_demo_data = true;
+DELETE FROM invoices WHERE is_demo_data = true;
+DELETE FROM care_plans WHERE is_demo_data = true;
+DELETE FROM family_members WHERE is_demo_data = true;
+DELETE FROM caregivers WHERE is_demo_data = true;
+DELETE FROM clients WHERE is_demo_data = true;
+</code></pre>
+<p>Or reset and reseed:</p>
+<pre><code class="language-bash">npm run db:nuke          # ⚠️ Drops all tables
+npm run db:migrate       # Recreates schema
+npm run db:seed          # Creates org/branch/admin
+npm run db:seed:showcase-comprehensive  # Generates demo data
+</code></pre>
+<h4>Customizing Demo Data</h4>
+<p>Edit <code>packages/core/scripts/seed-showcase-comprehensive.ts</code> to adjust:</p>
+<pre><code class="language-typescript">const SEED_CONFIG = {
+  clients: 60,        // Adjust number of clients
+  caregivers: 35,     // Adjust number of caregivers
+  visits: 600,        // Adjust number of visits
+  carePlans: 50,      // Adjust number of care plans
+  familyMembers: 40,  // Adjust number of family members
+};
+</code></pre>
+<h4>Troubleshooting</h4>
+<p><strong>Error: &quot;No organization found&quot;</strong></p>
+<ul>
+<li>Run <code>npm run db:seed</code> first to create the required org, branch, and admin user</li>
+</ul>
+<p><strong>Error: Database connection failed</strong></p>
+<ul>
+<li>Check your <code>.env</code> file has correct database credentials</li>
+<li>Ensure PostgreSQL is running: <code>pg_isready</code></li>
+<li>Test connection: <code>psql -h localhost -U postgres -d care_commons</code></li>
+</ul>
+<p><strong>Seed script is slow</strong></p>
+<ul>
+<li>The script generates 900+ records with realistic data</li>
+<li>Expected time: 2-5 minutes depending on your database speed</li>
+<li>Uses transactions for data consistency</li>
+</ul>
+<p><strong>Need different states?</strong></p>
+<ul>
+<li>Edit the <code>generateClient()</code> function to add/modify states</li>
+<li>Default states: TX (Texas), FL (Florida), OH (Ohio)</li>
+</ul>
+<h2>Development</h2>
+<pre><code class="language-bash"># Run all packages in development mode
+npm run dev
+
+# Build all packages
+npm run build
+
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Type checking
+npm run typecheck
+
+# Lint code
+npm run lint
+</code></pre>
+<h2>API Documentation</h2>
+<p>Interactive API documentation is available via Swagger UI:</p>
+<ul>
+<li><strong>Local Development</strong>: <a href="http://localhost:3000/api-docs">http://localhost:3000/api-docs</a></li>
+<li><strong>Production</strong>: <a href="https://care-commons.vercel.app/api-docs">https://care-commons.vercel.app/api-docs</a></li>
+</ul>
+<h3>OpenAPI Specification</h3>
+<p>The OpenAPI 3.0 specification is available at:</p>
+<ul>
+<li><strong>JSON Format</strong>: <a href="http://localhost:3000/openapi.json">http://localhost:3000/openapi.json</a></li>
+</ul>
+<h3>Postman Collection</h3>
+<p>Generate a Postman collection for API testing:</p>
+<pre><code class="language-bash">npm run docs:generate
+</code></pre>
+<p>This creates:</p>
+<ul>
+<li><code>docs/openapi.json</code> - OpenAPI 3.0 specification</li>
+<li><code>docs/postman-collection.json</code> - Postman collection (if converter available)</li>
+</ul>
+<p>Import <code>docs/postman-collection.json</code> into Postman for easy API testing and development.</p>
+<h3>Documented API Endpoints</h3>
+<p>The following API endpoints are documented with OpenAPI annotations:</p>
+<ul>
+<li><strong>Authentication</strong> - Login, logout, token refresh, user profile</li>
+<li><strong>Organizations</strong> - Registration, management</li>
+<li><strong>Clients</strong> - CRUD operations, search, demographics, risk flags</li>
+<li><strong>Care Plans</strong> - Create, update, search, activate</li>
+<li><strong>Caregivers</strong> - Staff management</li>
+<li><strong>Visits</strong> - Scheduling and tracking (see scheduling vertical)</li>
+</ul>
+<p>All endpoints require authentication via JWT Bearer token (except login/register endpoints).</p>
+<h3>Code Coverage</h3>
+<p>This project uses Codecov for tracking code coverage. Coverage reports are automatically generated and uploaded during CI runs. The project maintains a minimum coverage threshold of 70% across all packages.</p>
+<p>To generate coverage reports locally:</p>
+<pre><code class="language-bash">npm run test:coverage
+</code></pre>
+<p>Coverage reports are available in the <code>coverage/</code> directory of each package.</p>
+<h2>GitHub Actions</h2>
+<p>This project uses GitHub Actions for automated CI/CD workflows:</p>
+<h3>Workflows</h3>
+<ul>
+<li><p><strong>CI</strong> (<code>ci.yml</code>) - Runs on pull requests and pushes to main/develop</p>
+<ul>
+<li>Linting and type checking</li>
+<li>Unit and integration tests with PostgreSQL</li>
+<li>Build verification</li>
+<li>Code coverage reporting</li>
+</ul>
+</li>
+<li><p><strong>Deploy</strong> (<code>deploy.yml</code>) - Automated deployments</p>
+<ul>
+<li>Production deployments on main branch pushes</li>
+<li>Staging deployments on develop branch pushes</li>
+<li>Database migrations during deployment</li>
+</ul>
+</li>
+<li><p><strong>Database Operations</strong> (<code>database.yml</code>) - Manual database management</p>
+<ul>
+<li>Run migrations, rollbacks, and seeding</li>
+<li>Support for staging and production environments</li>
+<li>Manual workflow dispatch with safety checks</li>
+</ul>
+</li>
+<li><p><strong>Security and Dependencies</strong> (<code>security.yml</code>) - Automated security</p>
+<ul>
+<li>Weekly security audits</li>
+<li>Dependency updates with PR creation</li>
+<li>CodeQL analysis</li>
+</ul>
+</li>
+<li><p><strong>Release</strong> (<code>release.yml</code>) - Version management</p>
+<ul>
+<li>Automated releases on git tags</li>
+<li>Changelog generation</li>
+<li>Version bumping and npm publishing</li>
+</ul>
+</li>
+</ul>
+<h3>Required Secrets</h3>
+<p>Configure these repository secrets for full functionality:</p>
+<pre><code class="language-bash"># Database connections
+DATABASE_URL=postgresql://user:pass@host:port/db
+STAGING_DATABASE_URL=postgresql://user:pass@host:port/staging_db
+
+# Application secrets
+JWT_SECRET=your-jwt-secret
+STAGING_JWT_SECRET=your-staging-jwt-secret
+
+# Optional services
+CODECOV_TOKEN=your-codecov-token
+</code></pre>
+<h3>Manual Workflows</h3>
+<p>Some workflows can be triggered manually:</p>
+<ol>
+<li><strong>Database Operations</strong> - Go to Actions → Database Operations → Run workflow</li>
+<li><strong>Security Scans</strong> - Go to Actions → Security and Dependencies → Run workflow  </li>
+<li><strong>Release</strong> - Go to Actions → Release → Run workflow (or push a git tag)</li>
+</ol>
+<h2>Database Management</h2>
+<pre><code class="language-bash"># Run migrations
+npm run db:migrate
+
+# Seed database with sample data
+npm run db:seed
+
+# Seed TX/FL demo data (idempotent)
+npm run db:seed:demo
+
+# Check migration status
+npm run db:migrate:status
+
+# Rollback last migration
+npm run db:migrate:rollback
+</code></pre>
+<h2>Cloud Deployment</h2>
+<p>Care Commons supports deployment to <strong>Vercel</strong> with <strong>Neon PostgreSQL</strong> for production-ready, serverless hosting.</p>
+<h3>Prerequisites for Cloud Deployment</h3>
+<ol>
+<li><strong>Vercel Account</strong> - Sign up at <a href="https://vercel.com">vercel.com</a></li>
+<li><strong>Neon PostgreSQL</strong> - Create a database at <a href="https://neon.tech">neon.tech</a></li>
+<li><strong>Vercel CLI</strong> - Install globally: <code>npm install -g vercel</code></li>
+</ol>
+<h3>Neon PostgreSQL Setup</h3>
+<ol>
+<li>Create a new project at <a href="https://console.neon.tech">console.neon.tech</a></li>
+<li>Create two databases:<ul>
+<li><code>care_commons_staging</code> (for staging environment)</li>
+<li><code>care_commons_production</code> (for production environment)</li>
+</ul>
+</li>
+<li>Enable connection pooling for each database</li>
+<li>Copy the connection strings (with pooling enabled)</li>
+</ol>
+<h3>Vercel Project Setup</h3>
+<ol>
+<li><p>Install Vercel CLI:</p>
+<pre><code class="language-bash">npm install -g vercel
+</code></pre>
+</li>
+<li><p>Login to Vercel:</p>
+<pre><code class="language-bash">vercel login
+</code></pre>
+</li>
+<li><p>Link your project:</p>
+<pre><code class="language-bash">vercel link
+</code></pre>
+</li>
+<li><p>Add environment variables to Vercel:</p>
+<pre><code class="language-bash"># For production
+vercel env add DATABASE_URL production
+# Paste your Neon production connection string (with pooling)
+
+# For staging
+vercel env add DATABASE_URL preview
+# Paste your Neon staging connection string (with pooling)
+
+# Add other secrets
+vercel env add JWT_SECRET production
+vercel env add ENCRYPTION_KEY production
+</code></pre>
+</li>
+</ol>
+<h3>Deployment Commands</h3>
+<pre><code class="language-bash"># Deploy to preview (automatic on PRs)
+npm run deploy:preview
+
+# Deploy to staging
+npm run deploy:staging
+
+# Deploy to production
+npm run deploy:production
+</code></pre>
+<h3>GitHub Actions Deployment</h3>
+<p>The project includes automated deployment workflows:</p>
+<h4>Preview Deployments</h4>
+<ul>
+<li>Automatically deploy on every pull request</li>
+<li>Preview URL posted as PR comment</li>
+<li>Uses staging database</li>
+</ul>
+<h4>Staging Deployments</h4>
+<ul>
+<li>Deploy to staging on <code>develop</code> branch pushes</li>
+<li>Runs database migrations automatically</li>
+<li>Health check validation</li>
+</ul>
+<h4>Production Deployments</h4>
+<ul>
+<li>Deploy to production on <code>main</code> branch pushes</li>
+<li>Runs database migrations automatically</li>
+<li>Health check validation</li>
+<li>Optional demo data seeding</li>
+</ul>
+<h3>Required GitHub Secrets</h3>
+<p>Add these secrets in your repository settings (Settings → Secrets and variables → Actions):</p>
+<pre><code class="language-bash"># Vercel
+VERCEL_TOKEN=&lt;your-vercel-token&gt;
+VERCEL_ORG_ID=&lt;your-vercel-org-id&gt;
+VERCEL_PROJECT_ID=&lt;your-vercel-project-id&gt;
+
+# Database
+DATABASE_URL=&lt;neon-production-connection-string&gt;
+STAGING_DATABASE_URL=&lt;neon-staging-connection-string&gt;
+
+# Application
+JWT_SECRET=&lt;random-secret-string&gt;
+STAGING_JWT_SECRET=&lt;random-secret-string&gt;
+ENCRYPTION_KEY=&lt;32-byte-random-string&gt;
+</code></pre>
+<h3>Health Check Endpoint</h3>
+<p>After deployment, verify your application:</p>
+<pre><code class="language-bash"># Check production health
+curl https://your-app.vercel.app/health
+
+# Expected response
+{
+  &quot;status&quot;: &quot;healthy&quot;,
+  &quot;timestamp&quot;: &quot;2025-11-01T12:00:00.000Z&quot;,
+  &quot;environment&quot;: &quot;production&quot;,
+  &quot;uptime&quot;: 3600,
+  &quot;responseTime&quot;: 45,
+  &quot;database&quot;: {
+    &quot;status&quot;: &quot;connected&quot;,
+    &quot;responseTime&quot;: 45
+  },
+  &quot;memory&quot;: {
+    &quot;used&quot;: 128,
+    &quot;total&quot;: 256
+  }
+}
+</code></pre>
+<h3>Database Migrations on Vercel</h3>
+<p>Migrations run automatically during deployment via GitHub Actions. To run manually:</p>
+<pre><code class="language-bash"># Set DATABASE_URL environment variable
+export DATABASE_URL=&quot;your-neon-connection-string&quot;
+
+# Run migrations
+npm run db:migrate
+
+# Seed demo data (optional)
+npm run db:seed:demo
+</code></pre>
+<h3>Monitoring and Logging</h3>
+<ul>
+<li><strong>Vercel Dashboard</strong>: View deployment logs and metrics</li>
+<li><strong>Neon Console</strong>: Monitor database performance and queries</li>
+<li><strong>Health Endpoint</strong>: <code>/health</code> for uptime monitoring</li>
+<li><strong>Error Tracking</strong>: Configure Sentry DSN in environment variables (optional)</li>
+</ul>
+<h3>Rollback</h3>
+<p>To rollback a deployment:</p>
+<pre><code class="language-bash"># List recent deployments
+vercel ls
+
+# Promote a previous deployment to production
+vercel promote &lt;deployment-url&gt; --scope &lt;team-name&gt;
+</code></pre>
+<h3>Best Practices</h3>
+<ol>
+<li><strong>Database Pooling</strong>: Always use Neon&#39;s pooled connection string for serverless environments</li>
+<li><strong>Environment Variables</strong>: Never commit secrets to git - use Vercel environment variables</li>
+<li><strong>Migrations</strong>: Test migrations on staging before deploying to production</li>
+<li><strong>Health Checks</strong>: Monitor the <code>/health</code> endpoint for database connectivity</li>
+<li><strong>Preview Deployments</strong>: Review changes on preview URLs before merging to main</li>
+</ol>
+<h2>Documentation</h2>
+<h3>Core Documentation</h3>
+<ul>
+<li><a href="./care-commons-tech-plan.md">Technical Plan</a> - Overall product vision and vertical descriptions</li>
+<li><a href="./verticals/client-demographics/README.md">Client &amp; Demographics</a> - Client management vertical documentation</li>
+<li><a href="./verticals/caregiver-staff/README.md">Caregiver &amp; Staff Management</a> - Caregiver and staff management documentation</li>
+<li><a href="./verticals/scheduling-visits/README.md">Scheduling &amp; Visit Management</a> - Scheduling and visit tracking documentation</li>
+<li><a href="./verticals/care-plans-tasks/README.md">Care Plans &amp; Tasks Library</a> - Care plans, goals, interventions, and task management</li>
+<li><a href="./verticals/family-engagement/README.md">Family Engagement Platform</a> - Family portal, transparency, and communication features</li>
+<li><a href="./packages/core/README.md">Core Package</a> - Core functionality documentation</li>
+</ul>
+<h3>Generate Complete PDF Documentation</h3>
+<p>Combine all documentation into a single PDF:</p>
+<pre><code class="language-bash"># Generate combined documentation (markdown + PDF)
+./scripts/docs-to-pdf.sh
+
+# Or with custom output name
+./scripts/docs-to-pdf.sh my-documentation
+</code></pre>
+<p>This creates a comprehensive PDF (~500+ pages) organized by:</p>
+<ol>
+<li><strong>End-User Overview</strong> - READMEs, quickstarts, getting started guides</li>
+<li><strong>End-User Guides</strong> - Detailed user documentation and tutorials</li>
+<li><strong>System Architecture</strong> - Deployment, architecture, design documents</li>
+<li><strong>Implementation Details</strong> - Code, compliance, operations documentation</li>
+</ol>
+<p>See <a href="./scripts/DOCS_TO_PDF.md">scripts/DOCS_TO_PDF.md</a> for detailed instructions.</p>
+<h2>Contributing</h2>
+<p>We welcome contributions! Please see <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a> for guidelines.</p>
+<h3>Development Principles</h3>
+<ol>
+<li><strong>Human-first design</strong> - Tools should reduce burden, not add it</li>
+<li><strong>Privacy by default</strong> - Least-privilege access, explicit consent</li>
+<li><strong>Offline-capable</strong> - Core functionality works without connectivity</li>
+<li><strong>Auditable</strong> - All changes tracked for compliance and debugging</li>
+<li><strong>Modular</strong> - Verticals are independent but share common infrastructure</li>
+<li><strong>Open</strong> - APIs and data schemas are documented and accessible</li>
+</ol>
+<h2>License</h2>
+<p>See <a href="./LICENSE">LICENSE</a> for details.</p>
+<h2>Community</h2>
+<ul>
+<li><strong>GitHub</strong>: <a href="https://github.com/neighborhood-lab/care-commons">neighborhood-lab/care-commons</a></li>
+<li><strong>Issues</strong>: <a href="https://github.com/neighborhood-lab/care-commons/issues">Report bugs or request features</a></li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> is brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a> 🏡</p>
+<p>Shared care software, community owned.</p>
+<p><a href="https://neighborhood-lab.github.io/care-commons-home/">Product website</a><br><a href="https://neighborhood-lab.github.io/home/">Organization website</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

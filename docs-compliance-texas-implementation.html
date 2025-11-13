@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texas Compliance Implementation Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Texas Compliance Implementation Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Texas Compliance Implementation Guide</h1>
+<p><strong>State Code</strong>: TX<br><strong>Last Updated</strong>: 2025-11-05<br><strong>Implementation Status</strong>: In Progress</p>
+<h2>Overview</h2>
+<p>This document describes how Care Commons implements Texas regulatory requirements as documented in <a href="./REQUIREMENTS.md">REQUIREMENTS.md</a>.</p>
+<h2>Implementation Status</h2>
+<h3>Caregiver Credentials</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Employee Misconduct Registry validation</li>
+<li><input checked="" disabled="" type="checkbox"> Nurse Aide Registry verification</li>
+<li><input checked="" disabled="" type="checkbox"> Background screening tracking</li>
+<li><input disabled="" type="checkbox"> TB testing tracking (planned)</li>
+<li><input disabled="" type="checkbox"> Training requirements tracking (planned)</li>
+</ul>
+<h3>Client Authorization</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Service authorization tracking</li>
+<li><input checked="" disabled="" type="checkbox"> Units consumed monitoring</li>
+<li><input checked="" disabled="" type="checkbox"> Plan of care management (basic)</li>
+<li><input disabled="" type="checkbox"> Physician order tracking (planned)</li>
+<li><input disabled="" type="checkbox"> Authorization renewal alerts (planned)</li>
+</ul>
+<h3>Visit Documentation</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Required field validation (planned)</li>
+<li><input disabled="" type="checkbox"> Documentation timeliness checks (planned)</li>
+<li><input disabled="" type="checkbox"> Quality standards enforcement (planned)</li>
+<li><input disabled="" type="checkbox"> Supervisor review workflow (planned)</li>
+</ul>
+<h3>EVV Compliance</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Six data elements captured</li>
+<li><input checked="" disabled="" type="checkbox"> HHAeXchange aggregator integration</li>
+<li><input checked="" disabled="" type="checkbox"> Geofence configuration (100m + 50m tolerance)</li>
+<li><input checked="" disabled="" type="checkbox"> Grace period enforcement (10 minutes)</li>
+<li><input checked="" disabled="" type="checkbox"> VMUR workflow implemented</li>
+</ul>
+<h3>Data Retention</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 6-year retention policy configured</li>
+<li><input disabled="" type="checkbox"> Automated archival (planned)</li>
+<li><input disabled="" type="checkbox"> Audit trail preservation (implemented in core)</li>
+</ul>
+<h3>Privacy &amp; Security</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> HIPAA compliance (role-based permissions)</li>
+<li><input checked="" disabled="" type="checkbox"> Field-level permissions</li>
+<li><input checked="" disabled="" type="checkbox"> Audit logging</li>
+<li><input disabled="" type="checkbox"> Texas Medical Records Privacy Act compliance (planned)</li>
+</ul>
+<hr>
+<h2>Code Structure</h2>
+<h3>Texas Compliance Validator</h3>
+<p><strong>Location</strong>: <code>packages/core/src/compliance/texas/</code></p>
+<pre><code class="language-typescript">// packages/core/src/compliance/texas/credentials.ts
+export interface TexasCredentialRequirements {
+  employeeMisconductRegistry: {
+    frequency: &#39;ANNUAL&#39;;
+    expiration: 365; // days
+    blockingIssue: true;
+    apiEndpoint: &#39;https://apps.hhs.texas.gov/emr/api/search&#39;; // If available
+  };
+  
+  nurseAideRegistry: {
+    appliesTo: [&#39;CNA&#39;, &#39;MEDICATION_AIDE&#39;];
+    frequency: &#39;AT_HIRE_AND_ANNUAL&#39;;
+    verificationMethod: &#39;MANUAL_SEARCH&#39;; // No public API
+    registryUrl: &#39;https://vo.hhsc.state.tx.us/datamart/mainMenu.do&#39;;
+  };
+  
+  backgroundScreening: {
+    level: &#39;LEVEL_2&#39;; // For vulnerable adults
+    frequency: &#39;BIENNIAL&#39;; // Every 2 years
+    components: [
+      &#39;CRIMINAL_HISTORY_TX_DPS&#39;,
+      &#39;FBI_FINGERPRINTS&#39;,
+      &#39;SEX_OFFENDER_REGISTRY&#39;,
+      &#39;DFPS_REGISTRY&#39;,
+      &#39;HHSC_EXCLUSIONS&#39;,
+      &#39;OIG_EXCLUSIONS&#39;
+    ];
+  };
+  
+  tbTesting: {
+    frequency: &#39;ANNUAL&#39;;
+    acceptableTests: [&#39;SKIN_TEST&#39;, &#39;IGRA_BLOOD_TEST&#39;, &#39;CHEST_XRAY&#39;];
+    expiration: 365; // days
+  };
+  
+  training: {
+    orientationHours: 16;
+    annualInServiceHours: 12;
+    requiredTopics: [
+      &#39;INFECTION_CONTROL&#39;,
+      &#39;CLIENT_RIGHTS&#39;,
+      &#39;EMERGENCY_PROCEDURES&#39;,
+      &#39;HIPAA_CONFIDENTIALITY&#39;,
+      &#39;ABUSE_NEGLECT_REPORTING&#39;
+    ];
+  };
+}
+
+export class TexasComplianceValidator extends BaseComplianceValidator {
+  readonly state: StateCode = &#39;TX&#39;;
+  
+  protected readonly credentialConfig: StateCredentialConfig = {
+    backgroundScreening: {
+      required: true,
+      type: &#39;LEVEL_2&#39;,
+      frequency: &#39;BIENNIAL&#39;,
+      expirationDays: 730,
+      warningDays: 60,
+    },
+    licensure: {
+      required: false, // Not all TX caregivers require licensure
+      roles: [&#39;RN&#39;, &#39;LVN&#39;, &#39;CNA&#39;],
+      verificationFrequency: &#39;ANNUAL&#39;,
+    },
+    registryChecks: [
+      {
+        name: &#39;Employee Misconduct Registry&#39;,
+        type: &#39;EMPLOYEE_MISCONDUCT&#39;,
+        frequency: &#39;ANNUAL&#39;,
+        expirationDays: 365,
+      },
+      {
+        name: &#39;Nurse Aide Registry&#39;,
+        type: &#39;NURSE_AIDE&#39;,
+        frequency: &#39;ANNUAL&#39;,
+        expirationDays: 365,
+      },
+    ],
+  };
+  
+  protected readonly authorizationConfig: StateAuthorizationConfig = {
+    required: true,
+    warningThreshold: 0.9, // Alert at 90% utilization
+    allowOverage: false,
+  };
+  
+  /**
+   * Validate caregiver credentials for Texas
+   */
+  async canAssignToVisit(
+    caregiver: CaregiverCredentials,
+    visit: VisitDetails,
+    client: ClientDetails
+  ): Promise&lt;ValidationResult&gt; {
+    const issues: ComplianceIssue[] = [];
+    
+    // Base validation (background, licensure, registries)
+    const baseResult = await super.canAssignToVisit(caregiver, visit, client);
+    issues.push(...baseResult.issues);
+    
+    // Texas-specific EMR check
+    const emrIssues = this.validateEMR(caregiver);
+    issues.push(...emrIssues);
+    
+    // Texas-specific NAR check (for CNAs)
+    const narIssues = this.validateNAR(caregiver, visit);
+    issues.push(...narIssues);
+    
+    // TB testing
+    const tbIssues = this.validateTBTesting(caregiver);
+    issues.push(...tbIssues);
+    
+    // Training requirements
+    const trainingIssues = this.validateTraining(caregiver);
+    issues.push(...trainingIssues);
+    
+    return issues.length &gt; 0
+      ? createFailureResult(issues, &#39;TX&#39;, &#39;TexasComplianceValidator&#39;)
+      : createSuccessResult(&#39;TX&#39;, &#39;TexasComplianceValidator&#39;);
+  }
+  
+  /**
+   * Validate Employee Misconduct Registry check
+   */
+  private validateEMR(caregiver: CaregiverCredentials): ComplianceIssue[] {
+    const issues: ComplianceIssue[] = [];
+    const emrCheck = caregiver.registryChecks.find(
+      (check) =&gt; check.type === &#39;EMPLOYEE_MISCONDUCT&#39;
+    );
+    
+    // Missing EMR check
+    if (!emrCheck || !emrCheck.checkDate) {
+      issues.push({
+        type: &#39;TX_EMR_MISSING&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: &#39;No Employee Misconduct Registry check on file&#39;,
+        regulation: &#39;26 TAC §558.353&#39;,
+        remediation: &#39;Perform EMR search at https://apps.hhs.texas.gov/emr/&#39;,
+        canBeOverridden: false,
+        requiresComplianceReview: true,
+      });
+      return issues;
+    }
+    
+    // Listed on EMR (permanent disqualification)
+    if (emrCheck.status === &#39;LISTED&#39;) {
+      issues.push({
+        type: &#39;TX_EMR_LISTED&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: &#39;Caregiver listed on Employee Misconduct Registry - permanent disqualification&#39;,
+        regulation: &#39;Texas Human Resources Code §40.053&#39;,
+        remediation: &#39;Cannot employ - contact HHSC compliance&#39;,
+        canBeOverridden: false,
+        requiresComplianceReview: true,
+      });
+      return issues;
+    }
+    
+    // EMR check expired (&gt;365 days)
+    const daysSinceCheck = daysSince(emrCheck.checkDate);
+    if (daysSinceCheck &gt; 365) {
+      issues.push({
+        type: &#39;TX_EMR_EXPIRED&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: `EMR check expired ${daysSinceCheck - 365} days ago (annual verification required)`,
+        regulation: &#39;26 TAC §558.353&#39;,
+        remediation: &#39;Re-verify EMR status within 30 days&#39;,
+        canBeOverridden: false,
+        metadata: { daysSinceCheck, daysOverdue: daysSinceCheck - 365 },
+      });
+    }
+    // Warning: EMR check expiring soon (within 30 days)
+    else if (daysSinceCheck &gt; 335) {
+      issues.push({
+        type: &#39;TX_EMR_EXPIRING_SOON&#39;,
+        severity: &#39;WARNING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: `EMR check due for renewal in ${365 - daysSinceCheck} days`,
+        regulation: &#39;26 TAC §558.353&#39;,
+        remediation: &#39;Schedule EMR re-verification&#39;,
+        canBeOverridden: true,
+        metadata: { daysSinceCheck, daysUntilDue: 365 - daysSinceCheck },
+      });
+    }
+    
+    return issues;
+  }
+  
+  /**
+   * Validate Nurse Aide Registry (for CNAs only)
+   */
+  private validateNAR(
+    caregiver: CaregiverCredentials,
+    visit: VisitDetails
+  ): ComplianceIssue[] {
+    const issues: ComplianceIssue[] = [];
+    
+    // Check if this is a CNA or requires CNA certification
+    const isCNA = caregiver.licenses.some((license) =&gt; license.type === &#39;CNA&#39;);
+    const requiresCNA = visit.serviceType.includes(&#39;CNA&#39;); // Simplified check
+    
+    if (!isCNA &amp;&amp; !requiresCNA) {
+      return issues; // NAR check not required
+    }
+    
+    const narCheck = caregiver.registryChecks.find(
+      (check) =&gt; check.type === &#39;NURSE_AIDE&#39;
+    );
+    
+    // Missing NAR check for CNA
+    if (!narCheck) {
+      issues.push({
+        type: &#39;TX_NAR_MISSING&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: &#39;No Nurse Aide Registry verification for CNA&#39;,
+        regulation: &#39;26 TAC §558.3&#39;,
+        remediation: &#39;Verify NAR status at https://vo.hhsc.state.tx.us/&#39;,
+        canBeOverridden: false,
+      });
+      return issues;
+    }
+    
+    // NAR status not active
+    if (narCheck.status !== &#39;CLEAR&#39;) {
+      issues.push({
+        type: &#39;TX_NAR_INACTIVE&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: `Nurse Aide Registry status: ${narCheck.status}`,
+        regulation: &#39;26 TAC §558.3&#39;,
+        remediation: &#39;Cannot assign CNA tasks - registry status must be Active&#39;,
+        canBeOverridden: false,
+      });
+    }
+    
+    return issues;
+  }
+  
+  /**
+   * Validate TB testing
+   */
+  private validateTBTesting(caregiver: CaregiverCredentials): ComplianceIssue[] {
+    const issues: ComplianceIssue[] = [];
+    const tbData = caregiver.stateSpecificData?.texas?.tbTesting;
+    
+    if (!tbData || !tbData.testDate) {
+      issues.push({
+        type: &#39;TX_TB_TEST_MISSING&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: &#39;No TB test on file&#39;,
+        regulation: &#39;26 TAC §558.357&#39;,
+        remediation: &#39;Complete TB screening (skin test or IGRA blood test)&#39;,
+        canBeOverridden: false,
+      });
+      return issues;
+    }
+    
+    const daysSinceTest = daysSince(tbData.testDate);
+    if (daysSinceTest &gt; 365) {
+      issues.push({
+        type: &#39;TX_TB_TEST_EXPIRED&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: `TB test expired ${daysSinceTest - 365} days ago`,
+        regulation: &#39;26 TAC §558.357&#39;,
+        remediation: &#39;Complete annual TB screening&#39;,
+        canBeOverridden: false,
+        metadata: { daysSinceTest },
+      });
+    }
+    
+    return issues;
+  }
+  
+  /**
+   * Validate training requirements
+   */
+  private validateTraining(caregiver: CaregiverCredentials): ComplianceIssue[] {
+    const issues: ComplianceIssue[] = [];
+    const trainingData = caregiver.stateSpecificData?.texas?.training;
+    
+    // Orientation required
+    if (!trainingData || !trainingData.orientationCompletedDate) {
+      issues.push({
+        type: &#39;TX_ORIENTATION_MISSING&#39;,
+        severity: &#39;BLOCKING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: &#39;Orientation training not completed (16 hours required)&#39;,
+        regulation: &#39;26 TAC §558.359&#39;,
+        remediation: &#39;Complete orientation training before client contact&#39;,
+        canBeOverridden: false,
+      });
+      return issues;
+    }
+    
+    // Annual in-service required
+    const currentYear = new Date().getFullYear();
+    if (
+      !trainingData.annualInServiceYear ||
+      trainingData.annualInServiceYear &lt; currentYear ||
+      trainingData.annualInServiceHours &lt; 12
+    ) {
+      issues.push({
+        type: &#39;TX_INSERVICE_DUE&#39;,
+        severity: &#39;WARNING&#39;,
+        category: &#39;CAREGIVER_CREDENTIALS&#39;,
+        message: `Annual in-service training due (12 hours required for ${currentYear})`,
+        regulation: &#39;26 TAC §558.359&#39;,
+        remediation: &#39;Complete 12 hours of in-service training&#39;,
+        canBeOverridden: true,
+        metadata: { year: currentYear, hoursCompleted: trainingData.annualInServiceHours || 0 },
+      });
+    }
+    
+    return issues;
+  }
+  
+  /**
+   * Regulatory citations
+   */
+  protected getBackgroundRegulation(): string {
+    return &#39;Texas Human Resources Code §250.006&#39;;
+  }
+  
+  protected getLicensureRegulation(): string {
+    return &#39;26 TAC §558.3&#39;;
+  }
+  
+  protected getRegistryRegulation(type: string): string {
+    if (type === &#39;EMPLOYEE_MISCONDUCT&#39;) {
+      return &#39;26 TAC §558.353&#39;;
+    }
+    if (type === &#39;NURSE_AIDE&#39;) {
+      return &#39;26 TAC §558.3&#39;;
+    }
+    return &#39;26 TAC §558&#39;;
+  }
+  
+  protected getAuthorizationRegulation(): string {
+    return &#39;Texas Administrative Code Title 1, Part 15&#39;;
+  }
+  
+  protected getDocumentationRegulation(): string {
+    return &#39;26 TAC §558.363&#39;;
+  }
+  
+  protected getPlanOfCareRegulation(): string {
+    return &#39;26 TAC §558.363&#39;;
+  }
+}
+</code></pre>
+<hr>
+<h3>EVV Texas Provider</h3>
+<p><strong>Location</strong>: <code>verticals/time-tracking-evv/src/providers/texas-evv-provider.ts</code></p>
+<pre><code class="language-typescript">/**
+ * Texas EVV Provider
+ * 
+ * Implements Texas-specific EVV business logic and HHAeXchange integration.
+ */
+export class TexasEVVProvider {
+  private aggregator: HHAeXchangeAggregator;
+  private validator: TexasComplianceValidator;
+  
+  /**
+   * Submit EVV record to HHAeXchange
+   */
+  async submitToAggregator(evvRecord: EVVRecord): Promise&lt;SubmissionResult&gt; {
+    // Validate all required fields present
+    if (!this.validateTexasRequirements(evvRecord)) {
+      throw new ValidationError(&#39;Missing required Texas EVV fields&#39;);
+    }
+    
+    // Transform to HHAeXchange format
+    const payload = this.transformToHHAeXchangeFormat(evvRecord);
+    
+    // Submit to aggregator
+    const result = await this.aggregator.submitVisit(payload);
+    
+    // Log submission
+    await this.logSubmission(evvRecord.id, result);
+    
+    return result;
+  }
+  
+  /**
+   * Request Visit Maintenance Unlock (VMUR)
+   */
+  async requestVMUR(
+    evvRecord: EVVRecord,
+    reason: TexasVMURReasonCode,
+    reasonDetails: string,
+    requestedBy: string
+  ): Promise&lt;VMURResult&gt; {
+    // Create VMUR record
+    const vmur: TexasVMUR = {
+      id: generateUUID(),
+      evvRecordId: evvRecord.id,
+      visitId: evvRecord.visitId,
+      requestedBy,
+      requestedByName: await this.getUserName(requestedBy),
+      requestedAt: new Date(),
+      requestReason: reason,
+      requestReasonDetails: reasonDetails,
+      approvalStatus: &#39;PENDING&#39;,
+      originalData: this.captureSnapshot(evvRecord),
+      expiresAt: addDays(new Date(), 30),
+    };
+    
+    // Submit VMUR to HHAeXchange
+    const result = await this.aggregator.submitVMUR(vmur);
+    
+    // Store VMUR record
+    await this.vmurRepository.create(vmur);
+    
+    return result;
+  }
+  
+  /**
+   * Validate Texas-specific EVV requirements
+   */
+  private validateTexasRequirements(evvRecord: EVVRecord): boolean {
+    // All 6 federal elements required
+    const hasAllElements = 
+      evvRecord.serviceType &amp;&amp;
+      evvRecord.clientId &amp;&amp;
+      evvRecord.caregiverId &amp;&amp;
+      evvRecord.serviceDate &amp;&amp;
+      evvRecord.locationVerification &amp;&amp;
+      evvRecord.clockInTime &amp;&amp;
+      evvRecord.clockOutTime;
+    
+    if (!hasAllElements) return false;
+    
+    // Texas-specific: MCO code required for managed care
+    if (evvRecord.stateSpecificData?.mcoCode === undefined) {
+      return false;
+    }
+    
+    // Texas-specific: Authorization number required
+    if (!evvRecord.stateSpecificData?.authorizationNumber) {
+      return false;
+    }
+    
+    return true;
+  }
+  
+  /**
+   * Transform EVV record to HHAeXchange format
+   */
+  private transformToHHAeXchangeFormat(evvRecord: EVVRecord): HHAeXchangePayload {
+    return {
+      visitId: evvRecord.visitId,
+      serviceType: evvRecord.serviceType,
+      clientMedicaidId: evvRecord.clientMedicaidId,
+      caregiverEmployeeId: evvRecord.caregiverEmployeeId,
+      serviceDate: format(evvRecord.serviceDate, &#39;yyyy-MM-dd&#39;),
+      serviceLocation: {
+        latitude: evvRecord.locationVerification.clockInLocation.latitude,
+        longitude: evvRecord.locationVerification.clockInLocation.longitude,
+        address: evvRecord.serviceAddress,
+      },
+      clockInTime: evvRecord.clockInTime.toISOString(),
+      clockOutTime: evvRecord.clockOutTime?.toISOString(),
+      authorizationNumber: evvRecord.stateSpecificData?.authorizationNumber,
+      mcoCode: evvRecord.stateSpecificData?.mcoCode,
+      programType: evvRecord.stateSpecificData?.programType || &#39;STAR_PLUS&#39;,
+    };
+  }
+}
+</code></pre>
+<hr>
+<h3>Database Schema Extensions</h3>
+<p><strong>Location</strong>: <code>packages/core/migrations/</code></p>
+<pre><code class="language-typescript">// Migration: Add Texas-specific caregiver fields
+export async function up(knex: Knex): Promise&lt;void&gt; {
+  await knex.schema.alterTable(&#39;caregivers&#39;, (table) =&gt; {
+    // Employee Misconduct Registry
+    table.timestamp(&#39;tx_emr_check_date&#39;).nullable();
+    table.enum(&#39;tx_emr_status&#39;, [&#39;CLEAR&#39;, &#39;LISTED&#39;, &#39;PENDING&#39;]).nullable();
+    table.string(&#39;tx_emr_documentation&#39;).nullable();
+    
+    // Nurse Aide Registry
+    table.string(&#39;tx_nar_number&#39;).nullable();
+    table.timestamp(&#39;tx_nar_check_date&#39;).nullable();
+    table.enum(&#39;tx_nar_status&#39;, [&#39;ACTIVE&#39;, &#39;INACTIVE&#39;, &#39;SUSPENDED&#39;, &#39;REVOKED&#39;]).nullable();
+    table.timestamp(&#39;tx_nar_expiration&#39;).nullable();
+    
+    // TB Testing
+    table.timestamp(&#39;tx_tb_test_date&#39;).nullable();
+    table.enum(&#39;tx_tb_test_type&#39;, [&#39;SKIN_TEST&#39;, &#39;IGRA_BLOOD_TEST&#39;, &#39;CHEST_XRAY&#39;]).nullable();
+    table.enum(&#39;tx_tb_test_result&#39;, [&#39;NEGATIVE&#39;, &#39;POSITIVE&#39;]).nullable();
+    
+    // Training
+    table.timestamp(&#39;tx_orientation_completed&#39;).nullable();
+    table.integer(&#39;tx_orientation_hours&#39;).nullable();
+    table.integer(&#39;tx_annual_inservice_year&#39;).nullable();
+    table.integer(&#39;tx_annual_inservice_hours&#39;).nullable();
+  });
+}
+
+export async function down(knex: Knex): Promise&lt;void&gt; {
+  await knex.schema.alterTable(&#39;caregivers&#39;, (table) =&gt; {
+    table.dropColumns(
+      &#39;tx_emr_check_date&#39;,
+      &#39;tx_emr_status&#39;,
+      &#39;tx_emr_documentation&#39;,
+      &#39;tx_nar_number&#39;,
+      &#39;tx_nar_check_date&#39;,
+      &#39;tx_nar_status&#39;,
+      &#39;tx_nar_expiration&#39;,
+      &#39;tx_tb_test_date&#39;,
+      &#39;tx_tb_test_type&#39;,
+      &#39;tx_tb_test_result&#39;,
+      &#39;tx_orientation_completed&#39;,
+      &#39;tx_orientation_hours&#39;,
+      &#39;tx_annual_inservice_year&#39;,
+      &#39;tx_annual_inservice_hours&#39;
+    );
+  });
+}
+</code></pre>
+<hr>
+<h2>Testing Strategy</h2>
+<h3>Texas Compliance Test Suite</h3>
+<p><strong>Location</strong>: <code>packages/core/src/compliance/__tests__/texas/</code></p>
+<pre><code class="language-typescript">// texas-credentials.test.ts
+describe(&#39;Texas Caregiver Credentials&#39;, () =&gt; {
+  const validator = new TexasComplianceValidator();
+  
+  describe(&#39;Employee Misconduct Registry&#39;, () =&gt; {
+    it(&#39;blocks assignment if no EMR check on file&#39;, async () =&gt; {
+      const caregiver = createCaregiver({
+        registryChecks: [] // No EMR check
+      });
+      
+      const result = await validator.canAssignToVisit(caregiver, visit, client);
+      
+      expect(result.canProceed).toBe(false);
+      expect(result.issues).toContainEqual(
+        expect.objectContaining({
+          type: &#39;TX_EMR_MISSING&#39;,
+          severity: &#39;BLOCKING&#39;,
+          regulation: &#39;26 TAC §558.353&#39;,
+        })
+      );
+    });
+    
+    it(&#39;permanently blocks if caregiver listed on EMR&#39;, async () =&gt; {
+      const caregiver = createCaregiver({
+        registryChecks: [{
+          name: &#39;Employee Misconduct Registry&#39;,
+          type: &#39;EMPLOYEE_MISCONDUCT&#39;,
+          checkDate: new Date(),
+          status: &#39;LISTED&#39;, // RED FLAG
+          state: &#39;TX&#39;,
+        }]
+      });
+      
+      const result = await validator.canAssignToVisit(caregiver, visit, client);
+      
+      expect(result.canProceed).toBe(false);
+      const emrIssue = result.issues.find(i =&gt; i.type === &#39;TX_EMR_LISTED&#39;);
+      expect(emrIssue?.canBeOverridden).toBe(false);
+      expect(emrIssue?.requiresComplianceReview).toBe(true);
+    });
+    
+    it(&#39;blocks assignment if EMR check expired (&gt;365 days)&#39;, async () =&gt; {
+      const caregiver = createCaregiver({
+        registryChecks: [{
+          name: &#39;Employee Misconduct Registry&#39;,
+          type: &#39;EMPLOYEE_MISCONDUCT&#39;,
+          checkDate: subDays(new Date(), 400), // 400 days ago
+          status: &#39;CLEAR&#39;,
+          state: &#39;TX&#39;,
+        }]
+      });
+      
+      const result = await validator.canAssignToVisit(caregiver, visit, client);
+      
+      expect(result.canProceed).toBe(false);
+      expect(result.issues).toContainEqual(
+        expect.objectContaining({
+          type: &#39;TX_EMR_EXPIRED&#39;,
+          severity: &#39;BLOCKING&#39;,
+        })
+      );
+    });
+  });
+  
+  // Additional test scenarios from TEST_SCENARIOS.md
+});
+</code></pre>
+<hr>
+<h2>Configuration</h2>
+<h3>Environment Variables</h3>
+<pre><code class="language-bash"># Texas HHAeXchange Aggregator
+TX_HHAEEXCHANGE_API_KEY=your_api_key_here
+TX_HHAEEXCHANGE_ENDPOINT=https://api.hhaeexchange.com/evv/v2/visits
+TX_HHAEEXCHANGE_ENTITY_ID=your_entity_id_here
+TX_HHAEEXCHANGE_TIMEOUT=30000
+
+# Texas Geofence Settings
+TX_GEOFENCE_RADIUS=100
+TX_GEOFENCE_TOLERANCE=50
+TX_GRACE_PERIOD_MINUTES=10
+
+# Texas VMUR Settings
+TX_VMUR_WINDOW_DAYS=30
+TX_VMUR_ENABLED=true
+</code></pre>
+<hr>
+<h2>Deployment Checklist</h2>
+<h3>Development Environment</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Texas EVV configuration added</li>
+<li><input checked="" disabled="" type="checkbox"> Compliance validators implemented</li>
+<li><input checked="" disabled="" type="checkbox"> Unit tests written</li>
+<li><input disabled="" type="checkbox"> Integration tests with mock HHAeXchange</li>
+</ul>
+<h3>Staging Environment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Database migrations applied</li>
+<li><input disabled="" type="checkbox"> Texas-specific seed data</li>
+<li><input disabled="" type="checkbox"> API endpoints deployed</li>
+<li><input disabled="" type="checkbox"> HHAeXchange test credentials configured</li>
+<li><input disabled="" type="checkbox"> End-to-end testing</li>
+</ul>
+<h3>Production Environment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Production HHAeXchange credentials configured</li>
+<li><input disabled="" type="checkbox"> HHSC registry access set up</li>
+<li><input disabled="" type="checkbox"> Monitoring and alerts configured</li>
+<li><input disabled="" type="checkbox"> 6-year data retention configured</li>
+<li><input disabled="" type="checkbox"> Staff training completed</li>
+</ul>
+<hr>
+<h2>Known Limitations</h2>
+<ol>
+<li><strong>EMR/NAR Integration</strong>: No public API available - manual verification required</li>
+<li><strong>VMUR Auto-Approval</strong>: HHAeXchange approval is manual, not automated</li>
+<li><strong>Multi-State Caregivers</strong>: EMR check only covers Texas offenses</li>
+</ol>
+<hr>
+<h2>Resources</h2>
+<ul>
+<li><a href="./REQUIREMENTS.md">REQUIREMENTS.md</a> - Texas regulatory requirements</li>
+<li><a href="./TEST_SCENARIOS.md">TEST_SCENARIOS.md</a> - Texas test cases</li>
+<li><a href="./CHANGELOG.md">CHANGELOG.md</a> - Texas regulation change history</li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production Launch Runbook - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Production Launch Runbook</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Production Launch Runbook</h1>
+<p><strong>Version</strong>: 1.0
+<strong>Last Updated</strong>: 2025-11-08
+<strong>Owner</strong>: Engineering Team</p>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#pre-launch-checklist">Pre-Launch Checklist</a></li>
+<li><a href="#launch-day-timeline">Launch Day Timeline</a></li>
+<li><a href="#launch-procedures">Launch Procedures</a></li>
+<li><a href="#post-launch-monitoring">Post-Launch Monitoring</a></li>
+<li><a href="#rollback-triggers">Rollback Triggers</a></li>
+<li><a href="#communication-protocols">Communication Protocols</a></li>
+<li><a href="#contact-information">Contact Information</a></li>
+</ol>
+<hr>
+<h2>Pre-Launch Checklist</h2>
+<h3>T-7 Days: Final Preparations</h3>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Code Freeze</strong>: Merge final features to main branch</li>
+<li><input disabled="" type="checkbox"> <strong>Security Review</strong>: Review all security configurations</li>
+<li><input disabled="" type="checkbox"> <strong>Performance Testing</strong>: Complete load testing (see <code>LOAD_TESTING.md</code>)</li>
+<li><input disabled="" type="checkbox"> <strong>Documentation Review</strong>: Verify all docs are up-to-date</li>
+<li><input disabled="" type="checkbox"> <strong>Stakeholder Notification</strong>: Send pre-launch communication</li>
+<li><input disabled="" type="checkbox"> <strong>Support Training</strong>: Brief support team (see <code>SUPPORT_BRIEF.md</code>)</li>
+<li><input disabled="" type="checkbox"> <strong>Backup Verification</strong>: Test database restore procedure</li>
+<li><input disabled="" type="checkbox"> <strong>Monitoring Setup</strong>: Verify all monitoring tools configured</li>
+</ul>
+<h3>T-3 Days: Environment Preparation</h3>
+<ul>
+<li><p><input disabled="" type="checkbox"> <strong>Production Environment Variables</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Verify all environment variables in Vercel dashboard</li>
+<li><input disabled="" type="checkbox"> Confirm <code>DATABASE_URL</code> points to production Neon database</li>
+<li><input disabled="" type="checkbox"> Set <code>NODE_ENV=production</code></li>
+<li><input disabled="" type="checkbox"> Configure <code>SENTRY_DSN</code> for error tracking</li>
+<li><input disabled="" type="checkbox"> Set <code>JWT_SECRET</code> and <code>JWT_REFRESH_SECRET</code> (min 32 chars)</li>
+<li><input disabled="" type="checkbox"> Configure <code>ENCRYPTION_KEY</code> (32 bytes)</li>
+<li><input disabled="" type="checkbox"> Set <code>CORS_ORIGIN</code> to production domain(s)</li>
+<li><input disabled="" type="checkbox"> Configure Google OAuth credentials (<code>GOOGLE_CLIENT_ID</code>, <code>GOOGLE_CLIENT_SECRET</code>)</li>
+<li><input disabled="" type="checkbox"> Optional: Set <code>UPSTASH_REDIS_REST_URL</code> and <code>UPSTASH_REDIS_REST_TOKEN</code> for distributed rate limiting</li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>Database Setup</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Run production migrations: <code>npm run db:migrate</code></li>
+<li><input disabled="" type="checkbox"> Verify migration status: <code>npm run db:migrate:status</code></li>
+<li><input disabled="" type="checkbox"> Run production seed (minimal data): <code>npm run db:seed</code></li>
+<li><input disabled="" type="checkbox"> Verify database indexes</li>
+<li><input disabled="" type="checkbox"> Confirm backup schedule active</li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>Monitoring Configuration</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Configure Sentry alerts (critical errors, high error rate)</li>
+<li><input disabled="" type="checkbox"> Set up external uptime monitoring (UptimeRobot, Pingdom)</li>
+<li><input disabled="" type="checkbox"> Configure Prometheus scraping (if using external Prometheus)</li>
+<li><input disabled="" type="checkbox"> Set up log aggregation (Vercel logs retention)</li>
+<li><input disabled="" type="checkbox"> Configure PagerDuty/Slack alerts</li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>DNS and SSL</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Configure custom domain in Vercel</li>
+<li><input disabled="" type="checkbox"> Verify SSL certificate provisioned</li>
+<li><input disabled="" type="checkbox"> Test HTTPS enforcement</li>
+<li><input disabled="" type="checkbox"> Verify redirects working</li>
+</ul>
+</li>
+</ul>
+<h3>T-1 Day: Final Verification</h3>
+<ul>
+<li><p><input disabled="" type="checkbox"> <strong>Smoke Tests</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Run E2E smoke tests: <code>npm run test:smoke</code></li>
+<li><input disabled="" type="checkbox"> Manual testing of critical flows:<ul>
+<li><input disabled="" type="checkbox"> User login (Google OAuth)</li>
+<li><input disabled="" type="checkbox"> Client creation</li>
+<li><input disabled="" type="checkbox"> Caregiver registration</li>
+<li><input disabled="" type="checkbox"> Visit scheduling</li>
+<li><input disabled="" type="checkbox"> Visit clock-in/out (mobile)</li>
+<li><input disabled="" type="checkbox"> Family portal access</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>Performance Baseline</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Record current <code>/metrics</code> output</li>
+<li><input disabled="" type="checkbox"> Document baseline response times</li>
+<li><input disabled="" type="checkbox"> Verify health check responses: <code>/health</code></li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>Team Preparation</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Confirm on-call rotation schedule</li>
+<li><input disabled="" type="checkbox"> Verify contact list up-to-date</li>
+<li><input disabled="" type="checkbox"> Review rollback procedures with team</li>
+<li><input disabled="" type="checkbox"> Conduct final team briefing</li>
+</ul>
+</li>
+<li><p><input disabled="" type="checkbox"> <strong>Deployment Dry Run</strong>:</p>
+<ul>
+<li><input disabled="" type="checkbox"> Deploy to preview environment</li>
+<li><input disabled="" type="checkbox"> Run full test suite against preview</li>
+<li><input disabled="" type="checkbox"> Verify migrations run successfully</li>
+<li><input disabled="" type="checkbox"> Test rollback procedure in preview</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>Launch Day Timeline</h2>
+<h3>Launch Window: [Recommended: Tuesday-Thursday, 10:00 AM - 2:00 PM local time]</h3>
+<p><strong>Why mid-week, mid-day?</strong></p>
+<ul>
+<li>Full team availability for monitoring</li>
+<li>Avoids Friday deployments (limited weekend support)</li>
+<li>Avoids Monday (potential weekend issues)</li>
+<li>Business hours allow immediate user feedback</li>
+</ul>
+<h3>Hour-by-Hour Schedule</h3>
+<h4>H-1: Final Preparation (9:00 AM)</h4>
+<p><strong>Time</strong>: 9:00 AM - 10:00 AM</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Team Assembly</strong>: All hands on deck (engineers, support, product)</li>
+<li><input disabled="" type="checkbox"> <strong>Communication Check</strong>: Verify all communication channels working</li>
+<li><input disabled="" type="checkbox"> <strong>Monitoring Check</strong>: Verify all monitoring dashboards accessible</li>
+<li><input disabled="" type="checkbox"> <strong>Go/No-Go Decision</strong>: Final approval from stakeholders</li>
+</ul>
+<p><strong>No-Go Criteria</strong>:</p>
+<ul>
+<li>Critical bugs identified</li>
+<li>Monitoring systems down</li>
+<li>Key team members unavailable</li>
+<li>External dependencies unavailable</li>
+</ul>
+<h4>H-0: Launch (10:00 AM)</h4>
+<p><strong>Time</strong>: 10:00 AM - 10:30 AM</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>10:00 AM</strong>: Merge to main branch (triggers automatic deployment)</li>
+<li><input disabled="" type="checkbox"> <strong>10:05 AM</strong>: Monitor deployment logs in Vercel</li>
+<li><input disabled="" type="checkbox"> <strong>10:10 AM</strong>: Verify database migrations completed successfully</li>
+<li><input disabled="" type="checkbox"> <strong>10:15 AM</strong>: Check health endpoints:<ul>
+<li><code>GET https://[domain]/health</code> should return <code>{&quot;status&quot;: &quot;healthy&quot;}</code></li>
+<li><code>GET https://[domain]/health/geocoding</code> should verify provider</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>10:20 AM</strong>: Smoke test critical endpoints</li>
+<li><input disabled="" type="checkbox"> <strong>10:25 AM</strong>: Send &quot;Deployment Complete&quot; notification to team</li>
+</ul>
+<p><strong>Success Criteria</strong>:</p>
+<ul>
+<li>Deployment status: &quot;Ready&quot; in Vercel</li>
+<li>Health check: 200 OK</li>
+<li>No errors in Sentry</li>
+<li>Database connections healthy</li>
+</ul>
+<h4>H+1: Initial Monitoring (11:00 AM)</h4>
+<p><strong>Time</strong>: 10:30 AM - 11:00 AM</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Monitor Sentry</strong>: Check for new errors/crashes</li>
+<li><input disabled="" type="checkbox"> <strong>Monitor Vercel Logs</strong>: Review application logs</li>
+<li><input disabled="" type="checkbox"> <strong>Monitor Metrics</strong>: Check <code>/metrics</code> endpoint<ul>
+<li>HTTP request rates</li>
+<li>Response times</li>
+<li>Database query durations</li>
+<li>Error rates</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>Test User Flows</strong>:<ul>
+<li>Admin login</li>
+<li>Create test client</li>
+<li>Create test visit</li>
+<li>Mobile app sync</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>Check Performance</strong>:<ul>
+<li>Average response time &lt; 200ms</li>
+<li>95th percentile &lt; 500ms</li>
+<li>Database queries &lt; 100ms</li>
+</ul>
+</li>
+</ul>
+<p><strong>Rollback Triggers</strong>: See <a href="#rollback-triggers">Rollback Triggers</a></p>
+<h4>H+2: User Communication (12:00 PM)</h4>
+<p><strong>Time</strong>: 11:00 AM - 12:00 PM</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Send Launch Announcement</strong>: Email to stakeholders (use template)</li>
+<li><input disabled="" type="checkbox"> <strong>Enable User Access</strong>: Remove any &quot;maintenance mode&quot; restrictions</li>
+<li><input disabled="" type="checkbox"> <strong>Monitor User Activity</strong>:<ul>
+<li>Watch active user count</li>
+<li>Monitor login success rate</li>
+<li>Check for user-reported issues</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>Support Readiness</strong>: Support team monitoring Slack/email</li>
+</ul>
+<h4>H+4: Mid-Day Check (2:00 PM)</h4>
+<p><strong>Time</strong>: 12:00 PM - 2:00 PM</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Review Metrics</strong>:<ul>
+<li>Total requests processed</li>
+<li>Error rate &lt; 1%</li>
+<li>No critical errors in Sentry</li>
+<li>Database performance stable</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>User Feedback</strong>: Review any user-reported issues</li>
+<li><input disabled="" type="checkbox"> <strong>Performance</strong>: Verify no degradation</li>
+<li><input disabled="" type="checkbox"> <strong>Capacity</strong>: Check database connection pool utilization</li>
+</ul>
+<p><strong>Success Criteria</strong>:</p>
+<ul>
+<li>No critical issues reported</li>
+<li>Error rate within acceptable range (&lt; 1%)</li>
+<li>Performance meeting SLAs</li>
+<li>User feedback positive or neutral</li>
+</ul>
+<h4>End of Day: Day 1 Summary (5:00 PM)</h4>
+<p><strong>Time</strong>: 5:00 PM</p>
+<ul>
+<li><input disabled="" type="checkbox"> <strong>Metrics Summary</strong>:<ul>
+<li>Total users active</li>
+<li>Total visits created</li>
+<li>Total API requests</li>
+<li>Average response time</li>
+<li>Error count and types</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> <strong>Issue Review</strong>: Document any issues encountered</li>
+<li><input disabled="" type="checkbox"> <strong>Team Debrief</strong>: 30-minute team sync</li>
+<li><input disabled="" type="checkbox"> <strong>Stakeholder Update</strong>: Send end-of-day summary</li>
+<li><input disabled="" type="checkbox"> <strong>On-Call Handoff</strong>: Brief evening/night on-call engineer</li>
+</ul>
+<hr>
+<h2>Launch Procedures</h2>
+<h3>1. Deployment Execution</h3>
+<pre><code class="language-bash"># Ensure you&#39;re on main branch with latest code
+git checkout main
+git pull origin main
+
+# Verify all tests pass
+npm run lint
+npm run type-check
+npm test
+npm run build
+
+# Deployment happens automatically when pushing to main
+# GitHub Actions will:
+# 1. Run CI tests
+# 2. Build application
+# 3. Run database migrations
+# 4. Deploy to Vercel
+# 5. Run health checks
+</code></pre>
+<p><strong>Automatic Deployment via GitHub Actions</strong>:</p>
+<ul>
+<li>Push to <code>main</code> triggers <code>.github/workflows/deploy.yml</code></li>
+<li>Workflow runs migrations automatically</li>
+<li>Deployment to Vercel</li>
+<li>Health check verification</li>
+<li>Automatic rollback if health checks fail</li>
+</ul>
+<h3>2. Database Migration Verification</h3>
+<pre><code class="language-bash"># Check migration status
+npm run db:migrate:status
+
+# Expected output:
+# Migration files:
+# [✓] 001_initial_schema.ts
+# [✓] 002_auth_tables.ts
+# ...
+# All migrations completed successfully
+</code></pre>
+<h3>3. Health Check Verification</h3>
+<pre><code class="language-bash"># Test health endpoint
+curl https://[your-domain]/health
+
+# Expected response:
+{
+  &quot;status&quot;: &quot;healthy&quot;,
+  &quot;timestamp&quot;: &quot;2025-11-08T10:00:00.000Z&quot;,
+  &quot;database&quot;: &quot;connected&quot;,
+  &quot;uptime&quot;: 60,
+  &quot;environment&quot;: &quot;production&quot;
+}
+
+# Test geocoding health
+curl https://[your-domain]/health/geocoding
+
+# Expected response:
+{
+  &quot;status&quot;: &quot;healthy&quot;,
+  &quot;provider&quot;: &quot;google&quot;,
+  &quot;timestamp&quot;: &quot;2025-11-08T10:00:00.000Z&quot;
+}
+</code></pre>
+<h3>4. Smoke Test Critical Paths</h3>
+<p><strong>Authentication</strong>:</p>
+<pre><code class="language-bash"># Test Google OAuth flow (manual browser test)
+# 1. Navigate to https://[your-domain]/login
+# 2. Click &quot;Sign in with Google&quot;
+# 3. Verify redirect to Google
+# 4. Authorize application
+# 5. Verify redirect back and successful login
+</code></pre>
+<p><strong>API Endpoint Test</strong>:</p>
+<pre><code class="language-bash"># Get auth token (after login)
+TOKEN=&quot;your-jwt-token&quot;
+
+# Test API endpoint
+curl -H &quot;Authorization: Bearer $TOKEN&quot; \
+  https://[your-domain]/api/organizations
+
+# Expected: 200 OK with organization data
+</code></pre>
+<p><strong>Mobile Sync Test</strong>:</p>
+<pre><code class="language-bash"># Test sync endpoint
+curl -X POST -H &quot;Authorization: Bearer $TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{&quot;lastPulledAt&quot;: null}&#39; \
+  https://[your-domain]/api/sync/pull
+
+# Expected: 200 OK with sync data
+</code></pre>
+<h3>5. Monitoring Dashboard Access</h3>
+<p><strong>Sentry</strong>: <a href="https://sentry.io/organizations/%5Byour-org%5D/projects/">https://sentry.io/organizations/[your-org]/projects/</a></p>
+<ul>
+<li>Check for new errors</li>
+<li>Verify error rate &lt; 1%</li>
+</ul>
+<p><strong>Vercel Dashboard</strong>: <a href="https://vercel.com/%5Byour-org%5D/%5Byour-project%5D">https://vercel.com/[your-org]/[your-project]</a></p>
+<ul>
+<li>Deployment status</li>
+<li>Real-time logs</li>
+<li>Analytics</li>
+</ul>
+<p><strong>Prometheus Metrics</strong>: https://[your-domain]/metrics</p>
+<ul>
+<li>Requires authentication</li>
+<li>Use for performance monitoring</li>
+</ul>
+<hr>
+<h2>Post-Launch Monitoring</h2>
+<h3>First 24 Hours: Intensive Monitoring</h3>
+<p><strong>Hourly Checks</strong> (H+1 to H+24):</p>
+<ol>
+<li><p><strong>Sentry Dashboard</strong>:</p>
+<ul>
+<li>New errors/crashes</li>
+<li>Error frequency</li>
+<li>Affected users</li>
+</ul>
+</li>
+<li><p><strong>Vercel Analytics</strong>:</p>
+<ul>
+<li>Request volume</li>
+<li>Response times (avg, p50, p95, p99)</li>
+<li>Status code distribution</li>
+</ul>
+</li>
+<li><p><strong>Database Health</strong>:</p>
+<ul>
+<li>Connection pool utilization (should be &lt; 80%)</li>
+<li>Query performance (&lt; 100ms average)</li>
+<li>Long-running queries</li>
+</ul>
+</li>
+<li><p><strong>Metrics Endpoint</strong> (<code>/metrics</code>):</p>
+<pre><code class="language-bash">curl -H &quot;Authorization: Bearer $TOKEN&quot; https://[domain]/metrics
+</code></pre>
+<ul>
+<li><code>http_requests_total</code>: Track request volume</li>
+<li><code>http_request_duration_seconds</code>: Track latency</li>
+<li><code>db_query_duration_seconds</code>: Database performance</li>
+<li><code>active_users</code>: Current active users</li>
+</ul>
+</li>
+<li><p><strong>User Feedback</strong>:</p>
+<ul>
+<li>Support tickets</li>
+<li>User-reported bugs</li>
+<li>Feature requests</li>
+</ul>
+</li>
+</ol>
+<p><strong>Alert Thresholds</strong> (First 24 hours):</p>
+<ul>
+<li><strong>Critical</strong>: Error rate &gt; 5% (immediate rollback consideration)</li>
+<li><strong>High</strong>: Error rate &gt; 1% (investigate immediately)</li>
+<li><strong>Medium</strong>: Response time p95 &gt; 1000ms</li>
+<li><strong>Low</strong>: Response time p95 &gt; 500ms</li>
+</ul>
+<h3>Days 2-7: Daily Monitoring</h3>
+<p><strong>Daily Checks</strong> (Once per day):</p>
+<ul>
+<li><input disabled="" type="checkbox"> Review Sentry error summary</li>
+<li><input disabled="" type="checkbox"> Check Vercel analytics trends</li>
+<li><input disabled="" type="checkbox"> Verify backup completion</li>
+<li><input disabled="" type="checkbox"> Review database performance</li>
+<li><input disabled="" type="checkbox"> Check user growth metrics</li>
+<li><input disabled="" type="checkbox"> Review support tickets</li>
+</ul>
+<p><strong>Weekly Summary</strong> (End of Week 1):</p>
+<ul>
+<li>Total users onboarded</li>
+<li>Total visits tracked</li>
+<li>Error rate trends</li>
+<li>Performance trends</li>
+<li>User feedback summary</li>
+<li>Action items for Week 2</li>
+</ul>
+<h3>Week 2+: Normal Operations</h3>
+<p><strong>Transition to Standard Monitoring</strong>:</p>
+<ul>
+<li>Move to standard on-call rotation</li>
+<li>Weekly metrics review</li>
+<li>Monthly performance review</li>
+<li>Quarterly capacity planning</li>
+</ul>
+<hr>
+<h2>Rollback Triggers</h2>
+<h3>Automatic Rollback Criteria</h3>
+<p>The deployment will automatically rollback if:</p>
+<ul>
+<li>Health check fails after deployment</li>
+<li>Critical error rate &gt; 10% within 5 minutes</li>
+<li>Database migration fails</li>
+</ul>
+<h3>Manual Rollback Triggers</h3>
+<p><strong>CRITICAL - Immediate Rollback Required</strong>:</p>
+<ol>
+<li><p><strong>Security Breach</strong>:</p>
+<ul>
+<li>Unauthorized access detected</li>
+<li>Data leak identified</li>
+<li>Authentication bypass discovered</li>
+</ul>
+</li>
+<li><p><strong>Data Loss</strong>:</p>
+<ul>
+<li>Database corruption detected</li>
+<li>Data deletion bugs identified</li>
+<li>Sync conflicts causing data loss</li>
+</ul>
+</li>
+<li><p><strong>Complete Service Failure</strong>:</p>
+<ul>
+<li>Application crashes on startup</li>
+<li>Database connectivity completely lost</li>
+<li>All requests returning 500 errors</li>
+</ul>
+</li>
+</ol>
+<p><strong>HIGH - Rollback Within 30 Minutes</strong>:</p>
+<ol>
+<li><p><strong>High Error Rate</strong>:</p>
+<ul>
+<li>Error rate &gt; 5% sustained for 10 minutes</li>
+<li>Critical user flows broken (auth, visit tracking)</li>
+</ul>
+</li>
+<li><p><strong>Severe Performance Degradation</strong>:</p>
+<ul>
+<li>Response time p95 &gt; 5 seconds</li>
+<li>Database queries timing out</li>
+<li>Connection pool exhausted</li>
+</ul>
+</li>
+<li><p><strong>Compliance Violation</strong>:</p>
+<ul>
+<li>HIPAA compliance breach detected</li>
+<li>EVV data not being captured</li>
+<li>Audit logging failures</li>
+</ul>
+</li>
+</ol>
+<p><strong>MEDIUM - Investigate, Rollback if Unresolvable</strong>:</p>
+<ol>
+<li><p><strong>Moderate Error Rate</strong>:</p>
+<ul>
+<li>Error rate 1-5% sustained for 30 minutes</li>
+<li>Non-critical features failing</li>
+</ul>
+</li>
+<li><p><strong>Performance Issues</strong>:</p>
+<ul>
+<li>Response time p95 &gt; 1 second</li>
+<li>Slow database queries</li>
+</ul>
+</li>
+<li><p><strong>User Reports</strong>:</p>
+<ul>
+<li>Multiple users reporting same critical issue</li>
+<li>Mobile app crashes</li>
+</ul>
+</li>
+</ol>
+<h3>Rollback Decision Process</h3>
+<ol>
+<li><strong>Identify Issue</strong>: Team member identifies rollback trigger</li>
+<li><strong>Alert Team</strong>: Post in #incidents Slack channel</li>
+<li><strong>Quick Assessment</strong>: 5-minute team huddle</li>
+<li><strong>Decision</strong>: Tech lead makes rollback decision</li>
+<li><strong>Execute</strong>: Follow rollback procedure (see <code>ROLLBACK_PROCEDURES.md</code>)</li>
+<li><strong>Communicate</strong>: Notify stakeholders</li>
+<li><strong>Post-Mortem</strong>: Schedule incident review</li>
+</ol>
+<hr>
+<h2>Communication Protocols</h2>
+<h3>Internal Communication</h3>
+<p><strong>Slack Channels</strong>:</p>
+<ul>
+<li><code>#production-launch</code>: Launch coordination</li>
+<li><code>#incidents</code>: Critical issues and rollbacks</li>
+<li><code>#monitoring</code>: Automated monitoring alerts</li>
+<li><code>#deployments</code>: Deployment notifications</li>
+</ul>
+<p><strong>Communication Cadence</strong>:</p>
+<ul>
+<li><strong>Launch Day H+0 to H+4</strong>: Updates every 30 minutes</li>
+<li><strong>Launch Day H+4 to H+24</strong>: Updates every 2 hours</li>
+<li><strong>Days 2-7</strong>: Daily summary</li>
+<li><strong>Week 2+</strong>: Weekly summary</li>
+</ul>
+<h3>External Communication</h3>
+<p><strong>Stakeholder Updates</strong>:</p>
+<p>Use templates from <code>STAKEHOLDER_COMMUNICATIONS.md</code>:</p>
+<ol>
+<li><p><strong>Pre-Launch</strong> (T-7 days):</p>
+<ul>
+<li>Launch date and time</li>
+<li>Expected impact</li>
+<li>What to expect</li>
+</ul>
+</li>
+<li><p><strong>Launch Day</strong> (H+0):</p>
+<ul>
+<li>Deployment started</li>
+<li>Expected completion time</li>
+<li>Where to report issues</li>
+</ul>
+</li>
+<li><p><strong>Launch Complete</strong> (H+2):</p>
+<ul>
+<li>Successful deployment</li>
+<li>New features available</li>
+<li>Support contact information</li>
+</ul>
+</li>
+<li><p><strong>Incident Notification</strong> (As needed):</p>
+<ul>
+<li>Issue description</li>
+<li>Impact assessment</li>
+<li>Resolution timeline</li>
+<li>Workarounds if available</li>
+</ul>
+</li>
+</ol>
+<p><strong>User Communication</strong>:</p>
+<ul>
+<li>In-app notifications for major changes</li>
+<li>Email for critical updates</li>
+<li>Status page for ongoing incidents</li>
+</ul>
+<hr>
+<h2>Contact Information</h2>
+<h3>On-Call Rotation</h3>
+<p><strong>Primary On-Call</strong> (Launch Week):</p>
+<ul>
+<li>Name: [Primary Engineer]</li>
+<li>Phone: [Phone Number]</li>
+<li>Slack: @primary-engineer</li>
+</ul>
+<p><strong>Secondary On-Call</strong>:</p>
+<ul>
+<li>Name: [Secondary Engineer]</li>
+<li>Phone: [Phone Number]</li>
+<li>Slack: @secondary-engineer</li>
+</ul>
+<h3>Escalation Path</h3>
+<ol>
+<li><strong>Level 1</strong>: On-call engineer</li>
+<li><strong>Level 2</strong>: Tech lead</li>
+<li><strong>Level 3</strong>: Engineering manager</li>
+<li><strong>Level 4</strong>: CTO</li>
+</ol>
+<h3>External Contacts</h3>
+<p><strong>Vercel Support</strong>:</p>
+<ul>
+<li>Email: <a href="mailto:support@vercel.com">support@vercel.com</a></li>
+<li>Dashboard: <a href="https://vercel.com/support">https://vercel.com/support</a></li>
+<li>Priority: Enterprise (if applicable)</li>
+</ul>
+<p><strong>Neon Support</strong> (Database):</p>
+<ul>
+<li>Email: <a href="mailto:support@neon.tech">support@neon.tech</a></li>
+<li>Dashboard: <a href="https://console.neon.tech">https://console.neon.tech</a></li>
+<li>Priority: Pro plan support</li>
+</ul>
+<p><strong>Sentry Support</strong>:</p>
+<ul>
+<li>Email: <a href="mailto:support@sentry.io">support@sentry.io</a></li>
+<li>Dashboard: <a href="https://sentry.io/support">https://sentry.io/support</a></li>
+</ul>
+<hr>
+<h2>Appendix</h2>
+<h3>Useful Commands</h3>
+<pre><code class="language-bash"># Check deployment status
+vercel list --scope [your-org]
+
+# View live logs
+vercel logs [deployment-url]
+
+# Check database migrations
+npm run db:migrate:status
+
+# View metrics
+curl https://[domain]/metrics
+
+# Test health
+curl https://[domain]/health
+</code></pre>
+<h3>Success Metrics</h3>
+<p><strong>Launch Day Success Criteria</strong>:</p>
+<ul>
+<li>✅ Zero critical errors</li>
+<li>✅ Error rate &lt; 1%</li>
+<li>✅ Response time p95 &lt; 500ms</li>
+<li>✅ All health checks passing</li>
+<li>✅ No rollbacks required</li>
+<li>✅ Positive user feedback</li>
+</ul>
+<p><strong>Week 1 Success Criteria</strong>:</p>
+<ul>
+<li>✅ 99.9% uptime</li>
+<li>✅ &lt; 5 non-critical bugs</li>
+<li>✅ Zero data loss incidents</li>
+<li>✅ Zero security incidents</li>
+<li>✅ User adoption meeting targets</li>
+</ul>
+<hr>
+<p><strong>Document Version</strong>: 1.0
+<strong>Last Review</strong>: 2025-11-08
+<strong>Next Review</strong>: Post-Launch + 1 week</p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

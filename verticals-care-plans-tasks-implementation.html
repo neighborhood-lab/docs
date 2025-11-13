@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Plans & Tasks Library - Implementation Guide - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Care Plans & Tasks Library - Implementation Guide</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Care Plans &amp; Tasks Library - Implementation Guide</h1>
+<h2>Overview</h2>
+<p>This document provides technical implementation details for the Care Plans &amp; Tasks Library vertical, including database schema, API endpoints, and deployment considerations.</p>
+<h2>Database Schema</h2>
+<p><strong>Migration Status</strong>: ✅ IMPLEMENTED</p>
+<p>The database schema described below has been implemented in migration file <code>packages/core/migrations/20251030214716_care_plans_tables.ts</code> and successfully applied to the database.</p>
+<p>To verify:</p>
+<pre><code class="language-bash"># Check migration status
+npm run db:migrate:status
+
+# View the comprehensive migration
+cat packages/core/migrations/20251030214716_care_plans_tables.ts
+</code></pre>
+<h3>Table: care_plans</h3>
+<pre><code class="language-sql">CREATE TABLE care_plans (
+  -- Identity
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  plan_number VARCHAR(50) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  
+  -- Associations
+  client_id UUID NOT NULL REFERENCES clients(id),
+  organization_id UUID NOT NULL REFERENCES organizations(id),
+  branch_id UUID REFERENCES branches(id),
+  
+  -- Plan metadata
+  plan_type VARCHAR(50) NOT NULL,
+  status VARCHAR(50) NOT NULL DEFAULT &#39;DRAFT&#39;,
+  priority VARCHAR(20) NOT NULL DEFAULT &#39;MEDIUM&#39;,
+  
+  -- Dates
+  effective_date DATE NOT NULL,
+  expiration_date DATE,
+  review_date DATE,
+  last_reviewed_date DATE,
+  
+  -- Care team
+  primary_caregiver_id UUID REFERENCES caregivers(id),
+  coordinator_id UUID REFERENCES users(id),
+  supervisor_id UUID REFERENCES users(id),
+  physician_id UUID,
+  
+  -- Plan content (JSONB for flexibility)
+  assessment_summary TEXT,
+  medical_diagnosis TEXT[],
+  functional_limitations TEXT[],
+  goals JSONB NOT NULL DEFAULT &#39;[]&#39;,
+  interventions JSONB NOT NULL DEFAULT &#39;[]&#39;,
+  task_templates JSONB DEFAULT &#39;[]&#39;,
+  
+  -- Frequency and schedule
+  service_frequency JSONB,
+  estimated_hours_per_week NUMERIC(5,2),
+  
+  -- Authorization
+  authorized_by UUID REFERENCES users(id),
+  authorized_date DATE,
+  authorization_number VARCHAR(100),
+  payer_source JSONB,
+  authorization_hours NUMERIC(6,2),
+  authorization_start_date DATE,
+  authorization_end_date DATE,
+  
+  -- Documentation requirements
+  required_documentation JSONB,
+  signature_requirements JSONB,
+  
+  -- Restrictions and precautions
+  restrictions TEXT[],
+  precautions TEXT[],
+  allergies JSONB,
+  contraindications TEXT[],
+  
+  -- Progress and outcomes
+  progress_notes JSONB,
+  outcomes_measured JSONB,
+  
+  -- Compliance
+  regulatory_requirements TEXT[],
+  compliance_status VARCHAR(50) NOT NULL DEFAULT &#39;PENDING_REVIEW&#39;,
+  last_compliance_check TIMESTAMP,
+  
+  -- Modifications
+  modification_history JSONB DEFAULT &#39;[]&#39;,
+  
+  -- Metadata
+  notes TEXT,
+  tags TEXT[],
+  custom_fields JSONB,
+  
+  -- Audit fields
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  created_by UUID NOT NULL REFERENCES users(id),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_by UUID NOT NULL REFERENCES users(id),
+  version INTEGER NOT NULL DEFAULT 1,
+  
+  -- Soft delete
+  deleted_at TIMESTAMP,
+  deleted_by UUID REFERENCES users(id)
+);
+
+-- Indexes
+CREATE INDEX idx_care_plans_client_id ON care_plans(client_id);
+CREATE INDEX idx_care_plans_organization_id ON care_plans(organization_id);
+CREATE INDEX idx_care_plans_branch_id ON care_plans(branch_id);
+CREATE INDEX idx_care_plans_status ON care_plans(status);
+CREATE INDEX idx_care_plans_effective_date ON care_plans(effective_date);
+CREATE INDEX idx_care_plans_expiration_date ON care_plans(expiration_date);
+CREATE INDEX idx_care_plans_coordinator_id ON care_plans(coordinator_id);
+CREATE INDEX idx_care_plans_plan_number ON care_plans(plan_number);
+CREATE INDEX idx_care_plans_deleted_at ON care_plans(deleted_at);
+
+-- GIN indexes for JSONB columns
+CREATE INDEX idx_care_plans_goals ON care_plans USING GIN (goals);
+CREATE INDEX idx_care_plans_interventions ON care_plans USING GIN (interventions);
+CREATE INDEX idx_care_plans_task_templates ON care_plans USING GIN (task_templates);
+
+-- Full-text search
+CREATE INDEX idx_care_plans_name_search ON care_plans USING GIN (to_tsvector(&#39;english&#39;, name));
+
+-- Composite indexes for common queries
+CREATE INDEX idx_care_plans_org_status ON care_plans(organization_id, status) WHERE deleted_at IS NULL;
+CREATE INDEX idx_care_plans_client_active ON care_plans(client_id, status) WHERE status = &#39;ACTIVE&#39; AND deleted_at IS NULL;
+
+-- Trigger for updated_at
+CREATE TRIGGER update_care_plans_updated_at
+  BEFORE UPDATE ON care_plans
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+</code></pre>
+<h3>Table: task_instances</h3>
+<pre><code class="language-sql">CREATE TABLE task_instances (
+  -- Identity
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  
+  -- References
+  care_plan_id UUID NOT NULL REFERENCES care_plans(id),
+  template_id UUID, -- Reference to template in care_plan.task_templates
+  visit_id UUID REFERENCES visits(id),
+  client_id UUID NOT NULL REFERENCES clients(id),
+  assigned_caregiver_id UUID REFERENCES caregivers(id),
+  
+  -- Task details
+  name VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  category VARCHAR(50) NOT NULL,
+  instructions TEXT NOT NULL,
+  
+  -- Scheduling
+  scheduled_date DATE NOT NULL,
+  scheduled_time TIME,
+  time_of_day VARCHAR(20),
+  estimated_duration INTEGER, -- minutes
+  
+  -- Completion
+  status VARCHAR(50) NOT NULL DEFAULT &#39;SCHEDULED&#39;,
+  completed_at TIMESTAMP,
+  completed_by UUID REFERENCES users(id),
+  completion_note TEXT,
+  completion_signature JSONB,
+  completion_photo TEXT[],
+  
+  -- Verification
+  verification_data JSONB,
+  quality_check_responses JSONB,
+  
+  -- Skipping
+  skipped_at TIMESTAMP,
+  skipped_by UUID REFERENCES users(id),
+  skip_reason VARCHAR(200),
+  skip_note TEXT,
+  
+  -- Issues
+  issue_reported BOOLEAN DEFAULT FALSE,
+  issue_description TEXT,
+  issue_reported_at TIMESTAMP,
+  issue_reported_by UUID REFERENCES users(id),
+  
+  -- Required data
+  required_signature BOOLEAN NOT NULL DEFAULT FALSE,
+  required_note BOOLEAN NOT NULL DEFAULT FALSE,
+  custom_field_values JSONB,
+  
+  -- Metadata
+  notes TEXT,
+  
+  -- Audit fields
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  created_by UUID NOT NULL REFERENCES users(id),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_by UUID NOT NULL REFERENCES users(id),
+  version INTEGER NOT NULL DEFAULT 1
+);
+
+-- Indexes
+CREATE INDEX idx_task_instances_care_plan_id ON task_instances(care_plan_id);
+CREATE INDEX idx_task_instances_visit_id ON task_instances(visit_id);
+CREATE INDEX idx_task_instances_client_id ON task_instances(client_id);
+CREATE INDEX idx_task_instances_assigned_caregiver_id ON task_instances(assigned_caregiver_id);
+CREATE INDEX idx_task_instances_status ON task_instances(status);
+CREATE INDEX idx_task_instances_category ON task_instances(category);
+CREATE INDEX idx_task_instances_scheduled_date ON task_instances(scheduled_date);
+CREATE INDEX idx_task_instances_completed_at ON task_instances(completed_at);
+
+-- Composite indexes
+CREATE INDEX idx_task_instances_visit_status ON task_instances(visit_id, status);
+CREATE INDEX idx_task_instances_date_status ON task_instances(scheduled_date, status);
+CREATE INDEX idx_task_instances_caregiver_date ON task_instances(assigned_caregiver_id, scheduled_date);
+
+-- GIN indexes for JSONB
+CREATE INDEX idx_task_instances_verification ON task_instances USING GIN (verification_data);
+CREATE INDEX idx_task_instances_quality_checks ON task_instances USING GIN (quality_check_responses);
+
+-- Trigger for updated_at
+CREATE TRIGGER update_task_instances_updated_at
+  BEFORE UPDATE ON task_instances
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+</code></pre>
+<h3>Table: progress_notes</h3>
+<pre><code class="language-sql">CREATE TABLE progress_notes (
+  -- Identity
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  
+  -- References
+  care_plan_id UUID NOT NULL REFERENCES care_plans(id),
+  client_id UUID NOT NULL REFERENCES clients(id),
+  visit_id UUID REFERENCES visits(id),
+  
+  -- Note metadata
+  note_type VARCHAR(50) NOT NULL,
+  note_date DATE NOT NULL,
+  
+  -- Author
+  author_id UUID NOT NULL REFERENCES users(id),
+  author_name VARCHAR(200) NOT NULL,
+  author_role VARCHAR(50) NOT NULL,
+  
+  -- Content
+  content TEXT NOT NULL,
+  
+  -- Structured data (JSONB for flexibility)
+  goal_progress JSONB DEFAULT &#39;[]&#39;,
+  observations JSONB DEFAULT &#39;[]&#39;,
+  concerns TEXT[],
+  recommendations TEXT[],
+  
+  -- Review and approval
+  reviewed_by UUID REFERENCES users(id),
+  reviewed_at TIMESTAMP,
+  approved BOOLEAN DEFAULT FALSE,
+  
+  -- Attachments
+  attachments TEXT[],
+  
+  -- Signature
+  signature JSONB,
+  
+  -- Metadata
+  tags TEXT[],
+  is_private BOOLEAN DEFAULT FALSE,
+  
+  -- Audit fields
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  created_by UUID NOT NULL REFERENCES users(id),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_by UUID NOT NULL REFERENCES users(id),
+  version INTEGER NOT NULL DEFAULT 1
+);
+
+-- Indexes
+CREATE INDEX idx_progress_notes_care_plan_id ON progress_notes(care_plan_id);
+CREATE INDEX idx_progress_notes_client_id ON progress_notes(client_id);
+CREATE INDEX idx_progress_notes_visit_id ON progress_notes(visit_id);
+CREATE INDEX idx_progress_notes_author_id ON progress_notes(author_id);
+CREATE INDEX idx_progress_notes_note_type ON progress_notes(note_type);
+CREATE INDEX idx_progress_notes_note_date ON progress_notes(note_date);
+CREATE INDEX idx_progress_notes_reviewed_by ON progress_notes(reviewed_by);
+
+-- Full-text search on content
+CREATE INDEX idx_progress_notes_content_search ON progress_notes USING GIN (to_tsvector(&#39;english&#39;, content));
+
+-- GIN indexes for JSONB
+CREATE INDEX idx_progress_notes_goal_progress ON progress_notes USING GIN (goal_progress);
+CREATE INDEX idx_progress_notes_observations ON progress_notes USING GIN (observations);
+
+-- Trigger for updated_at
+CREATE TRIGGER update_progress_notes_updated_at
+  BEFORE UPDATE ON progress_notes
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+</code></pre>
+<h3>Supporting Function</h3>
+<pre><code class="language-sql">-- Function to update updated_at timestamp
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+</code></pre>
+<h2>API Endpoints</h2>
+<p><strong>Implementation Status</strong>: ✅ IMPLEMENTED</p>
+<p>All API endpoints described below have been implemented in <code>verticals/care-plans-tasks/src/api/care-plan-handlers.ts</code> and are registered in the Express app via <code>packages/app/src/routes/index.ts</code>.</p>
+<p>To test the API:</p>
+<pre><code class="language-bash"># Start the server
+npm run dev:server
+
+# See DEMO.md for curl examples
+</code></pre>
+<h3>Care Plans</h3>
+<pre><code>POST   /api/care-plans                    - Create new care plan
+GET    /api/care-plans/:id                - Get care plan by ID
+PUT    /api/care-plans/:id                - Update care plan
+DELETE /api/care-plans/:id                - Delete care plan (soft delete)
+POST   /api/care-plans/:id/activate       - Activate care plan
+GET    /api/care-plans                    - Search care plans
+GET    /api/care-plans/client/:clientId   - Get care plans for client
+GET    /api/care-plans/expiring           - Get expiring care plans
+GET    /api/care-plans/analytics          - Get care plan analytics
+</code></pre>
+<h3>Tasks</h3>
+<pre><code>POST   /api/tasks                         - Create task instance
+GET    /api/tasks/:id                     - Get task by ID
+PUT    /api/tasks/:id                     - Update task
+POST   /api/tasks/:id/complete            - Complete task
+POST   /api/tasks/:id/skip                - Skip task
+POST   /api/tasks/:id/report-issue        - Report task issue
+GET    /api/tasks                         - Search task instances
+GET    /api/tasks/visit/:visitId          - Get tasks for visit
+POST   /api/tasks/visit/:visitId/generate - Generate tasks from care plan
+GET    /api/tasks/metrics                 - Get task completion metrics
+</code></pre>
+<h3>Progress Notes</h3>
+<pre><code>POST   /api/progress-notes                        - Create progress note
+GET    /api/progress-notes/:id                    - Get progress note by ID
+PUT    /api/progress-notes/:id                    - Update progress note
+GET    /api/progress-notes/care-plan/:carePlanId - Get notes for care plan
+GET    /api/progress-notes/client/:clientId      - Get notes for client
+POST   /api/progress-notes/:id/review            - Review and approve note
+</code></pre>
+<h2>Data Validation Rules</h2>
+<h3>Care Plan</h3>
+<ul>
+<li>Name: 1-255 characters, required</li>
+<li>Effective date: Cannot be in future for activation</li>
+<li>Expiration date: Must be after effective date</li>
+<li>At least one goal required for activation</li>
+<li>At least one intervention required for activation</li>
+<li>Coordinator required for activation</li>
+</ul>
+<h3>Goal</h3>
+<ul>
+<li>Name: 1-255 characters</li>
+<li>Description: 1-2000 characters</li>
+<li>Target date: Optional, must be in future</li>
+<li>Measurement type determines required fields</li>
+<li>Progress percentage: 0-100</li>
+</ul>
+<h3>Task Instance</h3>
+<ul>
+<li>Name: 1-255 characters</li>
+<li>Description: 1-2000 characters</li>
+<li>Instructions: 1-5000 characters</li>
+<li>Scheduled date: Required</li>
+<li>Status transitions validated</li>
+</ul>
+<h3>Task Completion</h3>
+<ul>
+<li>Signature required if task.requiredSignature = true</li>
+<li>Note required if task.requiredNote = true</li>
+<li>Vital signs must be within reasonable ranges</li>
+<li>GPS location required for GPS verification type</li>
+</ul>
+<h3>Progress Note</h3>
+<ul>
+<li>Content: 1-10000 characters</li>
+<li>Author information: Required</li>
+<li>Note date: Required</li>
+<li>Signature optional but captured if provided</li>
+</ul>
+<h2>Business Logic</h2>
+<h3>Care Plan Activation</h3>
+<ol>
+<li>Validate plan has at least one goal</li>
+<li>Validate plan has at least one intervention</li>
+<li>Validate coordinator is assigned</li>
+<li>Check for existing active plan for client</li>
+<li>Optionally expire old plan</li>
+<li>Set status to ACTIVE</li>
+</ol>
+<h3>Task Generation</h3>
+<ol>
+<li>Load active care plan for client</li>
+<li>Filter task templates by status = ACTIVE</li>
+<li>For each template:<ul>
+<li>Check frequency pattern matches visit date</li>
+<li>Check day of week if specified</li>
+<li>Create task instance if conditions met</li>
+</ul>
+</li>
+<li>Link tasks to visit</li>
+<li>Set initial status to SCHEDULED</li>
+</ol>
+<h3>Task Completion</h3>
+<ol>
+<li>Validate task is in completable state (not COMPLETED, CANCELLED)</li>
+<li>Check required fields (signature, note)</li>
+<li>Validate vital signs if provided</li>
+<li>Capture verification data (GPS, photo, etc.)</li>
+<li>Record quality check responses</li>
+<li>Set status to COMPLETED</li>
+<li>Record completion timestamp and user</li>
+</ol>
+<h3>Progress Note Creation</h3>
+<ol>
+<li>Validate care plan exists and is accessible</li>
+<li>Extract author information from user context</li>
+<li>Validate content length and format</li>
+<li>Store structured goal progress data</li>
+<li>Store structured observations</li>
+<li>Capture signature if provided</li>
+<li>Set initial approved = false</li>
+</ol>
+<h2>Performance Considerations</h2>
+<h3>Indexing Strategy</h3>
+<ul>
+<li>Index all foreign keys</li>
+<li>Composite indexes for common query patterns</li>
+<li>GIN indexes for JSONB columns</li>
+<li>Full-text indexes for search</li>
+<li>Partial indexes for filtered queries</li>
+</ul>
+<h3>Query Optimization</h3>
+<ul>
+<li>Use pagination for large result sets</li>
+<li>Limit JSONB column retrieval to needed fields</li>
+<li>Cache frequently accessed care plans</li>
+<li>Use database connection pooling</li>
+<li>Implement query result caching for analytics</li>
+</ul>
+<h3>Scaling Considerations</h3>
+<ul>
+<li>Partition task_instances by scheduled_date (monthly/quarterly)</li>
+<li>Archive old progress_notes to separate table</li>
+<li>Implement read replicas for analytics queries</li>
+<li>Use CDN for signature images and photos</li>
+<li>Consider caching layer (Redis) for active care plans</li>
+</ul>
+<h2>Security</h2>
+<h3>Data Protection</h3>
+<ul>
+<li>Encrypt signature data at rest</li>
+<li>Encrypt photo URLs (use signed URLs)</li>
+<li>Redact sensitive medical information in logs</li>
+<li>Implement field-level encryption for PHI</li>
+</ul>
+<h3>Access Control</h3>
+<ul>
+<li>Enforce organization boundary in all queries</li>
+<li>Validate user permissions before operations</li>
+<li>Audit all access to care plans and notes</li>
+<li>Implement row-level security policies</li>
+</ul>
+<h3>Compliance</h3>
+<ul>
+<li>Maintain complete audit trail</li>
+<li>Retain deleted records for required period</li>
+<li>Implement data retention policies</li>
+<li>Support HIPAA compliance requirements</li>
+<li>Enable audit log export for compliance reporting</li>
+</ul>
+<h2>Testing Strategy</h2>
+<h3>Unit Tests</h3>
+<ul>
+<li>Validation schemas</li>
+<li>Business logic methods</li>
+<li>Data transformations</li>
+<li>Permission checks</li>
+</ul>
+<h3>Integration Tests</h3>
+<ul>
+<li>Repository CRUD operations</li>
+<li>Service layer workflows</li>
+<li>API endpoints</li>
+<li>Database constraints</li>
+</ul>
+<h3>End-to-End Tests</h3>
+<ul>
+<li>Complete care plan lifecycle</li>
+<li>Task generation and completion</li>
+<li>Progress note creation</li>
+<li>Multi-user workflows</li>
+</ul>
+<h2>Deployment</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>PostgreSQL 14+ with JSONB support</li>
+<li>Node.js 20+</li>
+<li>Core package installed</li>
+<li>Client and Caregiver verticals (dependencies)</li>
+</ul>
+<h3>Migration Steps</h3>
+<ol>
+<li>Run database migrations in order</li>
+<li>Create indexes (can be done concurrently)</li>
+<li>Seed initial data if needed</li>
+<li>Deploy application code</li>
+<li>Run smoke tests</li>
+<li>Enable monitoring</li>
+</ol>
+<h3>Rollback Plan</h3>
+<ul>
+<li>Keep previous version deployable</li>
+<li>Database migrations are additive</li>
+<li>Feature flags for new functionality</li>
+<li>Gradual rollout by organization</li>
+</ul>
+<h2>Monitoring</h2>
+<h3>Key Metrics</h3>
+<ul>
+<li>Care plan creation rate</li>
+<li>Task completion rate</li>
+<li>Average completion time</li>
+<li>Skipped task rate</li>
+<li>Issue report rate</li>
+<li>Progress note creation rate</li>
+<li>API response times</li>
+<li>Database query performance</li>
+</ul>
+<h3>Alerts</h3>
+<ul>
+<li>Care plan expiring in &lt; 7 days</li>
+<li>Task overdue &gt; 24 hours</li>
+<li>High skip rate (&gt; 20%)</li>
+<li>High issue report rate (&gt; 10%)</li>
+<li>API errors &gt; 1%</li>
+<li>Slow query warnings</li>
+</ul>
+<h2>Future Enhancements</h2>
+<h3>Phase 2</h3>
+<ul>
+<li>Care plan versioning and comparison</li>
+<li>Template library for common care plans</li>
+<li>Bulk task operations</li>
+<li>Advanced analytics dashboard</li>
+<li>Mobile-optimized task completion UI</li>
+</ul>
+<h3>Phase 3</h3>
+<ul>
+<li>AI-powered care plan suggestions</li>
+<li>Predictive analytics for outcomes</li>
+<li>Integration with clinical guidelines</li>
+<li>Voice-to-text for notes</li>
+<li>Automated care plan generation from assessments</li>
+</ul>
+<h3>Phase 4</h3>
+<ul>
+<li>Family portal integration</li>
+<li>Medication reconciliation</li>
+<li>Telehealth integration</li>
+<li>Outcome-based payment tracking</li>
+<li>Population health analytics</li>
+</ul>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

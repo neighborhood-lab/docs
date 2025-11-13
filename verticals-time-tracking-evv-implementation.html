@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Tracking & EVV - Implementation Status - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>Time Tracking & EVV - Implementation Status</span>
+    </div>
+      <article class="markdown-content">
+        <h1>Time Tracking &amp; EVV - Implementation Status</h1>
+<p><strong>Status</strong>: ✅ Initial implementation complete<br><strong>Version</strong>: 0.1.0<br><strong>Last Updated</strong>: 2024</p>
+<h2>Overview</h2>
+<p>The Time Tracking &amp; Electronic Visit Verification (EVV) vertical provides comprehensive capabilities for compliance with federal and state EVV requirements under the 21st Century Cures Act. The implementation captures accurate timing and location evidence of home care visits with robust anti-fraud measures.</p>
+<h2>Completed Components</h2>
+<h3>✅ Core Types &amp; Domain Model</h3>
+<p><strong>File</strong>: <code>src/types/evv.ts</code></p>
+<p>Comprehensive type definitions including:</p>
+<ul>
+<li><code>EVVRecord</code> - Complete compliance record with all 6 required federal data elements</li>
+<li><code>LocationVerification</code> - GPS-based location proof with integrity checks</li>
+<li><code>TimeEntry</code> - Individual clock events with offline support</li>
+<li><code>Geofence</code> - Virtual boundaries for location verification</li>
+<li><code>EVVComplianceReport</code> - Regulatory reporting structures</li>
+<li>Support types for attestations, manual overrides, exceptions, and sync</li>
+</ul>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Federal EVV compliance (21st Century Cures Act)</li>
+<li>State-specific extensibility</li>
+<li>Tamper-evident design with cryptographic hashing</li>
+<li>Offline-first architecture with sync metadata</li>
+<li>Multiple verification methods (GPS, biometric, phone, manual)</li>
+<li>GPS spoofing and device security detection</li>
+</ul>
+<h3>✅ Repository Layer</h3>
+<p><strong>File</strong>: <code>src/repository/evv-repository.ts</code></p>
+<p>Data access layer with methods for:</p>
+<ul>
+<li>Creating and updating EVV records</li>
+<li>Managing time entries with sync status</li>
+<li>Geofence creation and statistics tracking</li>
+<li>Search and filtering with pagination</li>
+<li>Pending entry queries for offline sync</li>
+</ul>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>PostgreSQL-backed with JSONB for flexibility</li>
+<li>Efficient indexing for common query patterns</li>
+<li>Transaction support for data integrity</li>
+<li>Bulk operations for sync scenarios</li>
+<li>Automatic timestamp and version management</li>
+</ul>
+<h3>✅ Validation Layer</h3>
+<p><strong>File</strong>: <code>src/validation/evv-validator.ts</code></p>
+<p>Comprehensive validation including:</p>
+<ul>
+<li>Clock-in/out input validation</li>
+<li>GPS coordinate and accuracy validation</li>
+<li>Device info and security checks</li>
+<li>Geofence boundary calculations (Haversine formula)</li>
+<li>Integrity verification (hash and checksum)</li>
+<li>Comprehensive verification results with issue flagging</li>
+<li>Mock location and rooted device detection</li>
+</ul>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Anomaly detection (impossible location jumps, time gaps, etc.)</li>
+<li>Configurable thresholds for verification</li>
+<li>Severity-based issue categorization</li>
+<li>Supervisor review requirements</li>
+<li>Geofence distance calculations</li>
+</ul>
+<h3>✅ Service Layer</h3>
+<p><strong>File</strong>: <code>src/service/evv-service.ts</code></p>
+<p>Business logic implementation:</p>
+<ul>
+<li><code>clockIn()</code> - Start visit with location verification</li>
+<li><code>clockOut()</code> - End visit with duration calculation</li>
+<li><code>applyManualOverride()</code> - Supervisor review and approval</li>
+<li><code>createGeofence()</code> - Geofence management</li>
+<li><code>getEVVRecordByVisit()</code> - Record retrieval</li>
+<li><code>getTimeEntriesByVisit()</code> - Time entry history</li>
+</ul>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Permission-based access control</li>
+<li>Integration with scheduling vertical</li>
+<li>Automatic geofence creation</li>
+<li>Integrity hash generation</li>
+<li>Verification workflow with flagging</li>
+<li>Exception tracking and logging</li>
+</ul>
+<h3>✅ Documentation</h3>
+<ul>
+<li><strong>README.md</strong> - Complete feature documentation with usage examples</li>
+<li><strong>QUICKSTART.md</strong> - 10-minute getting started guide</li>
+<li><strong>IMPLEMENTATION.md</strong> - This file</li>
+</ul>
+<h2>Database Schema</h2>
+<h3>Tables Created</h3>
+<ol>
+<li><p><strong>evv_records</strong> - Main EVV compliance records</p>
+<ul>
+<li>All 6 federal data elements</li>
+<li>Location verification data</li>
+<li>Integrity hashes and checksums</li>
+<li>Sync metadata</li>
+<li>State-specific extensibility</li>
+</ul>
+</li>
+<li><p><strong>time_entries</strong> - Individual clock events</p>
+<ul>
+<li>Clock-in, clock-out, pause, resume, check-in</li>
+<li>Device information and GPS data</li>
+<li>Offline support with sync status</li>
+<li>Manual override tracking</li>
+</ul>
+</li>
+<li><p><strong>geofences</strong> - Location boundaries</p>
+<ul>
+<li>Circular and polygon shapes</li>
+<li>Performance metrics</li>
+<li>Auto-calibration support</li>
+<li>Success rate tracking</li>
+</ul>
+</li>
+</ol>
+<h3>Indexes</h3>
+<p>Optimized for:</p>
+<ul>
+<li>Visit-based lookups</li>
+<li>Date range queries</li>
+<li>Caregiver schedule views</li>
+<li>Pending sync queries</li>
+<li>Compliance reporting</li>
+<li>Geofence proximity searches</li>
+</ul>
+<h2>API Endpoints (Future)</h2>
+<p>The following REST API endpoints will be implemented in a future update:</p>
+<pre><code>POST   /api/evv/clock-in           - Clock in to start visit
+POST   /api/evv/clock-out          - Clock out to end visit
+POST   /api/evv/check-in           - Mid-visit location check
+POST   /api/evv/pause              - Pause visit
+POST   /api/evv/resume             - Resume visit
+GET    /api/evv/records/:id        - Get EVV record
+GET    /api/evv/visits/:visitId    - Get EVV record by visit
+GET    /api/evv/time-entries/:visitId - Get time entries
+POST   /api/evv/override           - Apply manual override
+POST   /api/geofences              - Create geofence
+GET    /api/geofences/:addressId   - Get geofence
+PATCH  /api/geofences/:id          - Update geofence
+POST   /api/evv/reports            - Generate compliance report
+GET    /api/evv/pending-sync       - Get entries needing sync
+POST   /api/evv/batch-sync         - Sync multiple entries
+</code></pre>
+<h2>Testing Strategy</h2>
+<h3>Unit Tests (TODO)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> EVV type validation</li>
+<li><input disabled="" type="checkbox"> Geofence distance calculations</li>
+<li><input disabled="" type="checkbox"> Integrity hash generation</li>
+<li><input disabled="" type="checkbox"> Mock location detection logic</li>
+<li><input disabled="" type="checkbox"> Time duration calculations</li>
+<li><input disabled="" type="checkbox"> Compliance flag rules</li>
+</ul>
+<h3>Integration Tests (TODO)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Clock-in/out workflow</li>
+<li><input disabled="" type="checkbox"> Geofence verification</li>
+<li><input disabled="" type="checkbox"> Manual override process</li>
+<li><input disabled="" type="checkbox"> Offline sync scenarios</li>
+<li><input disabled="" type="checkbox"> Database transactions</li>
+<li><input disabled="" type="checkbox"> Permission enforcement</li>
+</ul>
+<h3>Compliance Tests (TODO)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Federal data element capture</li>
+<li><input disabled="" type="checkbox"> State-specific requirements</li>
+<li><input disabled="" type="checkbox"> Audit trail completeness</li>
+<li><input disabled="" type="checkbox"> Data retention rules</li>
+<li><input disabled="" type="checkbox"> Encryption verification</li>
+<li><input disabled="" type="checkbox"> Integrity tamper detection</li>
+</ul>
+<h2>Security Considerations</h2>
+<h3>Implemented</h3>
+<ul>
+<li>✅ Role-based access control</li>
+<li>✅ Permission checks on all operations</li>
+<li>✅ Cryptographic hashing for integrity</li>
+<li>✅ Mock location detection</li>
+<li>✅ Rooted/jailbroken device detection</li>
+<li>✅ User context validation</li>
+</ul>
+<h3>TODO</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Encrypt PII fields (client_name, client_medicaid_id)</li>
+<li><input disabled="" type="checkbox"> Rate limiting for API endpoints</li>
+<li><input disabled="" type="checkbox"> Device fingerprinting</li>
+<li><input disabled="" type="checkbox"> Biometric verification</li>
+<li><input disabled="" type="checkbox"> Photo verification storage</li>
+<li><input disabled="" type="checkbox"> Secure key management for hashing</li>
+</ul>
+<h2>Performance Optimizations</h2>
+<h3>Current</h3>
+<ul>
+<li>JSONB for flexible nested data</li>
+<li>Indexes on common query patterns</li>
+<li>Efficient geofence distance calculations</li>
+<li>Bulk operations for sync</li>
+</ul>
+<h3>TODO</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Redis caching for geofences</li>
+<li><input disabled="" type="checkbox"> Background job processing for reports</li>
+<li><input disabled="" type="checkbox"> Batch operations for payor submission</li>
+<li><input disabled="" type="checkbox"> Database partitioning by date</li>
+<li><input disabled="" type="checkbox"> Read replicas for reporting</li>
+<li><input disabled="" type="checkbox"> CDN for photo/signature storage</li>
+</ul>
+<h2>State-Specific Requirements</h2>
+<h3>Extensible Design</h3>
+<p>The <code>state_specific_data</code> JSONB field allows storing additional data per state requirements:</p>
+<pre><code class="language-typescript">// Example: New York requirements
+stateSpecificData: {
+  state: &#39;NY&#39;,
+  additionalFields: {
+    taskCodes: [&#39;ADL-01&#39;, &#39;ADL-02&#39;],
+    serviceAuthNumber: &#39;AUTH-123&#39;,
+    countyCode: &#39;061&#39;,
+  }
+}
+
+// Example: California requirements  
+stateSpecificData: {
+  state: &#39;CA&#39;,
+  additionalFields: {
+    ihssCase: &#39;IHSS-456&#39;,
+    providerEnrollmentId: &#39;PE-789&#39;,
+    waiverId: &#39;WAIV-012&#39;,
+  }
+}
+</code></pre>
+<h3>TODO: State Implementations</h3>
+<ul>
+<li><input disabled="" type="checkbox"> New York state requirements</li>
+<li><input disabled="" type="checkbox"> California (IHSS) requirements</li>
+<li><input disabled="" type="checkbox"> Texas requirements</li>
+<li><input disabled="" type="checkbox"> Florida requirements</li>
+<li><input disabled="" type="checkbox"> Pennsylvania requirements</li>
+<li><input disabled="" type="checkbox"> State EVV aggregator integration</li>
+</ul>
+<h2>Integration Points</h2>
+<h3>With Other Verticals</h3>
+<ol>
+<li><p><strong>Scheduling &amp; Visit Management</strong></p>
+<ul>
+<li>Get visit details for EVV record creation</li>
+<li>Update visit status on clock-in/out</li>
+<li>Link to visit.id</li>
+</ul>
+</li>
+<li><p><strong>Client &amp; Demographics</strong></p>
+<ul>
+<li>Client name and Medicaid ID</li>
+<li>Service address for geofence</li>
+<li>Emergency contacts</li>
+</ul>
+</li>
+<li><p><strong>Caregiver &amp; Staff Management</strong></p>
+<ul>
+<li>Caregiver name and employee ID</li>
+<li>NPI number for billing</li>
+<li>Credentials and certifications</li>
+</ul>
+</li>
+<li><p><strong>Billing &amp; Invoicing</strong></p>
+<ul>
+<li>Verified hours for billing</li>
+<li>EVV records for claim submission</li>
+<li>Payor approval status</li>
+</ul>
+</li>
+<li><p><strong>Payroll Processing</strong></p>
+<ul>
+<li>Worked hours for payroll</li>
+<li>Clock-in/out times</li>
+<li>Break time calculations</li>
+</ul>
+</li>
+<li><p><strong>Compliance &amp; Documentation</strong></p>
+<ul>
+<li>Audit trail access</li>
+<li>Exception reporting</li>
+<li>Compliance reports</li>
+</ul>
+</li>
+</ol>
+<h3>External Integrations (TODO)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> State EVV aggregator APIs</li>
+<li><input disabled="" type="checkbox"> Medicaid Management Information Systems (MMIS)</li>
+<li><input disabled="" type="checkbox"> Electronic Data Interchange (EDI) for claims</li>
+<li><input disabled="" type="checkbox"> Payor portals (Medicare, Medicaid, private insurance)</li>
+<li><input disabled="" type="checkbox"> Third-party EVV vendors</li>
+<li><input disabled="" type="checkbox"> Background check services</li>
+<li><input disabled="" type="checkbox"> Mobile device management (MDM) systems</li>
+</ul>
+<h2>Mobile App Requirements</h2>
+<p>The mobile app should implement:</p>
+<h3>Core Features</h3>
+<ol>
+<li><p><strong>Clock In/Out UI</strong></p>
+<ul>
+<li>Large, accessible buttons</li>
+<li>GPS status indicator</li>
+<li>Battery level warning</li>
+<li>Network status</li>
+<li>Location accuracy display</li>
+</ul>
+</li>
+<li><p><strong>Offline Mode</strong></p>
+<ul>
+<li>Local SQLite database</li>
+<li>Queue pending entries</li>
+<li>Automatic sync when online</li>
+<li>Conflict resolution UI</li>
+</ul>
+</li>
+<li><p><strong>Location Services</strong></p>
+<ul>
+<li>Request high-accuracy GPS</li>
+<li>Background location tracking</li>
+<li>Geofence enter/exit events</li>
+<li>Mock location detection</li>
+</ul>
+</li>
+<li><p><strong>Device Security</strong></p>
+<ul>
+<li>Root/jailbreak detection</li>
+<li>Certificate pinning</li>
+<li>Secure storage (Keychain/KeyStore)</li>
+<li>Device ID generation</li>
+</ul>
+</li>
+<li><p><strong>User Experience</strong></p>
+<ul>
+<li>Push notifications for clock-in reminders</li>
+<li>Visit details display</li>
+<li>Task checklist</li>
+<li>Signature capture pad</li>
+<li>Photo capture</li>
+<li>Voice notes</li>
+</ul>
+</li>
+</ol>
+<h3>Platform-Specific</h3>
+<p><strong>iOS</strong>:</p>
+<ul>
+<li>CoreLocation for GPS</li>
+<li>LocalAuthentication for Face ID/Touch ID</li>
+<li>SQLite.swift for offline storage</li>
+<li>Background location permissions</li>
+</ul>
+<p><strong>Android</strong>:</p>
+<ul>
+<li>Google Play Services Location API</li>
+<li>BiometricPrompt for fingerprint</li>
+<li>Room database for offline storage</li>
+<li>Foreground service for background location</li>
+</ul>
+<h2>Deployment Checklist</h2>
+<h3>Development Environment</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> TypeScript types defined</li>
+<li><input checked="" disabled="" type="checkbox"> Repository layer implemented</li>
+<li><input checked="" disabled="" type="checkbox"> Validation layer implemented</li>
+<li><input checked="" disabled="" type="checkbox"> Service layer implemented</li>
+<li><input disabled="" type="checkbox"> Unit tests written</li>
+<li><input disabled="" type="checkbox"> Integration tests written</li>
+<li><input disabled="" type="checkbox"> API endpoints created</li>
+<li><input disabled="" type="checkbox"> Mobile SDK published</li>
+</ul>
+<h3>Staging Environment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Database migrations applied</li>
+<li><input disabled="" type="checkbox"> Indexes created</li>
+<li><input disabled="" type="checkbox"> Sample data seeded</li>
+<li><input disabled="" type="checkbox"> API deployed</li>
+<li><input disabled="" type="checkbox"> Mobile app beta testing</li>
+<li><input disabled="" type="checkbox"> Performance testing</li>
+<li><input disabled="" type="checkbox"> Security audit</li>
+</ul>
+<h3>Production Environment</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Database encrypted at rest</li>
+<li><input disabled="" type="checkbox"> PII fields encrypted</li>
+<li><input disabled="" type="checkbox"> TLS 1.3 enforced</li>
+<li><input disabled="" type="checkbox"> Rate limiting configured</li>
+<li><input disabled="" type="checkbox"> Monitoring and alerts setup</li>
+<li><input disabled="" type="checkbox"> Backup and disaster recovery</li>
+<li><input disabled="" type="checkbox"> Compliance audit completed</li>
+<li><input disabled="" type="checkbox"> Staff training completed</li>
+</ul>
+<h2>Regulatory Compliance</h2>
+<h3>Federal Requirements ✅</h3>
+<p><strong>21st Century Cures Act - Section 12006(a)</strong></p>
+<p>All six required data elements captured:</p>
+<ol>
+<li>✅ Type of service performed</li>
+<li>✅ Individual receiving the service  </li>
+<li>✅ Individual providing the service</li>
+<li>✅ Date of service</li>
+<li>✅ Location of service delivery</li>
+<li>✅ Time service begins and ends</li>
+</ol>
+<p>Additional federal requirements:</p>
+<ul>
+<li>✅ Electronic capture and transmission</li>
+<li>✅ Secure, tamper-evident records</li>
+<li>✅ Audit trail capability</li>
+<li>✅ Retention per CMS guidelines</li>
+<li>✅ Privacy and security standards</li>
+</ul>
+<h3>HIPAA Compliance</h3>
+<ul>
+<li>✅ Access control (role-based)</li>
+<li>✅ Audit logging</li>
+<li><input disabled="" type="checkbox"> Encryption at rest (TODO)</li>
+<li><input disabled="" type="checkbox"> Encryption in transit (TLS)</li>
+<li><input disabled="" type="checkbox"> Business Associate Agreements</li>
+<li><input disabled="" type="checkbox"> Breach notification procedures</li>
+<li><input disabled="" type="checkbox"> Patient rights (access, amendment)</li>
+</ul>
+<h3>State Compliance</h3>
+<ul>
+<li><input disabled="" type="checkbox"> State-specific data elements</li>
+<li><input disabled="" type="checkbox"> State EVV aggregator submission</li>
+<li><input disabled="" type="checkbox"> State audit requirements</li>
+<li><input disabled="" type="checkbox"> State retention requirements</li>
+</ul>
+<h2>Known Limitations</h2>
+<ol>
+<li><p><strong>Cryptographic Hashing</strong>: Current implementation uses simple hash functions for demonstration. Production should use SHA-256 from crypto library.</p>
+</li>
+<li><p><strong>Encryption</strong>: PII fields not yet encrypted at rest. Requires implementation of column-level encryption.</p>
+</li>
+<li><p><strong>Biometric Verification</strong>: Type definitions exist but actual biometric integration not implemented.</p>
+</li>
+<li><p><strong>Photo Storage</strong>: Photo URLs supported but no actual storage/CDN integration.</p>
+</li>
+<li><p><strong>State Requirements</strong>: Extensible design but no specific state implementations yet.</p>
+</li>
+<li><p><strong>Payor Submission</strong>: Data model supports it but no actual API integration with payors.</p>
+</li>
+<li><p><strong>Background Location</strong>: Requires mobile app implementation.</p>
+</li>
+<li><p><strong>Bluetooth Beacons</strong>: Not yet implemented (useful for indoor/basement locations).</p>
+</li>
+</ol>
+<h2>Future Enhancements</h2>
+<h3>Short Term (v0.2.0)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Complete unit test coverage</li>
+<li><input disabled="" type="checkbox"> REST API implementation</li>
+<li><input disabled="" type="checkbox"> Proper cryptographic hashing</li>
+<li><input disabled="" type="checkbox"> PII encryption at rest</li>
+<li><input disabled="" type="checkbox"> Basic mobile SDK</li>
+<li><input disabled="" type="checkbox"> State: New York requirements</li>
+</ul>
+<h3>Medium Term (v0.3.0)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Biometric verification integration</li>
+<li><input disabled="" type="checkbox"> Photo storage and CDN</li>
+<li><input disabled="" type="checkbox"> Bluetooth beacon support</li>
+<li><input disabled="" type="checkbox"> Real-time location tracking</li>
+<li><input disabled="" type="checkbox"> Advanced anomaly detection</li>
+<li><input disabled="" type="checkbox"> Multiple state implementations</li>
+<li><input disabled="" type="checkbox"> State EVV aggregator integration</li>
+</ul>
+<h3>Long Term (v1.0.0)</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Machine learning fraud detection</li>
+<li><input disabled="" type="checkbox"> Predictive geofence optimization</li>
+<li><input disabled="" type="checkbox"> Voice recognition clock-in</li>
+<li><input disabled="" type="checkbox"> NFC/QR code verification</li>
+<li><input disabled="" type="checkbox"> Wearable device support</li>
+<li><input disabled="" type="checkbox"> Video verification</li>
+<li><input disabled="" type="checkbox"> Route optimization</li>
+<li><input disabled="" type="checkbox"> Advanced analytics dashboard</li>
+</ul>
+<h2>Migration Guide</h2>
+<p>For upgrading from a system without EVV:</p>
+<h3>Phase 1: Setup (Week 1)</h3>
+<ol>
+<li>Run database migrations</li>
+<li>Create geofences for existing clients</li>
+<li>Configure state requirements</li>
+<li>Train supervisors on manual override</li>
+</ol>
+<h3>Phase 2: Pilot (Weeks 2-4)</h3>
+<ol>
+<li>Deploy mobile app to pilot caregivers</li>
+<li>Run parallel with existing system</li>
+<li>Monitor verification success rates</li>
+<li>Adjust geofences as needed</li>
+<li>Refine supervisor procedures</li>
+</ol>
+<h3>Phase 3: Rollout (Weeks 5-8)</h3>
+<ol>
+<li>Gradual rollout by branch</li>
+<li>Weekly review of exceptions</li>
+<li>Optimize geofence radiuses</li>
+<li>Integrate with billing system</li>
+<li>Submit test claims to payors</li>
+</ol>
+<h3>Phase 4: Full Production (Week 9+)</h3>
+<ol>
+<li>All visits using EVV</li>
+<li>Automated billing submission</li>
+<li>Regular compliance reports</li>
+<li>Ongoing monitoring and optimization</li>
+</ol>
+<h2>Support and Maintenance</h2>
+<h3>Monitoring</h3>
+<p>Key metrics to track:</p>
+<ul>
+<li>Verification success rate</li>
+<li>Average GPS accuracy</li>
+<li>Geofence violation rate</li>
+<li>Manual override frequency</li>
+<li>Sync failure rate</li>
+<li>Average visit duration</li>
+<li>Clock-out compliance</li>
+</ul>
+<h3>Alerts</h3>
+<p>Setup alerts for:</p>
+<ul>
+<li>High frequency of verification failures</li>
+<li>Sudden increase in manual overrides</li>
+<li>Multiple mock location detections</li>
+<li>Sync failures exceeding threshold</li>
+<li>Geofence success rate below 90%</li>
+<li>Unusual visit duration patterns</li>
+</ul>
+<h3>Maintenance Tasks</h3>
+<p><strong>Daily</strong>:</p>
+<ul>
+<li>Monitor sync queue</li>
+<li>Review flagged visits</li>
+<li>Process manual overrides</li>
+</ul>
+<p><strong>Weekly</strong>:</p>
+<ul>
+<li>Geofence optimization</li>
+<li>Exception pattern analysis</li>
+<li>Performance review</li>
+</ul>
+<p><strong>Monthly</strong>:</p>
+<ul>
+<li>Compliance report generation</li>
+<li>Audit trail review</li>
+<li>Security assessment</li>
+<li>State submission verification</li>
+</ul>
+<h2>Contributing</h2>
+<p>See <a href="../../CONTRIBUTING.md">CONTRIBUTING.md</a> for guidelines.</p>
+<p>Key areas needing contribution:</p>
+<ol>
+<li>State-specific implementations</li>
+<li>Mobile app development</li>
+<li>Biometric integration</li>
+<li>Advanced fraud detection</li>
+<li>Performance optimization</li>
+<li>Documentation and examples</li>
+</ol>
+<h2>License</h2>
+<p>AGPL-3.0 - See <a href="../../LICENSE">LICENSE</a></p>
+<hr>
+<p><strong>Care Commons</strong> - Shared care software, community owned<br>Brought to you by <a href="https://neighborhoodlab.org">Neighborhood Lab</a></p>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

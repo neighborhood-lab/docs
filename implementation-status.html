@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TX/FL Implementation Status - Care Commons Documentation</title>
+  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      hljs.highlightAll();
+      
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.sidebar');
+      if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+      
+      // Search functionality
+      const searchInput = document.getElementById('search-input');
+      const searchResults = document.getElementById('search-results');
+      
+      if (searchInput && searchResults) {
+        searchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          if (query.length < 2) {
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+            return;
+          }
+          
+          // Simple search through navigation items
+          const navItems = document.querySelectorAll('.sidebar a');
+          const matches = Array.from(navItems)
+            .filter(item => item.textContent.toLowerCase().includes(query))
+            .slice(0, 10);
+          
+          if (matches.length > 0) {
+            searchResults.innerHTML = matches
+              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
+              .join('');
+            searchResults.style.display = 'block';
+          } else {
+            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
+            searchResults.style.display = 'block';
+          }
+        });
+        
+        // Hide results when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1><a href="/index.html">Care Commons Docs</a></h1>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
+        <div id="search-results"></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-category">
+      <h3>🚀 Getting Started</h3>
+      <ul><li><a href="/api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="/claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="/claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="/database-quickstart.html">Database Quick Start</a></li><li><a href="/demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="/deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="/deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="/docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="/e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="/packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="/packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="/packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="/readme.html">Care Commons</a></li><li><a href="/scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="/showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="/showcase-readme.html">Care Commons Showcase</a></li><li><a href="/vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="/verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="/verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="/verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="/verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="/verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="/verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="/verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="/verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="/verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="/verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="/verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="/verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="/verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="/verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
+      <h3>📖 User Guides</h3>
+      <ul><li><a href="/claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="/docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="/docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="/packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="/rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="/showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="/showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="/showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="/sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="/verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="/verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="/verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="/verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="/verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="/verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="/verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="/verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
+      <h3>🏗️ Architecture & Deployment</h3>
+      <ul><li><a href="/github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="/github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="/github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="/autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="/claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="/cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="/deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="/deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="/deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="/deployment.html">Cloud Deployment Guide</a></li><li><a href="/docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="/docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="/docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="/docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="/hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="/implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="/implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="/offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="/offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="/packages-app-readme.html">Care Commons API Server</a></li><li><a href="/packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="/packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="/packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="/packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="/packages-web-architecture.html">Web Architecture</a></li><li><a href="/packages-web-readme.html">Care Commons Web UI</a></li><li><a href="/production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="/pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="/tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="/verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="/verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="/verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="/verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="/verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="/verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="/verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="/web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
+      <h3>⚙️ Implementation Details</h3>
+      <ul><li><a href="/github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="/github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="/agents.html">Agent Implementation Directives</a></li><li><a href="/api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="/auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="/claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="/claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="/claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="/claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="/claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="/claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="/claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="/claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="/claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="/claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="/claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="/claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="/claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="/claude-layer-1-input.html">Input</a></li><li><a href="/claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="/claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="/claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="/claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="/claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="/claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="/claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="/claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="/claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="/claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="/claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="/claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="/claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="/claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="/cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="/contributing.html">Contributing to Care Commons</a></li><li><a href="/cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="/create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="/database-environments.html">Database Environment Management</a></li><li><a href="/dev-setup.html">Development Setup Guide</a></li><li><a href="/docs-api-documentation.html">API Documentation</a></li><li><a href="/docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="/docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="/docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="/docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="/docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="/docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="/docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="/docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+      </nav>
+    </aside>
+    <main class="content">
+      <div class="breadcrumbs">
+      <a href="/index.html">Home</a> / 
+      <span>⚙️ Implementation Details</span> / 
+      <span>TX/FL Implementation Status</span>
+    </div>
+      <article class="markdown-content">
+        <h1>TX/FL Implementation Status</h1>
+<h2>Overview</h2>
+<p>This document tracks the implementation status of Texas and Florida state-specific requirements for the Scheduling &amp; Visit Management and Time Tracking &amp; EVV verticals.</p>
+<p><strong>Last Updated:</strong> 2024-01-25</p>
+<hr>
+<h2>✅ Completed Work</h2>
+<h3>1. State-Specific Type Definitions</h3>
+<p><strong>Location:</strong> <code>verticals/time-tracking-evv/src/types/state-specific.ts</code></p>
+<p>Comprehensive type definitions for TX/FL EVV requirements:</p>
+<ul>
+<li>✅ Texas EVV configuration (<code>TexasEVVConfig</code>)</li>
+<li>✅ Texas Medicaid program types (<code>TexasMedicaidProgram</code>)</li>
+<li>✅ Texas clock methods (<code>TexasClockMethod</code>)</li>
+<li>✅ Texas VMUR (Visit Maintenance Unlock Request) system</li>
+<li>✅ Florida EVV configuration with multi-aggregator support</li>
+<li>✅ Florida Medicaid programs (<code>FloridaMedicaidProgram</code>)</li>
+<li>✅ Florida MCO-specific requirements</li>
+<li>✅ State-specific validation rules helpers</li>
+<li>✅ Aggregator submission tracking</li>
+</ul>
+<h3>2. EVV Revision &amp; Audit Trail System</h3>
+<p><strong>Location:</strong> <code>verticals/time-tracking-evv/src/types/evv-revisions.ts</code></p>
+<p>Immutable audit trail implementation per TX/FL compliance:</p>
+<ul>
+<li>✅ <code>EVVRevision</code> type for tracking all record changes</li>
+<li>✅ <code>EVVOriginalData</code> for immutable baseline storage</li>
+<li>✅ <code>EVVAuditTrail</code> for complete change history</li>
+<li>✅ <code>EVVAccessLog</code> for HIPAA-compliant access tracking</li>
+<li>✅ <code>EVVRevisionRequest</code> for approval workflows</li>
+<li>✅ <code>EVVExceptionQueueItem</code> for anomaly management</li>
+<li>✅ Revision types covering all correction scenarios</li>
+<li>✅ Approval workflow types</li>
+</ul>
+<h3>3. Database Migrations</h3>
+<p><strong>Location:</strong> <code>packages/core/migrations/010_state_specific_evv.sql</code></p>
+<p>Production-ready database schema:</p>
+<ul>
+<li>✅ <code>evv_state_config</code> - State-specific EVV configuration per organization</li>
+<li>✅ <code>evv_revisions</code> - Append-only audit trail with integrity chain</li>
+<li>✅ <code>evv_original_data</code> - Immutable baseline data (never modified)</li>
+<li>✅ <code>evv_access_log</code> - HIPAA-compliant access tracking</li>
+<li>✅ <code>texas_vmur</code> - Texas Visit Maintenance Unlock Requests</li>
+<li>✅ <code>state_aggregator_submissions</code> - Aggregator submission tracking</li>
+<li>✅ <code>evv_exception_queue</code> - Exception queue with SLA tracking</li>
+<li>✅ Comprehensive indexes for performance</li>
+<li>✅ Triggers for auto-increment revision numbers</li>
+<li>✅ Foreign key constraints for data integrity</li>
+</ul>
+<h3>4. Provider Interface Definitions</h3>
+<p><strong>Location:</strong> <code>verticals/time-tracking-evv/src/interfaces/visit-provider.ts</code></p>
+<p>Clean integration contracts:</p>
+<ul>
+<li>✅ <code>IVisitProvider</code> - Visit data fetching from scheduling vertical</li>
+<li>✅ <code>IClientProvider</code> - Client demographic data</li>
+<li>✅ <code>ICaregiverProvider</code> - Caregiver credential/authorization checking</li>
+<li>✅ <code>EVVVisitData</code> - Complete visit data contract</li>
+<li>✅ Authorization validation methods</li>
+<li>✅ Visit status synchronization methods</li>
+</ul>
+<hr>
+<h2>✅ Recently Completed</h2>
+<h3>1. EVV Service Integration</h3>
+<p><strong>Location:</strong> <code>verticals/time-tracking-evv/src/service/evv-service.ts</code></p>
+<p><strong>Current State:</strong> ✅ <strong>PRODUCTION READY</strong> - All provider interfaces fully wired with real database queries (lines 87-93)</p>
+<p><strong>Completion Date:</strong> November 6, 2025</p>
+<p><strong>Implementation Details:</strong></p>
+<pre><code class="language-typescript">// Real provider integration (COMPLETED):
+const visitData = await this.visitProvider.getVisitForEVV(input.visitId);
+const client = await this.clientProvider.getClientForEVV(visitData.clientId);
+const caregiver = await this.caregiverProvider.getCaregiverForEVV(input.caregiverId);
+
+// Validate caregiver authorization with real credential checks
+const authCheck = await this.caregiverProvider.canProvideService(
+  input.caregiverId,
+  visitData.serviceTypeCode,
+  visitData.clientId
+);
+
+if (!authCheck.authorized) {
+  throw new ValidationError(
+    `Caregiver not authorized to provide service: ${authCheck.reason}`,
+    { missingCredentials: authCheck.missingCredentials }
+  );
+}
+</code></pre>
+<p><strong>Implemented Features:</strong></p>
+<ol>
+<li>✅ Real visit data from scheduling vertical (<code>IVisitProvider</code>)</li>
+<li>✅ Real client data from client demographics (<code>IClientProvider</code>)</li>
+<li>✅ Real caregiver data from caregiver staff (<code>ICaregiverProvider</code>)</li>
+<li>✅ Database-backed authorization validation</li>
+<li>✅ Comprehensive error handling (NotFoundError for missing records)</li>
+<li>✅ Full test coverage with regression protection</li>
+</ol>
+<p><strong>Verification:</strong> See <code>verticals/time-tracking-evv/TASK-0000-COMPLETION.md</code> for detailed completion report</p>
+<h2>🚧 In Progress / Needs Implementation</h2>
+<h3>1. Schedule Service Integration</h3>
+<p><strong>Location:</strong> <code>verticals/scheduling-visits/src/service/schedule-service.ts</code></p>
+<p><strong>Current State:</strong> Service contains mocked client address (lines 566-576)</p>
+<p><strong>Required Actions:</strong></p>
+<pre><code class="language-typescript">// REPLACE: getClientAddress method
+private async getClientAddress(clientId: UUID): Promise&lt;any&gt; {
+  // TODO: Integrate with client demographics service
+  // For now, return placeholder
+  return {
+    line1: &#39;123 Main St&#39;, // MOCKED
+    city: &#39;Springfield&#39;, // MOCKED
+    state: &#39;IL&#39;, // MOCKED
+    postalCode: &#39;62701&#39;, // MOCKED
+    country: &#39;US&#39;,
+  };
+}
+
+// Should become:
+private async getClientAddress(clientId: UUID): Promise&lt;VisitAddress&gt; {
+  const client = await this.clientProvider.getClientForScheduling(clientId);
+  
+  if (!client.serviceAddress) {
+    throw new ValidationError(&#39;Client has no service address configured&#39;);
+  }
+  
+  // Validate address is geocoded
+  if (!client.serviceAddress.latitude || !client.serviceAddress.longitude) {
+    throw new ValidationError(
+      &#39;Client address must be geocoded before scheduling visits&#39;
+    );
+  }
+  
+  return client.serviceAddress;
+}
+</code></pre>
+<h3>2. State-Specific Validation Enhancement</h3>
+<p><strong>Location:</strong> <code>verticals/time-tracking-evv/src/validation/evv-validator.ts</code></p>
+<p><strong>Required Additions:</strong></p>
+<pre><code class="language-typescript">/**
+ * Validate state-specific EVV requirements
+ */
+validateStateRequirements(
+  evvRecord: EVVRecord,
+  stateConfig: TexasEVVConfig | FloridaEVVConfig
+): VerificationResult {
+  // Texas-specific
+  if (stateConfig.state === &#39;TX&#39;) {
+    // Validate clock method is allowed
+    // Validate GPS required for mobile
+    // Validate grace period rules
+    // Validate VMUR requirements if applicable
+  }
+  
+  // Florida-specific
+  if (stateConfig.state === &#39;FL&#39;) {
+    // Validate aggregator selection
+    // Validate MCO-specific requirements
+    // Validate submission windows
+  }
+}
+
+/**
+ * Validate geographic requirements with state tolerance
+ */
+validateGeographicWithStateTolerance(
+  location: LocationVerification,
+  geofence: Geofence,
+  stateRules: StateEVVRules
+): GeofenceCheckResult {
+  // Apply state-specific tolerance
+  const effectiveRadius = geofence.radiusMeters + stateRules.geoFenceTolerance;
+  
+  // State-specific accuracy requirements
+  if (location.accuracy &gt; stateRules.minimumGPSAccuracy) {
+    // Flag as requiring manual review
+  }
+  
+  // ... implementation
+}
+</code></pre>
+<h3>3. Plan-of-Care Authorization Validation</h3>
+<p><strong>Location:</strong> <code>verticals/scheduling-visits/src/service/schedule-service.ts</code></p>
+<p><strong>Required Implementation:</strong></p>
+<pre><code class="language-typescript">/**
+ * Validate visit aligns with authorized plan-of-care
+ */
+private async validatePlanOfCareAuthorization(
+  input: CreateVisitInput
+): Promise&lt;void&gt; {
+  // Fetch active care plan for client
+  const carePlan = await this.carePlanProvider.getActiveCarePlan(input.clientId);
+  
+  if (!carePlan) {
+    throw new ValidationError(&#39;No active care plan found for client&#39;);
+  }
+  
+  // Validate service type is authorized
+  const authorizedService = carePlan.authorizedServices.find(
+    s =&gt; s.serviceTypeId === input.serviceTypeId
+  );
+  
+  if (!authorizedService) {
+    throw new ValidationError(
+      `Service type ${input.serviceTypeName} is not authorized in care plan`
+    );
+  }
+  
+  // Validate within authorization dates
+  const now = new Date();
+  if (authorizedService.startDate &gt; now || authorizedService.endDate &lt; now) {
+    throw new ValidationError(&#39;Service authorization is not currently valid&#39;);
+  }
+  
+  // Validate units available
+  if (authorizedService.unitsUsed &gt;= authorizedService.unitsAuthorized) {
+    throw new ValidationError(&#39;All authorized service units have been used&#39;);
+  }
+  
+  // State-specific validations (TX/FL)
+  await this.validateStateAuthorizationRules(
+    input,
+    carePlan,
+    authorizedService
+  );
+}
+</code></pre>
+<h3>4. EVV Aggregator Integration Layer</h3>
+<p><strong>Location:</strong> <code>verticals/time-tracking-evv/src/services/aggregator-service.ts</code> (NEW FILE NEEDED)</p>
+<p><strong>Required Implementation:</strong></p>
+<pre><code class="language-typescript">export class AggregatorService {
+  /**
+   * Submit EVV record to state aggregator
+   */
+  async submitToAggregator(
+    evvRecord: EVVRecord,
+    stateConfig: TexasEVVConfig | FloridaEVVConfig
+  ): Promise&lt;StateAggregatorSubmission&gt; {
+    // Select correct aggregator
+    const aggregatorId = selectAggregator(
+      stateConfig.state,
+      stateConfig,
+      evvRecord.payerId,
+      evvRecord.mcoId
+    );
+    
+    // Format payload per aggregator requirements
+    const payload = this.formatForAggregator(evvRecord, stateConfig);
+    
+    // Submit via HTTP/API
+    const response = await this.httpClient.post(
+      stateConfig.aggregatorSubmissionEndpoint,
+      payload,
+      { headers: this.getAuthHeaders(stateConfig) }
+    );
+    
+    // Track submission
+    return await this.repository.createSubmission({
+      evvRecordId: evvRecord.id,
+      aggregatorId,
+      payload,
+      response,
+      // ... tracking data
+    });
+  }
+  
+  /**
+   * Handle aggregator webhook callbacks
+   */
+  async handleAggregatorCallback(
+    submissionId: UUID,
+    status: &#39;ACCEPTED&#39; | &#39;REJECTED&#39;,
+    response: unknown
+  ): Promise&lt;void&gt; {
+    // Update submission status
+    // Create exception if rejected
+    // Notify stakeholders
+  }
+}
+</code></pre>
+<hr>
+<h2>📋 Key Integration Points Summary</h2>
+<h3>Vertical Dependencies</h3>
+<pre><code>time-tracking-evv
+├── REQUIRES: Visit data from scheduling-visits
+│   └── Interface: IVisitProvider
+├── REQUIRES: Client data from client-demographics
+│   └── Interface: IClientProvider
+├── REQUIRES: Caregiver data from caregiver-staff
+│   └── Interface: ICaregiverProvider
+└── REQUIRES: Care plan data from care-plans-tasks
+    └── Interface: ICarePlanProvider (needs creation)
+
+scheduling-visits
+├── REQUIRES: Client address from client-demographics
+│   └── Method: getClientForScheduling()
+├── REQUIRES: Care plan authorization from care-plans-tasks
+│   └── Method: getActiveCarePlan()
+└── REQUIRES: Caregiver credentials from caregiver-staff
+    └── Method: canProvideService()
+</code></pre>
+<h3>External System Dependencies</h3>
+<pre><code>EVV Aggregators
+├── Texas: HHAeXchange (mandatory)
+│   ├── Submit EVV data
+│   ├── Receive confirmation
+│   └── Handle VMURs
+└── Florida: Multi-aggregator
+    ├── HHAeXchange
+    ├── Netsmart/Tellus
+    ├── iConnect
+    └── Route by payer/MCO
+
+Geocoding Service
+└── Validate and geocode client addresses
+    └── Required before visit scheduling
+
+State Registry APIs
+├── Texas HHSC APIs
+│   ├── Employee Misconduct Registry
+│   └── Nurse Aide Registry
+└── Florida AHCA APIs
+    └── Level 2 Background Screening
+</code></pre>
+<hr>
+<h2>🎯 Recommended Implementation Order</h2>
+<h3>Phase 1: Core Integration (High Priority)</h3>
+<ol>
+<li><p><strong>Implement IVisitProvider</strong> in scheduling-visits</p>
+<ul>
+<li>Create concrete implementation</li>
+<li>Remove mocked visit data from EVV service</li>
+</ul>
+</li>
+<li><p><strong>Implement IClientProvider</strong> in client-demographics</p>
+<ul>
+<li>Fetch client data for EVV</li>
+<li>Fetch client address for scheduling</li>
+</ul>
+</li>
+<li><p><strong>Implement ICaregiverProvider</strong> in caregiver-staff</p>
+<ul>
+<li>Validate credentials and authorizations</li>
+<li>Check background screening status</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 2: State-Specific Validation (High Priority)</h3>
+<ol start="4">
+<li><p><strong>Add state-specific validation to EVVValidator</strong></p>
+<ul>
+<li>Geographic tolerance by state</li>
+<li>Clock method validation</li>
+<li>Grace period checks</li>
+</ul>
+</li>
+<li><p><strong>Implement plan-of-care authorization validation</strong></p>
+<ul>
+<li>Create ICarePlanProvider interface</li>
+<li>Validate visits against authorized services</li>
+<li>Check authorization dates and units</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 3: Aggregator Integration (Medium Priority)</h3>
+<ol start="6">
+<li><p><strong>Create AggregatorService</strong></p>
+<ul>
+<li>HHAeXchange integration (TX mandatory, FL optional)</li>
+<li>Multi-aggregator routing for FL</li>
+<li>Webhook callback handling</li>
+</ul>
+</li>
+<li><p><strong>Implement VMUR workflow</strong> (Texas-specific)</p>
+<ul>
+<li>Create request approval UI</li>
+<li>Track corrections</li>
+<li>Submit to aggregator</li>
+</ul>
+</li>
+</ol>
+<h3>Phase 4: Exception Queue &amp; Reporting (Medium Priority)</h3>
+<ol start="8">
+<li><p><strong>Build exception queue UI</strong></p>
+<ul>
+<li>Dashboard for exceptions</li>
+<li>Assignment workflow</li>
+<li>Resolution tracking</li>
+</ul>
+</li>
+<li><p><strong>Create compliance reports</strong></p>
+<ul>
+<li>State-specific reporting formats</li>
+<li>Export to aggregator formats</li>
+<li>Audit trail reports</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>🧪 Testing Requirements</h2>
+<h3>Unit Tests Needed</h3>
+<ul>
+<li><input disabled="" type="checkbox"> State-specific validation logic</li>
+<li><input disabled="" type="checkbox"> Geofence tolerance calculations</li>
+<li><input disabled="" type="checkbox"> Revision integrity chain validation</li>
+<li><input disabled="" type="checkbox"> VMUR reason code validation</li>
+<li><input disabled="" type="checkbox"> Aggregator payload formatting</li>
+</ul>
+<h3>Integration Tests Needed</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Complete clock-in/out workflow</li>
+<li><input disabled="" type="checkbox"> Multi-aggregator routing (FL)</li>
+<li><input disabled="" type="checkbox"> VMUR approval workflow (TX)</li>
+<li><input disabled="" type="checkbox"> Exception queue processing</li>
+<li><input disabled="" type="checkbox"> State-specific validation</li>
+</ul>
+<h3>End-to-End Tests Needed</h3>
+<ul>
+<li><input disabled="" type="checkbox"> Full visit lifecycle (TX scenario)</li>
+<li><input disabled="" type="checkbox"> Full visit lifecycle (FL scenario)</li>
+<li><input disabled="" type="checkbox"> EVV anomaly detection and resolution</li>
+<li><input disabled="" type="checkbox"> Aggregator submission and callback</li>
+<li><input disabled="" type="checkbox"> Compliance report generation</li>
+</ul>
+<hr>
+<h2>📦 Seed Data Requirements</h2>
+<h3>Texas Scenario</h3>
+<ul>
+<li>Organization with TX state config</li>
+<li>Clients with TX Medicaid IDs</li>
+<li>STAR+PLUS program configuration</li>
+<li>Caregivers with TX registry clearances</li>
+<li>Visits with GPS-based EVV</li>
+<li>Sample VMUR corrections</li>
+</ul>
+<h3>Florida Scenario</h3>
+<ul>
+<li>Organization with FL state config</li>
+<li>Clients with FL Medicaid IDs</li>
+<li>SMMC LTC program configuration</li>
+<li>Caregivers with Level 2 screening clearances</li>
+<li>Multi-aggregator setup</li>
+<li>MCO-specific requirements</li>
+</ul>
+<hr>
+<h2>⚠️ Critical Compliance Notes</h2>
+<h3>Texas Specifics</h3>
+<ol>
+<li><strong>MANDATORY</strong> GPS for mobile visits per HHSC policy</li>
+<li><strong>MANDATORY</strong> VMUR for corrections after 30 days</li>
+<li><strong>MANDATORY</strong> HHAeXchange aggregator submission</li>
+<li>Grace periods: 10 min clock-in, 10 min clock-out</li>
+<li>Geofence tolerance: 100m base + 50m GPS accuracy</li>
+<li>Data retention: Minimum 6 years</li>
+</ol>
+<h3>Florida Specifics</h3>
+<ol>
+<li><strong>FLEXIBLE</strong> EVV vendor choice (open model)</li>
+<li><strong>REQUIRED</strong> Six Cures Act data elements</li>
+<li><strong>REQUIRED</strong> Multi-aggregator support for MCOs</li>
+<li>Grace periods: 15 min clock-in, 15 min clock-out  </li>
+<li>Geofence tolerance: 150m base + 100m GPS accuracy</li>
+<li>Data retention: Minimum 6 years</li>
+</ol>
+<hr>
+<h2>📚 Reference Documentation</h2>
+<h3>Texas</h3>
+<ul>
+<li>HHSC EVV Policy Handbook</li>
+<li>HHAeXchange Provider Portal Guide</li>
+<li>26 TAC §§558 (HCSSA licensing)</li>
+<li>Texas Medicaid Provider Agreement</li>
+</ul>
+<h3>Florida</h3>
+<ul>
+<li>AHCA EVV Program Requirements</li>
+<li>Florida Statute 400.487 (home health services)</li>
+<li>Chapter 59A-8 (home health licensing)</li>
+<li>SMMC and MMA program specifications</li>
+</ul>
+<hr>
+<h2>🔄 Version History</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Version</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2024-01-25</td>
+<td>1.0</td>
+<td>Initial implementation status document</td>
+</tr>
+</tbody></table>
+
+      </article>
+      <footer class="content-footer">
+        <p>
+          <strong>Care Commons</strong> - Shared care software, community owned<br>
+          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
+        </p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
