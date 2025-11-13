@@ -95,316 +95,495 @@
       <span>Cloudflare Deployment Guide</span>
     </div>
       <article class="markdown-content">
-        <h1>Cloudflare Deployment Guide</h1>
-<p>This guide covers deploying Care Commons to Cloudflare&#39;s edge platform. We maintain <strong>dual deployment support</strong> for both Vercel (default) and Cloudflare.</p>
-<h2>Architecture Overview</h2>
-<h3>Cloudflare Deployment Stack</h3>
-<ul>
-<li><strong>Frontend</strong>: Cloudflare Pages (React SPA)</li>
-<li><strong>API</strong>: Cloudflare Workers (Express on edge)</li>
-<li><strong>Database</strong>: Neon PostgreSQL (via Hyperdrive for connection pooling)</li>
-<li><strong>Cache</strong>: Cloudflare KV (optional, alternative to Redis)</li>
-<li><strong>Storage</strong>: Cloudflare R2 (optional, for file uploads)</li>
-<li><strong>CDN</strong>: Cloudflare global edge network</li>
-</ul>
-<h3>vs Vercel Deployment</h3>
+        <h1>Deploying Care Commons to Cloudflare's Edge Network</h1>
+
+<h2>What Edge Deployment Actually Means</h2>
+
+<p>When you run software in the cloud, the first question is always: where? Traditional cloud deployment means picking a location—maybe US-East in Virginia, or EU-West in Ireland—and running your application there. Everyone who uses your software connects to that single location, no matter where they physically are. A caregiver in San Diego talks to servers in Virginia. A coordinator in Seattle talks to those same Virginia servers. Every request crosses thousands of miles of internet infrastructure.</p>
+
+<p>Edge deployment inverts this model entirely. Instead of bringing users to your servers, you bring servers to your users. Cloudflare operates data centers in over 300 cities worldwide. When you deploy to their edge network, your code doesn't live in one place—it lives everywhere simultaneously. A request from San Diego is handled by servers in Los Angeles. A request from London is handled by servers in London. The application is physically closer to every user, and that proximity translates directly into speed.</p>
+
+<p>This matters especially for Care Commons because home health happens in real time. When a caregiver arrives at a client's home and needs to pull up today's care plan, or when they clock in for their shift using GPS verification, every millisecond of latency makes the interface feel slower and less responsive. Edge deployment keeps that interaction snappy regardless of geography.</p>
+
+<h2>Why We Built for Both Vercel and Cloudflare</h2>
+
+<p>Most open-source projects pick one deployment platform and call it done. We deliberately support two: Vercel and Cloudflare. They represent different philosophies about how web applications should work, and different agencies will benefit from different approaches.</p>
+
+<p>Vercel excels at developer experience. Their platform is deeply integrated—database, functions, frontend hosting, storage all work together seamlessly with minimal configuration. You connect your GitHub repository, set a few environment variables, and you're deployed. It's opinionated in the best sense: they've made decisions that eliminate configuration burden. For a small agency getting started, or for developers who want to focus on features rather than infrastructure, Vercel is the right choice.</p>
+
+<p>Cloudflare optimizes for performance and cost at scale. Their Workers run in V8 isolates rather than containers, which means they start instantly with no cold start penalty. Their edge network is legitimately global—not just "a few regions" global, but "everywhere people actually live" global. And their pricing model charges for actual usage rather than team seats, making them dramatically cheaper as you grow. A ten-person team on Vercel costs $200 monthly before you serve a single request; that same team on Cloudflare typically pays $5-10 total based on traffic.</p>
+
+<p>The architectural differences have practical implications for home health. If your agency serves one metro area—say, Greater Boston—regional deployment (Vercel) works perfectly. Everyone's within 100 miles, latency is already low, and Vercel's integrated platform accelerates development. But if you serve multiple states, or if you're planning national expansion, edge deployment becomes compelling. A caregiver checking in from rural Montana gets the same instant response as one in downtown Chicago because both requests are handled locally.</p>
+
+<h2>Our Philosophy on Pricing and Support</h2>
+
+<p>Care Commons exists to serve caregivers, not to extract maximum revenue from home health agencies. We're community-owned software built by people who believe that care work deserves better tools than what the market provides. Quality software shouldn't force agencies to choose between modern technology and paying their staff fairly.</p>
+
+<p>With that in mind, we will be lenient with our first customers. We want to provide as close to a zero-cost experience as possible for small agencies. If you're running on tight margins and serving your community, we'll work with you. Both Cloudflare and Vercel offer generous free tiers, and we've architected Care Commons to live comfortably within those limits for smaller deployments.</p>
+
+<p>That said, infrastructure costs money. Hosting isn't free; databases aren't free; support takes time we could spend building features. If Care Commons creates value for your organization—if it helps your coordinators schedule more effectively, if it makes compliance easier, if it saves your caregivers time clocking in and documenting visits—please consider supporting our continued development through <a href="https://www.patreon.com/neighborhoodlab" target="_blank">Patreon</a>. Your donations directly fund new features, documentation improvements, and responsive support for the care community. We're not building a venture-funded startup here; we're building sustainable community infrastructure, and that requires community support.</p>
+
+<h2>Understanding the Cloudflare Architecture</h2>
+
+<p>A Cloudflare deployment of Care Commons involves several services working together. Understanding what each piece does, and why we chose it, helps you maintain and troubleshoot your installation.</p>
+
+<p><strong>Cloudflare Pages</strong> hosts your frontend—the React application that coordinators and admins interact with in their browsers. Pages is essentially a globally distributed static site host with edge rendering capabilities. When someone loads care-commons.com, they're served HTML, CSS, and JavaScript from the Cloudflare data center nearest them. This makes the initial page load fast regardless of location, and it's completely free for unlimited bandwidth.</p>
+
+<p><strong>Cloudflare Workers</strong> run your API backend. This is where business logic lives: authentication, scheduling algorithms, EVV validation, all the server-side code that makes Care Commons function. Workers use V8 isolates—the same JavaScript engine that powers Chrome—rather than traditional containers. This architectural choice means they start in under a millisecond with no cold starts. The free tier includes 100,000 requests per day, which is plenty for small agencies. Unlike traditional serverless functions that might take 100-200ms to wake up, Workers respond instantly every single time.</p>
+
+<p><strong>Supabase Postgres</strong> is your database. We specifically chose Supabase over plain PostgreSQL providers like Neon because Supabase offers more than just database access. It includes built-in authentication (handling user login, sessions, password resets), real-time subscriptions (so coordinators see schedule changes instantly without refreshing), and file storage (for clinical photos and documents). This eliminates entire categories of code you'd otherwise need to write and maintain. Supabase's free tier provides 500MB of database storage and 1GB of file storage, which handles thousands of clients and visits.</p>
+
+<p><strong>Cloudflare Hyperdrive</strong> sits between Workers and Supabase, acting as an intelligent connection pooler and query cache. Here's the problem it solves: every Worker execution needs a database connection, but Workers run in 300+ locations while your database lives in one region. Opening a new connection for every request would be slow and would exhaust Supabase's connection limit. Hyperdrive maintains persistent connections to your database and intelligently caches frequently-read data at the edge. When a Worker in Sydney needs to read a care plan, Hyperdrive might serve that from cache without touching the database at all, dramatically reducing latency.</p>
+
+<p><strong>Cloudflare R2</strong> handles object storage—files that don't belong in a database. Think clinical photos, uploaded documents, PDF exports of visit reports. R2 is S3-compatible, meaning it works with standard S3 libraries and tools, but with one crucial difference: no egress fees. Amazon S3 charges you to upload data (ingress) and again to download it (egress). For a bucket storing clinical photos that staff view frequently, egress fees can dwarf storage costs. R2 only charges for storage and operations, making it dramatically cheaper for read-heavy workloads. The free tier includes 10GB storage and a million operations monthly.</p>
+
+<p><strong>Cloudflare KV</strong> (Key-Value storage) provides globally replicated caching for temporary data like session tokens or frequently-accessed configuration. It's eventually consistent, meaning writes might take a few seconds to propagate everywhere, but reads are always local and instant. For Care Commons, we use KV for caching schedules, caregiver availability, and other data that changes occasionally but gets read constantly. This reduces database load and keeps the application responsive even during peak usage.</p>
+
+<h3>Comparing Deployment Options</h3>
+
+<p>Here's how our Cloudflare stack differs from the Vercel deployment in practical terms:</p>
+
 <table>
 <thead>
 <tr>
-<th>Component</th>
-<th>Vercel</th>
-<th>Cloudflare</th>
+<th>What It Does</th>
+<th>Vercel Approach</th>
+<th>Cloudflare Approach</th>
+<th>Why It Matters</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>Frontend</td>
-<td>Vercel Edge</td>
+<tbody>
+<tr>
+<td>Serves frontend files</td>
+<td>Vercel Edge Network</td>
 <td>Cloudflare Pages</td>
+<td>Both are edge networks; performance is nearly identical</td>
 </tr>
 <tr>
-<td>API</td>
-<td>Vercel Serverless</td>
-<td>Cloudflare Workers</td>
+<td>Runs API logic</td>
+<td>Serverless Functions</td>
+<td>Workers (V8 Isolates)</td>
+<td>Workers have zero cold start; serverless can take 100-200ms to wake up</td>
 </tr>
 <tr>
-<td>Database</td>
-<td>Neon PostgreSQL</td>
-<td>Neon PostgreSQL via Hyperdrive</td>
+<td>Stores application data</td>
+<td>Neon Postgres</td>
+<td>Supabase Postgres</td>
+<td>Supabase adds auth, real-time, and file storage built-in</td>
 </tr>
 <tr>
-<td>Cache</td>
-<td>Redis/Upstash</td>
-<td>Cloudflare KV</td>
+<td>Manages database connections</td>
+<td>Neon's built-in pooling</td>
+<td>Hyperdrive</td>
+<td>Hyperdrive adds edge caching for frequently-read data</td>
 </tr>
 <tr>
-<td>File Storage</td>
-<td>Vercel Blob</td>
+<td>Stores files (photos, documents)</td>
+<td>Vercel Blob Storage</td>
 <td>Cloudflare R2</td>
+<td>R2 has zero egress fees; costs 5-10x less for read-heavy workloads</td>
 </tr>
 <tr>
-<td>Pricing</td>
-<td>$20/mo per member</td>
-<td>~$5/mo for typical usage</td>
+<td>Costs for a 5-person team</td>
+<td>$100/month minimum</td>
+<td>$5-15/month based on usage</td>
+<td>Cloudflare charges for traffic, not team size</td>
 </tr>
-</tbody></table>
-<h2>Prerequisites</h2>
-<ol>
-<li><p><strong>Cloudflare Account</strong> (Free or Pro)</p>
-<ul>
-<li>Sign up at <a href="https://dash.cloudflare.com/sign-up">https://dash.cloudflare.com/sign-up</a></li>
-</ul>
-</li>
-<li><p><strong>Wrangler CLI</strong> (Already installed globally)</p>
-<pre><code class="language-bash">wrangler --version  # Should show 4.47.0+
-</code></pre>
-</li>
-<li><p><strong>Domain</strong> (Optional but recommended)</p>
-<ul>
-<li>Add your domain to Cloudflare</li>
-<li>Update DNS to use Cloudflare nameservers</li>
-</ul>
-</li>
-<li><p><strong>Neon Database</strong> (Existing PostgreSQL database)</p>
-<ul>
-<li>Connection string from Neon dashboard</li>
-</ul>
-</li>
-</ol>
-<h2>Initial Setup</h2>
-<h3>1. Authenticate with Cloudflare</h3>
-<pre><code class="language-bash">wrangler login
-</code></pre>
-<p>This opens a browser to authenticate. Grant Wrangler access to your account.</p>
-<h3>2. Create Hyperdrive Configuration (Recommended)</h3>
-<p>Hyperdrive provides connection pooling and reduces latency for PostgreSQL:</p>
-<pre><code class="language-bash"># Get your Neon connection string
-export DATABASE_URL=&quot;postgresql://user:pass@host.neon.tech:5432/dbname?sslmode=require&quot;
+</tbody>
+</table>
 
-# Create Hyperdrive configuration
-wrangler hyperdrive create care-commons-db --connection-string=&quot;$DATABASE_URL&quot;
+<p>Neither stack is universally better. Vercel wins on simplicity and integration; Cloudflare wins on performance and cost efficiency. Your choice depends on your priorities and technical comfort level.</p>
+<h2>What You Need Before Deploying</h2>
 
-# Save the returned ID and update wrangler.toml:
-# [[hyperdrive]]
-# binding = &quot;DATABASE&quot;
-# id = &quot;YOUR_HYPERDRIVE_ID&quot;
-</code></pre>
-<h3>3. Set Secrets</h3>
-<pre><code class="language-bash"># Database (if not using Hyperdrive)
-wrangler secret put DATABASE_URL
+<p>Before you can deploy Care Commons to Cloudflare, you need accounts and tools set up. Some of these are required; others are optional but recommended depending on your needs.</p>
 
-# JWT secrets (generate with: openssl rand -base64 32)
-wrangler secret put JWT_SECRET
-wrangler secret put JWT_REFRESH_SECRET
-wrangler secret put SESSION_SECRET
+<h3>Required: A Cloudflare Account</h3>
 
-# Encryption key (generate with: openssl rand -hex 32)
-wrangler secret put ENCRYPTION_KEY
+<p>Sign up for a free Cloudflare account at <a href="https://dash.cloudflare.com/sign-up">dash.cloudflare.com/sign-up</a>. The free tier is genuinely useful—it's not a time-limited trial or a crippled version. You get access to Workers, Pages, R2, KV, and Hyperdrive with generous usage limits that handle small-to-medium deployments comfortably. You can always upgrade to the Workers Paid plan ($5/month) later if you exceed free tier limits, but many agencies run production workloads indefinitely on the free tier.</p>
 
-# Google OAuth (optional)
-wrangler secret put GOOGLE_CLIENT_ID
-wrangler secret put GOOGLE_CLIENT_SECRET
+<h3>Required: Wrangler Command Line Tool</h3>
 
-# Geocoding API key
-wrangler secret put GEOCODING_API_KEY
+<p>Wrangler is Cloudflare's CLI for deploying and managing Workers, Pages, and related services. If you've already worked with the Care Commons codebase, you likely have it installed. You can verify by running:</p>
 
-# Sentry DSN (optional)
-wrangler secret put SENTRY_DSN
-</code></pre>
-<h3>4. Configure KV Namespaces (Optional - for caching)</h3>
-<pre><code class="language-bash"># Create KV namespace for caching
-wrangler kv:namespace create &quot;CACHE&quot;
-wrangler kv:namespace create &quot;CACHE&quot; --preview
+<pre><code class="language-bash">wrangler --version</code></pre>
 
-# Update wrangler.toml with the returned IDs:
-# [[kv_namespaces]]
-# binding = &quot;CACHE&quot;
-# id = &quot;YOUR_KV_NAMESPACE_ID&quot;
-# preview_id = &quot;YOUR_PREVIEW_KV_NAMESPACE_ID&quot;
-</code></pre>
-<h3>5. Configure R2 Bucket (Optional - for file uploads)</h3>
-<pre><code class="language-bash"># Create R2 bucket for uploads
-wrangler r2 bucket create care-commons-uploads
-wrangler r2 bucket create care-commons-uploads-preview
+<p>You want version 4.47.0 or newer. If it's not installed, or if your version is outdated, install it globally with npm:</p>
 
-# Update wrangler.toml
-</code></pre>
-<h2>Deployment</h2>
-<h3>Deploy API (Cloudflare Workers)</h3>
-<pre><code class="language-bash"># Staging environment
-npm run deploy:cloudflare:staging
+<pre><code class="language-bash">npm install -g wrangler@latest</code></pre>
 
-# Production environment
-npm run deploy:cloudflare:production
+<h3>Required: A Supabase Account and Database</h3>
 
-# Or use wrangler directly
-wrangler deploy --env production
-</code></pre>
-<h3>Deploy Frontend (Cloudflare Pages)</h3>
-<h4>Option 1: CLI Deployment</h4>
-<pre><code class="language-bash"># Build frontend
-npm run build:web
+<p>Create a free Supabase account at <a href="https://supabase.com" target="_blank">supabase.com</a> and set up a new project. Supabase will provision a PostgreSQL database for you, along with authentication services and file storage. You'll need the connection string, which you can find in your project settings under "Database → Connection String". It looks something like:</p>
 
-# Deploy to Cloudflare Pages
-npm run deploy:cloudflare:pages
-</code></pre>
-<h4>Option 2: Git Integration (Recommended for CI/CD)</h4>
-<ol>
-<li><p>Go to Cloudflare Dashboard → Pages</p>
-</li>
-<li><p>Click &quot;Create a project&quot;</p>
-</li>
-<li><p>Connect to GitHub repository</p>
-</li>
-<li><p>Configure build settings:</p>
+<pre><code>postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres</code></pre>
+
+<p>Save this—you'll need it when configuring Hyperdrive shortly.</p>
+
+<h3>Optional but Recommended: A Custom Domain</h3>
+
+<p>Cloudflare will give you a default domain for your deployment (something like `care-commons-xyz.pages.dev`), but most agencies want their own domain like `app.youragncy.com`. If you have a domain, add it to your Cloudflare account and update your domain's nameservers to point to Cloudflare. This lets Cloudflare manage DNS and automatically provision SSL certificates.</p>
+
+<p>If you don't have a domain yet, you can deploy without one and add it later. The functionality is identical; it's purely about branding and memorability.</p>
+
+<h2>Setting Up Your Deployment</h2>
+
+<p>Deployment setup involves configuring services and setting secrets. We'll walk through this step by step, explaining what each piece does and why it matters.</p>
+
+<h3>Step One: Authenticate Wrangler with Your Cloudflare Account</h3>
+
+<p>Run this command in your terminal:</p>
+
+<pre><code class="language-bash">wrangler login</code></pre>
+
+<p>This opens your browser and asks you to grant Wrangler permission to manage your Cloudflare account. Once you authorize it, Wrangler stores credentials locally so future commands work automatically. You only need to do this once per computer.</p>
+
+<h3>Step Two: Create a Hyperdrive Configuration for Database Access</h3>
+
+<p>Hyperdrive acts as an intelligent intermediary between your Workers and Supabase database. Without it, every Worker execution would open a new database connection, which is slow and quickly exhausts connection limits. Hyperdrive pools connections and caches queries, dramatically improving performance.</p>
+
+<p>Create a Hyperdrive configuration using your Supabase connection string:</p>
+
+<pre><code class="language-bash"># Replace with your actual Supabase connection string
+export DATABASE_URL="postgresql://postgres:[password]@db.[project-ref].supabase.co:5432/postgres"
+
+wrangler hyperdrive create care-commons-db --connection-string="$DATABASE_URL"</code></pre>
+
+<p>Wrangler will return a Hyperdrive ID. Copy this—you'll add it to your `wrangler.toml` configuration file. Open `wrangler.toml` in the Care Commons repository and add or update the hyperdrive section:</p>
+
+<pre><code class="language-toml">[[hyperdrive]]
+binding = "DATABASE"
+id = "your-hyperdrive-id-here"</code></pre>
+
+<p>The `binding` name ("DATABASE") is how your Worker code references this connection. The Care Commons codebase expects this specific name, so don't change it unless you're also updating the application code.</p>
+
+<h3>Step Three: Configure Secrets</h3>
+
+<p>Secrets are sensitive values—passwords, API keys, encryption keys—that your application needs but shouldn't be visible in code or logs. Cloudflare stores them encrypted and injects them into your Workers at runtime.</p>
+
+<p>You'll need to set several secrets. For security-sensitive values like JWT secrets and encryption keys, generate random values rather than using predictable ones. The commands below show how:</p>
+
+<pre><code class="language-bash"># Generate and set JWT secret (used to sign authentication tokens)
+openssl rand -base64 32 | wrangler secret put JWT_SECRET
+
+# Generate and set refresh token secret
+openssl rand -base64 32 | wrangler secret put JWT_REFRESH_SECRET
+
+# Generate and set session secret
+openssl rand -base64 32 | wrangler secret put SESSION_SECRET
+
+# Generate and set encryption key (for SSN, medical info, etc.)
+openssl rand -hex 32 | wrangler secret put ENCRYPTION_KEY</code></pre>
+
+<p>Each command generates a cryptographically random value and immediately stores it as a Cloudflare secret. You won't see the values printed—that's intentional. They're stored securely and you don't need to remember them; the Worker accesses them automatically.</p>
+
+<p>If you're using Google OAuth for authentication, you'll need to set those credentials too:</p>
+
+<pre><code class="language-bash">wrangler secret put GOOGLE_CLIENT_ID
+wrangler secret put GOOGLE_CLIENT_SECRET</code></pre>
+
+<p>For these, you'll need to paste the actual values from your Google Cloud Console OAuth configuration. The command prompts you to enter the secret value interactively.</p>
+
+<p>If you're using geocoding for EVV location verification, set your geocoding API key:</p>
+
+<pre><code class="language-bash">wrangler secret put GEOCODING_API_KEY</code></pre>
+
+<p>Care Commons supports both Mapbox and Google Maps APIs for geocoding. Mapbox is generally cheaper for low-to-medium volume usage.</p>
+
+<p>Finally, if you're using Sentry for error monitoring (optional but recommended for production), set your DSN:</p>
+
+<pre><code class="language-bash">wrangler secret put SENTRY_DSN</code></pre>
+
+<h3>Step Four: Set Up KV for Caching (Optional)</h3>
+
+<p>KV (Key-Value) storage provides globally replicated caching. It's optional—Care Commons works without it—but it significantly improves performance by caching frequently-accessed data like schedules and caregiver availability.</p>
+
+<p>Create two KV namespaces: one for production, one for preview deployments:</p>
+
+<pre><code class="language-bash">wrangler kv:namespace create "CACHE"
+wrangler kv:namespace create "CACHE" --preview</code></pre>
+
+<p>Each command returns a namespace ID. Add both to your `wrangler.toml`:</p>
+
+<pre><code class="language-toml">[[kv_namespaces]]
+binding = "CACHE"
+id = "your-production-namespace-id"
+preview_id = "your-preview-namespace-id"</code></pre>
+
+<h3>Step Five: Set Up R2 for File Storage (Optional)</h3>
+
+<p>R2 stores files like clinical photos, uploaded documents, and PDF exports. Like KV, it's optional, but you'll need it if you want to enable photo uploads or document storage features.</p>
+
+<p>Create production and preview buckets:</p>
+
+<pre><code class="language-bash">wrangler r2 bucket create care-commons-uploads
+wrangler r2 bucket create care-commons-uploads-preview</code></pre>
+
+<p>Then add them to `wrangler.toml`:</p>
+
+<pre><code class="language-toml">[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "care-commons-uploads"
+preview_bucket_name = "care-commons-uploads-preview"</code></pre>
+<h2>Deploying Your Application</h2>
+
+<p>With services configured and secrets set, you're ready to deploy. Care Commons has two components that deploy separately: the API backend (Workers) and the frontend (Pages). We'll deploy the API first, then the frontend.</p>
+
+<h3>Deploying the API Backend</h3>
+
+<p>The API backend runs on Cloudflare Workers. From the root of the Care Commons repository, run:</p>
+
+<pre><code class="language-bash">wrangler deploy --env production</code></pre>
+
+<p>This builds your Worker code, uploads it to Cloudflare, and activates it across their global network. The process takes about 30-60 seconds. When it completes, Wrangler prints the URL where your API is now live—something like `care-commons.your-subdomain.workers.dev`.</p>
+
+<p>If you're maintaining separate staging and production environments, you can deploy to staging first:</p>
+
+<pre><code class="language-bash">wrangler deploy --env staging</code></pre>
+
+<p>The Care Commons repository includes npm scripts that wrap these commands for convenience:</p>
+
+<pre><code class="language-bash">npm run deploy:cloudflare:staging
+npm run deploy:cloudflare:production</code></pre>
+
+<p>These scripts ensure the codebase is built correctly before deploying, reducing the chance of deployment errors from stale builds.</p>
+
+<h3>Deploying the Frontend</h3>
+
+<p>The frontend is a React application that users interact with in their browsers. Cloudflare Pages hosts it and distributes it globally. You have two deployment approaches: direct CLI deployment or Git integration. Git integration is more powerful for ongoing development because it automatically deploys when you push commits.</p>
+
+<h4>Approach One: Direct CLI Deployment</h4>
+
+<p>Build the frontend first, then deploy it:</p>
+
+<pre><code class="language-bash">npm run build:web
+wrangler pages deploy packages/web/dist --project-name=care-commons</code></pre>
+
+<p>This uploads your built frontend to Pages and makes it immediately available. It's fast and simple, perfect for testing or one-off deployments.</p>
+
+<h4>Approach Two: Git Integration (Recommended)</h4>
+
+<p>Git integration connects your GitHub repository to Cloudflare Pages. Every time you push to main (or whatever branch you configure), Cloudflare automatically builds and deploys your frontend. This eliminates manual deployment steps and ensures your production site stays in sync with your repository.</p>
+
+<p>To set up Git integration:</p>
+
+<p>First, go to your Cloudflare dashboard and navigate to Pages. Click "Create a project" and choose "Connect to Git". Authorize Cloudflare to access your GitHub account and select the Care Commons repository.</p>
+
+<p>Configure the build settings:</p>
+
 <ul>
 <li><strong>Build command</strong>: <code>npm run build:web</code></li>
 <li><strong>Build output directory</strong>: <code>packages/web/dist</code></li>
-<li><strong>Root directory</strong>: <code>/</code></li>
-<li><strong>Node version</strong>: <code>22</code></li>
+<li><strong>Root directory</strong>: <code>/</code> (leave as default)</li>
+<li><strong>Node version</strong>: <code>22</code> (or whatever version you're using)</li>
 </ul>
-</li>
-<li><p>Set environment variables:</p>
-<pre><code>NODE_ENV=production
-VITE_API_URL=https://api.care-commons.com
-</code></pre>
-</li>
-<li><p>Deploy</p>
-</li>
-</ol>
-<h3>Custom Domain Setup</h3>
-<h4>API Domain (Cloudflare Workers)</h4>
-<ol>
-<li><p>Add route in <code>wrangler.toml</code>:</p>
+
+<p>Set the environment variables your frontend needs:</p>
+
+<ul>
+<li><code>NODE_ENV=production</code></li>
+<li><code>VITE_API_URL=https://your-api-url.workers.dev</code> (use your actual Worker URL)</li>
+</ul>
+
+<p>Click "Save and Deploy". Cloudflare builds and deploys your frontend, which takes 2-3 minutes. Future pushes to your repository trigger automatic rebuilds.</p>
+
+<h3>Setting Up Custom Domains</h3>
+
+<p>By default, Cloudflare gives you generated URLs like `care-commons-abc123.pages.dev` for your frontend and `care-commons.your-subdomain.workers.dev` for your API. These work fine, but most agencies prefer custom domains like `app.youragncy.com` and `api.youragncy.com`.</p>
+
+<h4>Custom Domain for Your API (Workers)</h4>
+
+<p>Edit your `wrangler.toml` file and add a routes section specifying your custom domain:</p>
+
 <pre><code class="language-toml">routes = [
-  { pattern = &quot;api.care-commons.com/*&quot;, zone_name = &quot;care-commons.com&quot; }
-]
-</code></pre>
-</li>
-<li><p>Deploy: <code>wrangler deploy --env production</code></p>
-</li>
-<li><p>DNS will be configured automatically</p>
-</li>
-</ol>
-<h4>Frontend Domain (Cloudflare Pages)</h4>
-<ol>
-<li>Go to Pages project → Custom domains</li>
-<li>Add <code>care-commons.com</code> and <code>www.care-commons.com</code></li>
-<li>Cloudflare will configure DNS automatically</li>
-</ol>
-<h2>Environment Variables</h2>
-<h3>Worker Environment Variables (wrangler.toml)</h3>
+  { pattern = "api.youragncy.com/*", zone_name = "youragncy.com" }
+]</code></pre>
+
+<p>Replace `youragncy.com` with your actual domain. Then deploy your Worker again:</p>
+
+<pre><code class="language-bash">wrangler deploy --env production</code></pre>
+
+<p>Cloudflare automatically configures DNS to point your custom API domain to your Worker. Within a few minutes, `api.youragncy.com` routes to your deployed API.</p>
+
+<h4>Custom Domain for Your Frontend (Pages)</h4>
+
+<p>In your Cloudflare dashboard, go to your Pages project and click "Custom domains". Click "Set up a custom domain" and enter your desired domain like `app.youragncy.com` or `youragncy.com`. Cloudflare automatically creates the necessary DNS records and provisions an SSL certificate. Your frontend is accessible at your custom domain within minutes.</p>
+
+<p>You can add multiple domains—for example, both `youragncy.com` and `www.youragncy.com`—and Cloudflare handles routing and SSL for all of them.</p>
+<h2>Managing Environment Configuration</h2>
+
+<p>Care Commons needs configuration values to work correctly—things like which database to connect to, what log level to use, and which origins to allow for CORS. These are split into two categories: non-sensitive variables that can be visible in code, and sensitive secrets that must be encrypted.</p>
+
+<h3>Non-Sensitive Variables</h3>
+
+<p>Non-sensitive variables go directly in your `wrangler.toml` file under the `[vars]` section:</p>
+
 <pre><code class="language-toml">[vars]
-NODE_ENV = &quot;production&quot;
-LOG_LEVEL = &quot;info&quot;
-CORS_ORIGIN = &quot;https://care-commons.com,https://www.care-commons.com&quot;
-</code></pre>
-<h3>Worker Secrets (Sensitive)</h3>
-<p>Use <code>wrangler secret put &lt;NAME&gt;</code>:</p>
+NODE_ENV = "production"
+LOG_LEVEL = "info"
+CORS_ORIGIN = "https://youragncy.com,https://www.youragncy.com"</code></pre>
+
+<p>These are baked into your Worker code at deploy time. They're visible to anyone who can access your Cloudflare dashboard, so never put passwords or API keys here.</p>
+
+<h3>Sensitive Secrets</h3>
+
+<p>Sensitive values—database passwords, JWT signing secrets, API keys—must be set as encrypted secrets using the Wrangler CLI. We covered this in the setup section above, but here's the complete list of secrets Care Commons needs:</p>
+
 <ul>
-<li><code>DATABASE_URL</code> - PostgreSQL connection string</li>
-<li><code>JWT_SECRET</code> - JWT signing secret</li>
-<li><code>JWT_REFRESH_SECRET</code> - Refresh token secret</li>
-<li><code>SESSION_SECRET</code> - Session encryption secret</li>
-<li><code>ENCRYPTION_KEY</code> - Field encryption key (SSN, etc.)</li>
-<li><code>GOOGLE_CLIENT_ID</code> - OAuth client ID</li>
-<li><code>GOOGLE_CLIENT_SECRET</code> - OAuth client secret</li>
-<li><code>GEOCODING_API_KEY</code> - Mapbox/Google geocoding key</li>
+<li><code>DATABASE_URL</code> — Your Supabase PostgreSQL connection string (if not using Hyperdrive)</li>
+<li><code>JWT_SECRET</code> — Used to sign authentication tokens; generate with <code>openssl rand -base64 32</code></li>
+<li><code>JWT_REFRESH_SECRET</code> — Used to sign refresh tokens; generate separately from JWT_SECRET</li>
+<li><code>SESSION_SECRET</code> — Encrypts session cookies; generate with <code>openssl rand -base64 32</code></li>
+<li><code>ENCRYPTION_KEY</code> — Encrypts sensitive fields like SSN and medical data; generate with <code>openssl rand -hex 32</code></li>
+<li><code>GOOGLE_CLIENT_ID</code> — If using Google OAuth; get from Google Cloud Console</li>
+<li><code>GOOGLE_CLIENT_SECRET</code> — OAuth secret from Google Cloud Console</li>
+<li><code>GEOCODING_API_KEY</code> — For EVV location verification; Mapbox or Google Maps API key</li>
+<li><code>SENTRY_DSN</code> — Optional; for error monitoring via Sentry</li>
 </ul>
-<h3>Pages Environment Variables</h3>
-<p>Set in Cloudflare Dashboard → Pages → Settings → Environment variables:</p>
+
+<p>Set each with <code>wrangler secret put SECRET_NAME</code>. The command prompts you to paste the value interactively, then encrypts and stores it.</p>
+
+<h3>Frontend Environment Variables</h3>
+
+<p>Your frontend (Pages deployment) also needs configuration. Set these in the Cloudflare dashboard under Pages → Settings → Environment variables:</p>
+
 <ul>
-<li><code>VITE_API_URL</code> - API endpoint URL</li>
-<li><code>NODE_ENV</code> - <code>production</code> or <code>staging</code></li>
+<li><code>VITE_API_URL</code> — URL where your API Worker is deployed (e.g., `https://api.youragncy.com`)</li>
+<li><code>NODE_ENV</code> — Either `production` or `staging` depending on the environment</li>
 </ul>
+
+<p>Vite (the build tool Care Commons uses) automatically injects variables prefixed with `VITE_` into your frontend code at build time.</p>
+
 <h2>Database Migrations</h2>
-<p>Run migrations <strong>before</strong> deploying:</p>
-<pre><code class="language-bash"># Set DATABASE_URL to your environment
-export DATABASE_URL=&quot;your_database_url_here&quot;
 
-# Run migrations
-npm run db:migrate
+<p>Before your application can work, your database needs the correct schema—tables, indexes, constraints, all the structure that Care Commons expects. Database migrations apply this schema.</p>
 
-# Verify
-npm run db:migrate:status
-</code></pre>
-<h2>Monitoring and Debugging</h2>
-<h3>View Logs</h3>
-<pre><code class="language-bash"># Real-time logs (tail)
-wrangler tail
+<p>Always run migrations before deploying code that depends on new database features. Running migrations after deployment can cause errors when your new code tries to access tables or columns that don't exist yet.</p>
 
-# Filter by environment
-wrangler tail --env production
+<p>To run migrations, first set your DATABASE_URL environment variable to point at your Supabase database:</p>
 
-# Filter by status
-wrangler tail --status error
-</code></pre>
-<h3>View Metrics</h3>
-<pre><code class="language-bash"># View deployment details
-wrangler deployments list
+<pre><code class="language-bash">export DATABASE_URL="postgresql://postgres:[password]@db.[project-ref].supabase.co:5432/postgres"</code></pre>
 
-# View analytics
-wrangler analytics
-</code></pre>
-<h3>Debugging</h3>
-<pre><code class="language-bash"># Local development with Miniflare
-wrangler dev
+<p>Then run the migrations:</p>
 
-# Test worker locally
-curl http://localhost:8787/health
-</code></pre>
-<h2>Rollback</h2>
-<h3>Rollback Worker Deployment</h3>
-<pre><code class="language-bash"># List recent deployments
-wrangler deployments list
+<pre><code class="language-bash">npm run db:migrate</code></pre>
 
-# Rollback to previous version
-wrangler rollback &lt;DEPLOYMENT_ID&gt;
-</code></pre>
-<h3>Rollback Pages Deployment</h3>
-<ol>
-<li>Go to Cloudflare Dashboard → Pages → Project</li>
-<li>Deployments tab</li>
-<li>Click &quot;...&quot; on previous successful deployment</li>
-<li>Select &quot;Rollback to this deployment&quot;</li>
-</ol>
-<h2>Cost Estimation</h2>
-<p>Cloudflare pricing is usage-based. Typical costs for a small-medium home health agency:</p>
-<h3>Workers (API)</h3>
+<p>This applies any unapplied migrations in order. The migration system tracks which migrations have already run, so running this command multiple times is safe—it only applies new migrations.</p>
+
+<p>To verify the current migration status:</p>
+
+<pre><code class="language-bash">npm run db:migrate:status</code></pre>
+
+<p>This lists all migrations and shows which have been applied.</p>
+<h2>Monitoring and Debugging Your Deployment</h2>
+
+<p>Once deployed, you need visibility into how your application behaves in production. Cloudflare provides several tools for monitoring performance, viewing logs, and debugging issues.</p>
+
+<h3>Viewing Real-Time Logs</h3>
+
+<p>The most immediate way to see what your Worker is doing is to tail its logs. This streams log output to your terminal in real-time:</p>
+
+<pre><code class="language-bash">wrangler tail</code></pre>
+
+<p>You'll see every request as it happens, including console.log statements from your code, errors, and performance metrics. This is invaluable for debugging—you can watch requests flow through your application and immediately see where things go wrong.</p>
+
+<p>If you're running multiple environments (staging and production), specify which one to tail:</p>
+
+<pre><code class="language-bash">wrangler tail --env production</code></pre>
+
+<p>You can filter logs to show only errors, which helps when diagnosing problems without wading through successful requests:</p>
+
+<pre><code class="language-bash">wrangler tail --status error</code></pre>
+
+<h3>Reviewing Deployment History and Analytics</h3>
+
+<p>To see your deployment history—useful when you need to understand what changed when:</p>
+
+<pre><code class="language-bash">wrangler deployments list</code></pre>
+
+<p>This shows recent deployments with timestamps and deployment IDs. You can rollback to any previous deployment if needed (more on that below).</p>
+
+<p>For higher-level analytics about traffic patterns and performance:</p>
+
+<pre><code class="language-bash">wrangler analytics</code></pre>
+
+<p>This shows request counts, error rates, and CPU usage over time. It helps you understand traffic patterns and identify performance issues.</p>
+
+<h3>Local Development and Testing</h3>
+
+<p>Before deploying changes to production, test them locally. Wrangler includes a development server that simulates the Workers environment on your machine:</p>
+
+<pre><code class="language-bash">wrangler dev</code></pre>
+
+<p>This starts a local server, usually on port 8787. Your Worker code runs locally but behaves just like it would in production, including access to KV, R2, and Hyperdrive (though these connect to preview versions, not production data).</p>
+
+<p>You can test your Worker with curl or your browser:</p>
+
+<pre><code class="language-bash">curl http://localhost:8787/health</code></pre>
+
+<p>Local development is dramatically faster than deploy-and-test cycles. Use it liberally.</p>
+
+<h3>Rolling Back Bad Deployments</h3>
+
+<p>Sometimes a deployment goes wrong. Maybe you introduced a bug, or maybe a dependency broke something. Cloudflare lets you instantly rollback to any previous deployment.</p>
+
+<p>For Workers, first list recent deployments to find the ID of the version you want to revert to:</p>
+
+<pre><code class="language-bash">wrangler deployments list</code></pre>
+
+<p>Then rollback to that deployment:</p>
+
+<pre><code class="language-bash">wrangler rollback &lt;DEPLOYMENT_ID&gt;</code></pre>
+
+<p>This is instant—your Worker switches back to the previous code globally within seconds.</p>
+
+<p>For Pages (frontend) deployments, use the dashboard. Go to Cloudflare Dashboard → Pages → your project → Deployments tab. Find the deployment you want to rollback to, click the three-dot menu, and select "Rollback to this deployment". This also takes effect within seconds.</p>
+<h2>Understanding Costs</h2>
+
+<p>Cloudflare's pricing model differs fundamentally from traditional cloud providers. Instead of charging for team size or server capacity, they charge for actual usage—requests served, data stored, operations performed. This makes costs highly predictable and often dramatically lower than alternatives.</p>
+
+<p>Here's what a typical home health agency pays, broken down by service:</p>
+
+<h3>Workers (Your API Backend)</h3>
+
+<p>The free tier includes 100,000 requests per day, which translates to about 3 million per month. For context, a small agency with 20 caregivers making 50 API calls per shift (checking in, viewing schedules, documenting visits) generates around 1,000 requests per day. You'd need to grow quite large before hitting free tier limits.</p>
+
+<p>If you exceed the free tier, the Workers Paid plan costs $5 per month and includes 10 million requests. Beyond that, it's $0.50 per million additional requests. A medium-sized agency handling 100,000 requests daily might pay $5-10 monthly. A large agency at a million requests daily might pay $50-100 monthly—still a fraction of what traditional per-seat SaaS costs.</p>
+
+<h3>Pages (Your Frontend)</h3>
+
+<p>Cloudflare Pages is free with unlimited bandwidth. You only pay for builds (deployments), and the free tier includes 500 builds per month. Unless you're deploying dozens of times daily, you'll never hit this limit. Expected cost: $0.</p>
+
+<h3>R2 (File Storage)</h3>
+
+<p>R2's free tier includes 10GB of storage and 1 million operations (reads and writes) monthly. This handles thousands of clinical photos and documents. Most small-to-medium agencies stay within free tier limits indefinitely.</p>
+
+<p>If you exceed free limits, R2 charges $0.015 per GB of storage and $0.36 per million read operations. Critically, there are no egress fees—downloading files is free. Compare this to S3, where egress fees often exceed storage costs. Expected cost for most agencies: $0-5 monthly.</p>
+
+<h3>KV (Caching)</h3>
+
+<p>KV includes 100,000 reads per day free, which is plenty for caching schedules and frequently-accessed data. Beyond that, it's $0.50 per million reads, which is negligible. Expected cost: $0-2 monthly.</p>
+
+<h3>Hyperdrive (Database Pooling)</h3>
+
+<p>Hyperdrive is included with the Workers Paid plan ($5/month) and free if you're on the Workers free tier. No additional cost.</p>
+
+<h3>Supabase (Your Database)</h3>
+
+<p>Supabase's free tier provides 500MB database storage, 1GB file storage, and 2GB data transfer monthly. This is separate from Cloudflare but worth noting because it's your largest potential cost. Most small agencies stay within free limits. Supabase Pro is $25/month if you need more resources.</p>
+
+<h3>Total Monthly Costs</h3>
+
+<p>Realistically, here's what agencies at different scales can expect to pay:</p>
+
 <ul>
-<li><strong>Free tier</strong>: 100,000 requests/day</li>
-<li><strong>Paid</strong>: $5/mo for 10M requests</li>
-<li><strong>Typical usage</strong>: ~$5-10/mo</li>
+<li><strong>Small agency (10-30 caregivers, fewer than 10,000 requests daily)</strong>: $0-5/month, often entirely free</li>
+<li><strong>Medium agency (30-100 caregivers, 50,000-100,000 requests daily)</strong>: $10-30/month</li>
+<li><strong>Large agency (100+ caregivers, 500,000+ requests daily)</strong>: $50-150/month</li>
 </ul>
-<h3>Pages (Frontend)</h3>
-<ul>
-<li><strong>Free tier</strong>: Unlimited bandwidth</li>
-<li><strong>Builds</strong>: 500 builds/month free</li>
-<li><strong>Typical usage</strong>: $0/mo</li>
-</ul>
-<h3>R2 Storage (if used)</h3>
-<ul>
-<li><strong>Free tier</strong>: 10GB storage</li>
-<li><strong>Operations</strong>: First 1M free</li>
-<li><strong>Typical usage</strong>: $0-5/mo</li>
-</ul>
-<h3>KV (if used)</h3>
-<ul>
-<li><strong>Free tier</strong>: 100,000 reads/day</li>
-<li><strong>Paid</strong>: $0.50 per million reads</li>
-<li><strong>Typical usage</strong>: $0-2/mo</li>
-</ul>
-<h3>Hyperdrive (Database pooling)</h3>
-<ul>
-<li><strong>Included</strong> in Workers Paid plan</li>
-<li><strong>No additional cost</strong></li>
-</ul>
-<h3>Total Estimated Cost</h3>
-<ul>
-<li><strong>Small agency (&lt; 10k requests/day)</strong>: ~$0-5/mo</li>
-<li><strong>Medium agency (100k requests/day)</strong>: ~$10-20/mo</li>
-<li><strong>Large agency (1M requests/day)</strong>: ~$50-100/mo</li>
-</ul>
-<p>Compare to Vercel Pro at $20/member/mo.</p>
+
+<p>Compare this to typical SaaS pricing at $15-50 per user per month. A 50-caregiver agency might pay $750-2,500 monthly for comparable commercial software. With Cloudflare, that same agency pays $10-30 monthly for infrastructure.</p>
+
+<p>This is why we emphasize that Care Commons is accessible. Infrastructure costs are genuinely low enough that we can offer the software essentially for free to small agencies while asking larger ones to support development through <a href="https://www.patreon.com/neighborhoodlab" target="_blank">Patreon</a> donations.</p>
 <h2>CI/CD Integration</h2>
 <h3>GitHub Actions (Recommended)</h3>
 <p>Create <code>.github/workflows/cloudflare-deploy.yml</code>:</p>
@@ -458,48 +637,88 @@ jobs:
 <li><code>CLOUDFLARE_API_TOKEN</code> - Create at Cloudflare Dashboard → Profile → API Tokens</li>
 <li><code>CLOUDFLARE_ACCOUNT_ID</code> - Found in Cloudflare Dashboard → Workers &amp; Pages</li>
 </ul>
-<h2>Troubleshooting</h2>
-<h3>Issue: Worker fails to start</h3>
-<p><strong>Error</strong>: <code>Module worker script timed out</code></p>
-<p><strong>Solution</strong>: Check that all dependencies are compatible with Workers runtime. Some Node.js APIs are not available.</p>
-<h3>Issue: Database connection fails</h3>
-<p><strong>Error</strong>: <code>ECONNREFUSED</code> or timeout</p>
-<p><strong>Solution</strong>: </p>
-<ol>
-<li>Verify DATABASE_URL secret is set correctly</li>
-<li>Use Hyperdrive for better connection pooling</li>
-<li>Check Neon IP allowlist (Cloudflare IPs must be allowed)</li>
-</ol>
-<h3>Issue: CORS errors</h3>
-<p><strong>Solution</strong>: Update CORS_ORIGIN in wrangler.toml to include your frontend domain</p>
-<h3>Issue: Build fails</h3>
-<p><strong>Error</strong>: <code>Cannot find module ...</code></p>
-<p><strong>Solution</strong>: Ensure all packages are built before deploying:</p>
-<pre><code class="language-bash">npm run build
-wrangler deploy
-</code></pre>
-<h2>Support</h2>
-<p>For Cloudflare-specific issues:</p>
+<h2>Common Problems and How to Fix Them</h2>
+
+<p>Even with careful setup, deployment issues happen. Here are the most common problems and their solutions.</p>
+
+<h3>Worker Fails to Start: "Module worker script timed out"</h3>
+
+<p>This error usually means your Worker code is trying to use Node.js built-ins that don't exist in the Workers runtime. Workers run in V8 isolates, not full Node.js environments, so APIs like `fs` (file system) or `child_process` aren't available.</p>
+
+<p>Check your dependencies. Some npm packages assume they're running in Node and won't work in Workers. Look for edge-compatible alternatives or use Cloudflare's compatibility flags to enable certain Node APIs. The Care Commons codebase is already architected for Workers compatibility, so if you see this error, you likely introduced a dependency that isn't edge-compatible.</p>
+
+<h3>Database Connection Fails: "ECONNREFUSED" or Timeout</h3>
+
+<p>Connection errors usually stem from incorrect credentials or network restrictions. First, verify your DATABASE_URL secret is correct. Run `wrangler secret list` to see which secrets are set, then double-check the connection string in your Supabase dashboard.</p>
+
+<p>If credentials are correct but connections still fail, ensure you're using Hyperdrive. Without it, each Worker execution tries to open a direct connection to Supabase, which often hits rate limits or connection limits. Hyperdrive pools connections and caches queries, solving these problems.</p>
+
+<p>Finally, check Supabase's IP allowlist settings. Some database configurations restrict connections to specific IP ranges. Cloudflare Workers don't have fixed IPs, so you need to allow Cloudflare's entire IP range or disable IP restrictions entirely.</p>
+
+<h3>CORS Errors in the Browser</h3>
+
+<p>If your frontend loads but API requests fail with CORS errors, your Worker isn't allowing requests from your frontend's domain. Update the CORS_ORIGIN variable in your `wrangler.toml`:</p>
+
+<pre><code class="language-toml">[vars]
+CORS_ORIGIN = "https://youragncy.com,https://www.youragncy.com"</code></pre>
+
+<p>Include all domains your frontend uses, including development domains like `localhost:3000` if you're testing locally. Redeploy your Worker after changing this.</p>
+
+<h3>Build Fails: "Cannot find module"</h3>
+
+<p>Module errors mean dependencies aren't properly installed or the codebase isn't built before deployment. Make sure you run the full build process:</p>
+
+<pre><code class="language-bash">npm install
+npm run build
+wrangler deploy</code></pre>
+
+<p>If you're using the npm scripts (`npm run deploy:cloudflare:production`), they handle building automatically. If you're calling `wrangler deploy` directly, you must build first.</p>
+
+<h3>Frontend Loads But Shows API Errors</h3>
+
+<p>This usually means your frontend is trying to reach the API at the wrong URL. Check your Pages environment variables—specifically `VITE_API_URL`. It should point to your deployed Worker URL (like `https://api.youragncy.com` or `https://care-commons.your-subdomain.workers.dev`).</p>
+
+<p>Environment variables are baked into the frontend at build time, so changing them requires triggering a new Pages build. If you're using Git integration, push a commit to rebuild. If you deployed manually, rebuild and redeploy:</p>
+
+<pre><code class="language-bash">npm run build:web
+wrangler pages deploy packages/web/dist --project-name=care-commons</code></pre>
+
+<h2>Getting Help When You're Stuck</h2>
+
+<p>Cloudflare has excellent documentation and community support. For platform-specific questions about Workers, Pages, or other Cloudflare services:</p>
+
 <ul>
-<li>Cloudflare Workers Docs: <a href="https://developers.cloudflare.com/workers/">https://developers.cloudflare.com/workers/</a></li>
-<li>Cloudflare Pages Docs: <a href="https://developers.cloudflare.com/pages/">https://developers.cloudflare.com/pages/</a></li>
-<li>Community Discord: <a href="https://discord.cloudflare.com">https://discord.cloudflare.com</a></li>
+<li><a href="https://developers.cloudflare.com/workers/" target="_blank">Cloudflare Workers Documentation</a> — comprehensive guides and API references</li>
+<li><a href="https://developers.cloudflare.com/pages/" target="_blank">Cloudflare Pages Documentation</a> — deployment and configuration guides</li>
+<li><a href="https://discord.cloudflare.com" target="_blank">Cloudflare Community Discord</a> — active community with helpful developers</li>
 </ul>
-<p>For Care Commons deployment issues:</p>
+
+<p>For Care Commons-specific issues—problems with the application code, feature questions, bugs, or deployment issues specific to Care Commons rather than Cloudflare itself:</p>
+
 <ul>
-<li>GitHub Issues: <a href="https://github.com/neighborhood-lab/care-commons/issues">https://github.com/neighborhood-lab/care-commons/issues</a></li>
-<li>Email: <a href="mailto:support@neighborhoodlab.org">support@neighborhoodlab.org</a></li>
+<li><a href="https://github.com/neighborhood-lab/care-commons/issues" target="_blank">GitHub Issues</a> — report bugs or ask questions publicly</li>
+<li>Email: <a href="mailto:support@neighborhoodlab.org">support@neighborhoodlab.org</a> — direct support from the Care Commons team</li>
 </ul>
-<h2>Migration from Vercel</h2>
-<p>To migrate an existing Vercel deployment to Cloudflare:</p>
-<ol>
-<li><strong>Deploy to Cloudflare</strong> (following this guide)</li>
-<li><strong>Test thoroughly</strong> on Cloudflare staging</li>
-<li><strong>Update DNS</strong> to point to Cloudflare Pages</li>
-<li><strong>Monitor</strong> for 24-48 hours</li>
-<li><strong>Decommission</strong> Vercel deployment once stable</li>
-</ol>
-<p>Both platforms can run simultaneously during migration.</p>
+
+<p>When asking for help, include relevant details: error messages, logs from `wrangler tail`, your deployment configuration (but not secrets!), and steps to reproduce the problem. The more context you provide, the faster we can help.</p>
+
+<h2>Migrating from an Existing Vercel Deployment</h2>
+
+<p>If you're currently running Care Commons on Vercel and want to migrate to Cloudflare, you can run both simultaneously during transition. This lets you test Cloudflare thoroughly without disrupting your existing production system.</p>
+
+<p>The migration process:</p>
+
+<p><strong>First</strong>, deploy to Cloudflare following this entire guide. Set up a separate Supabase project or use a branch of your existing database. Configure everything and deploy both Workers and Pages. You now have two complete installations: your original Vercel deployment and a new Cloudflare one.</p>
+
+<p><strong>Second</strong>, test the Cloudflare deployment thoroughly. Use it yourself. Have staff try it. Run through common workflows—scheduling visits, checking in as a caregiver, documenting care, running reports. Make sure everything works as expected. Fix any issues you discover.</p>
+
+<p><strong>Third</strong>, when you're confident the Cloudflare deployment is stable, update DNS to point your production domain to Cloudflare. If you're using Cloudflare's DNS, this happens automatically when you configure custom domains. If you're using another DNS provider, update A and AAAA records to point to Cloudflare's servers.</p>
+
+<p><strong>Fourth</strong>, monitor closely for 24-48 hours after switching. Watch error rates, check logs, ask staff about any issues. Keep your Vercel deployment running so you can quickly switch back if major problems emerge.</p>
+
+<p><strong>Finally</strong>, once you're confident everything works smoothly, decommission the Vercel deployment. Delete the project from Vercel and migrate any remaining data to your Cloudflare deployment.</p>
+
+<p>Running both platforms simultaneously costs no extra money—both have generous free tiers. Take your time with testing. It's better to spend a week being thorough than to rush and cause problems for your staff and clients.</p>
 
       </article>
       <footer class="content-footer">
