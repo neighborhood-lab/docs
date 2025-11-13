@@ -5,60 +5,23 @@ const { execSync } = require('child_process');
 
 console.log('📚 Generating curated PDF from HTML documentation...\n');
 
-// Parse index.html to get the exact category structure
-const indexHtml = fs.readFileSync('index.html', 'utf8');
-
-// Extract categories and their files
-const categories = [
-  { 
-    name: '🚀 Getting Started', 
-    description: 'READMEs, quickstarts, and high-level overviews',
-    files: [] 
-  },
-  { 
-    name: '📖 User Guides', 
-    description: 'Detailed guides, tutorials, and how-tos',
-    files: [] 
-  },
-  { 
-    name: '🏗️ Architecture & Deployment', 
-    description: 'System architecture and deployment guides',
-    files: [] 
-  },
-  { 
-    name: '⚙️ Implementation Details', 
-    description: 'Code documentation, compliance, and operations',
-    files: [] 
-  }
-];
-
-// Parse the sidebar navigation to extract file order
-const navMatch = indexHtml.match(/<nav class="sidebar-nav">([\s\S]*?)<\/nav>/);
-if (navMatch) {
-  const navContent = navMatch[1];
-  
-  // Split by nav-category divs
-  const categoryMatches = navContent.match(/<div class="nav-category">([\s\S]*?)<\/div>/g);
-  
-  if (categoryMatches) {
-    categoryMatches.forEach((catBlock, idx) => {
-      if (idx >= categories.length) return;
-      
-      // Extract all href links from this category
-      const linkRegex = /<a href="\.\/([^"]+\.html)">([^<]+)<\/a>/g;
-      let match;
-      while ((match = linkRegex.exec(catBlock)) !== null) {
-        const filename = match[1];
-        const title = match[2];
-        
-        // Verify file exists
-        if (fs.existsSync(filename)) {
-          categories[idx].files.push({ filename, title });
-        }
-      }
-    });
-  }
+// Load categorization from reorganize-docs.js output
+let categoriesData;
+try {
+  categoriesData = JSON.parse(fs.readFileSync('doc-categories.json', 'utf8'));
+} catch (e) {
+  console.error('❌ Error: Run "node reorganize-docs.js" first to categorize documents');
+  process.exit(1);
 }
+
+// Convert to array format, excluding developer docs from PDF
+const categories = [
+  categoriesData.start,
+  categoriesData.using,
+  categoriesData.deployment,
+  categoriesData.reference,
+  categoriesData.operations
+].filter(cat => cat && cat.files.length > 0)
 
 console.log('Category breakdown:');
 categories.forEach(cat => {
