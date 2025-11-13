@@ -14,14 +14,13 @@ try {
   process.exit(1);
 }
 
-// Convert to array format, excluding developer docs from PDF
+// Convert to array format - use new simplified structure
 const categories = [
-  categoriesData.start,
-  categoriesData.using,
+  categoriesData.features,
   categoriesData.deployment,
-  categoriesData.reference,
-  categoriesData.operations
-].filter(cat => cat && cat.files.length > 0)
+  categoriesData.compliance,
+  categoriesData.contributing
+].filter(cat => cat && cat.files && cat.files.length > 0)
 
 console.log('Category breakdown:');
 categories.forEach(cat => {

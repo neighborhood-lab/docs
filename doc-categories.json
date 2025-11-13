@@ -1,828 +1,122 @@
 {
-  "start": {
-    "name": "🎯 Start Here",
-    "description": "New to Care Commons? Begin here",
+  "features": {
+    "name": "Features",
+    "description": "What the software does and how to use it",
     "files": [
       {
-        "filename": "readme.html",
-        "title": "Care Commons"
-      },
-      {
-        "filename": "showcase.html",
-        "title": "Care Commons Platform - Interactive Showcase"
-      },
-      {
-        "filename": "demo-quickstart.html",
-        "title": "Rich Interactive Demo - Quick Start Guide"
-      },
-      {
-        "filename": "showcase-readme.html",
-        "title": "Care Commons Showcase"
-      }
-    ],
-    "priority": 1
-  },
-  "using": {
-    "name": "📖 Using Care Commons",
-    "description": "Feature guides organized by what you want to do",
-    "files": [
-      {
-        "filename": "verticals-analytics-reporting-readme.html",
-        "title": "Analytics & Reporting Vertical"
-      },
-      {
-        "filename": "verticals-billing-invoicing-readme.html",
-        "title": "Billing & Invoicing"
-      },
-      {
-        "filename": "packages-web-src-showcase-readme.html",
-        "title": "Care Commons Showcase Enhancements"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-readme.html",
-        "title": "Care Plans & Tasks Library"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-quickstart.html",
-        "title": "Care Plans & Tasks Library - Quickstart"
+        "filename": "verticals-client-demographics-readme.html",
+        "title": "Client Management"
       },
       {
         "filename": "verticals-caregiver-staff-readme.html",
         "title": "Caregiver & Staff Management"
       },
       {
-        "filename": "verticals-caregiver-staff-quickstart.html",
-        "title": "Caregiver & Staff Management - Quick Start"
+        "filename": "verticals-scheduling-visits-readme.html",
+        "title": "Scheduling & Visits"
       },
       {
-        "filename": "verticals-caregiver-staff-examples.html",
-        "title": "Caregiver & Staff Management - Usage Examples"
+        "filename": "verticals-time-tracking-evv-readme.html",
+        "title": "Time Tracking & EVV"
       },
       {
-        "filename": "verticals-client-demographics-examples.html",
-        "title": "Client & Demographics - Usage Examples"
+        "filename": "verticals-care-plans-tasks-readme.html",
+        "title": "Care Plans & Tasks"
       },
       {
-        "filename": "verticals-client-demographics-readme.html",
-        "title": "Client & Demographics Management"
-      },
-      {
-        "filename": "verticals-family-engagement-readme.html",
-        "title": "Family Engagement Platform (Consolidated)"
+        "filename": "verticals-billing-invoicing-readme.html",
+        "title": "Billing & Invoicing"
       },
       {
         "filename": "verticals-payroll-processing-readme.html",
         "title": "Payroll Processing"
       },
       {
-        "filename": "verticals-quality-assurance-audits-readme.html",
-        "title": "Quality Assurance & Audits Vertical"
+        "filename": "verticals-family-engagement-readme.html",
+        "title": "Family Portal"
       },
       {
-        "filename": "verticals-scheduling-visits-quickstart.html",
-        "title": "Quickstart: Scheduling & Visit Management"
+        "filename": "verticals-analytics-reporting-readme.html",
+        "title": "Analytics & Reporting"
+      }
+    ],
+    "priority": 1
+  },
+  "deployment": {
+    "name": "Deployment",
+    "description": "How to install and run the software",
+    "files": [
+      {
+        "filename": "vercel-quickstart.html",
+        "title": "Deploy to Vercel"
       },
       {
-        "filename": "verticals-scheduling-visits-readme.html",
-        "title": "Scheduling & Visit Management"
+        "filename": "cloudflare-deployment.html",
+        "title": "Deploy to Cloudflare"
       },
       {
-        "filename": "verticals-scheduling-visits-wiring-guide.html",
-        "title": "Scheduling Service Wiring Guide"
+        "filename": "database-quickstart.html",
+        "title": "Database Setup"
       },
       {
-        "filename": "verticals-shift-matching-readme.html",
-        "title": "Shift Matching & Assignment"
-      },
-      {
-        "filename": "showcase-demo-data-implementation.html",
-        "title": "Showcase Demo Data Implementation"
-      },
-      {
-        "filename": "showcase-quick-start.html",
-        "title": "Showcase Quick Start Guide"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-readme.html",
-        "title": "Time Tracking & Electronic Visit Verification (EVV)"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-quickstart.html",
-        "title": "Time Tracking & EVV - Quick Start Guide"
+        "filename": "packages-mobile-quickstart.html",
+        "title": "Mobile App Setup"
       }
     ],
     "priority": 2
   },
-  "deployment": {
-    "name": "🚀 Deployment & Setup",
-    "description": "Get Care Commons running",
+  "compliance": {
+    "name": "State Compliance",
+    "description": "State-specific EVV requirements",
     "files": [
       {
-        "filename": "deployment-ready.html",
-        "title": "✅ Deployment Ready - Care Commons Platform"
+        "filename": "docs-compliance-texas-requirements.html",
+        "title": "Texas Requirements"
       },
       {
-        "filename": "github-workflows-deployment-checklist.html",
-        "title": "🚀 Deployment Safety Checklist"
+        "filename": "docs-compliance-florida-requirements.html",
+        "title": "Florida Requirements"
       },
       {
-        "filename": "docs-deployment-guide.html",
-        "title": "Care Commons Deployment Guide"
+        "filename": "docs-compliance-ohio-requirements.html",
+        "title": "Ohio Requirements"
       },
       {
-        "filename": "deployment.html",
-        "title": "Cloud Deployment Guide"
-      },
-      {
-        "filename": "cloudflare-deployment.html",
-        "title": "Cloudflare Deployment Guide"
-      },
-      {
-        "filename": "api-cloudflare-workers-setup.html",
-        "title": "Cloudflare Workers Setup (TODO)"
-      },
-      {
-        "filename": "docs-deployment-setup-complete.html",
-        "title": "Complete Deployment Setup Guide for Care Commons"
-      },
-      {
-        "filename": "database-quickstart.html",
-        "title": "Database Quick Start"
-      },
-      {
-        "filename": "docs-deployment-checklist.html",
-        "title": "Deployment Checklist"
-      },
-      {
-        "filename": "github-workflows-deployment-diagram.html",
-        "title": "Deployment Flow Diagram"
-      },
-      {
-        "filename": "deployment-options.html",
-        "title": "Deployment Options for Care Commons"
-      },
-      {
-        "filename": "deployment-quick-reference.html",
-        "title": "Deployment Quick Reference"
-      },
-      {
-        "filename": "deployment-quickstart.html",
-        "title": "Deployment Quick Start"
-      },
-      {
-        "filename": "deployment-quick-start.html",
-        "title": "Deployment Quick Start Guide"
-      },
-      {
-        "filename": "github-workflows-deployment-flow.html",
-        "title": "Deployment Workflow Guide"
-      },
-      {
-        "filename": "environment-setup.html",
-        "title": "Environment Configuration Guide"
-      },
-      {
-        "filename": "docs-runbooks-manual-deployment.html",
-        "title": "Manual Deployment Runbook"
-      },
-      {
-        "filename": "packages-mobile-deployment-checklist.html",
-        "title": "Mobile App Deployment Checklist"
-      },
-      {
-        "filename": "production-deployment.html",
-        "title": "Production Deployment Guide - Vercel"
-      },
-      {
-        "filename": "vercel-config-notes.html",
-        "title": "Vercel Deployment Configuration"
-      },
-      {
-        "filename": "vercel-quickstart.html",
-        "title": "Vercel Environment Setup - Quick Start"
-      },
-      {
-        "filename": "vercel-env-setup.html",
-        "title": "Vercel Environment Variables Setup"
-      },
-      {
-        "filename": "vercel-deployment-checklist.html",
-        "title": "Vercel Production Deployment Checklist"
+        "filename": "docs-compliance-pennsylvania-requirements.html",
+        "title": "Pennsylvania Requirements"
       }
     ],
     "priority": 3
   },
-  "reference": {
-    "name": "📚 Technical Reference",
-    "description": "Architecture, APIs, and compliance details",
+  "contributing": {
+    "name": "Contributing",
+    "description": "How to contribute code and documentation",
     "files": [
-      {
-        "filename": "docs-compliance-template-implementation.html",
-        "title": "[STATE NAME] Compliance Implementation Guide"
-      },
-      {
-        "filename": "docs-compliance-template-test-scenarios.html",
-        "title": "[STATE NAME] Compliance Test Scenarios"
-      },
-      {
-        "filename": "docs-compliance-template-requirements.html",
-        "title": "[STATE NAME] Home Healthcare Compliance Requirements"
-      },
-      {
-        "filename": "docs-compliance-template-changelog.html",
-        "title": "[STATE NAME] Regulatory Changelog"
-      },
-      {
-        "filename": "packages-core-readme.html",
-        "title": "@care-commons/core"
-      },
-      {
-        "filename": "packages-shared-components-readme.html",
-        "title": "@care-commons/shared-components"
-      },
-      {
-        "filename": "cli-tools-installed.html",
-        "title": "✅ CLI Tools Installed & Ready"
-      },
-      {
-        "filename": "packages-web-src-app-pages-admin-readme.html",
-        "title": "Admin Dashboard"
-      },
-      {
-        "filename": "verticals-analytics-reporting-architectural-issues.html",
-        "title": "Analytics & Reporting - Architectural Issues & Required Refactor"
-      },
-      {
-        "filename": "api-readme.html",
-        "title": "API Directory - Vercel Serverless Functions"
-      },
-      {
-        "filename": "docs-api-documentation.html",
-        "title": "API Documentation"
-      },
-      {
-        "filename": "auth-login-debugging.html",
-        "title": "Authentication Login Failure Debugging Report"
-      },
-      {
-        "filename": "verticals-billing-invoicing-usage.html",
-        "title": "Billing & Invoicing - Usage Guide"
-      },
-      {
-        "filename": "packages-app-readme.html",
-        "title": "Care Commons API Server"
-      },
-      {
-        "filename": "scripts-readme.html",
-        "title": "Care Commons Deployment Scripts"
-      },
-      {
-        "filename": "packages-mobile-readme.html",
-        "title": "Care Commons Mobile App 📱"
-      },
-      {
-        "filename": "packages-web-readme.html",
-        "title": "Care Commons Web UI"
-      },
-      {
-        "filename": "e2e-readme.html",
-        "title": "Care Commons: End-to-End Testing Guide"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-status.html",
-        "title": "Care Plans & Tasks Library - Current Status"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-demo.html",
-        "title": "Care Plans & Tasks Library - Demo Guide"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-implementation.html",
-        "title": "Care Plans & Tasks Library - Implementation Guide"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-reference.html",
-        "title": "Care Plans & Tasks Library - Quick Reference"
-      },
-      {
-        "filename": "verticals-caregiver-staff-implementation.html",
-        "title": "Caregiver & Staff Management - Implementation Summary"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-changelog.html",
-        "title": "Changelog"
-      },
-      {
-        "filename": "verticals-client-demographics-changelog.html",
-        "title": "Changelog - Client & Demographics Management"
-      },
-      {
-        "filename": "cors-fix.html",
-        "title": "CORS Fix for Vercel Deployments"
-      },
-      {
-        "filename": "create-mobile-pr.html",
-        "title": "Create Mobile Foundation PR"
-      },
-      {
-        "filename": "database-environments.html",
-        "title": "Database Environment Management"
-      },
-      {
-        "filename": "packages-core-migrations-readme.html",
-        "title": "Database Migrations"
-      },
-      {
-        "filename": "docs-database-performance.html",
-        "title": "Database Performance Optimization Guide"
-      },
-      {
-        "filename": "docs-query-optimization.html",
-        "title": "Database Query Performance Optimization"
-      },
-      {
-        "filename": "docs-development.html",
-        "title": "Development Guide"
-      },
-      {
-        "filename": "docs-docker-setup.html",
-        "title": "Docker Setup Guide"
-      },
-      {
-        "filename": "scripts-docs-site.html",
-        "title": "Documentation Site Generator"
-      },
-      {
-        "filename": "scripts-docs-to-pdf.html",
-        "title": "Documentation to PDF Scripts"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-evv-sync-integration.html",
-        "title": "EVV Sync Integration Guide"
-      },
-      {
-        "filename": "docs-compliance-florida-requirements.html",
-        "title": "Florida Home Healthcare Compliance Requirements"
-      },
-      {
-        "filename": "docs-compliance-florida-changelog.html",
-        "title": "Florida Regulatory Changelog"
-      },
-      {
-        "filename": "github-actions.html",
-        "title": "GitHub Actions Documentation"
-      },
-      {
-        "filename": "docs-github-secrets.html",
-        "title": "GitHub Secrets Configuration Guide"
-      },
-      {
-        "filename": "packages-mobile-viewing-mobile-app.html",
-        "title": "How to View the Mobile App"
-      },
-      {
-        "filename": "verticals-scheduling-visits-implementation.html",
-        "title": "Implementation: Scheduling & Visit Management"
-      },
-      {
-        "filename": "verticals-client-demographics-migration.html",
-        "title": "Migration Guide - Client & Demographics Management"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-migration-guide.html",
-        "title": "Migration Guide: TX/FL to Multi-State EVV"
-      },
-      {
-        "filename": "packages-mobile-next-steps.html",
-        "title": "Mobile App - Next Steps"
-      },
-      {
-        "filename": "packages-mobile-quickstart-mobile.html",
-        "title": "Mobile App Quick Start Guide"
-      },
-      {
-        "filename": "packages-mobile-quickstart.html",
-        "title": "Mobile App Quickstart Guide"
-      },
-      {
-        "filename": "packages-mobile-readme-e2e-testing.html",
-        "title": "Mobile E2E Testing with Detox"
-      },
-      {
-        "filename": "mobile-pr-ready.html",
-        "title": "Mobile Foundation PR - Ready for Review ✅"
-      },
-      {
-        "filename": "packages-core-src-compliance-readme.html",
-        "title": "Multi-State Compliance System"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-multistate-guide.html",
-        "title": "Multi-State EVV Integration Guide"
-      },
-      {
-        "filename": "node-version-setup.html",
-        "title": "Node.js Version Setup Guide"
-      },
-      {
-        "filename": "offline-first-architecture.html",
-        "title": "Offline-First Architecture Implementation"
-      },
-      {
-        "filename": "sync-integration-guide.html",
-        "title": "Offline-First Sync Integration Guide"
-      },
-      {
-        "filename": "docs-compliance-ohio-changelog.html",
-        "title": "Ohio Compliance Changelog"
-      },
-      {
-        "filename": "docs-compliance-ohio-implementation.html",
-        "title": "Ohio Compliance Implementation Guide"
-      },
-      {
-        "filename": "docs-compliance-ohio-test-scenarios.html",
-        "title": "Ohio Compliance Test Scenarios"
-      },
-      {
-        "filename": "docs-compliance-ohio-requirements.html",
-        "title": "Ohio Home Healthcare Compliance Requirements"
-      },
-      {
-        "filename": "docs-security-penetration-testing-checklist.html",
-        "title": "Penetration Testing Checklist"
-      },
-      {
-        "filename": "docs-compliance-pennsylvania-requirements.html",
-        "title": "Pennsylvania Home Healthcare Compliance Requirements"
-      },
-      {
-        "filename": "docs-performance-optimization-guide.html",
-        "title": "Performance Optimization Guide"
-      },
-      {
-        "filename": "docs-production-launch-checklist.html",
-        "title": "Production Launch Checklist"
-      },
-      {
-        "filename": "docs-production-readiness-checklist.html",
-        "title": "Production Readiness Checklist"
-      },
-      {
-        "filename": "qwen.html",
-        "title": "Project Customization for Qwen Code"
-      },
-      {
-        "filename": "quick-db-reference.html",
-        "title": "Quick Database Reference"
-      },
-      {
-        "filename": "quick-deploy-reference.html",
-        "title": "Quick Deployment Reference Card"
-      },
-      {
-        "filename": "packages-web-quickstart.html",
-        "title": "Quick Start Guide"
-      },
-      {
-        "filename": "docs-refactoring-guide.html",
-        "title": "Refactoring Guide"
-      },
-      {
-        "filename": "verticals-shift-matching-demo.html",
-        "title": "Shift Matching & Assignment Demo"
-      },
-      {
-        "filename": "github-snyk-integration.html",
-        "title": "Snyk Integration Policy"
-      },
-      {
-        "filename": "docs-compliance-index.html",
-        "title": "State Compliance Documentation"
-      },
-      {
-        "filename": "docs-compliance-readme.html",
-        "title": "State Compliance Documentation"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-task-0000-completion.html",
-        "title": "Task 0000 Completion Report"
-      },
-      {
-        "filename": "task-completion-status.html",
-        "title": "Task Completion Status - Layer 2 Input"
-      },
-      {
-        "filename": "docs-compliance-texas-implementation.html",
-        "title": "Texas Compliance Implementation Guide"
-      },
-      {
-        "filename": "docs-compliance-texas-requirements.html",
-        "title": "Texas Home Healthcare Compliance Requirements"
-      },
-      {
-        "filename": "docs-compliance-texas-changelog.html",
-        "title": "Texas Regulatory Changelog"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-implementation.html",
-        "title": "Time Tracking & EVV - Implementation Status"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-improvements.html",
-        "title": "Time Tracking & EVV Improvements"
-      },
-      {
-        "filename": "packages-web-architecture.html",
-        "title": "Web Architecture"
-      }
-    ],
-    "priority": 4
-  },
-  "operations": {
-    "name": "⚙️ Operations",
-    "description": "Monitoring, backups, and troubleshooting",
-    "files": [
-      {
-        "filename": "docs-operations-backup-restore.html",
-        "title": "Backup and Restore Procedures"
-      },
-      {
-        "filename": "docs-operations-backup-recovery.html",
-        "title": "Database Backup and Recovery Procedures"
-      },
-      {
-        "filename": "docs-disaster-recovery-plan.html",
-        "title": "Disaster Recovery Plan"
-      },
-      {
-        "filename": "docs-operations-disaster-recovery.html",
-        "title": "Disaster Recovery Plan"
-      },
-      {
-        "filename": "docs-disaster-recovery.html",
-        "title": "Disaster Recovery Procedures"
-      },
-      {
-        "filename": "docs-runbooks-runbook-disaster-recovery.html",
-        "title": "Disaster Recovery Runbook"
-      },
-      {
-        "filename": "docs-runbook-launch-day.html",
-        "title": "Launch Day Runbook"
-      },
-      {
-        "filename": "docs-operations-load-testing.html",
-        "title": "Load Testing Guide"
-      },
-      {
-        "filename": "docs-operations-monitoring-alerts.html",
-        "title": "Monitoring and Alerting Configuration"
-      },
-      {
-        "filename": "docs-operations-launch-runbook.html",
-        "title": "Production Launch Runbook"
-      },
-      {
-        "filename": "docs-operations-support-brief.html",
-        "title": "Production Support Team Brief"
-      },
-      {
-        "filename": "docs-operations-rollback-procedures.html",
-        "title": "Rollback Procedures"
-      },
-      {
-        "filename": "docs-operations-stakeholder-communications.html",
-        "title": "Stakeholder Communications Templates"
-      }
-    ],
-    "priority": 5
-  },
-  "developer": {
-    "name": "👨‍💻 Developer Docs",
-    "description": "Contributing and development (hidden from main nav)",
-    "files": [
-      {
-        "filename": "agents.html",
-        "title": "Agent Implementation Directives"
-      },
-      {
-        "filename": "autonomous-session-summary.html",
-        "title": "Autonomous Development Session Summary"
-      },
-      {
-        "filename": "verticals-billing-invoicing-implementation-summary.html",
-        "title": "Billing & Invoicing - Implementation Summary"
-      },
-      {
-        "filename": "claude-layer-1-memory.html",
-        "title": "Care Commons - Central Planner Vision & State"
-      },
-      {
-        "filename": "verticals-care-plans-tasks-summary.html",
-        "title": "Care Plans & Tasks Library - Implementation Summary"
-      },
-      {
-        "filename": "claude-readme.html",
-        "title": "Claude Autonomous Task Management System"
-      },
-      {
-        "filename": "hardening-summary.html",
-        "title": "Codebase Hardening Summary"
-      },
       {
         "filename": "contributing.html",
-        "title": "Contributing to Care Commons"
+        "title": "Contribution Guide"
       },
       {
         "filename": "dev-setup.html",
-        "title": "Development Setup Guide"
+        "title": "Development Setup"
       },
       {
-        "filename": "claude-layer-1-input.html",
-        "title": "Input"
+        "filename": "packages-core-readme.html",
+        "title": "Core Package Architecture"
       },
       {
-        "filename": "claude-layer-2-instructions.html",
-        "title": "INSTRUCTIONS"
+        "filename": "packages-app-readme.html",
+        "title": "API Server"
       },
       {
-        "filename": "claude-layer-2-input-readme.html",
-        "title": "Layer 2 Implementation Tasks"
+        "filename": "packages-web-readme.html",
+        "title": "Web UI"
       },
       {
-        "filename": "implementation-note.html",
-        "title": "ML-Based Shift Matching Implementation"
-      },
-      {
-        "filename": "mobile-implementation-complete.html",
-        "title": "Mobile Foundation Implementation - Complete ✅"
-      },
-      {
-        "filename": "github-pull-request-template-mobile-pr-template.html",
-        "title": "Mobile Pr Template"
-      },
-      {
-        "filename": "offline-first-implementation-summary.html",
-        "title": "Offline-First Architecture - Implementation Summary"
-      },
-      {
-        "filename": "pull-request-summary.html",
-        "title": "Pull Request: Offline-First Synchronization System"
-      },
-      {
-        "filename": "web-implementation-summary.html",
-        "title": "React Frontend Implementation Summary"
-      },
-      {
-        "filename": "implementation-complete-final.html",
-        "title": "React Native Mobile Foundation - COMPLETE ✅"
-      },
-      {
-        "filename": "packages-mobile-implementation-summary.html",
-        "title": "React Native Mobile Foundation - Implementation Summary"
-      },
-      {
-        "filename": "packages-mobile-mobile-foundation-summary.html",
-        "title": "React Native Mobile Foundation - Implementation Summary"
-      },
-      {
-        "filename": "rich-demo-implementation-plan.html",
-        "title": "Rich Interactive Demo Implementation Plan"
-      },
-      {
-        "filename": "verticals-scheduling-visits-summary.html",
-        "title": "Scheduling & Visit Management - Implementation Summary"
-      },
-      {
-        "filename": "showcase-part3-summary.html",
-        "title": "Showcase Part 3: Multi-Role Experience Implementation"
-      },
-      {
-        "filename": "docs-compliance-project-summary.html",
-        "title": "State Compliance Documentation System - Project Summary"
-      },
-      {
-        "filename": "claude-0000-task-management-system-setup.html",
-        "title": "Task 0000: Task Management System Setup"
-      },
-      {
-        "filename": "claude-0001-fix-caregiver-repository-type-errors.html",
-        "title": "Task 0001: Fix Caregiver Repository Type Errors"
-      },
-      {
-        "filename": "claude-0002-fix-client-demographics-api-error.html",
-        "title": "Task 0002: Fix Client Demographics API Type Error"
-      },
-      {
-        "filename": "claude-0003-create-state-compliance-service.html",
-        "title": "Task 0003: Create State Compliance Service"
-      },
-      {
-        "filename": "claude-layer-2-input-0003-mobile-offline-sync-status.html",
-        "title": "Task 0003: Mobile Offline Sync Status Screen"
-      },
-      {
-        "filename": "claude-layer-2-input-0004-api-caregivers-me-endpoint.html",
-        "title": "Task 0004: Caregiver Profile API Endpoint"
-      },
-      {
-        "filename": "claude-0004-implement-state-specific-evv-validation.html",
-        "title": "Task 0004: Implement State-Specific EVV Validation"
-      },
-      {
-        "filename": "claude-0005-implement-visit-status-notifications.html",
-        "title": "Task 0005: Implement Visit Status Notifications"
-      },
-      {
-        "filename": "claude-layer-2-input-0005-api-visits-my-visits-endpoint.html",
-        "title": "Task 0005: My Visits API Endpoint"
-      },
-      {
-        "filename": "claude-0006-build-clinical-documentation-foundation.html",
-        "title": "Task 0006: Build Clinical Documentation Foundation"
-      },
-      {
-        "filename": "claude-layer-2-input-0006-mobile-visit-notes.html",
-        "title": "Task 0006: Mobile Visit Notes Entry"
-      },
-      {
-        "filename": "claude-layer-2-input-0007-web-client-dashboard.html",
-        "title": "Task 0007: Web Client Dashboard"
-      },
-      {
-        "filename": "claude-layer-2-input-0008-api-rate-limiting.html",
-        "title": "Task 0008: API Rate Limiting Middleware"
-      },
-      {
-        "filename": "claude-0008-fix-evv-notification-recipients.html",
-        "title": "Task 0008: Fix EVV Notification Recipients"
-      },
-      {
-        "filename": "claude-layer-2-input-0009-error-monitoring-setup.html",
-        "title": "Task 0009: Error Monitoring and Logging"
-      },
-      {
-        "filename": "claude-0009-integrate-family-engagement-with-services.html",
-        "title": "Task 0009: Integrate Family Engagement with Client/Care Plan Services"
-      },
-      {
-        "filename": "claude-layer-2-input-0010-database-backup-strategy.html",
-        "title": "Task 0010: Database Backup and Recovery"
-      },
-      {
-        "filename": "claude-0010-implement-hhaexchange-evv-aggregator-integration.html",
-        "title": "Task 0010: Implement HHAeXchange EVV Aggregator Integration"
-      },
-      {
-        "filename": "claude-layer-2-input-0011-mobile-biometric-auth.html",
-        "title": "Task 0011: Mobile Biometric Authentication"
-      },
-      {
-        "filename": "claude-layer-2-input-0012-api-documentation.html",
-        "title": "Task 0012: API Documentation with OpenAPI"
-      },
-      {
-        "filename": "claude-layer-2-input-0013-web-coordinator-onboarding.html",
-        "title": "Task 0013: Coordinator Onboarding Flow"
-      },
-      {
-        "filename": "claude-0013-implement-holiday-filtering-in-schedule-service.html",
-        "title": "Task 0013: Implement Holiday Filtering in Schedule Service"
-      },
-      {
-        "filename": "claude-0014-implement-mobile-push-notifications.html",
-        "title": "Task 0014: Implement Mobile Push Notifications"
-      },
-      {
-        "filename": "claude-layer-2-input-0014-mobile-push-notifications.html",
-        "title": "Task 0014: Mobile Push Notifications"
-      },
-      {
-        "filename": "claude-0015-implement-mobile-sync-status-screen.html",
-        "title": "Task 0015: Implement Mobile Sync Status Screen"
-      },
-      {
-        "filename": "claude-layer-2-input-0015-testing-improvements.html",
-        "title": "Task 0015: Test Coverage Improvements"
-      },
-      {
-        "filename": "claude-0016-implement-mobile-e2e-testing.html",
-        "title": "Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows"
-      },
-      {
-        "filename": "tx-fl-implementation-summary.html",
-        "title": "Texas and Florida State-Specific Implementation Summary"
-      },
-      {
-        "filename": "verticals-time-tracking-evv-summary.html",
-        "title": "Time Tracking & EVV Implementation Summary"
-      },
-      {
-        "filename": "implementation-status.html",
-        "title": "TX/FL Implementation Status"
+        "filename": "packages-mobile-readme.html",
+        "title": "Mobile App"
       }
     ],
-    "priority": 6
+    "priority": 4
   }
 }

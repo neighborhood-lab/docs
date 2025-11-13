@@ -3,158 +3,627 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Care Commons Documentation</title>
-  <meta name="description" content="Comprehensive documentation for Care Commons - Shared care software, community owned">
+  <title>Care Commons - Home Care Software, Community Owned</title>
+  <meta name="description" content="Care Commons is software for running home care agencies. Open source, self-hostable, designed for small agencies.">
   <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      hljs.highlightAll();
-      
-      // Mobile menu toggle
-      const menuToggle = document.querySelector('.menu-toggle');
-      const sidebar = document.querySelector('.sidebar');
-      if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', () => {
-          sidebar.classList.toggle('open');
-        });
-      }
-      
-      // Search functionality
-      const searchInput = document.getElementById('search-input');
-      const searchResults = document.getElementById('search-results');
-      
-      if (searchInput && searchResults) {
-        searchInput.addEventListener('input', (e) => {
-          const query = e.target.value.toLowerCase();
-          if (query.length < 2) {
-            searchResults.innerHTML = '';
-            searchResults.style.display = 'none';
-            return;
-          }
-          
-          // Simple search through navigation items
-          const navItems = document.querySelectorAll('.sidebar a');
-          const matches = Array.from(navItems)
-            .filter(item => item.textContent.toLowerCase().includes(query))
-            .slice(0, 10);
-          
-          if (matches.length > 0) {
-            searchResults.innerHTML = matches
-              .map(item => `<a href="${item.href}" class="search-result">${item.textContent}</a>`)
-              .join('');
-            searchResults.style.display = 'block';
-          } else {
-            searchResults.innerHTML = '<div class="search-result no-results">No results found</div>';
-            searchResults.style.display = 'block';
-          }
-        });
-        
-        // Hide results when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.style.display = 'none';
-          }
-        });
-      }
-    });
-  </script>
 </head>
 <body>
   <div class="container">
     <aside class="sidebar">
       <div class="sidebar-header">
-        <h1><a href="./index.html">Care Commons Docs</a></h1>
-        <button class="menu-toggle" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search documentation..." />
-        <div id="search-results"></div>
+        <h1><a href="./index.html">Care Commons</a></h1>
       </div>
       <nav class="sidebar-nav">
         <div class="nav-category">
-      <h3>🚀 Getting Started</h3>
-      <ul><li><a href="./api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="./claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="./claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="./database-quickstart.html">Database Quick Start</a></li><li><a href="./demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li><li><a href="./deployment-quick-start.html">Deployment Quick Start Guide</a></li><li><a href="./deployment-quickstart.html">Deployment Quick Start</a></li><li><a href="./docs-compliance-readme.html">State Compliance Documentation</a></li><li><a href="./e2e-readme.html">Care Commons: End-to-End Testing Guide</a></li><li><a href="./packages-mobile-quickstart-mobile.html">Mobile App Quick Start Guide</a></li><li><a href="./packages-mobile-quickstart.html">Mobile App Quickstart Guide</a></li><li><a href="./packages-web-quickstart.html">Quick Start Guide</a></li><li><a href="./readme.html">Care Commons</a></li><li><a href="./scripts-readme.html">Care Commons Deployment Scripts</a></li><li><a href="./showcase-quick-start.html">Showcase Quick Start Guide</a></li><li><a href="./showcase-readme.html">Care Commons Showcase</a></li><li><a href="./vercel-quickstart.html">Vercel Environment Setup - Quick Start</a></li><li><a href="./verticals-analytics-reporting-readme.html">Analytics & Reporting Vertical</a></li><li><a href="./verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li><li><a href="./verticals-care-plans-tasks-quickstart.html">Care Plans & Tasks Library - Quickstart</a></li><li><a href="./verticals-care-plans-tasks-readme.html">Care Plans & Tasks Library</a></li><li><a href="./verticals-caregiver-staff-quickstart.html">Caregiver & Staff Management - Quick Start</a></li><li><a href="./verticals-caregiver-staff-readme.html">Caregiver & Staff Management</a></li><li><a href="./verticals-client-demographics-readme.html">Client & Demographics Management</a></li><li><a href="./verticals-family-engagement-readme.html">Family Engagement Platform (Consolidated)</a></li><li><a href="./verticals-payroll-processing-readme.html">Payroll Processing</a></li><li><a href="./verticals-quality-assurance-audits-readme.html">Quality Assurance & Audits Vertical</a></li><li><a href="./verticals-scheduling-visits-quickstart.html">Quickstart: Scheduling & Visit Management</a></li><li><a href="./verticals-scheduling-visits-readme.html">Scheduling & Visit Management</a></li><li><a href="./verticals-shift-matching-readme.html">Shift Matching & Assignment</a></li><li><a href="./verticals-time-tracking-evv-quickstart.html">Time Tracking & EVV - Quick Start Guide</a></li><li><a href="./verticals-time-tracking-evv-readme.html">Time Tracking & Electronic Visit Verification (EVV)</a></li></ul></div><div class="nav-category">
-      <h3>📖 User Guides</h3>
-      <ul><li><a href="./claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="./docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="./docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="./packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="./rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li><li><a href="./showcase-demo-data-implementation.html">Showcase Demo Data Implementation</a></li><li><a href="./showcase.html">Care Commons Platform - Interactive Showcase</a></li><li><a href="./showcase-part3-summary.html">Showcase Part 3: Multi-Role Experience Implementation</a></li><li><a href="./sync-integration-guide.html">Offline-First Sync Integration Guide</a></li><li><a href="./verticals-care-plans-tasks-demo.html">Care Plans & Tasks Library - Demo Guide</a></li><li><a href="./verticals-client-demographics-changelog.html">Changelog - Client & Demographics Management</a></li><li><a href="./verticals-client-demographics-examples.html">Client & Demographics - Usage Examples</a></li><li><a href="./verticals-client-demographics-migration.html">Migration Guide - Client & Demographics Management</a></li><li><a href="./verticals-scheduling-visits-wiring-guide.html">Scheduling Service Wiring Guide</a></li><li><a href="./verticals-shift-matching-demo.html">Shift Matching & Assignment Demo</a></li><li><a href="./verticals-time-tracking-evv-migration-guide.html">Migration Guide: TX/FL to Multi-State EVV</a></li><li><a href="./verticals-time-tracking-evv-multistate-guide.html">Multi-State EVV Integration Guide</a></li></ul></div><div class="nav-category">
-      <h3>🏗️ Architecture & Deployment</h3>
-      <ul><li><a href="./github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="./github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="./github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="./autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="./claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li><li><a href="./cloudflare-deployment.html">Cloudflare Deployment Guide</a></li><li><a href="./deployment-options.html">Deployment Options for Care Commons</a></li><li><a href="./deployment-quick-reference.html">Deployment Quick Reference</a></li><li><a href="./deployment-ready.html">✅ Deployment Ready - Care Commons Platform</a></li><li><a href="./deployment.html">Cloud Deployment Guide</a></li><li><a href="./docs-compliance-index.html">State Compliance Documentation</a></li><li><a href="./docs-compliance-project-summary.html">State Compliance Documentation System - Project Summary</a></li><li><a href="./docs-deployment-setup-complete.html">Complete Deployment Setup Guide for Care Commons</a></li><li><a href="./docs-runbooks-manual-deployment.html">Manual Deployment Runbook</a></li><li><a href="./hardening-summary.html">Codebase Hardening Summary</a></li><li><a href="./implementation-complete-final.html">React Native Mobile Foundation - COMPLETE ✅</a></li><li><a href="./implementation-note.html">ML-Based Shift Matching Implementation</a></li><li><a href="./offline-first-architecture.html">Offline-First Architecture Implementation</a></li><li><a href="./offline-first-implementation-summary.html">Offline-First Architecture - Implementation Summary</a></li><li><a href="./packages-app-readme.html">Care Commons API Server</a></li><li><a href="./packages-core-src-compliance-readme.html">Multi-State Compliance System</a></li><li><a href="./packages-mobile-deployment-checklist.html">Mobile App Deployment Checklist</a></li><li><a href="./packages-mobile-implementation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="./packages-mobile-mobile-foundation-summary.html">React Native Mobile Foundation - Implementation Summary</a></li><li><a href="./packages-shared-components-readme.html">@care-commons/shared-components</a></li><li><a href="./packages-web-architecture.html">Web Architecture</a></li><li><a href="./packages-web-readme.html">Care Commons Web UI</a></li><li><a href="./production-deployment.html">Production Deployment Guide - Vercel</a></li><li><a href="./pull-request-summary.html">Pull Request: Offline-First Synchronization System</a></li><li><a href="./tx-fl-implementation-summary.html">Texas and Florida State-Specific Implementation Summary</a></li><li><a href="./verticals-billing-invoicing-implementation-summary.html">Billing & Invoicing - Implementation Summary</a></li><li><a href="./verticals-care-plans-tasks-summary.html">Care Plans & Tasks Library - Implementation Summary</a></li><li><a href="./verticals-scheduling-visits-implementation.html">Implementation: Scheduling & Visit Management</a></li><li><a href="./verticals-scheduling-visits-summary.html">Scheduling & Visit Management - Implementation Summary</a></li><li><a href="./verticals-time-tracking-evv-changelog.html">Changelog</a></li><li><a href="./verticals-time-tracking-evv-evv-sync-integration.html">EVV Sync Integration Guide</a></li><li><a href="./verticals-time-tracking-evv-summary.html">Time Tracking & EVV Implementation Summary</a></li><li><a href="./web-implementation-summary.html">React Frontend Implementation Summary</a></li></ul></div><div class="nav-category">
-      <h3>⚙️ Implementation Details</h3>
-      <ul><li><a href="./github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="./github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="./agents.html">Agent Implementation Directives</a></li><li><a href="./api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="./auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li><li><a href="./claude-0000-task-management-system-setup.html">Task 0000: Task Management System Setup</a></li><li><a href="./claude-0001-fix-caregiver-repository-type-errors.html">Task 0001: Fix Caregiver Repository Type Errors</a></li><li><a href="./claude-0003-create-state-compliance-service.html">Task 0003: Create State Compliance Service</a></li><li><a href="./claude-0004-implement-state-specific-evv-validation.html">Task 0004: Implement State-Specific EVV Validation</a></li><li><a href="./claude-0005-implement-visit-status-notifications.html">Task 0005: Implement Visit Status Notifications</a></li><li><a href="./claude-0006-build-clinical-documentation-foundation.html">Task 0006: Build Clinical Documentation Foundation</a></li><li><a href="./claude-0008-fix-evv-notification-recipients.html">Task 0008: Fix EVV Notification Recipients</a></li><li><a href="./claude-0009-integrate-family-engagement-with-services.html">Task 0009: Integrate Family Engagement with Client/Care Plan Services</a></li><li><a href="./claude-0010-implement-hhaexchange-evv-aggregator-integration.html">Task 0010: Implement HHAeXchange EVV Aggregator Integration</a></li><li><a href="./claude-0013-implement-holiday-filtering-in-schedule-service.html">Task 0013: Implement Holiday Filtering in Schedule Service</a></li><li><a href="./claude-0014-implement-mobile-push-notifications.html">Task 0014: Implement Mobile Push Notifications</a></li><li><a href="./claude-0015-implement-mobile-sync-status-screen.html">Task 0015: Implement Mobile Sync Status Screen</a></li><li><a href="./claude-0016-implement-mobile-e2e-testing.html">Task 0016: Implement Mobile E2E Testing for Critical Caregiver Workflows</a></li><li><a href="./claude-layer-1-input.html">Input</a></li><li><a href="./claude-layer-2-input-0003-mobile-offline-sync-status.html">Task 0003: Mobile Offline Sync Status Screen</a></li><li><a href="./claude-layer-2-input-0004-api-caregivers-me-endpoint.html">Task 0004: Caregiver Profile API Endpoint</a></li><li><a href="./claude-layer-2-input-0005-api-visits-my-visits-endpoint.html">Task 0005: My Visits API Endpoint</a></li><li><a href="./claude-layer-2-input-0006-mobile-visit-notes.html">Task 0006: Mobile Visit Notes Entry</a></li><li><a href="./claude-layer-2-input-0007-web-client-dashboard.html">Task 0007: Web Client Dashboard</a></li><li><a href="./claude-layer-2-input-0008-api-rate-limiting.html">Task 0008: API Rate Limiting Middleware</a></li><li><a href="./claude-layer-2-input-0009-error-monitoring-setup.html">Task 0009: Error Monitoring and Logging</a></li><li><a href="./claude-layer-2-input-0010-database-backup-strategy.html">Task 0010: Database Backup and Recovery</a></li><li><a href="./claude-layer-2-input-0011-mobile-biometric-auth.html">Task 0011: Mobile Biometric Authentication</a></li><li><a href="./claude-layer-2-input-0012-api-documentation.html">Task 0012: API Documentation with OpenAPI</a></li><li><a href="./claude-layer-2-input-0013-web-coordinator-onboarding.html">Task 0013: Coordinator Onboarding Flow</a></li><li><a href="./claude-layer-2-input-0014-mobile-push-notifications.html">Task 0014: Mobile Push Notifications</a></li><li><a href="./claude-layer-2-input-0015-testing-improvements.html">Task 0015: Test Coverage Improvements</a></li><li><a href="./claude-layer-2-instructions.html">INSTRUCTIONS</a></li><li><a href="./cli-tools-installed.html">✅ CLI Tools Installed & Ready</a></li><li><a href="./contributing.html">Contributing to Care Commons</a></li><li><a href="./cors-fix.html">CORS Fix for Vercel Deployments</a></li><li><a href="./create-mobile-pr.html">Create Mobile Foundation PR</a></li><li><a href="./database-environments.html">Database Environment Management</a></li><li><a href="./dev-setup.html">Development Setup Guide</a></li><li><a href="./docs-api-documentation.html">API Documentation</a></li><li><a href="./docs-compliance-template-changelog.html">[STATE NAME] Regulatory Changelog</a></li><li><a href="./docs-compliance-template-implementation.html">[STATE NAME] Compliance Implementation Guide</a></li><li><a href="./docs-compliance-template-requirements.html">[STATE NAME] Home Healthcare Compliance Requirements</a></li><li><a href="./docs-compliance-template-test-scenarios.html">[STATE NAME] Compliance Test Scenarios</a></li><li><a href="./docs-compliance-florida-changelog.html">Florida Regulatory Changelog</a></li><li><a href="./docs-compliance-florida-requirements.html">Florida Home Healthcare Compliance Requirements</a></li><li><a href="./docs-compliance-ohio-changelog.html">Ohio Compliance Changelog</a></li><li><a href="./docs-compliance-ohio-implementation.html">Ohio Compliance Implementation Guide</a></li><li><a href="./docs-compliance-ohio-requirements.html">Ohio Home Healthcare Compliance Requirements</a></li><li><a href="./docs-compliance-ohio-test-scenarios.html">Ohio Compliance Test Scenarios</a></li><li class="more-docs">+ 59 more documents</li></ul></div>
+          <h3>Start Here</h3>
+          <ul>
+            <li><a href="#what">What is this?</a></li>
+            <li><a href="#try">Try it</a></li>
+            <li><a href="https://discord.gg/EkeXQZFq" target="_blank">Discord</a></li>
+            <li><a href="https://neighborhoodlab.substack.com/" target="_blank">Substack</a></li>
+            <li><a href="https://www.patreon.com/neighborhood_lab" target="_blank">Patreon</a></li>
+          </ul>
+        </div>
+        <div class="nav-category">
+          <h3>Using the Software</h3>
+          <ul>
+            <li><a href="#web-app">Web app (office staff)</a></li>
+            <li><a href="#mobile-app">Mobile app (caregivers)</a></li>
+            <li><a href="#state-specific">State-specific features</a></li>
+          </ul>
+        </div>
+        <div class="nav-category">
+          <h3>Installing</h3>
+          <ul>
+            <li><a href="#hosting-options">Vercel vs Cloudflare</a></li>
+            <li><a href="#vercel">Deploy to Vercel</a></li>
+            <li><a href="#cloudflare">Deploy to Cloudflare</a></li>
+          </ul>
+        </div>
+        <div class="nav-category">
+          <h3>Contributing</h3>
+          <ul>
+            <li><a href="#architecture">Architecture overview</a></li>
+            <li><a href="#development">Development setup</a></li>
+            <li><a href="#making-changes">Making changes</a></li>
+          </ul>
+        </div>
+        <div class="nav-category">
+          <h3>Features</h3>
+          <ul>
+            <li><a href="./verticals-client-demographics-readme.html">Client Management</a></li>
+            <li><a href="./verticals-caregiver-staff-readme.html">Caregiver & Staff</a></li>
+            <li><a href="./verticals-scheduling-visits-readme.html">Scheduling & Visits</a></li>
+            <li><a href="./verticals-time-tracking-evv-readme.html">Time Tracking & EVV</a></li>
+            <li><a href="./verticals-care-plans-tasks-readme.html">Care Plans & Tasks</a></li>
+            <li><a href="./verticals-billing-invoicing-readme.html">Billing & Invoicing</a></li>
+            <li><a href="./verticals-family-engagement-readme.html">Family Portal</a></li>
+          </ul>
+        </div>
+        <div class="nav-category">
+          <h3>State Compliance</h3>
+          <ul>
+            <li><a href="./docs-compliance-texas-requirements.html">Texas</a></li>
+            <li><a href="./docs-compliance-florida-requirements.html">Florida</a></li>
+            <li><a href="./docs-compliance-ohio-requirements.html">Ohio</a></li>
+          </ul>
+        </div>
       </nav>
     </aside>
     <main class="content">
-      
       <article class="markdown-content">
         
-    <div class="hero">
-      <h1>📚 Care Commons Documentation</h1>
-      <p>Comprehensive documentation for Care Commons - Shared care software, community owned</p>
-    </div>
-    <div class="category-grid">
-      
-      <div class="category-card">
-        <h2>🚀 Getting Started</h2>
-        <p>READMEs, quickstarts, and high-level overviews</p>
-        <ul>
-          <li><a href="./api-readme.html">API Directory - Vercel Serverless Functions</a></li><li><a href="./claude-layer-2-input-readme.html">Layer 2 Implementation Tasks</a></li><li><a href="./claude-readme.html">Claude Autonomous Task Management System</a></li><li><a href="./database-quickstart.html">Database Quick Start</a></li><li><a href="./demo-quickstart.html">Rich Interactive Demo - Quick Start Guide</a></li>
-          <li><a href="#" style="font-style: italic;">+ 27 more...</a></li>
-        </ul>
-      </div>
-    
-      <div class="category-card">
-        <h2>📖 User Guides</h2>
-        <p>Detailed guides, tutorials, and how-tos</p>
-        <ul>
-          <li><a href="./claude-0002-fix-client-demographics-api-error.html">Task 0002: Fix Client Demographics API Type Error</a></li><li><a href="./docs-deployment-guide.html">Care Commons Deployment Guide</a></li><li><a href="./docs-performance-optimization-guide.html">Performance Optimization Guide</a></li><li><a href="./packages-web-src-showcase-readme.html">Care Commons Showcase Enhancements</a></li><li><a href="./rich-demo-implementation-plan.html">Rich Interactive Demo Implementation Plan</a></li>
-          <li><a href="#" style="font-style: italic;">+ 12 more...</a></li>
-        </ul>
-      </div>
-    
-      <div class="category-card">
-        <h2>🏗️ Architecture & Deployment</h2>
-        <p>System architecture and deployment guides</p>
-        <ul>
-          <li><a href="./github-pull-request-template-mobile-pr-template.html">Mobile Pr Template</a></li><li><a href="./github-workflows-deployment-diagram.html">Deployment Flow Diagram</a></li><li><a href="./github-workflows-deployment-flow.html">Deployment Workflow Guide</a></li><li><a href="./autonomous-session-summary.html">Autonomous Development Session Summary</a></li><li><a href="./claude-layer-1-memory.html">Care Commons - Central Planner Vision & State</a></li>
-          <li><a href="#" style="font-style: italic;">+ 33 more...</a></li>
-        </ul>
-      </div>
-    
-      <div class="category-card">
-        <h2>⚙️ Implementation Details</h2>
-        <p>Code documentation, compliance, and operations</p>
-        <ul>
-          <li><a href="./github-snyk-integration.html">Snyk Integration Policy</a></li><li><a href="./github-workflows-deployment-checklist.html">🚀 Deployment Safety Checklist</a></li><li><a href="./agents.html">Agent Implementation Directives</a></li><li><a href="./api-cloudflare-workers-setup.html">Cloudflare Workers Setup (TODO)</a></li><li><a href="./auth-login-debugging.html">Authentication Login Failure Debugging Report</a></li>
-          <li><a href="#" style="font-style: italic;">+ 104 more...</a></li>
-        </ul>
-      </div>
-    
-    </div>
-    <div style="background-color: var(--surface); padding: 2rem; border-radius: 0.5rem; border: 1px solid var(--border);">
-      <h2>About Care Commons</h2>
-      <p>
-        Care Commons is a modular, self-hostable software platform designed to support the 
-        administration and daily operations of home-based care services. Built by the people 
-        at <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>.
-      </p>
-      <p>
-        This documentation contains <strong>196 documents</strong> organized into 
-        4 main categories to help you get started, deploy, and maintain Care Commons.
-      </p>
-    </div>
-  
+        <h1 id="what">What is Care Commons?</h1>
+        
+        <p>Care Commons is software for running a home care agency. If you operate a small agency that sends caregivers to people's homes, this handles the paperwork and coordination. It keeps track of your clients, schedules your staff, records when visits happen, and generates invoices at the end of the month.</p>
+        
+        <p>Think of it like the big enterprise systems—ClearCare, WellSky, those names you've heard—but built for smaller operations. We're talking agencies with five to fifty people on staff, not five hundred. There's a fundamental difference between software designed for large organizations and software designed for small ones. Large systems assume you have a dedicated IT department, multiple coordinators, and complex approval workflows. Small systems assume you're wearing five hats at once and just need things to work.</p>
+        
+        <h2>How we make money</h2>
+        
+        <p>The software itself is open source. That means you can read the code, modify it, and see exactly how it works. There are no secrets about what it's doing with your data. But open source doesn't mean we work for free.</p>
+        
+        <p>We make money in three ways. First, we'll host it for you. You pay us two hundred to five hundred dollars a month depending on how many caregivers you have, and we run everything on our servers. You don't think about updates or backups or any of that. Second, if you want to run it yourself but need help getting it set up, we charge one hundred fifty dollars an hour for support. Third, we have people who support the project on Patreon because they believe in community-owned alternatives to corporate software.</p>
+        
+        <p>If you're technical—if you know what PostgreSQL is and you're comfortable with a command line—you can install and run this yourself at no cost. The code is yours to use. But most agency owners don't have time for that, which is fine. That's what the hosting option is for.</p>
+        
+        <h2>What makes it different from enterprise systems</h2>
+        
+        <p>Small scale. This is the first difference and it matters more than people think. When you design software for a giant hospital network, you build in layers of permissions and approval chains because that's how large organizations work. But in a fifteen-person agency, those layers just slow you down. You need software that assumes the coordinator probably knows everyone's schedule by heart and just needs the system to remember what they already know.</p>
+        
+        <p>Works offline. Most software assumes you always have internet, which is a weird assumption if you think about it. Caregivers go into basements, rural areas, houses with bad wifi. If your system breaks when the internet drops, your caregivers can't clock in. Your data doesn't get recorded. With Care Commons, the phone stores everything locally. When the connection comes back, it syncs. This is less convenient to build, which is why most companies don't do it, but it matches how the work actually happens.</p>
+        
+        <p>You own your data. With most enterprise systems, your data lives on their servers and you access it through their interface. If you want to leave, you have to ask permission to export your records. Sometimes they charge you for it. Sometimes the export format is deliberately difficult to work with because they don't want you to leave. With Care Commons, you can install it on your own server. The database is yours. Export everything anytime in standard formats. Switch to different software if you want. No lock-in.</p>
+        
+        <p>State compliance built in. Different states have different rules for something called Electronic Visit Verification, which is just a fancy term for proving that a caregiver actually showed up when they said they did. Texas wants GPS coordinates within five hundred feet. Florida allows a thousand feet. Ohio requires specific consent forms. Instead of you having to track all these rules, the software knows them. You tell it what state you're in, and it enforces the right requirements automatically.</p>
+        
+        <h2>What the software actually does</h2>
+        
+        <p>It keeps a database of your clients. Names, addresses, who to call in an emergency, what insurance they have, what kind of care they need. The kind of information you're probably keeping in a filing cabinet or a spreadsheet right now.</p>
+        
+        <p>It keeps a database of your caregivers. Who has which certifications, who speaks which languages, who's available which days, what their hourly rate is. All the staff information in one place instead of scattered across multiple documents.</p>
+        
+        <p>It handles scheduling, which sounds simple until you try to do it manually. You need to match caregivers to clients based on who's available, who's certified for the type of care needed, who the client gets along with. The software can do this automatically, or you can do it manually and the software just remembers your decisions.</p>
+        
+        <p>It tracks time. Caregivers use an app on their phone to clock in when they arrive and clock out when they leave. The app records GPS coordinates and timestamps. This is what the state requires for Medicaid reimbursement, but it's also useful for you to know if visits are actually happening when they're supposed to.</p>
+        
+        <p>It creates care plans. These are documents that say what you're trying to achieve with each client. Goals, specific tasks, notes on how things are going. Progress over time. The kind of thing state inspectors want to see, but also genuinely useful for coordinating care.</p>
+        
+        <p>It generates invoices. At the end of the month, you need to bill someone—Medicaid, Medicare, private insurance, or the client's family. The software looks at all the completed visits, calculates hours and rates, and creates itemized invoices. You review them and send them out. Much faster than doing this by hand.</p>
+        
+        <p>It calculates payroll. How many hours did each caregiver work this period? What's the total amount you owe them? The software adds it up. You still need to actually pay people—this connects to your accounting software for that—but the calculation happens automatically.</p>
+        
+        <p>It includes a family portal. Families can log in and see updates about their loved one's care. When visits happened, notes from caregivers, that sort of thing. This reduces the number of phone calls you get asking for updates, and it helps families feel more connected to what's happening.</p>
+        
+        <hr>
+        
+        <h1 id="try">Try it out before you commit to anything</h1>
+        
+        <h2>Interactive demo</h2>
+        
+        <p>We built a <a href="https://neighborhood-lab.github.io/care-commons/" target="_blank">live showcase</a> that walks you through realistic scenarios. Click through it. No login required. It shows you what the software looks like from different perspectives—what an administrator sees, what a coordinator sees, what a caregiver sees on their phone. Takes about ten minutes to go through.</p>
+        
+        <h2>Full application</h2>
+        
+        <p>If you want to actually use the software instead of just clicking through a demo, we have a <a href="https://care-commons.vercel.app/" target="_blank">demo deployment</a> with fake data. You can log in as different types of users and poke around. Create a visit, edit a client record, whatever you want. The data resets every night so you can't break anything.</p>
+        
+        <p>Login credentials:</p>
+        <table>
+          <tr><td>Administrator</td><td>admin@example.com</td><td>password123</td></tr>
+          <tr><td>Coordinator</td><td>coordinator@example.com</td><td>password123</td></tr>
+          <tr><td>Caregiver</td><td>caregiver@example.com</td><td>password123</td></tr>
+        </table>
+        
+        <p>Obviously these are not secure passwords. They're only for the demo environment.</p>
+        
+        <h2>Community</h2>
+        
+        <p>We run a <a href="https://discord.gg/EkeXQZFq" target="_blank">Discord server</a> where you can ask questions, report bugs, or suggest features. There are actual people there who'll respond, usually within a few hours.</p>
+        
+        <p>We publish updates on <a href="https://neighborhoodlab.substack.com/" target="_blank">Substack</a>. Once a month we send out a newsletter about what we built recently, what we're planning to build next, and our thinking about how care software should work. It's not marketing nonsense. We're genuinely trying to explain our decisions.</p>
+        
+        <p>If you want to support ongoing development, we have a <a href="https://www.patreon.com/neighborhood_lab" target="_blank">Patreon</a>. Monthly donations fund the work. This is how we can afford to keep the software open source instead of having to charge license fees.</p>
+        
+        <p>The source code lives on <a href="https://github.com/neighborhood-lab/care-commons" target="_blank">GitHub</a>. If you want to see how something works or report a technical issue, that's where to go.</p>
+        
+        <hr>
+        
+        <h1 id="using">Using the software once you've got it set up</h1>
+        
+        <h2 id="web-app">Web application for office staff</h2>
+        
+        <p>Coordinators and administrators use the web interface. This is the main dashboard you'd have open on your computer during the workday.</p>
+        
+        <h3>If you're the administrator setting things up for the first time</h3>
+        
+        <p>Start by entering your organization's basic information. Agency name, address, time zone. Seems obvious but the software needs to know these things to generate correct timestamps and format addresses properly.</p>
+        
+        <p>Add your clients. Each client is a person who receives care. You'll enter their demographics—name, date of birth, address. Their insurance information. Emergency contacts. Any specific care needs they have. Medical conditions, mobility limitations, dietary restrictions. The more complete this information is, the better the software can help you coordinate care.</p>
+        
+        <p>Add your caregivers. These are the people who actually go out and provide care. You'll record their certifications. CNA means Certified Nursing Assistant. HHA means Home Health Aide. Some states care deeply about these distinctions. You'll also record specializations—Alzheimer's care, diabetic care, wound care. Languages spoken. Hourly rate. Whether they're part-time or full-time. Availability, though that changes, so you'll update it regularly.</p>
+        
+        <p>Create care plans for clients who need them. A care plan documents what you're trying to accomplish. If someone needs help with bathing, meal preparation, and medication reminders, that goes in the care plan. Goals too. Maybe the goal is maintaining current mobility. Maybe it's improving nutrition. Having this written down helps everyone stay on the same page.</p>
+        
+        <p>Configure state compliance settings. Go to Settings, then Compliance, then select your state. This tells the software which rules to enforce. Texas has different requirements than Florida, which has different requirements than Ohio. The software knows these rules. You just need to tell it which ones apply to you.</p>
+        
+        <h3>If you're a coordinator managing day-to-day operations</h3>
+        
+        <p>You'll spend most of your time in the schedule. Creating visits is straightforward. Pick a client, pick a caregiver, pick a date and time, specify what services they'll be providing. The software checks if the caregiver is available and certified for that type of care. If there's a problem, it warns you.</p>
+        
+        <p>Your dashboard shows today's visits and any alerts. Alerts are things that need your attention. A caregiver clocked in late. Someone didn't clock out. A visit got marked as a no-show. You deal with these as they come up.</p>
+        
+        <p>Review completed visits regularly. Go to Visits, then Completed. You'll see the clock-in and clock-out times. GPS locations where those happened. This is important for two reasons. First, you need to verify visits actually occurred for billing purposes. Second, if there are patterns—caregivers consistently running late to one particular client, for example—you can address them.</p>
+        
+        <p>Generate invoices at the end of the billing period. Go to Billing, then Generate Invoice. Select the date range and the client. The software finds all completed visits for that client during that period, calculates the total hours and cost, and creates an itemized invoice. You review it to make sure it looks right, then send it to whoever's paying—Medicaid, insurance, or the family.</p>
+        
+        <p>Handle messages from families through the family portal. Some families are more hands-on than others. They'll send messages asking about schedule changes or how their loved one is doing. You can respond directly through the portal. This is better than phone tag and creates a written record of communication.</p>
+        
+        <h2 id="mobile-app">Mobile app for caregivers</h2>
+        
+        <p>Caregivers use an app on their phone. iPhone or Android. This is what they interact with during their workday.</p>
+        
+        <h3>Getting the app installed</h3>
+        
+        <p>Eventually this will be in the App Store and Google Play. Right now it's not quite ready for public release. Your administrator can give you a TestFlight link if you're on iPhone, or an APK file if you're on Android. Installing these requires a few extra steps compared to a regular app, but your administrator should walk you through it.</p>
+        
+        <h3>Typical day with the app</h3>
+        
+        <p>You log in with an email address and password. Your administrator will give you these credentials. They're unique to you.</p>
+        
+        <p>The home screen shows your assigned visits for the day. It lists them in order. Client name, address, time you're supposed to arrive, type of services to provide.</p>
+        
+        <p>When you arrive at a client's home, tap that visit, then tap Clock In. The app records the current time and your GPS location. This is what the state requires to prove the visit happened. The GPS coordinates show you were actually at the client's home, not somewhere else.</p>
+        
+        <p>During the visit, you can add notes. What tasks you completed. How the client seemed. Anything unusual worth documenting. This goes into the client's record and the coordinator can see it.</p>
+        
+        <p>When you're done, tap Clock Out. Again, it records the time and GPS location. The difference between clock-in and clock-out determines how many hours you worked, which affects both your pay and what the agency bills.</p>
+        
+        <p>If you don't have internet, everything still works. The app saves all this information on your phone. Later, when you get back to wifi or cell service, it uploads everything automatically. You'll see a sync status indicator that shows when data is waiting to upload versus when everything's synced. This matters because a lot of homes have spotty coverage, and you don't want the app to just not work because of that.</p>
+        
+        <h2 id="state-specific">How state rules change what you see</h2>
+        
+        <p>Electronic Visit Verification is a set of rules about proving that care visits actually happened. The federal government started requiring this for Medicaid-funded care. Each state implemented the requirement differently. These differences affect how the software behaves.</p>
+        
+        <h3>Texas rules</h3>
+        
+        <p>When a caregiver clocks in, the system must record GPS coordinates, caregiver ID, client ID, and what type of service they're providing. When they clock out, it records GPS coordinates again and notes about what tasks they performed.</p>
+        
+        <p>Geofencing is set to five hundred feet. That means the clock-in GPS location must be within five hundred feet of the client's registered home address. If the caregiver tries to clock in from farther away, the system won't let them. This prevents fraud where someone clocks in from home and then drives to the visit.</p>
+        
+        <p>All these records must be kept for six years. This is longer than many other states. The system automatically enforces this retention period.</p>
+        
+        <h3>Florida rules</h3>
+        
+        <p>Clock-in captures GPS coordinates, caregiver signature, and client authorization. The signature and authorization pieces are slightly different from Texas. You're verifying that the client knows the caregiver is there and agrees to receive care.</p>
+        
+        <p>Clock-out captures GPS coordinates and a service summary. The summary is more detailed than Texas requires.</p>
+        
+        <p>Geofencing is set to one thousand feet, which is more lenient than Texas. This matters in rural areas where GPS accuracy isn't great and houses might have long driveways.</p>
+        
+        <p>Records must be kept for five years instead of six.</p>
+        
+        <h3>Ohio rules</h3>
+        
+        <p>Clock-in requires GPS coordinates, caregiver ID, and client consent. The consent piece is handled slightly differently than Florida's authorization, but functionally they're similar.</p>
+        
+        <p>Clock-out requires GPS coordinates and visit notes.</p>
+        
+        <p>Geofencing is six hundred feet. Stricter than Florida, more lenient than Texas.</p>
+        
+        <p>Records must be kept for seven years, which is the longest retention period of the three states currently supported.</p>
+        
+        <p>The key point here is that you don't have to remember these rules. You configure the system once by selecting your state. After that, it enforces the correct requirements automatically. If you operate in multiple states, you can set compliance rules per client.</p>
+        
+        <hr>
+        
+        <h1 id="installing">Installing this for your own agency</h1>
+        
+        <h2 id="hosting-options">Choosing between Vercel and Cloudflare</h2>
+        
+        <p>Both Vercel and Cloudflare are companies that will run software on their servers for you. You don't manage physical servers. You don't worry about electricity and cooling and hard drive failures. You pay them a monthly fee and they handle the infrastructure. This is usually called cloud hosting, though that term has become almost meaningless from overuse.</p>
+        
+        <h3>Vercel makes sense if you want the fastest setup</h3>
+        
+        <p>Vercel specializes in making deployment easy. Their defaults are sensible. Their error messages are clear. If you're not particularly technical, this is probably what you want. Getting Care Commons running on Vercel takes about fifteen minutes once you have an account set up.</p>
+        
+        <p>Cost-wise, their free tier handles about twenty caregivers. Beyond that, you'll need their Pro plan, which is twenty dollars a month. You'll also need a database. Vercel doesn't provide databases themselves—they recommend using a service called Neon. Neon's free tier gives you half a gigabyte of storage, which is enough for a very small agency. Their paid tier is twenty dollars a month for ten gigabytes, which handles most small to medium agencies.</p>
+        
+        <p>So total cost is somewhere between zero dollars (if you're tiny and just testing) and forty dollars a month (twenty for Vercel Pro, twenty for Neon database). That's cheaper than any enterprise system.</p>
+        
+        <h3>Cloudflare makes sense if you need lower costs at scale</h3>
+        
+        <p>Cloudflare's model is different. They charge five dollars a month for Workers, which is their term for the servers that run your application code. Another five dollars a month for D1, which is their database service. That's ten dollars total, regardless of how many caregivers you have. Their pricing scales with usage rather than users, and for typical agency workloads, you won't hit the usage limits.</p>
+        
+        <p>The tradeoff is that setup takes longer. Maybe thirty minutes instead of fifteen. Their documentation assumes you know more technical details. Their database is based on SQLite rather than PostgreSQL, which matters if you care about database internals, but probably doesn't matter if you just want the software to work.</p>
+        
+        <p>If you're running a larger agency—fifty or more staff—or if you're technical enough that you can figure things out when the documentation isn't perfectly clear, Cloudflare will save you money.</p>
+        
+        <h2>What you need before starting</h2>
+        
+        <p>A computer where you can type commands. Mac, Linux, or Windows with WSL installed. WSL stands for Windows Subsystem for Linux and it's a way to run Linux commands on Windows. Most Windows users don't have this by default but it's free to install.</p>
+        
+        <p>Node.js version twenty or newer. Node.js is a programming environment that Care Commons is built with. Go to nodejs.org and download the installer. The website detects what operating system you're using and gives you the right version.</p>
+        
+        <p>Git installed. Git is version control software. It's how you download the Care Commons code. Go to git-scm.com and follow the installation instructions for your operating system.</p>
+        
+        <p>An account on whichever platform you're deploying to. Creating an account is free. You only pay when you actually use their services.</p>
+        
+        <h2 id="vercel">Deploying to Vercel step by step</h2>
+        
+        <h3>First, get the code onto your computer</h3>
+        
+        <p>Open a terminal. On Mac, that's the Terminal app. On Windows with WSL, that's the Ubuntu app or whatever Linux distribution you installed. Type these commands:</p>
+        
+        <pre><code>git clone https://github.com/neighborhood-lab/care-commons.git
+cd care-commons
+npm install</code></pre>
+        
+        <p>What this does: git clone downloads the code. cd care-commons moves you into the directory that was created. npm install downloads all the supporting libraries the software needs. This step might take a few minutes because there are a lot of libraries.</p>
+        
+        <h3>Second, create a database</h3>
+        
+        <p>Go to neon.tech in a web browser. Create an account if you don't have one. Click Create Project. Name it "care-commons-production" or something memorable. The name only matters to you.</p>
+        
+        <p>Enable connection pooling. There's a toggle switch for this in the project settings. Connection pooling is important because Vercel's servers are stateless, meaning they don't maintain persistent connections to the database. Without pooling, you hit connection limits quickly.</p>
+        
+        <p>Copy the connection string. It looks like: postgres://username:password@host.neon.tech/database_name. You'll need this in the next step.</p>
+        
+        <h3>Third, deploy to Vercel</h3>
+        
+        <p>Back in your terminal, install Vercel's command-line tool and log in:</p>
+        
+        <pre><code>npm install -g vercel
+vercel login</code></pre>
+        
+        <p>The -g flag means install globally, so you can use this tool from anywhere. vercel login opens a web browser where you approve the connection.</p>
+        
+        <p>Now link your local code to a Vercel project:</p>
+        
+        <pre><code>vercel link</code></pre>
+        
+        <p>It asks questions. Create new project? Say yes. Project name? Type care-commons or whatever you want. Directory? Just press Enter to accept the default.</p>
+        
+        <h3>Fourth, configure environment variables</h3>
+        
+        <p>Environment variables are settings that the software needs but that shouldn't be stored in the code itself. Like database passwords.</p>
+        
+        <pre><code>vercel env add DATABASE_URL production</code></pre>
+        
+        <p>It prompts you to enter the value. Paste your Neon connection string.</p>
+        
+        <pre><code>vercel env add JWT_SECRET production</code></pre>
+        
+        <p>JWT stands for JSON Web Token. This is how the software creates secure login sessions. Type any random thirty-two-character string. Mash your keyboard. What matters is that it's long and random.</p>
+        
+        <pre><code>vercel env add ENCRYPTION_KEY production</code></pre>
+        
+        <p>This encrypts sensitive data in the database. Again, type a long random string. Different from the JWT secret.</p>
+        
+        <h3>Fifth, set up the database structure</h3>
+        
+        <p>The database exists but it's empty. You need to create tables and relationships. Back in your terminal:</p>
+        
+        <pre><code>export DATABASE_URL="your-neon-connection-string"
+npm run db:migrate
+npm run db:seed</code></pre>
+        
+        <p>Replace "your-neon-connection-string" with the actual string. The export command makes it available to the next commands. db:migrate creates the database structure. db:seed adds minimal initial data—your organization record, first admin user, that kind of thing.</p>
+        
+        <h3>Sixth, actually deploy</h3>
+        
+        <pre><code>vercel --prod</code></pre>
+        
+        <p>This uploads your code to Vercel's servers and starts it running. Takes a minute or two. When it's done, it gives you a URL. Something like care-commons.vercel.app. That's your live application.</p>
+        
+        <h3>Seventh, create your administrator account</h3>
+        
+        <p>Visit that URL in a web browser. You'll see a registration page. The first organization to register becomes the system administrator. After that, other users can only be added by administrators.</p>
+        
+        <h2 id="cloudflare">Deploying to Cloudflare step by step</h2>
+        
+        <h3>First, get the code</h3>
+        
+        <p>Same as Vercel:</p>
+        
+        <pre><code>git clone https://github.com/neighborhood-lab/care-commons.git
+cd care-commons
+npm install</code></pre>
+        
+        <h3>Second, install Cloudflare's command-line tool</h3>
+        
+        <p>Cloudflare calls their tool Wrangler. Install and authenticate:</p>
+        
+        <pre><code>npm install -g wrangler
+wrangler login</code></pre>
+        
+        <p>Again, this opens a web browser for authentication.</p>
+        
+        <h3>Third, create a database</h3>
+        
+        <p>Unlike Vercel, Cloudflare provides their own database service called D1:</p>
+        
+        <pre><code>wrangler d1 create care-commons-production</code></pre>
+        
+        <p>This outputs a database ID. It's a long string of letters and numbers. Copy it. You need it in the next step.</p>
+        
+        <h3>Fourth, configure wrangler</h3>
+        
+        <p>Create a file called wrangler.toml in the project root directory. You can use any text editor. Put this in it:</p>
+        
+        <pre><code>name = "care-commons"
+main = "packages/app/src/index.ts"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "care-commons-production"
+database_id = "paste-your-database-id-here"</code></pre>
+        
+        <p>Replace the database_id value with what you copied in the previous step.</p>
+        
+        <h3>Fifth, set up the database structure</h3>
+        
+        <p>Cloudflare's database setup is different. You execute SQL files directly:</p>
+        
+        <pre><code>wrangler d1 execute care-commons-production --file=packages/core/migrations/001_initial_schema.sql
+wrangler d1 execute care-commons-production --file=packages/core/migrations/002_add_evv_tables.sql</code></pre>
+        
+        <p>Run these for each migration file in the migrations directory. There might be more than two depending on when you're reading this.</p>
+        
+        <h3>Sixth, add secrets</h3>
+        
+        <p>Secrets are like environment variables but more secure:</p>
+        
+        <pre><code>wrangler secret put JWT_SECRET</code></pre>
+        
+        <p>It prompts you to type the value. Type a long random string.</p>
+        
+        <pre><code>wrangler secret put ENCRYPTION_KEY</code></pre>
+        
+        <p>Again, a different long random string.</p>
+        
+        <h3>Seventh, build and deploy</h3>
+        
+        <pre><code>npm run build
+wrangler deploy</code></pre>
+        
+        <p>Building compiles the code into a format Cloudflare can run. Deploying uploads it. When it finishes, you get a URL like care-commons.your-subdomain.workers.dev.</p>
+        
+        <h3>Eighth, create your administrator account</h3>
+        
+        <p>Visit the URL. Register the first organization. That makes you the administrator.</p>
+        
+        <h2>Setting up the mobile app</h2>
+        
+        <p>The mobile app needs to know where your backend server is. Whether you deployed to Vercel or Cloudflare, you have a URL now. You need to put that URL into the app's configuration.</p>
+        
+        <h3>For iPhone</h3>
+        
+        <p>Open the file packages/mobile/src/config.ts in a text editor. Find the line that says API_URL. Change it to your Vercel or Cloudflare URL.</p>
+        
+        <p>If you want to test on your own phone before giving it to caregivers, run: npm run ios. This requires having Xcode installed, which only works on Mac. It opens the iOS simulator and runs the app there.</p>
+        
+        <p>To actually deploy to the App Store so caregivers can download it, run: npm run build:ios. Then follow Apple's submission process, which is its own complicated thing involving certificates and provisioning profiles. Apple's documentation covers this better than we can here.</p>
+        
+        <h3>For Android</h3>
+        
+        <p>Same config file change. packages/mobile/src/config.ts, update the API_URL.</p>
+        
+        <p>To test locally: npm run android. This requires having Android Studio installed, which works on Mac, Windows, or Linux. It opens an Android emulator and runs the app.</p>
+        
+        <p>To deploy to Google Play: npm run build:android. Then follow Google's submission process. It's more straightforward than Apple's but still has several steps. Google's documentation is decent.</p>
+        
+        <h2>Ongoing maintenance once you're running</h2>
+        
+        <p>Backup your database monthly. Both Neon and Cloudflare do automatic backups, but having your own backup is good practice. Most database services have an export button. Click it, save the file somewhere safe. External hard drive, cloud storage, wherever you keep important files.</p>
+        
+        <p>Update the software when new versions come out. We release updates roughly monthly. To update, go to your care-commons directory in terminal and run: git pull. This downloads the latest changes. Then run: vercel --prod (or wrangler deploy if you're on Cloudflare). This deploys the new version.</p>
+        
+        <p>Watch for errors. Both Vercel and Cloudflare have dashboards that show if anything broke. Check these occasionally. If you see errors you don't understand, ask in Discord. Seriously, we'd rather help you fix problems than have you struggle silently.</p>
+        
+        <hr>
+        
+        <h1 id="contributing">Contributing to the project</h1>
+        
+        <h2 id="architecture">How the code is organized</h2>
+        
+        <p>Care Commons uses something called a monorepo. That's one git repository containing multiple packages. Why do it this way? Because the packages need to share code. The web app and mobile app both use the same UI components. The API and the background jobs both use the same database access layer. Instead of duplicating this code or setting up complicated dependency management, we keep it all in one repository.</p>
+        
+        <p>Here's the structure:</p>
+        
+        <pre><code>care-commons/
+├── packages/
+│   ├── core/           # Database access, business logic, shared utilities
+│   ├── app/            # Backend API built with Express.js
+│   ├── web/            # Web interface built with React
+│   ├── mobile/         # Mobile app built with React Native
+│   └── shared-components/  # UI components used by both web and mobile
+└── verticals/          # Feature modules like billing, scheduling, etc.</code></pre>
+        
+        <h3>Understanding how data moves through the system</h3>
+        
+        <p>Someone opens the web app or mobile app. They click a button or fill out a form. That triggers an HTTP request to the API.</p>
+        
+        <p>The API receives the request. First thing it does is check authentication. Is this user logged in? Do they have permission to do what they're asking? If not, reject the request immediately.</p>
+        
+        <p>If authentication passes, the API calls business logic. Business logic lives in the core package. This is where calculations happen, rules get enforced, decisions get made. For example, if someone's scheduling a visit, the business logic checks whether the caregiver is certified for that type of care, whether they're already scheduled elsewhere at that time, whether the client is active.</p>
+        
+        <p>Business logic talks to the database. Read data, write data, update existing records. The database is PostgreSQL, which is a relational database. That means data is organized into tables with relationships between them.</p>
+        
+        <p>Results flow back. Database returns data to business logic. Business logic returns results to API. API sends response back to web app or mobile app. The whole round trip usually takes a fraction of a second.</p>
+        
+        <h3>Key concepts that affect how you work with the code</h3>
+        
+        <p>Verticals versus core. Core is foundational stuff that everything else depends on. Database access, authentication, permissions, basic data types. Verticals are specific features. Billing is a vertical. Scheduling is a vertical. Care plans are a vertical. Verticals use core but don't depend on each other. This means you can work on billing without worrying about breaking scheduling. They're isolated.</p>
+        
+        <p>Offline-first architecture. Most web applications assume constant internet. If the connection drops, they stop working. We can't do that because caregivers work in places with unreliable connectivity. So the mobile app stores data locally in SQLite, which is a database that lives on the phone. When internet is available, the app syncs local changes to the server. When internet is not available, everything keeps working with local data. This is harder to build but necessary for the use case.</p>
+        
+        <p>Conflict resolution. Here's a scenario: Two coordinators both edit the same visit while one of them is offline. Later, when the offline one comes back online, their changes sync. Now you have conflicting versions of the same data. The system doesn't just overwrite one with the other because you'd lose information. Instead, it keeps both versions and flags them for human review. The coordinator sees a notification that there's a conflict and decides which version to keep or how to merge them. This prevents data loss but requires more sophisticated syncing logic.</p>
+        
+        <h2 id="development">Setting up a development environment</h2>
+        
+        <h3>First, clone the repository</h3>
+        
+        <pre><code>git clone https://github.com/neighborhood-lab/care-commons.git
+cd care-commons
+npm install</code></pre>
+        
+        <p>Same as deployment, but now you're setting up to modify the code rather than just run it.</p>
+        
+        <h3>Second, set up a local database</h3>
+        
+        <p>Install PostgreSQL version fourteen or newer on your computer. On Mac, the easiest way is using Homebrew: brew install postgresql. On Windows, download the installer from postgresql.org. On Linux, use your package manager: apt-get install postgresql or equivalent.</p>
+        
+        <p>Create a database:</p>
+        
+        <pre><code>createdb care_commons</code></pre>
+        
+        <p>Copy the example environment file and edit it:</p>
+        
+        <pre><code>cp .env.example .env</code></pre>
+        
+        <p>Open .env in a text editor. Put in your local database credentials. Usually for development this is just: DATABASE_URL=postgresql://localhost/care_commons</p>
+        
+        <h3>Third, initialize the database</h3>
+        
+        <pre><code>npm run db:migrate
+npm run db:seed
+npm run db:seed:demo</code></pre>
+        
+        <p>Migrations create the structure. Seed adds minimal data. Seed demo adds realistic fake data so you have something to work with.</p>
+        
+        <h3>Fourth, start the development servers</h3>
+        
+        <pre><code>npm run dev</code></pre>
+        
+        <p>This starts multiple things at once. The backend API on port three thousand. The web UI on port five one seven three. If you're working on mobile, it also starts the mobile development server on port eight zero eight one, but that requires having iOS simulator or Android emulator set up.</p>
+        
+        <p>Now you can open localhost:5173 in a web browser and see the application running locally. Changes you make to the code get reflected automatically. This is called hot reload and it makes development much faster.</p>
+        
+        <h2 id="making-changes">Actually changing code and submitting it</h2>
+        
+        <h3>First, create a branch</h3>
+        
+        <p>Don't work directly on the main branch. Create a feature branch:</p>
+        
+        <pre><code>git checkout -b fix-scheduling-bug</code></pre>
+        
+        <p>Name it based on what you're doing. Use fix- for bug fixes. Use add- for new features. Use update- for improvements to existing features. This naming convention helps when looking at the branch list later.</p>
+        
+        <h3>Second, make your changes</h3>
+        
+        <p>Let's say you're adding a feature. Where does the code go?</p>
+        
+        <p>Backend API routes go in packages/app/src/routes/. These define URL endpoints. Like POST /api/visits to create a visit or GET /api/clients/:id to retrieve a client.</p>
+        
+        <p>Business logic goes in packages/core/src/services/. This is calculations, validation, rules enforcement. Keep business logic separate from API routes because sometimes you need to call the same logic from different places.</p>
+        
+        <p>Database changes require migrations. Create a new file in packages/core/migrations/. Number it sequentially. Like 003_add_billing_tables.sql. Write SQL that creates or modifies tables. Also write the reverse operation in case you need to roll back.</p>
+        
+        <p>Frontend components go in packages/web/src/components/ for web or packages/mobile/src/components/ for mobile. These are React components. Small, focused, reusable.</p>
+        
+        <h3>Third, write tests</h3>
+        
+        <p>Run the test suite:</p>
+        
+        <pre><code>npm test</code></pre>
+        
+        <p>We require tests for backend routes, business logic, and database migrations. You don't need tests for every tiny UI component, but complex features need test coverage. The test suite prevents regressions. Without it, you can't know if a change in one place broke something elsewhere.</p>
+        
+        <h3>Fourth, check types and code style</h3>
+        
+        <pre><code>npm run typecheck
+npm run lint</code></pre>
+        
+        <p>TypeScript catches type errors. The linter catches style violations. Fix these before submitting. They seem picky but they catch real bugs.</p>
+        
+        <h3>Fifth, commit your changes</h3>
+        
+        <pre><code>git add .
+git commit -m "Fix scheduling bug where overlapping visits weren't detected"</code></pre>
+        
+        <p>Write a commit message that explains why you made the change, not just what changed. "Fix overlapping visits bug" is better than "Update scheduler.ts". Future you trying to understand this code will appreciate the context.</p>
+        
+        <h3>Sixth, push and create a pull request</h3>
+        
+        <pre><code>git push origin fix-scheduling-bug</code></pre>
+        
+        <p>This uploads your branch to GitHub. Then go to the repository on GitHub and click Create Pull Request. Write a description that explains:</p>
+        
+        <p>What problem you're solving. If there's a bug, describe how to reproduce it. If it's a feature, explain why it's useful.</p>
+        
+        <p>What changes you made. High level. Don't just repeat the code. Explain the approach.</p>
+        
+        <p>Any tradeoffs or decisions. If you considered multiple approaches, mention why you picked this one.</p>
+        
+        <p>Screenshots if it's a UI change. Before and after photos help reviewers understand the impact.</p>
+        
+        <p>Breaking changes if any. Does this require users to update their deployment? Change their configuration? Migrate their database? Call that out explicitly.</p>
+        
+        <h2>Code style guidelines</h2>
+        
+        <p>Use TypeScript. Always specify types explicitly. Don't use any. If you don't know what type something should be, figure it out. Using any defeats the purpose of TypeScript.</p>
+        
+        <p>Keep functions short. Under fifty lines is good. If a function is getting longer, break it into smaller functions. Each function should do one thing. It's easier to understand five small functions than one giant one.</p>
+        
+        <p>Use descriptive names. calculateCaregiverPayForVisit is better than calcPay. You're writing code for humans to read. The computer doesn't care about name length.</p>
+        
+        <p>Write comments that explain why, not what. "Geofencing radius is five hundred feet per Texas EVV requirements" is a good comment because it explains the rationale. "Check if distance is less than five hundred" is a bad comment because the code already says that.</p>
+        
+        <h2>When you're stuck</h2>
+        
+        <p>Check existing issues on GitHub. Someone might have already reported the problem you're facing.</p>
+        
+        <p>Ask in the Discord dev channel. There are people there who know the codebase. Response time is usually a few hours, sometimes faster.</p>
+        
+        <p>Tag maintainers in your pull request if you need review and it's been sitting for a while. We're not ignoring you. We probably just missed the notification.</p>
+        
+        <hr>
+        
+        <h1 id="community">Community and support</h1>
+        
+        <p><strong>Discord</strong>: <a href="https://discord.gg/EkeXQZFq" target="_blank">discord.gg/EkeXQZFq</a><br>
+        Real-time chat. Ask questions, report bugs, discuss features. Active most days.</p>
+        
+        <p><strong>Substack</strong>: <a href="https://neighborhoodlab.substack.com/" target="_blank">neighborhoodlab.substack.com</a><br>
+        Monthly newsletter about what we built, what we're building next, and why we made certain decisions.</p>
+        
+        <p><strong>Patreon</strong>: <a href="https://www.patreon.com/neighborhood_lab" target="_blank">patreon.com/neighborhood_lab</a><br>
+        Support ongoing development with monthly donations. This is how we keep the software open source.</p>
+        
+        <p><strong>GitHub</strong>: <a href="https://github.com/neighborhood-lab/care-commons" target="_blank">github.com/neighborhood-lab/care-commons</a><br>
+        Source code, issue tracker, pull requests. All the technical stuff lives here.</p>
+        
+        <p><strong>Email</strong>: hello@neighborhoodlab.org<br>
+        For private inquiries or partnership discussions. We don't check this as often as Discord, so if you need a quick response, use Discord.</p>
+        
+        <hr>
+        
+        <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e0e0e0; color: #666;">
+          <p>Care Commons is built by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>. We're trying to build better care software. Licensed under AGPL-3.0. Last updated November 2024.</p>
+        </footer>
+        
       </article>
-      <footer class="content-footer">
-        <p>
-          <strong>Care Commons</strong> - Shared care software, community owned<br>
-          Brought to you by <a href="https://neighborhoodlab.org" target="_blank">Neighborhood Lab</a>
-        </p>
-      </footer>
     </main>
   </div>
 </body>
